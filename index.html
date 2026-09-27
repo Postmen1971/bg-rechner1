@@ -1825,6 +1825,128 @@ function renderReviewResult(){const e=Q.earned,N=Q.n;
   <div class="score">${e} von ${N} richtig</div><p>${e===N?'Alles sitzt! Diese Aufgaben kommen erst in ein paar Tagen wieder.':'Was noch nicht geklappt hat, kommt morgen noch einmal dran. So bleibt es im Kopf.'}</p>
   <div class="row" style="width:100%"><button class="btn" data-act="home">Zur Startseite</button></div></div>`}
 
+/* ================= NEU: Sinnerfassung, Überschlag, Großschreibung, Dialoge, Hören, Tagesziel, Eltern-Überblick ================= */
+
+/* ---------- Mathe: Überschlagsrechnen ---------- */
+M.ueberschlag=function(){
+  const p=Math.random()<.5?10:100;let a,b,op=pick(['+','−']);
+  if(p===10){a=R(41,89);b=op==='−'?R(11,a-12):R(11,89)}
+  else{a=R(300,890);b=op==='−'?R(110,a-110):R(110,880)}
+  const ra=Math.round(a/p)*p,rb=Math.round(b/p)*p;
+  const est=op==='+'?ra+rb:ra-rb,exact=op==='+'?a+b:a-b;
+  const opts=new Set([est]);while(opts.size<4)opts.add(est+pick([-2,-1,1,2])*p);
+  const nm=p===10?'Zehner':'Hunderter';
+  return{kind:'choice',long:1,text:`Schätze zuerst, ohne genau zu rechnen: ${a} ${op} ${b} ≈ ?`,options:shuf([...opts].map(fmt)),answer:fmt(est),
+    steps:[
+      {t:`${chip('f','Überschlag')} Runde beide Zahlen auf ${nm}: ${a} ≈ <b>${ra}</b>, ${b} ≈ <b>${rb}</b>`,why:'Beim Überschlagen rundest du zuerst. So kannst du im Kopf rechnen, ohne alles genau auszurechnen.'},
+      {t:`Rechne mit den runden Zahlen: ${ra} ${op} ${rb} = <b>${est}</b>`,why:`Runde ${nm} wie ${ra} und ${rb} kann man leicht im Kopf rechnen.`},
+      {t:`Das genaue Ergebnis wäre ${a} ${op} ${b} = ${fmt(exact)}. Dein Überschlag <b>${fmt(est)}</b> liegt nah dran.`,why:'Ein Überschlag muss nicht genau stimmen. Er hilft dir zu prüfen, ob ein genaues Ergebnis überhaupt sinnvoll sein kann.'}
+    ]}};
+
+/* ---------- Mathe: Welche Rechenart passt? (Sinnerfassung) ---------- */
+const OPNAME={'+':'plus (zusammenzählen)','−':'minus (wegnehmen, Unterschied finden)','·':'mal (mehrmals das Gleiche)',':':'geteilt (aufteilen, verteilen)'};
+const RART=[
+  (a,b)=>({op:'+',t:`Mia hat ${a} Murmeln. Sie bekommt ${b} weitere Murmeln geschenkt. Wie viele Murmeln hat sie jetzt?`,hint:'"bekommt dazu, geschenkt" → es wird mehr, man zählt zusammen'}),
+  (a,b)=>({op:'+',t:`Im Zoo leben ${a} Affen und ${b} Papageien. Wie viele Tiere sind das zusammen?`,hint:'"zusammen" → man zählt beides zusammen'}),
+  (a,b)=>({op:'−',t:`Auf dem Parkplatz stehen ${a} Autos. ${b} Autos fahren weg. Wie viele Autos stehen jetzt noch da?`,hint:'"fahren weg" → es wird weniger, man nimmt weg'}),
+  (a,b)=>({op:'−',t:`Tom hat ${a} €. Er kauft ein Buch für ${b} €. Wie viel Geld hat er noch übrig?`,hint:'"übrig, noch" → man zieht ab'}),
+  (a,b)=>({op:'·',t:`Im Klassenzimmer stehen ${a} Tische. An jedem Tisch sitzen ${b} Kinder. Wie viele Kinder sitzen insgesamt im Klassenzimmer?`,hint:'"an jedem" → gleich viele, mehrmals das Gleiche → malnehmen'}),
+  (a,b)=>({op:'·',t:`Ein Heft kostet ${b} €. Lena kauft ${a} Hefte. Wie viel muss sie bezahlen?`,hint:'"jedes kostet gleich viel" → gleiche Preise mehrmals → malnehmen'}),
+  (a,b)=>({op:':',t:`${a} Bonbons werden gleichmäßig an ${b} Kinder verteilt. Wie viele Bonbons bekommt jedes Kind?`,hint:'"gleichmäßig verteilen" → teilen'}),
+  (a,b)=>({op:':',t:`${a} Kinder sollen in Gruppen zu je ${b} Kindern eingeteilt werden. Wie viele Gruppen entstehen?`,hint:'"in Gruppen zu je" → aufteilen in gleich große Teile → teilen'})
+];
+M.rechenart=function(){
+  const f=pick(RART),a=R(6,20),b=R(2,9);
+  const{op,t,hint}=f(a,b);
+  return{kind:'choice',long:1,text:t,sub:'Welche Rechenart brauchst du, um die Frage zu beantworten?',options:['+','−','·',':'],answer:op,single:1,
+    steps:[
+      `${chip('f','Frage')} Lies genau: Was passiert in der Aufgabe? Wird etwas mehr, weniger, mehrmals gleich viel dazugelegt – oder aufgeteilt?`,
+      `Achte auf das Signalwort: <b>${hint}</b>`,
+      `Darum brauchst du hier: <b>${op}</b> — das heißt ${OPNAME[op]}.`
+    ]}};
+
+/* ---------- Deutsch: Groß- und Kleinschreibung ---------- */
+const GROSS=[
+  ['Der Hund bellt laut.','der Hund bellt laut.','Jeder Satz <b>beginnt groß</b> – auch wenn „der" sonst klein geschrieben wird.'],
+  ['Die Katze schläft auf dem Sofa.','Die katze schläft auf dem sofa.','<b>Nomen</b> (Namenwörter wie Katze, Sofa) schreibt man immer groß – nicht nur am Satzanfang.'],
+  ['Mein Bruder spielt Fußball.','Mein bruder spielt fußball.','„Bruder" und „Fußball" sind Nomen → groß. „spielt" ist ein Verb → klein.'],
+  ['Wir gehen heute in den Zoo.','wir gehen heute in den Zoo.','Satzanfang: „Wir" braucht einen großen Anfangsbuchstaben.'],
+  ['Der Lehrer schreibt an die Tafel.','Der Lehrer schreibt an die tafel.','„Tafel" ist ein Nomen → groß, auch mitten im Satz.'],
+  ['Am Montag regnet es stark.','am Montag regnet es Stark.','„stark" ist hier kein Nomen, sondern beschreibt das Regnen → klein. „Montag" ist ein Nomen → groß.'],
+  ['Die Kinder lachen laut.','Die Kinder lachen Laut.','„laut" beschreibt hier, wie sie lachen → klein. Der Satzanfang „Die" bleibt groß.'],
+  ['Opa liest die Zeitung.','Opa liest die zeitung.','„Zeitung" ist ein Nomen → immer groß.'],
+  ['Das kleine Kind malt ein Bild.','Das kleine kind malt ein Bild.','„Kind" ist ein Nomen → groß. „kleine" beschreibt das Kind → klein.'],
+  ['Heute scheint die Sonne.','Heute scheint die sonne.','„Sonne" ist ein Nomen → groß, egal wo es im Satz steht.'],
+  ['Meine Freundin backt einen Kuchen.','Meine freundin backt einen kuchen.','„Freundin" und „Kuchen" sind Nomen → beide groß.'],
+  ['Er fährt schnell mit dem Rad.','Er fährt Schnell mit dem Rad.','„schnell" beschreibt, wie er fährt → klein. „Rad" ist ein Nomen → groß.']
+];
+D2.gross=function(){const[ok,bad,why]=pick(GROSS);
+  return{kind:'choice',long:1,text:'Welcher Satz ist richtig geschrieben?',options:shuf([ok,bad]),answer:ok,single:1,
+    steps:[`Schau dir beide Sätze genau an. Wo stehen große und wo kleine Anfangsbuchstaben?`,why,`Richtig geschrieben ist: <b>${ok}</b>`]}};
+
+/* ---------- Englisch: Kleine Dialoge ---------- */
+const EN_DIALOG=[
+  ["What's your name?","My name is Tom.",["I am nine.","I like pizza.","Good morning."]],
+  ["How are you?","I'm fine, thank you.",["My name is Tom.","It's blue.","I have a dog."]],
+  ["How old are you?","I am nine years old.",["Good morning!","I like cats.","It's Monday."]],
+  ["Where do you live?","I live in Waiblingen.",["I am nine.","It's sunny.","Thank you."]],
+  ["What's the time, please?","It's three o'clock.",["I am fine.","My name is Anna.","I like football."]],
+  ["Do you like pizza?","Yes, I like pizza.",["It's Tuesday.","I live here.","Good night."]],
+  ["What colour is it?","It's blue.",["I am eight.","See you soon.","I have a cat."]],
+  ["Goodbye!","See you soon!",["My name is Lea.","I am fine.","It's Monday."]],
+  ["What day is it today?","It's Monday.",["I am nine.","It's blue.","Thank you."]],
+  ["Can I have some water, please?","Yes, here you are.",["I like dogs.","It's raining.","Good night."]],
+  ["Do you have a pet?","Yes, I have a dog.",["I am fine.","It's blue.","See you soon."]],
+  ["What's your favourite animal?","My favourite animal is a horse.",["It's Monday.","I am nine.","Good morning."]]
+];
+function enDialog(){const[q,a,ds]=pick(EN_DIALOG);
+  return{kind:'choice',long:1,text:`Jemand fragt dich: <b>„${esc(q)}"</b>`,sub:'Was antwortest du auf Englisch?',options:shuf([a,...ds]),answer:a,single:1,speak:q,speakLang:'en-GB',say:q,
+    steps:[`Hör dir die Frage an: „${q}"`,`Passende Antwort: <b>${a}</b>`,'Sprich den ganzen Antwortsatz laut auf Englisch nach.']}}
+
+/* ---------- Englisch: Hörverstehen ---------- */
+const EN_HOER=[
+  ["The cat sleeps on the sofa.","Die Katze schläft auf dem Sofa."],
+  ["My brother likes football.","Mein Bruder mag Fußball."],
+  ["It is raining today.","Es regnet heute."],
+  ["She has a blue bike.","Sie hat ein blaues Fahrrad."],
+  ["We eat breakfast at eight.","Wir frühstücken um acht."],
+  ["The sun is shining.","Die Sonne scheint."],
+  ["I go to school by bus.","Ich fahre mit dem Bus zur Schule."],
+  ["He is my best friend.","Er ist mein bester Freund."],
+  ["The dog runs in the garden.","Der Hund rennt im Garten."],
+  ["Can you help me, please?","Kannst du mir bitte helfen?"],
+  ["My mother is in the kitchen.","Meine Mutter ist in der Küche."],
+  ["We have two cats at home.","Wir haben zwei Katzen zu Hause."],
+  ["The book is on the table.","Das Buch liegt auf dem Tisch."],
+  ["I am hungry now.","Ich habe jetzt Hunger."]
+];
+function enHoer(){const[en,de]=pick(EN_HOER),others=shuf(EN_HOER.filter(x=>x[1]!==de)).slice(0,3).map(x=>x[1]);
+  return{kind:'choice',long:1,text:'🔊 Höre genau zu (tippe oben auf „Vorlesen") und wähle die richtige Übersetzung.',options:shuf([de,...others]),answer:de,single:1,speak:en,speakLang:'en-GB',say:en,autoplay:1,
+    steps:[`Der englische Satz war: <b>„${en}"</b>`,`Das bedeutet auf Deutsch: <b>${de}</b>`,'Hör ihn dir noch einmal an und sprich ihn leise mit.']}}
+
+/* ---------- Tagesziel ---------- */
+const DAILY_GOAL=5;
+function bumpDay(){const P=me(),t=today();if(!P.day||P.day.d!==t)P.day={d:t,n:0};P.day.n++}
+function dayGoalCard(){const P=me(),t=today(),n=(P.day&&P.day.d===t)?P.day.n:0,done=n>=DAILY_GOAL,pct=Math.min(100,Math.round(n/DAILY_GOAL*100));
+  return`<div class="rcard ${done?'done':''}"><div class="rc-h">${owl(done?'cheer':'think',44)}<div><b>Tagesziel</b><br><span>${done?`Super, du hast dein Ziel von ${DAILY_GOAL} Sternen heute schon geschafft!`:`Noch ${DAILY_GOAL-n} ${DAILY_GOAL-n===1?'Stern':'Sterne'} bis zum Tagesziel.`}</span></div></div><div class="rankbar" style="margin-top:10px"><i style="width:${pct}%"></i></div></div>`}
+
+/* ---------- Eltern-Überblick ---------- */
+function renderEltern(){
+  const P=me(),t=today(),items=[];
+  SUBJECTS.forEach(s=>{[2,3,4].forEach(g=>{(s.grades[g]||[]).forEach(top=>{
+    const k=`${s.id}-${g}-${top[0]}`,b=P.best[k];if(b==null)return;
+    const test=(P.test||{})[k],sc=(P.sched||{})[k];
+    items.push({sub:s.name,color:s.color,grade:g,name:top[1],best:b,medal:test!=null?medalOf(test):null,due:sc?sc.due:null});
+  });});});
+  items.sort((a,b)=>a.sub.localeCompare(b.sub,'de')||a.grade-b.grade);
+  const total=SUBJECTS.reduce((n,s)=>n+[2,3,4].reduce((m,g)=>m+(s.grades[g]||[]).length,0),0);
+  const dueCount=items.filter(x=>x.due!=null&&x.due<=t).length;
+  app.innerHTML=`${bar('home','Eltern-Überblick',`Fortschritt von ${esc(P.name)}`)}
+  <section><div class="label">Auf einen Blick</div><div class="rcard"><div class="rc-h">${owl('happy',44)}<div><b>${P.stars} Sterne gesammelt</b><br><span>${items.length} von ${total} Themen schon geübt${dueCount?` · ${dueCount} ${dueCount===1?'Thema ist':'Themen sind'} heute zur Wiederholung fällig`:''}</span></div></div></div></section>
+  ${items.length?`<section><div class="label">Geübte Themen</div><div class="topics">${items.map(x=>`<div class="topic" style="--c:var(${x.color})"><span class="tx"><span class="nm">${esc(x.name)}</span><br><span class="ds">${esc(x.sub)} · Klasse ${x.grade}${x.due!=null?` · Wiederholen: ${x.due<=t?'heute':`in ${x.due-t} Tagen`}`:''}</span></span>${x.medal?medalSVG(x.medal,22):''}<span class="best">${STAR}${x.best}/${ROUND}</span></div>`).join('')}</div></section>`:`<p class="note">Noch keine Themen geübt.</p>`}
+  <p class="note">Diese Übersicht zeigt, was ${esc(P.name)} auf diesem Gerät geübt hat. Die Daten sind nur lokal in diesem Browser gespeichert, nicht online.</p>`;
+}
+
 const ICON={leaf:'<svg viewBox="0 0 40 40" width="38" height="38" aria-hidden="true"><path d="M8 32 C8 16 18 7 34 6 C34 22 25 32 10 32Z" fill="#fff"/><path d="M8 33 L26 15" stroke="var(--c)" stroke-width="2.5" stroke-linecap="round"/></svg>',
  globe:'<svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="none" stroke="#fff" stroke-width="3"/><ellipse cx="20" cy="20" rx="7" ry="15" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M5 20 H35 M8 12 H32 M8 28 H32" stroke="#fff" stroke-width="2.5"/></svg>'};
 const SUBJECTS=[
@@ -1861,11 +1983,16 @@ addT('sa',3,[['wald','Der Wald','Tiere, Bäume, Stockwerke',saGen(SA2.wald)],['m
 addT('sa',4,[['feuer','Feuer & Notruf','Brandschutz und 112',saGen(SA2.feuer)],['rad','Fahrradprüfung','Regeln, Zeichen, Vorfahrt',mix(saGen(SA2.rad),S3.vorfahrt,V.schildBild)]]);
 addT('en',3,[['weather','Weather','Wetter',enGen(EN.weather)],['clothes','Clothes','Kleidung',enGen(EN.clothes)],['school','School things','Schulsachen',enGen(EN.school)]]);
 addT('en',4,[['time','What time is it?','Uhrzeit auf Englisch',enTime],['hobbies','Hobbies','Freizeit',enGen(EN.hobbies)],['shop','Shopping','Einkaufen',enGen(EN.shop)]]);
+addT('ma',3,[['rechenart','Welche Rechnung passt?','Plus, minus, mal oder geteilt?',M.rechenart],['ueberschlag','Überschlagen','Schnell schätzen statt genau rechnen',M.ueberschlag]]);
+addT('ma',4,[['ueberschlag4','Überschlagen','Große Zahlen schnell schätzen',M.ueberschlag]]);
+addT('de',2,[['gross','Groß oder klein?','Satzanfang und Nomen erkennen',D2.gross]]);
+addT('en',3,[['hoeren','Hören & Verstehen','Genau zuhören und übersetzen',enHoer]]);
+addT('en',4,[['dialoge','Kleine Dialoge','Frage hören, passend antworten',enDialog]]);
 addT('ma',2,[['t_plus9','Trick: Plus 9 und Minus 9','+ 10 − 1 statt + 9',T.plus9],['t_ausgl','Trick: Schlau ausgleichen','38 + 27 = 40 + 25',T.ausgleich],['t_fast','Trick: Fast-Verdoppeln','7 + 8 = 7 + 7 + 1',T.fastDoppel]]);
 addT('ma',3,[['t_nik','Indisch: Einmaleins 6 bis 9','Über Kreuz zum Ergebnis',T.nikMal],['t_11','Indisch: Mal 11','Die Lücken-Methode',T.mal11],['t_von','Indisch: Alle von 9, die letzte von 10','100 − 37 blitzschnell',T.von100],['t_59','Trick: Mal 5 und mal 9','Über die 10 rechnen',T.mal5und9],['t_99','Trick: Plus 99, 98, 101','Über den Hunderter',T.plus99]]);
 addT('ma',4,[['t_nik100','Indisch: Mal nahe 100','97 · 96 im Kopf',T.nik100],['t_quad','Indisch: Zahlen mit 5 am Ende','35 · 35 = 1225',T.quadrat5],['t_kreuz','Indisch: Über Kreuz malnehmen','Zweistellig mal zweistellig',T.kreuz],['t_von4','Indisch: Alle von 9, die letzte von 10','1000 − 358 blitzschnell',T.von100],['t_dh','Trick: Verdoppeln und Halbieren','16 · 25 = 4 · 100',T.dopHalb],['t_neun','Trick: Neunerprobe','Ergebnisse prüfen',T.neuner]]);
-const GRP={ma:[['Rechentricks: schnell im Kopf',['t_plus9','t_ausgl','t_fast','t_nik','t_11','t_von','t_59','t_99','t_nik100','t_quad','t_kreuz','t_von4','t_dh','t_neun']],['Rechnen & Zahlen',['zahlen2','zahlen3','plus100','minus100','mal2510','mal','geteilt','bis1000','doppelt','rest','schriftAdd','schriftSub','schriftMal','teilen','runden','pvs','sach']],['Größen: Geld, Zeit, Längen, Gewicht',['geld','einkauf','einkauf4','uhr','uhr5','zeit3','zeitspanne','fahrplan','laengen','laenge4','gewicht','liter','gewicht4']],['Geometrie',['formen','lage','umfang','koerper','netz','spiegel','wuerfelbau','flaeche','symm']],['Daten, Zufall & Muster',['strich','diagramm','diagramm4','zufall','zufall4','kombi','muster2','zauber']]],
- de:[['Lesen',['lesen2','lesen3','lesen4']],['Rechtschreibung',['bildwort','diktat2','diktat3','diktat4','silben','ie','ck','doppel2','doppel','dehnungsh','ableiten','dass','abc','woerterbuch','woerterbuch4','satzzeichen','rede']],['Grammatik',['artikel','nomen','wortart','mehrzahl','zusammen','wortfamilie','wortfamilie4','verben','steigern','zeit','subjekt']]],
+const GRP={ma:[['Rechentricks: schnell im Kopf',['t_plus9','t_ausgl','t_fast','t_nik','t_11','t_von','t_59','t_99','t_nik100','t_quad','t_kreuz','t_von4','t_dh','t_neun']],['Rechnen & Zahlen',['zahlen2','zahlen3','plus100','minus100','mal2510','mal','geteilt','bis1000','doppelt','rest','schriftAdd','schriftSub','schriftMal','teilen','runden','pvs','sach','rechenart','ueberschlag','ueberschlag4']],['Größen: Geld, Zeit, Längen, Gewicht',['geld','einkauf','einkauf4','uhr','uhr5','zeit3','zeitspanne','fahrplan','laengen','laenge4','gewicht','liter','gewicht4']],['Geometrie',['formen','lage','umfang','koerper','netz','spiegel','wuerfelbau','flaeche','symm']],['Daten, Zufall & Muster',['strich','diagramm','diagramm4','zufall','zufall4','kombi','muster2','zauber']]],
+ de:[['Lesen',['lesen2','lesen3','lesen4']],['Rechtschreibung',['bildwort','diktat2','diktat3','diktat4','silben','ie','ck','doppel2','doppel','dehnungsh','ableiten','dass','abc','woerterbuch','woerterbuch4','satzzeichen','rede','gross']],['Grammatik',['artikel','nomen','wortart','mehrzahl','zusammen','wortfamilie','wortfamilie4','verben','steigern','zeit','subjekt']]],
  er:[['Heimat',['heimat2','heimat3','heimat4']],['Deutschland & Welt',['ort','land','karte2','de','blk','bl','welt','eul','eu']]]};
 
 const GRADE_SUB={2:'Wiederholen',3:'Jetzt dran',4:'Vorschau'};
@@ -1945,8 +2072,9 @@ function renderHome(){
   ${store.profiles.map((p,i)=>S.editing===i?`<div class="prof on"><label class="label" for="nm${i}">Name</label><div class="editrow"><input id="nm${i}" maxlength="16" value="${esc(p.name)}"><button class="btn" data-act="saveName" data-i="${i}" style="flex:none">OK</button></div></div>`:
   `<div class="prof ${store.active===i?'on':''}"><button data-act="profile" data-i="${i}" style="text-align:left;display:flex;flex-direction:column;gap:4px"><span class="nm">${esc(p.name)}</span><span class="st">${STAR}${p.stars} Sterne</span><span class="rk">${rankOf(p.stars).name}</span></button><button class="linkbtn" data-act="editName" data-i="${i}">Name ändern</button></div>`).join('')}
   </div></section>
-  <div class="cards2">${reviewCard()}<button class="helper-card" data-act="helper"><span class="gl">?</span><span><span class="nm">Hausaufgaben-Helfer</span><span class="ds">Rechenaufgabe aus dem Heft eintippen und Schritt für Schritt erklären lassen.</span></span></button>
-  <button class="helper-card atl" data-act="atlas"><span class="gl">${ICON.globe}</span><span><span class="nm">Atlas</span><span class="ds">Deutschland, Europa und die Welt auf der Karte entdecken.</span></span></button></div>
+  <div class="cards2">${dayGoalCard()}${reviewCard()}<button class="helper-card" data-act="helper"><span class="gl">?</span><span><span class="nm">Hausaufgaben-Helfer</span><span class="ds">Rechenaufgabe aus dem Heft eintippen und Schritt für Schritt erklären lassen.</span></span></button>
+  <button class="helper-card atl" data-act="atlas"><span class="gl">${ICON.globe}</span><span><span class="nm">Atlas</span><span class="ds">Deutschland, Europa und die Welt auf der Karte entdecken.</span></span></button>
+  <button class="helper-card" data-act="eltern"><span class="gl">👪</span><span><span class="nm">Eltern-Überblick</span><span class="ds">Fortschritt und fällige Wiederholungen auf einen Blick.</span></span></button></div>
   <section><div class="label">Was möchtest du üben?</div><div class="subjects">
   ${SUBJECTS.map(s=>`<button class="subj" style="--c:var(${s.color})" data-act="subject" data-id="${s.id}"><span class="gl">${s.glyph}</span><span class="nm">${s.name}</span><span class="ds">${s.desc}</span></button>`).join('')}
   </div></section>
@@ -2020,7 +2148,7 @@ function newRound(test){
   P.seen[tk]=[...(P.seen[tk]||[]).filter(x=>!keys.has(x)),...keys].slice(-60);save();
   Q={qs,i:0,res:[],earned:0,n:qs.length,test:!!test,fails:{},t0:Date.now()};S.rv=null;startQ();
 }
-function startQ(){stopSpeech();Object.assign(Q,{input:'',tries:0,state:'ask',shown:1,wrong:[],steps:null,peeked:false,help:0,showSteps:false,tray:[],buildMsg:''});renderQuiz();const q=cur();if(q.kind==='text'){if(canSpeak)setTimeout(()=>say(q.say,'de-DE',q.sentence?.75:.8),250);focusDikt()}if(q.kind==='speak'&&canSpeak)setTimeout(()=>say(q.say,'en-GB',.85),250)}
+function startQ(){stopSpeech();Object.assign(Q,{input:'',tries:0,state:'ask',shown:1,wrong:[],steps:null,peeked:false,help:0,showSteps:false,tray:[],buildMsg:''});renderQuiz();const q=cur();if(q.kind==='text'){if(canSpeak)setTimeout(()=>say(q.say,'de-DE',q.sentence?.75:.8),250);focusDikt()}if(q.kind==='speak'&&canSpeak)setTimeout(()=>say(q.say,'en-GB',.85),250);if(q.autoplay&&canSpeak)setTimeout(()=>say(q.speak,q.speakLang||'en-GB',.85),300)}
 function focusDikt(){const i=document.getElementById('dikt');if(i&&matchMedia('(pointer:fine)').matches)i.focus()}
 const cur=()=>Q.qs[Q.i];
 const solText=q=>q.solTxt?q.solTxt:q.money||q.kind==='build'?euro(q.answer):q.kind==='num'?fmt(q.answer)+(q.unit?' '+q.unit:''):esc(q.answer);
@@ -2090,7 +2218,7 @@ function check(given){
   const ok=q.kind==='speak'?given===true:(q.money||q.dec)?parseMoney(given)===q.answer:q.kind==='build'?given===q.answer:q.kind==='num'?Number(given)===q.answer:given===q.answer;
   if(q.kind==='build'&&!ok)Q.buildMsg=given<q.answer?`Noch zu wenig! Es fehlen ${euro(q.answer-given)}.`:`Das ist zu viel! ${euro(given-q.answer)} zu viel.`;
   if(!ok&&q.kind==='text'){Q.steps=q.fail(given);Q.fails[Q.i]=Q.steps}
-  if(ok){promote(q,Q.tries===1&&Q.help===0);Q.state='ok';Q.res.push(true);Q.earned++;me().stars++;save();renderQuiz();popPill();tone('ok');return}
+  if(ok){promote(q,Q.tries===1&&Q.help===0);Q.state='ok';Q.res.push(true);Q.earned++;me().stars++;bumpDay();save();renderQuiz();popPill();tone('ok');return}
   tone('no');
   if(Q.test||Q.review&&false){Q.state='tw';Q.res.push(false);addWrong(q);if(q.kind==='choice')Q.wrong.push(given);renderQuiz();return}
   if(q.kind==='choice')Q.wrong.push(given);
@@ -2116,7 +2244,7 @@ function renderResult(){if(Q&&Q.review)return renderReviewResult();
   <div class="row" style="width:100%"><button class="btn ghost" data-act="hub">Zum Thema</button><button class="btn" data-act="${Q.test?'goTest':'again'}">${Q.test?'Test nochmal':'Nochmal üben'}</button></div></div>
   <div style="--c:var(${s.color})">${review}</div>`;
 }
-function render(){stopSpeech();({home:renderHome,topics:renderTopics,hub:renderHub,quiz:renderQuiz,result:renderResult,lesson:renderLesson,helper:renderHelper,atlas:renderAtlas})[S.screen]();window.scrollTo(0,0)}
+function render(){stopSpeech();({home:renderHome,topics:renderTopics,hub:renderHub,quiz:renderQuiz,result:renderResult,lesson:renderLesson,helper:renderHelper,atlas:renderAtlas,eltern:renderEltern})[S.screen]();window.scrollTo(0,0)}
 
 /* ---------- Lernen: Beispiel mit Erklär-Tafel ---------- */
 function renderLesson(){
@@ -2159,6 +2287,7 @@ function helperSolve(){const h=S.h;h.a=document.getElementById('ha').value;h.b=d
 function act(a,d){
   switch(a){
     case 'home':S.screen='home';render();break;
+    case 'eltern':S.screen='eltern';render();break;
     case 'profile':store.active=+d.i;save();renderHome();break;
     case 'editName':S.editing=+d.i;renderHome();break;
     case 'saveName':{const inp=document.getElementById('nm'+d.i);const v=(inp&&inp.value.trim())||store.profiles[d.i].name;store.profiles[d.i].name=v;store.active=+d.i;S.editing=-1;save();renderHome();break}
