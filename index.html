@@ -496,6 +496,17 @@ const DEL='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h11v14H9l-6-
 const BULB='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0012 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const canSpeak=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
 const IS_IOS=/iP(hone|od|ad)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+/* iPhone/iPad: Sprachausgabe muss beim allerersten Antippen der Seite "freigeschaltet" werden,
+   sonst bleibt sie für den Rest des Besuchs stumm - auch bei späteren, direkten Tipps auf "Anhören". */
+if(IS_IOS&&canSpeak){
+  const unlockSpeech=()=>{
+    try{const u=new SpeechSynthesisUtterance(' ');u.volume=1;u.lang='de-DE';speechSynthesis.speak(u)}catch(e){}
+    document.removeEventListener('touchend',unlockSpeech,true);
+    document.removeEventListener('click',unlockSpeech,true);
+  };
+  document.addEventListener('touchend',unlockSpeech,true);
+  document.addEventListener('click',unlockSpeech,true);
+}
 let VOICES=[];
 function loadVoices(){try{VOICES=speechSynthesis.getVoices()||[]}catch(e){VOICES=[]}}
 if(canSpeak){loadVoices();try{speechSynthesis.addEventListener('voiceschanged',()=>{loadVoices();if(S&&S.screen==='home'&&S.editing<0)renderHome()})}catch(e){}}
@@ -516,7 +527,7 @@ function speechHelp(){return'<b>Ich höre nichts?</b> Prüfe: Lautstärke hoch, 
 function say(text,lang,rate,onend){
   if(!canSpeak){onend&&onend();return}
   const id=++SAY_ID;lang=lang||'de-DE';let done=false;const fin=()=>{if(!done&&id===SAY_ID){done=true;onend&&onend()}};
-  try{speechSynthesis.cancel()}catch(e){}
+  try{if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel()}catch(e){}
   // lange Texte in Sätze teilen (Chrome bricht lange Texte sonst ab)
   text=String(text).replace(/\p{Extended_Pictographic}|\uFE0F|\u200D/gu,' ').replace(/[„“”"«»]/g,'').replace(/\s*\(\s*\)\s*/g,' ').replace(/\s+/g,' ').trim();
   const vv=pickVoice(lang),net=vv&&vv.localService===false;const parts=[];
