@@ -495,6 +495,7 @@ const SPK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8
 const DEL='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h11v14H9l-6-7z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M12 9l5 6M17 9l-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
 const BULB='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0012 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const canSpeak=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+const IS_IOS=/iP(hone|od|ad)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 let VOICES=[];
 function loadVoices(){try{VOICES=speechSynthesis.getVoices()||[]}catch(e){VOICES=[]}}
 if(canSpeak){loadVoices();try{speechSynthesis.addEventListener('voiceschanged',()=>{loadVoices();if(S&&S.screen==='home'&&S.editing<0)renderHome()})}catch(e){}}
@@ -511,7 +512,7 @@ function voiceScore(v,lang){let s=0;if(GOODV.test(v.name))s+=100;if(/google/i.te
 const isGoodVoice=v=>GOODV.test(v.name)||/google/i.test(v.name);
 let SAY_ID=0,SAY_Q=[],SAY_WARNED=false,SAY_OK=false;
 function toast(msg,ms){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');document.body.appendChild(t)}t.innerHTML=msg;t.className='show';clearTimeout(t._h);t._h=setTimeout(()=>{t.className=''},ms||6000)}
-function speechHelp(){return'<b>Ich höre nichts?</b> Prüfe: Lautstärke hoch, beim iPhone/iPad den <b>Stummschalter</b> aus. Öffne die Seite im Browser (Safari oder Chrome), nicht in einer anderen App. Unter „Töne und Stimme“ kannst du die Stimme testen.'}
+function speechHelp(){return'<b>Ich höre nichts?</b> Prüfe: Lautstärke hoch, beim iPhone/iPad den <b>Stummschalter</b> seitlich am Gerät ausschalten (auch im lautlosen Modus bleibt die Sprachausgabe sonst stumm). Öffne die Seite direkt in Safari oder Chrome, nicht in einer anderen App. Tippe zum Ausprobieren zuerst auf einen „Anhören“- oder „Vorlesen“-Knopf – beim automatischen Vorlesen ganz am Anfang ist auf dem iPhone manchmal ein erster Fingertipp nötig. Unter „Töne und Stimme“ kannst du die Stimme testen.'}
 function say(text,lang,rate,onend){
   if(!canSpeak){onend&&onend();return}
   const id=++SAY_ID;lang=lang||'de-DE';let done=false;const fin=()=>{if(!done&&id===SAY_ID){done=true;onend&&onend()}};
@@ -522,14 +523,16 @@ function say(text,lang,rate,onend){
   if(!net||text.length<220)parts.push(text);else text.split(/(?<=[.!?])\s+/).forEach(x=>{if(!x.trim())return;if(parts.length&&parts[parts.length-1].length+x.length<220)parts[parts.length-1]+=' '+x;else parts.push(x)});
   if(!parts.length){fin();return}
   const v=pickVoice(lang);
-  setTimeout(()=>{if(id!==SAY_ID)return;try{speechSynthesis.resume()}catch(e){}
+  const go=()=>{if(id!==SAY_ID)return;try{speechSynthesis.resume()}catch(e){}
     SAY_Q=parts.map((txt,i)=>{const u=new SpeechSynthesisUtterance(txt);u.lang=v?v.lang:lang;if(v)u.voice=v;u.rate=rate||1;u.pitch=1;u.volume=1;
       u.onstart=()=>{SAY_OK=true};
       u.onend=()=>{if(i===parts.length-1)fin()};
       u.onerror=e=>{const er=e&&e.error||'';if(er==='interrupted'||er==='canceled')return;if(!SAY_WARNED){SAY_WARNED=true;toast(`Die Sprachausgabe hat nicht funktioniert${er?` (${er})`:''}. `+speechHelp(),9000)}fin()};return u});
     SAY_Q.forEach(u=>speechSynthesis.speak(u));
-    setTimeout(()=>{if(id===SAY_ID&&!SAY_OK&&!SAY_WARNED&&!speechSynthesis.speaking){SAY_WARNED=true;toast(speechHelp(),9000)}},2500);
-  },80)}
+    setTimeout(()=>{if(id===SAY_ID&&!SAY_OK&&!SAY_WARNED&&!speechSynthesis.speaking){SAY_WARNED=true;toast(speechHelp(),9000)}},2500)};
+  // iPhone/iPad (Safari) erlauben Sprachausgabe nur, wenn speak() OHNE Verzögerung direkt beim Antippen aufgerufen wird.
+  // Jede künstliche Pause (auch nur wenige Millisekunden) lässt Safari die Ausgabe sonst stumm verwerfen.
+  if(IS_IOS)go();else setTimeout(go,80)}
 const plain=h=>String(h).replace(/<[^>]+>/g,' ').replace(/___/g,' Lücke ').replace(/\s+/g,' ').trim();
 const STELLE=['Einer','Zehner','Hunderter','Tausender','Zehntausender','Hunderttausender','Millionen'];
 
