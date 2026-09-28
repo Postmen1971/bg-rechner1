@@ -472,6 +472,10 @@ mark.ev{background:#FFE08A; color:var(--ink); border-bottom:3px solid var(--warn
 .rc-h{display:flex; align-items:center; gap:10px} .rc-h b{font-family:var(--display); font-size:21px} .rc-h span{font-size:15px; color:var(--muted)}
 .rc-chips{display:flex; flex-wrap:wrap; gap:6px}
 .chip2{border:2px solid var(--c); color:var(--c); background:var(--paper); border-radius:999px; padding:4px 12px; font-weight:700; font-size:15px}
+.zr{display:flex; align-items:center; flex-wrap:wrap; gap:8px; background:var(--card); border-radius:18px; padding:10px 14px; box-shadow:var(--shadow); font-weight:700; --c:var(--c-ma)}
+.zr span{flex:1 1 100%; font-size:15px; color:var(--muted)}
+.zr button{border:2.5px solid var(--c); color:var(--c); background:var(--paper); border-radius:999px; padding:7px 16px; font-weight:800; font-size:16px; font-family:var(--display)}
+.zr button.on{background:var(--c); color:#fff}
 @media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
 </style>
 </head>
@@ -519,31 +523,45 @@ function pickVoice(lang){const pre=lang.slice(0,2).toLowerCase(),list=voicesFor(
   const chosen=store.voice&&store.voice[pre];if(chosen){const v=list.find(x=>x.voiceURI===chosen);if(v)return v}
   return list.slice().sort((a,b)=>voiceScore(b,lang)-voiceScore(a,lang))[0]}
 const GOODV=/premium|enhanced|erweitert|natural|neural|online|wavenet|siri/i,BADV=/compact|eloquence|grandma|grandpa|oma|opa|rocko|shelley|sandy|flo\b|reed|eddy|albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|ralph|fred|kathy|espeak/i;
-function voiceScore(v,lang){let s=0;if(GOODV.test(v.name))s+=100;if(/google/i.test(v.name))s+=60;if(BADV.test(v.name))s-=80;if(isFemale(v))s+=25;if(isMale(v))s-=10;if((v.lang||'').toLowerCase().replace('_','-')===lang.toLowerCase())s+=10;return s}
+function voiceScore(v,lang){let s=0;const vl=(v.lang||'').toLowerCase().replace('_','-'),L=lang.toLowerCase();
+  if(GOODV.test(v.name))s+=100;if(/google/i.test(v.name))s+=60;if(BADV.test(v.name))s-=200;
+  // Standard-Aussprache bevorzugen: Britisch, dann Amerikanisch (nicht schottisch, irisch, indisch …)
+  if(vl===L)s+=50;else if(L.startsWith('en')&&vl==='en-us')s+=30;else if(L.startsWith('de')&&vl==='de-de')s+=30;
+  if(isFemale(v))s+=10;if(isMale(v))s-=5;return s}
 const isGoodVoice=v=>GOODV.test(v.name)||/google/i.test(v.name);
 let SAY_ID=0,SAY_Q=[],SAY_WARNED=false,SAY_OK=false;
 function toast(msg,ms){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');document.body.appendChild(t)}t.innerHTML=msg;t.className='show';clearTimeout(t._h);t._h=setTimeout(()=>{t.className=''},ms||6000)}
 function speechHelp(){return IS_IOS?'<b>Ich höre nichts?</b> Auf dem iPhone/iPad blockiert Apple die Sprachausgabe von Webseiten komplett, solange der <b>Stummschalter</b> seitlich am Gerät aktiv ist (rote Markierung sichtbar) – das betrifft jede Webseite, nicht nur diese. Bitte den Schalter nach vorne schieben (kein Rot sichtbar), dann noch einmal auf „Anhören“ tippen. Öffne die Seite außerdem direkt in Safari, nicht als Vorschau in einer anderen App. Unter „Töne und Stimme“ kannst du die Stimme testen.':'<b>Ich höre nichts?</b> Prüfe: Lautstärke hoch. Öffne die Seite direkt in Safari oder Chrome, nicht in einer anderen App. Unter „Töne und Stimme“ kannst du die Stimme testen.'}
+const enw=w=>`<span lang="en">${w}</span>`;
+const cleanSay=t=>String(t==null?'':t).replace(/\p{Extended_Pictographic}|️|‍/gu,' ').replace(/[„“”"«»]/g,'').replace(/\s*\(\s*\)\s*/g,' ').replace(/\s+/g,' ').trim();
+/* text: ein Text ODER eine Liste [{t,lang}] – so liest die deutsche Stimme Deutsch und die englische Stimme Englisch */
 function say(text,lang,rate,onend){
   if(!canSpeak){onend&&onend();return}
-  const id=++SAY_ID;lang=lang||'de-DE';let done=false;const fin=()=>{if(!done&&id===SAY_ID){done=true;onend&&onend()}};
+  const id=++SAY_ID;let done=false;const fin=()=>{if(!done&&id===SAY_ID){done=true;onend&&onend()}};
   try{if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel()}catch(e){}
-  // lange Texte in Sätze teilen (Chrome bricht lange Texte sonst ab)
-  text=String(text).replace(/\p{Extended_Pictographic}|\uFE0F|\u200D/gu,' ').replace(/[„“”"«»]/g,'').replace(/\s*\(\s*\)\s*/g,' ').replace(/\s+/g,' ').trim();
-  const vv=pickVoice(lang),net=vv&&vv.localService===false;const parts=[];
-  if(!net||text.length<220)parts.push(text);else text.split(/(?<=[.!?])\s+/).forEach(x=>{if(!x.trim())return;if(parts.length&&parts[parts.length-1].length+x.length<220)parts[parts.length-1]+=' '+x;else parts.push(x)});
+  const segs=(Array.isArray(text)?text:[{t:text,lang:lang||'de-DE'}]).map(x=>({t:cleanSay(x.t),lang:x.lang||'de-DE'})).filter(x=>/[\p{L}\p{N}]/u.test(x.t));
+  const parts=[];
+  segs.forEach(sg=>{const v=pickVoice(sg.lang),en=/^en/i.test(sg.lang),r=(rate||1)*(en&&segs.length>1?.9:1);let t=sg.t;
+    if(en&&t.length<30&&!/[.!?]$/.test(t))t+='.'; // kurze englische Wörter nicht abschneiden
+    const add=x=>parts.push({t:x,v,lang:sg.lang,r});
+    // lange Texte nur bei Online-Stimmen teilen (Chrome bricht sie sonst ab)
+    if(!(v&&v.localService===false)||t.length<220)add(t);
+    else{let c='';t.split(/(?<=[.!?])\s+/).forEach(x=>{if(!x.trim())return;if(c&&c.length+x.length>=220){add(c);c=x}else c=c?c+' '+x:x});if(c)add(c)}});
   if(!parts.length){fin();return}
-  const v=pickVoice(lang);
   const go=()=>{if(id!==SAY_ID)return;try{speechSynthesis.resume()}catch(e){}
-    SAY_Q=parts.map((txt,i)=>{const u=new SpeechSynthesisUtterance(txt);u.lang=v?v.lang:lang;if(v)u.voice=v;u.rate=rate||1;u.pitch=1;u.volume=1;
+    SAY_Q=parts.map((p,i)=>{const u=new SpeechSynthesisUtterance(p.t);u.lang=p.v?p.v.lang:p.lang;if(p.v)u.voice=p.v;u.rate=p.r;u.pitch=1;u.volume=1;
       u.onstart=()=>{SAY_OK=true};
       u.onend=()=>{if(i===parts.length-1)fin()};
       u.onerror=e=>{const er=e&&e.error||'';if(er==='interrupted'||er==='canceled')return;if(!SAY_WARNED){SAY_WARNED=true;toast(`Die Sprachausgabe hat nicht funktioniert${er?` (${er})`:''}. `+speechHelp(),9000)}fin()};return u});
     SAY_Q.forEach(u=>speechSynthesis.speak(u));
     setTimeout(()=>{if(id===SAY_ID&&!SAY_OK&&!SAY_WARNED&&!speechSynthesis.speaking){SAY_WARNED=true;toast(speechHelp(),9000)}},2500)};
   // iPhone/iPad (Safari) erlauben Sprachausgabe nur, wenn speak() OHNE Verzögerung direkt beim Antippen aufgerufen wird.
-  // Jede künstliche Pause (auch nur wenige Millisekunden) lässt Safari die Ausgabe sonst stumm verwerfen.
   if(IS_IOS)go();else setTimeout(go,80)}
+/* HTML mit <span lang="en">…</span> in deutsche und englische Stücke zerlegen */
+function mixSegs(html){const out=[],re=/<span lang="en">([\s\S]*?)<\/span>/g;let last=0,m;html=String(html==null?'':html);
+  const de=h=>{const t=mathSpeak(plain(h));if(t)out.push({t,lang:'de-DE'})};
+  while((m=re.exec(html))){de(html.slice(last,m.index));out.push({t:plain(m[1]),lang:'en-GB'});last=re.lastIndex}
+  de(html.slice(last));return out}
 const plain=h=>String(h).replace(/<[^>]+>/g,' ').replace(/___/g,' Lücke ').replace(/\s+/g,' ').trim();
 const STELLE=['Einer','Zehner','Hunderter','Tausender','Zehntausender','Hunderttausender','Millionen'];
 
@@ -679,7 +697,7 @@ function solveAdd(a,b){
   if(c)st.push({t:'Die gemerkte 1 schreibst du ganz vorne ins Ergebnis.',why:'Es gibt keine weitere Spalte, zu der sie dazukommen kann.',vis:view(L,n)});
   const rd=v=>v>=1000?Math.round(v/1000)*1000:v>=100?Math.round(v/100)*100:Math.round(v/10)*10;
   st.push({t:`Ergebnis: <b>${fmt(s)}</b>`,why:`Überschlag zum Prüfen: ${fmt(rd(a))} + ${fmt(rd(b))} = ${fmt(rd(a)+rd(b))}. ${fmt(s)} liegt in der Nähe, also passt es.`,vis:view(L,null)});
-  return{answer:s,visual:view(0,null),steps:st}}
+  return{answer:s,visual:st[0].vis,steps:st}}
 function solveSub(a,b){
   const d=a-b,w=String(a).length+1,A=[...String(a)].reverse(),B=[...String(b)].reverse(),L=String(d).length,rs=[...String(d)].reverse();let c=0;const carry=Array(w).fill(' ');
   const view=(done,col)=>gridX([{s:a},{s:'−'+String(b).padStart(w-1,' ')},{s:carry.join(''),cls:'carry'},{s:Array.from({length:L},(_,k)=>k<done?rs[k]:'_').reverse().join(''),cls:'res'+(done>=L?' done':'')}],w,{head:1,act:col==null?[]:[w-1-col]});
@@ -691,7 +709,7 @@ function solveSub(a,b){
       why=`Oben steht nur ${t}, das ist weniger als ${x}. Darum ergänzen wir bis ${t+10}. Den geliehenen Zehner geben wir zurück: Als kleine 1 kommt er unten zur nächsten Spalte.`}
     st.push({t:txt,why,vis:view(Math.min(i+1,L),i)})}
   st.push({t:`Ergebnis: <b>${fmt(d)}</b>`,why:`Probe: ${fmt(d)} + ${fmt(b)} = ${fmt(a)}. Stimmt! Bei Minus kannst du immer mit Plus prüfen.`,vis:view(L,null)});
-  return{answer:d,visual:view(0,null),steps:st}}
+  return{answer:d,visual:st[0].vis,steps:st}}
 function solveMul1(a,m){
   const p=a*m,A=[...String(a)].reverse(),L=String(p).length,w=Math.max(String(a).length+2,L),rs=[...String(p)].reverse();const carry=Array(w).fill(' ');
   const view=(done,col)=>gridX([{s:`${a}·${m}`},{s:carry.join(''),cls:'carry'},{s:Array.from({length:L},(_,k)=>k<done?rs[k]:'_').reverse().join(''),cls:'res'+(done>=L?' done':'')}],w,{act:col==null?[]:[w-3-col,w-1-col]});
@@ -701,9 +719,9 @@ function solveMul1(a,m){
     const why=last&&x>=10?'Das ist die letzte Ziffer. Darum schreibst du die ganze Zahl hin.':x>=10?`${x} ${STELLE[i]} sind ${Math.floor(x/10)} ${STELLE[i+1]} und ${x%10} ${STELLE[i]}. Die ${Math.floor(x/10)} wandert als Übertrag in die nächste Spalte.`:had?'Den Übertrag von vorhin rechnest du nach dem Malnehmen dazu.':'Einmaleins-Aufgabe aus dem Kopf.';
     c=last?0:Math.floor(x/10);if(c)carry[w-2-i]=String(c);
     st.push({t:txt,why,vis:view(last?L:i+1,i)})});
-  const ra=Math.round(a/100)*100||a;
+  const ra=a>=100?Math.round(a/100)*100:Math.round(a/10)*10;
   st.push({t:`Ergebnis: <b>${fmt(p)}</b>`,why:`Überschlag: ${fmt(ra)} · ${m} = ${fmt(ra*m)}. Das Ergebnis liegt in der Nähe.`,vis:view(L,null)});
-  return{answer:p,visual:view(0,null),steps:st}}
+  return{answer:p,visual:st[0].vis,steps:st}}
 function solveMulBig(a,b){const parts=placeParts(b),p=a*b;
   const st=[{t:`Zerlege ${b} in ${parts.join(' + ')}. Dann rechnest du ${a} mal jeden Teil.`,why:'Große Malaufgaben baust du aus kleinen zusammen. Das nennt man halbschriftlich rechnen.',vis:stt(b)}];
   parts.forEach(x=>{const z=String(x).match(/0+$/),dg=z?x/Math.pow(10,z[0].length):x;
@@ -1210,15 +1228,16 @@ const EN={
 };
 const enPic=(de,en)=>EN_PIC[en]||(/^\d+$/.test(de)&&+de<=10?'dots:'+de:null);
 function enGen(list){return()=>{const it=pick(list),others=shuf(list.filter(x=>x!==it)).slice(0,3);const toEn=Math.random()<.6;const[de,en,pr]=it;const pic=enPic(de,en);
+  const hear=tail=>pr?{t:`So spricht man es ungefähr: „${pr}“.${tail?' '+tail:''}`,say:`Hör genau hin: ${enw(en)}. ${tail||''}`}:{t:tail||'Hör es dir noch einmal an und sprich nach.',say:`So klingt es: ${enw(en)}. ${tail||'Sprich nach.'}`};
   if(pic&&Math.random()<.45){const col=pic.startsWith('color:'),dots=pic.startsWith('dots:');
     return{kind:'choice',text:col?'Welche Farbe ist das? Antworte auf Englisch.':dots?'Wie viele Punkte sind das? Antworte auf Englisch.':'Was ist das auf Englisch?',visual:picBox(pic),options:shuf([en,...others.map(o=>o[1])]),answer:en,say:en,
-      steps:[col?'Schau dir die Farbe genau an. Wie heißt sie auf Deutsch?':dots?'Zähle die Punkte. Wie heißt die Zahl auf Englisch?':'Schau dir das Bild an. Wie heißt es auf Deutsch?',`Das ist „${de}“. Auf Englisch heißt es <b>${en}</b>.`,pr?`So spricht man es ungefähr: „${pr}“. Tippe auf „Anhören“ und sprich nach.`:'Tippe auf „Anhören“ und sprich nach.']}}
-  if(toEn)return{kind:'choice',text:`Was heißt <b>„${de}“</b> auf Englisch?`,speak:`Was heißt ${de} auf Englisch?`,options:shuf([en,...others.map(o=>o[1])]),answer:en,single:de.length>14,say:en,steps:[`${picHTML(pic,1)} „${de}“ heißt auf Englisch <b>${en}</b>.`,pr?`So spricht man es ungefähr: „${pr}“. Tippe auf „Anhören“ und sprich nach.`:'Tippe auf „Anhören“ und sprich den Satz nach.']};
-  return{kind:'choice',text:`Was heißt <b>„${en}“</b> auf Deutsch?`,speak:en,speakLang:'en-GB',options:shuf([de,...others.map(o=>o[0])]),answer:de,single:de.length>14,say:en,steps:[`${picHTML(pic,1)} <b>${en}</b> heißt auf Deutsch „${de}“.`,pr?`So spricht man es ungefähr: „${pr}“.`:'Hör dir den Satz noch einmal an und sprich nach.']}}}
+      steps:[col?'Schau dir die Farbe genau an. Wie heißt sie auf Deutsch?':dots?'Zähle die Punkte. Wie heißt die Zahl auf Englisch?':'Schau dir das Bild an. Wie heißt es auf Deutsch?',`Das ist „${de}“. Auf Englisch heißt es <b>${enw(en)}</b>.`,hear('Tippe auf „Anhören“ und sprich nach.')]}}
+  if(toEn)return{kind:'choice',text:`Was heißt <b>„${de}“</b> auf Englisch?`,speak:`Was heißt ${de} auf Englisch?`,options:shuf([en,...others.map(o=>o[1])]),answer:en,single:de.length>14,say:en,steps:[`${picHTML(pic,1)} „${de}“ heißt auf Englisch <b>${enw(en)}</b>.`,hear('Tippe auf „Anhören“ und sprich nach.')]};
+  return{kind:'choice',text:`Was heißt <b>„${enw(en)}“</b> auf Deutsch?`,options:shuf([de,...others.map(o=>o[0])]),answer:de,single:de.length>14,say:en,steps:[`${picHTML(pic,1)} <b>${enw(en)}</b> heißt auf Deutsch „${de}“.`,hear('')]}}}
 function enSpeak(list){return()=>{const[de,en,pr]=pick(list);
-  return{kind:'speak',visual:picBox(enPic(de,en)),long:en.length>12,text:`Sprich nach: <b>${esc(en)}</b>`,sub:`Das heißt: „${de}“`,say:en,answer:en,
-    help:[`Tippe auf „Anhören“ und hör genau zu. Mit „Langsam“ hörst du jeden Laut besser.`,pr?`So klingt es ungefähr: <b>„${pr}“</b>`:'Sprich Wort für Wort, langsam und deutlich.'],
-    steps:[`Hör dir „${esc(en)}“ an, am besten zuerst langsam.`,pr?`Aussprache-Tipp: Es klingt ungefähr wie <b>„${pr}“</b>.`:'Sprich den Satz in kleinen Stücken nach, dann alles zusammen.','Sprich es laut nach. Hör es dir danach noch einmal an und vergleiche: Klingt es gleich?']}}}
+  return{kind:'speak',visual:picBox(enPic(de,en)),long:en.length>12,text:`Sprich nach: <b>${enw(esc(en))}</b>`,sub:`Das heißt: „${de}“`,say:en,answer:en,
+    help:[{t:'Tippe auf „Anhören“ und hör genau zu. Mit „Langsam“ hörst du jeden Laut besser.'},pr?{t:`So klingt es ungefähr: <b>„${pr}“</b>`,say:`So klingt es: ${enw(esc(en))}`}:{t:'Sprich Wort für Wort, langsam und deutlich.'}],
+    steps:[`Hör dir „${enw(esc(en))}“ an, am besten zuerst langsam.`,pr?{t:`Aussprache-Tipp: Es klingt ungefähr wie <b>„${pr}“</b>.`,say:`Hör genau hin: ${enw(esc(en))}.`}:'Sprich den Satz in kleinen Stücken nach, dann alles zusammen.','Sprich es laut nach. Hör es dir danach noch einmal an und vergleiche: Klingt es gleich?']}}}
 const SA_PIC=[['vom Pferd','🐴'],['vom Schaf','🐑'],['Kuh','🐮'],['Spinne','🕷️'],['Käfer','🐞'],['Winterschlaf','❄️'],['Zähne putzen','🪥'],['Milchzähne','🦷'],['Pfütze','☀️'],['Wolke','☁️'],['Bienen','🐝'],['Samen','🌱'],['Eiche','🌳'],['Steckdose','🔌'],['leuchtet der Mond','🌙'],['Kängurus','🦘'],['Sahara','🐪'],['Bauernhof','🚜'],['Bücher','📚'],['Hausnummern','🏠'],['Monat','📅'],['Woche','📅'],['Weihnachten','🎄'],['Fahrrad','🚲'],['Helm','🚲'],['Dünen','🏖️'],['Gebirge','⛰️'],['Planet ist unser Zuhause','🌍'],['Tag und Nacht','🌓']];
 function saGen(list){return()=>{const[q,a,w,why]=pick(list);const opts=shuf([a,...w]);const pk=SA_PIC.find(x=>q.includes(x[0]));return{kind:'choice',long:1,text:q,visual:pk?picBox(pk[1]):'',options:opts,answer:a,single:opts.some(o=>o.length>18),steps:[...why.split(/(?<=[.!?])\s+/),`Die Antwort ist: <b>${a}</b>`]}}}
 
@@ -1734,8 +1753,8 @@ Object.assign(EN_PIC,{sunny:'☀️',rainy:'🌧️',cloudy:'☁️',windy:'🌬
 function enTime(){const h=R(1,12),m=pick([0,30,15,45]);const nw=['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'];const n=i=>nw[(i-1+12)%12];
   const say=m===0?`It's ${n(h)} o'clock.`:m===30?`It's half past ${n(h)}.`:m===15?`It's quarter past ${n(h)}.`:`It's quarter to ${n(h%12+1)}.`;
   const wrong=[m===30?`It's half past ${n(h%12+1)}.`:`It's half past ${n(h)}.`,m===0?`It's ${n(h%12+1)} o'clock.`:`It's ${n(h)} o'clock.`,m===15?`It's quarter to ${n(h)}.`:`It's quarter past ${n(h)}.`].filter(x=>x!==say);
-  return{kind:'choice',text:'What time is it?',visual:clockSVG(h,m),options:shuf([say,...[...new Set(wrong)].slice(0,2)]),answer:say,single:1,say,
-    steps:[{t:'Auf Englisch fragt man: <b>What time is it?</b>'},{t:m===0?'Volle Stunde: <b>o\'clock</b>.':m===30?'Achtung: Im Englischen heißt halb: <b>half past</b> + die Stunde davor. Halb 4 ist „half past three“.':m===15?'Viertel nach: <b>quarter past</b>.':'Viertel vor: <b>quarter to</b> + die nächste Stunde.',why:m===30?'Im Deutschen denkt man an die nächste Stunde, im Englischen an die letzte.':'Past heißt „nach“, to heißt „vor“.'},{t:`Richtig: <b>${say}</b>`}]}}
+  return{kind:'choice',text:enw('What time is it?'),visual:clockSVG(h,m),options:shuf([say,...[...new Set(wrong)].slice(0,2)]),answer:say,single:1,say,
+    steps:[{t:`Auf Englisch fragt man: <b>${enw('What time is it?')}</b>`},{t:m===0?`Volle Stunde: <b>${enw("o'clock")}</b>.`:m===30?`Achtung: Im Englischen heißt halb: <b>${enw('half past')}</b> + die Stunde davor. Halb 4 ist „${enw('half past three')}“.`:m===15?`Viertel nach: <b>${enw('quarter past')}</b>.`:`Viertel vor: <b>${enw('quarter to')}</b> + die nächste Stunde.`,why:m===30?'Im Deutschen denkt man an die nächste Stunde, im Englischen an die letzte.':`${enw('Past')} heißt „nach“, ${enw('to')} heißt „vor“.`},{t:`Richtig: <b>${enw(say)}</b>`}]}}
 
 /* ---------- RECHENTRICKS: indisch (vedisch) und Schnellrechnen ---------- */
 const box=(v,c,sm)=>`<span class="tb${sm?' sm':''}" style="--tc:${c||'#4C86F0'}">${v}</span>`;
@@ -1811,7 +1830,7 @@ const qKey=q=>(plain(q.text)+'|'+q.answer+'|'+hashS(String(q.visual||''))).slice
 const today=()=>Math.floor((Date.now()-new Date().getTimezoneOffset()*6e4)/864e5);
 const TK=()=>`${S.subj}|${S.grade}|${S.topic[0]}`;
 const newSeed=()=>(Math.random()*2147483647)|0;
-function findTopic(tk){const[s,g,id]=tk.split('|');const sub=SUBJECTS.find(x=>x.id===s);if(!sub)return null;const t=(sub.grades[g]||[]).find(x=>x[0]===id);return t?{sub,g:+g,t}:null}
+function findTopic(tk){const[s,g,id]=tk.split('|');const sub=SUBJECTS.find(x=>x.id===s);if(!sub)return null;const t=(sub.grades[g]||[]).find(x=>x[0]===id);return t&&!t.hidden?{sub,g:+g,t}:null}
 const WR_DAYS=[0,1,3,7],TOPIC_DAYS=[1,2,4,7,14];
 function addWrong(q){if(!q||!q._tk)return;const P=me();P.wrong=P.wrong||[];const w=P.wrong.find(x=>x.key===q._key);
   if(w){w.box=1;w.due=today()+1}else P.wrong.push({tk:q._tk,seed:q._seed,key:q._key,box:1,due:today()+1});if(P.wrong.length>60)P.wrong.splice(0,P.wrong.length-60);save()}
@@ -1821,9 +1840,9 @@ function dueWrong(){const t=today();return(me().wrong||[]).filter(w=>w.due<=t&&f
 function dueTopics(){const t=today(),sc=me().sched||{};return Object.entries(sc).map(([tk,v])=>({tk,...v})).filter(v=>v.due<=t&&findTopic(v.tk)).sort((a,b)=>a.due-b.due)}
 function markTopic(ratio){const P=me();P.sched=P.sched||{};const tk=TK(),old=P.sched[tk];const box=ratio>=.75?Math.min((old&&old.box||0)+1,5):1;
   P.sched[tk]={last:today(),box,due:today()+TOPIC_DAYS[box-1],name:S.topic[1],sid:S.subj,g:S.grade}}
-function startReview(){const qs=[],keys=new Set();
-  const push=(f,tk,seed)=>{const q=genSeeded(f.t[3],seed);q._tk=tk;q._key=qKey(q);q._sid=f.sub.id;q._tname=f.t[1];if(keys.has(q._key))return;keys.add(q._key);qs.push(q)};
-  dueWrong().slice(0,6).forEach(w=>{const f=findTopic(w.tk);if(f)push(f,w.tk,w.seed)});
+function startReview(){applyZR();const qs=[],keys=new Set();
+  const push=(f,tk,seed,wk)=>{const q=genSeeded(f.t[3],seed);q._tk=tk;q._key=wk||qKey(q);q._sid=f.sub.id;q._tname=f.t[1];if(keys.has(q._key))return;keys.add(q._key);qs.push(q)};
+  dueWrong().slice(0,6).forEach(w=>{const f=findTopic(w.tk);if(f)push(f,w.tk,w.seed,w.key)});
   const tops=dueTopics();for(let i=0;qs.length<8&&tops.length&&i<60;i++){const tp=tops[i%tops.length],f=findTopic(tp.tk);if(f)push(f,tp.tk,newSeed())}
   if(!qs.length){toast('Heute gibt es nichts zu wiederholen. Super gemacht!',4000);return}
   stopSpeech();S.screen='quiz';Q={qs:shuf(qs),i:0,res:[],earned:0,n:qs.length,review:true,fails:{},t0:Date.now()};S.rv=null;startQ();window.scrollTo(0,0)}
@@ -1914,8 +1933,8 @@ const EN_DIALOG=[
   ["What's your favourite animal?","My favourite animal is a horse.",["It's Monday.","I am nine.","Good morning."]]
 ];
 function enDialog(){const[q,a,ds]=pick(EN_DIALOG);
-  return{kind:'choice',long:1,text:`Jemand fragt dich: <b>„${esc(q)}"</b>`,sub:'Was antwortest du auf Englisch?',options:shuf([a,...ds]),answer:a,single:1,speak:q,speakLang:'en-GB',say:q,
-    steps:[`Hör dir die Frage an: „${q}"`,`Passende Antwort: <b>${a}</b>`,'Sprich den ganzen Antwortsatz laut auf Englisch nach.']}}
+  return{kind:'choice',long:1,text:`Jemand fragt dich: <b>„${enw(esc(q))}“</b>`,sub:'Was antwortest du auf Englisch?',options:shuf([a,...ds]),answer:a,single:1,say:q,
+    steps:[`Hör dir die Frage an: „${enw(esc(q))}“`,`Passende Antwort: <b>${enw(esc(a))}</b>`,'Sprich den ganzen Antwortsatz laut auf Englisch nach.']}}
 
 /* ---------- Englisch: Hörverstehen ---------- */
 const EN_HOER=[
@@ -1936,7 +1955,7 @@ const EN_HOER=[
 ];
 function enHoer(){const[en,de]=pick(EN_HOER),others=shuf(EN_HOER.filter(x=>x[1]!==de)).slice(0,3).map(x=>x[1]);
   return{kind:'choice',long:1,text:'🔊 Höre genau zu (tippe oben auf „Vorlesen") und wähle die richtige Übersetzung.',options:shuf([de,...others]),answer:de,single:1,speak:en,speakLang:'en-GB',say:en,autoplay:1,
-    steps:[`Der englische Satz war: <b>„${en}"</b>`,`Das bedeutet auf Deutsch: <b>${de}</b>`,'Hör ihn dir noch einmal an und sprich ihn leise mit.']}}
+    steps:[`Der englische Satz war: <b>„${enw(esc(en))}“</b>`,`Das bedeutet auf Deutsch: <b>${de}</b>`,'Hör ihn dir noch einmal an und sprich ihn leise mit.']}}
 
 /* ---------- Tagesziel ---------- */
 const DAILY_GOAL=5;
@@ -1960,6 +1979,135 @@ function renderEltern(){
   ${items.length?`<section><div class="label">Geübte Themen</div><div class="topics">${items.map(x=>`<div class="topic" style="--c:var(${x.color})"><span class="tx"><span class="nm">${esc(x.name)}</span><br><span class="ds">${esc(x.sub)} · Klasse ${x.grade}${x.due!=null?` · Wiederholen: ${x.due<=t?'heute':`in ${x.due-t} Tagen`}`:''}</span></span>${x.medal?medalSVG(x.medal,22):''}<span class="best">${STAR}${x.best}/${ROUND}</span></div>`).join('')}</div></section>`:`<p class="note">Noch keine Themen geübt.</p>`}
   <p class="note">Diese Übersicht zeigt, was ${esc(P.name)} auf diesem Gerät geübt hat. Die Daten sind nur lokal in diesem Browser gespeichert, nicht online.</p>`;
 }
+
+/* ================= Zahlenraum bis 100 (pro Kind einstellbar, Standard: bis 100) ================= */
+const numTxt=h=>String(h==null?'':h).replace(/<svg[\s\S]*?<\/svg>/g,' ').replace(/<[^>]+>/g,' ').replace(/\d{1,2}:\d{2}/g,' ').replace(/\d+(?:[.,]\d+)?[\s ]?€/g,' ').replace(/(\d)\.(\d{3})/g,'$1$2');
+function maxNum(q){const parts=[q.text,q.sub,(q.options||[]).join(' '),q.kind==='build'||q.money?'':q.answer,...(q.steps||[]).map(s=>typeof s==='string'?s:s.t)];
+  return Math.max(0,...((parts.map(numTxt).join(' ').match(/\d+/g))||[]).map(Number))}
+/* Erzeugt so lange neu, bis keine Zahl über 100 vorkommt */
+const capN=(gen,lim)=>()=>{lim=lim||100;let q;for(let i=0;i<120;i++){q=gen();if(maxNum(q)<=lim)return q}return q};
+/* Ergänzen bis 100 als Schritte */
+const erg100=(c,u)=>{const z=Math.ceil(c/10)*10;return[
+  {t:`Frage: ${c} ${u} + <b>?</b> = 100 ${u}`,why:'„Wie viel fehlt?“ löst du mit Ergänzen: Du rechnest plus statt minus.'},
+  {t:`Erst bis zum nächsten Zehner: ${c} + ${z-c} = ${z}`,vis:lineSVG(c,[z-c,100-z])},
+  {t:`Dann bis 100: ${z} + ${100-z} = 100`},
+  {t:`Zusammen: ${z-c} + ${100-z} = <b>${100-c} ${u}</b>`,why:`Probe: ${c} + ${100-c} = 100.`}]};
+const noZ=(a,b)=>{let n;do{n=R(a,b)}while(n%10===0);return n};
+
+const K={
+  schriftAdd(){let a,b;do{a=R(15,69);b=R(12,99-a)}while(a+b>99||(a%10)+(b%10)<10);const r=solveAdd(a,b);return{kind:'num',text:'Rechne schriftlich:',answer:r.answer,visual:r.visual,steps:r.steps}},
+  schriftSub(){let a,b;do{a=R(31,98);b=R(12,a-10)}while((a%10)>=(b%10));const r=solveSub(a,b);return{kind:'num',text:'Rechne schriftlich:',answer:r.answer,visual:r.visual,steps:r.steps}},
+  schriftMal(){let a,m;do{a=R(12,49);m=R(2,9)}while(a*m>99||(a%10)*m<10);const r=solveMul1(a,m);return{kind:'num',text:'Rechne schriftlich:',answer:r.answer,visual:r.visual,steps:r.steps}},
+  teilen(){let d,q;do{d=R(2,8);q=R(11,49)}while(d*q>99||q%10===0);const a=d*q,qt=Math.floor(q/10)*10,qo=q%10;
+    return{kind:'num',text:`${a} : ${d} = ?`,answer:q,steps:[
+      {t:`Zerlege ${a} in zwei Zahlen, die sich gut durch ${d} teilen lassen: ${a} = <b>${d*qt}</b> + <b>${d*qo}</b>`,why:`${d*qt} ist ${qt/10}-mal ${d*10}. Solche Zehnerzahlen lassen sich leicht teilen.`},
+      {t:`${d*qt} : ${d} = <b>${qt}</b>`,why:`Denn ${qt} · ${d} = ${d*qt}.`},
+      {t:`${d*qo} : ${d} = <b>${qo}</b>`,why:`Einmaleins: ${qo} · ${d} = ${d*qo}.`},
+      {t:`Zusammen: ${qt} + ${qo} = <b>${q}</b>`,why:`Probe: ${q} · ${d} = ${a} ✓`}]}},
+  runden(){const n=noZ(11,99),dg=n%10,lo=n-dg,r=Math.round(n/10)*10;
+    return{kind:'num',text:`Runde ${n} auf Zehner.`,long:1,answer:r,steps:[
+      {t:`Schau auf die <b>Einer</b>: Das ist die <b>${dg}</b>.`,why:'Die Einer entscheiden, ob wir nach oben oder nach unten runden.',vis:stt(n)},
+      {t:dg>=5?`${dg} ist 5 oder größer → <b>aufrunden</b>.`:`${dg} ist kleiner als 5 → <b>abrunden</b>.`,why:`${n} liegt zwischen ${lo} und ${lo+10}. Wir nehmen die Zahl, die näher dran ist. Bei 5 runden wir immer auf. Das ist so abgemacht.`,vis:roundSVG(n,10)},
+      {t:`Die Einer werden 0: ${n} ≈ <b>${r}</b>`,why:'Das Zeichen ≈ heißt „ungefähr“. Gerundete Zahlen braucht man für den Überschlag.'}]}},
+  laengen(){const t=R(1,4);
+    if(t===1){const c=noZ(12,88);return{kind:'num',unit:'cm',long:1,text:`Ein Geschenkband ist ${c} cm lang. Wie viele Zentimeter fehlen bis 1 m?`,visual:scene('🎀','📏'),answer:100-c,
+      steps:[{t:'Merke: <b>1 m = 100 cm</b>.',why:'„Zenti“ bedeutet Hundertstel. 100 Zentimeter sind genau 1 Meter.'},...erg100(c,'cm')]}}
+    if(t===2){const a=R(12,55),b=R(11,99-a);return{kind:'num',unit:'cm',long:1,text:`Tim springt ${a} cm weit. Beim zweiten Sprung schafft er ${b} cm. Wie viele Zentimeter sind das zusammen?`,visual:scene('🧒','🦘'),answer:a+b,
+      steps:[{t:'Beide Sprünge werden zusammengezählt: <b>plus</b>.',why:'„Zusammen“ heißt: alles addieren.'},...halbAdd(a,b)]}}
+    if(t===3){const I=[['✏️','Wie lang ist ein Bleistift ungefähr?','15 cm',['15 m','1 cm'],'Ein Bleistift ist ungefähr # lang.'],['🚪','Wie hoch ist eine Tür ungefähr?','2 m',['2 cm','20 m'],'Eine Tür ist ungefähr # hoch.'],['👍','Wie lang ist dein Daumen ungefähr?','5 cm',['5 m','50 cm'],'Ein Kinderdaumen ist ungefähr # lang.'],['🏫','Wie lang ist ein Klassenzimmer ungefähr?','9 m',['9 cm','90 m'],'Ein Klassenzimmer ist ungefähr # lang.'],['📏','Wie lang ist ein Schullineal ungefähr?','30 cm',['30 m','3 cm'],'Ein Schullineal ist meistens # lang.'],['🛏️','Wie lang ist ein Bett ungefähr?','2 m',['2 cm','20 cm'],'Ein Bett ist ungefähr # lang.'],['🐜','Wie lang ist eine Ameise ungefähr?','1 cm',['1 m','10 m'],'Eine Ameise ist nur ungefähr # lang.'],['🚌','Wie lang ist ein Bus ungefähr?','12 m',['12 cm','100 m'],'Ein Bus ist ungefähr # lang.']];
+      const[e,q,a,w,st]=pick(I);return{kind:'choice',text:q,visual:scene(e),options:shuf([a,...w]),answer:a,steps:[{t:'Zentimeter (cm) für kleine Dinge, Meter (m) für große.',why:'Dein kleiner Finger ist etwa 1 cm breit. Ein großer Schritt ist etwa 1 m lang.'},{t:st.replace('#',`<b>${a}</b>`)}]}}
+    const c=R(60,99),eq=Math.random()<.2,L=eq?'100 cm':`${c} cm`,A=eq?'Beide sind gleich lang':'1 m';
+    return{kind:'choice',text:`Was ist länger: <b>1 m</b> oder <b>${L}</b>?`,options:shuf(['1 m',L,'Beide sind gleich lang']),answer:A,single:1,steps:[{t:'Merke: <b>1 m = 100 cm</b>.'},{t:`Vergleiche in Zentimetern: 100 cm und ${eq?100:c} cm.`},{t:eq?'100 cm und 100 cm sind <b>gleich lang</b>.':`100 ist mehr als ${c}. Also ist <b>1 m</b> länger.`}]}},
+  gewicht(){const t=R(1,3);
+    if(t===1){const I=[['🐱','eine Katze','4 kg',['4 g','40 kg']],['🧒','ein Kind (8 Jahre)','25 kg',['25 g','100 kg']],['🚲','ein Kinderfahrrad','10 kg',['10 g','100 g']],['🥚','ein Ei','60 g',['60 kg','6 kg']],['🍉','eine Wassermelone','5 kg',['5 g','50 kg']],['🍫','eine Tafel Schokolade','100 g',['100 kg','10 kg']],['✏️','ein Bleistift','5 g',['5 kg','50 kg']],['🐶','ein großer Hund','30 kg',['30 g','3 g']]];
+      const[e,n,a,w]=pick(I);return{kind:'choice',text:`Wie schwer ist ungefähr ${n}?`,visual:scene(e,'⚖️'),options:shuf([a,...w]),answer:a,steps:[{t:'Gramm (g) für leichte Dinge, Kilogramm (kg) für schwere.',why:'Eine Tafel Schokolade wiegt 100 g. Eine Packung Mehl wiegt 1 kg.'},{t:'Vergleiche mit etwas, das du kennst.',why:'Solche Vergleiche nennt man Stützpunkte. Damit kann man gut schätzen.'},{t:`${n.charAt(0).toUpperCase()+n.slice(1)} wiegt ungefähr <b>${a}</b>.`}]}}
+    if(t===2){const g=noZ(12,88);return{kind:'num',unit:'g',long:1,text:`Auf der Waage liegen ${g} g Nudeln. Wie viel Gramm fehlen noch bis 100 g?`,visual:scene('🍝','⚖️'),answer:100-g,steps:erg100(g,'g')}}
+    const a=R(8,35),b=R(20,40);return{kind:'num',unit:'kg',long:1,text:`Ein Hund wiegt ${a} kg. Ein Kind wiegt ${b} kg. Wie viel wiegen beide zusammen?`,visual:scene('🐶','🧒','⚖️'),answer:a+b,steps:[{t:'Beide zusammen: <b>plus</b>.'},...halbAdd(a,b)]}},
+  liter(){const t=R(1,3);
+    if(t===1){const I=[['🪣','einen Putzeimer','10 l',['10 ml','100 l']],['🥛','eine Milchtüte','1 l',['1 ml','100 l']],['🥄','einen Teelöffel','5 ml',['5 l','50 l']],['🍶','eine Wasserflasche','1 l',['1 ml','10 l']],['🐠','ein kleines Aquarium','50 l',['50 ml','5 ml']],['🫖','eine Teekanne','1 l',['1 ml','100 l']]];
+      const[e,n,a,w]=pick(I);return{kind:'choice',text:`Wie viel passt ungefähr in ${n}?`,visual:scene(e),options:shuf([a,...w]),answer:a,steps:[{t:'Liter (l) für große Mengen, Milliliter (ml) für ganz kleine.',why:'Eine Milchtüte hat 1 Liter. Ein Teelöffel hat nur etwa 5 ml.'},{t:`In ${n} passen ungefähr <b>${a}</b>.`}]}}
+    if(t===2){const c=noZ(12,88);return{kind:'num',unit:'l',long:1,text:`Eine Regentonne fasst 100 l. Es sind schon ${c} l Wasser drin. Wie viele Liter passen noch hinein?`,visual:scene('🌧️','🛢️'),answer:100-c,steps:erg100(c,'l')}}
+    const a=R(21,60),b=R(11,99-a);return{kind:'num',unit:'l',long:1,text:`Im Aquarium sind ${a} l Wasser. Papa gießt noch ${b} l dazu. Wie viele Liter sind es jetzt?`,visual:scene('🐠','🪣'),answer:a+b,steps:[{t:'Es kommt Wasser dazu: <b>plus</b>.'},...halbAdd(a,b)]}},
+  ueberschlag(){const op=pick(['+','−']);let a,b;
+    if(op==='+'){a=R(21,59);b=R(11,39)}else{a=R(41,98);b=R(11,a-12)}
+    const ra=Math.round(a/10)*10,rb=Math.round(b/10)*10,est=op==='+'?ra+rb:ra-rb,exact=op==='+'?a+b:a-b;
+    const opts=[est,...shuf([est-10,est+10,est-20,est+20,est-30,est+30].filter(x=>x>=0&&x<=100)).slice(0,3)];
+    return{kind:'choice',long:1,text:`Schätze zuerst, ohne genau zu rechnen: ${a} ${op} ${b} ≈ ?`,options:shuf(opts.map(String)),answer:String(est),steps:[
+      {t:`${chip('f','Überschlag')} Runde beide Zahlen auf Zehner: ${a} ≈ <b>${ra}</b>, ${b} ≈ <b>${rb}</b>`,why:'Beim Überschlagen rundest du zuerst. So kannst du schnell im Kopf rechnen.'},
+      {t:`Rechne mit den runden Zahlen: ${ra} ${op} ${rb} = <b>${est}</b>`,why:'Mit glatten Zehnern rechnet man ganz leicht.'},
+      {t:`Genau wäre es ${a} ${op} ${b} = ${exact}. Dein Überschlag <b>${est}</b> liegt nah dran.`,why:'Ein Überschlag muss nicht genau stimmen. Er hilft dir zu prüfen, ob ein Ergebnis sinnvoll ist.'}]}},
+  mal11(){const n=R(2,9),t=R(1,3);
+    if(t===3)return{kind:'num',text:`${n*11} : 11 = ?`,sub:'Mit dem Elfer-Trick',answer:n,steps:[{t:`In der Elferreihe steht dieselbe Ziffer zweimal: ${n*11} = ${n} · 11.`,why:`Umkehraufgabe: Welche Zahl mal 11 ergibt ${n*11}?`},{t:`Also ${n*11} : 11 = <b>${n}</b>`}]};
+    return{kind:'num',text:t===1?`${n} · 11 = ?`:`11 · ${n} = ?`,sub:'Mit dem Elfer-Trick',answer:n*11,steps:[
+      {t:'11 ist 10 + 1.',why:'Mal 10 ist leicht: Null anhängen. Mal 1 bleibt die Zahl gleich.',vis:trow(box('11','#E0598B'),'<span class="teq">=</span>',box('10','#4C86F0'),box('+ 1','#27B363'))},
+      {t:`${n} · 10 = ${n*10} und ${n} · 1 = ${n}`},
+      {t:`${n*10} + ${n} = <b>${n*11}</b>`,why:`Siehst du es? Bei ${n} · 11 steht die ${n} einfach zweimal da.`,vis:trow(box(n,'#4C86F0'),box(n,'#4C86F0'))}]}},
+  plus19(){const n=pick([19,29,39,18,28,21,31]),base=Math.round(n/10)*10,k=n-base,sub=Math.random()<.4;
+    if(sub){const a=R(n+11,99),r=a-n;return{kind:'num',text:`${a} − ${n} = ?`,answer:r,steps:[
+      {t:`Trick: ${n} ist fast ${base}. Rechne erst <b>− ${base}</b>.`,why:'Mit glatten Zehnern rechnest du blitzschnell im Kopf.'},
+      {t:`${a} − ${base} = ${a-base}`},
+      {t:k<0?`Du hast ${-k} zu viel weggenommen, also + ${-k}: ${a-base} + ${-k} = <b>${r}</b>`:`Es fehlt noch ${k}, also − ${k}: ${a-base} − ${k} = <b>${r}</b>`}]}}
+    const a=R(12,98-n),r=a+n;return{kind:'num',text:`${a} + ${n} = ?`,answer:r,steps:[
+      {t:`Trick: ${n} ist fast ${base}. Rechne erst <b>+ ${base}</b>.`,why:'Mit glatten Zehnern rechnest du blitzschnell im Kopf.'},
+      {t:`${a} + ${base} = ${a+base}`},
+      {t:k<0?`Du hast ${-k} zu viel dazugetan, also − ${-k}: ${a+base} − ${-k} = <b>${r}</b>`:`Es fehlt noch ${k}, also + ${k}: ${a+base} + ${k} = <b>${r}</b>`}]}},
+  dopHalb(){const[a,b]=pick([[12,5],[14,5],[16,5],[18,5],[8,5],[6,5],[10,5],[20,5],[4,25],[2,25],[2,35],[2,45],[2,15],[4,15],[6,15]]),r=a*b;const st=[];let x=a,y=b;
+    while(![10,100].includes(y)&&x%2===0&&st.length<3){st.push(`${x} · ${y} = <b>${x/2} · ${y*2}</b>`);x/=2;y*=2}
+    return{kind:'num',text:`${a} · ${b} = ?`,sub:'Verdoppeln und Halbieren',answer:r,steps:[{t:'Trick: Halbiere die eine Zahl und verdopple die andere. Das Ergebnis bleibt gleich.',why:'Stell dir ein Rechteck aus Punkten vor: halb so hoch, aber doppelt so breit. Es bleiben gleich viele Punkte.'},...st.map(t=>({t})),{t:`Jetzt ist es leicht: ${x} · ${y} = <b>${r}</b>`,why:'Mit 10 oder glatten Zehnern rechnet man am leichtesten.'}]}},
+  neuner(){let a,b,s,c,ok;do{a=R(12,59);b=R(11,99-a);s=a+b;ok=Math.random()<.5;c=ok?s:s+pick([1,-1,2,-2,10,-10,20])}while(c>100||c<10);
+    const qa=qs9(a),qb=qs9(b),qc=qs9(c),qab=qs9(qa+qb);
+    return{kind:'choice',text:`Stimmt die Rechnung? <b>${a} + ${b} = ${c}</b>`,sub:'Prüfe mit der Neunerprobe',options:['Ja, sie stimmt','Nein, da ist ein Fehler'],answer:ok?'Ja, sie stimmt':'Nein, da ist ein Fehler',single:1,steps:[
+      {t:'Neunerprobe: Bilde die <b>Quersumme</b> jeder Zahl, so lange, bis nur eine Ziffer übrig ist. Eine 9 zählt als 0.',why:'Die Quersumme ist die Summe aller Ziffern. Mit diesem Trick prüfen Rechenprofis ihre Ergebnisse schnell.'},
+      {t:`${a} → ${qa}, ${b} → ${qb}. Zusammen: ${qa} + ${qb} → <b>${qab}</b>`},
+      {t:`Ergebnis ${c} → <b>${qc}</b>`},
+      {t:qab===qc?'Beide Zahlen sind gleich. Die Rechnung <b>stimmt</b>.':'Die Zahlen sind verschieden. Da ist ein <b>Fehler</b>!',why:`Richtig wäre: ${a} + ${b} = ${s}.`}]}},
+  kekse(){const b=R(3,5);let p;do{p=R(6,15)}while(b*p>75);const n=b*p,k=R(5,n-10),r=n-k;
+    return{kind:'num',long:1,text:`Oma backt ${b} Bleche mit je ${p} Keksen. ${k} Kekse werden gleich gegessen. Wie viele Kekse sind noch da?`,visual:`<div class="picrow">${emo('🍪',b)}</div>`,answer:r,steps:[
+      {t:`${chip('f','Frage')} Lies die Aufgabe zweimal. Was sollst du herausfinden?`,why:'Wer die Frage kennt, weiß, wohin die Rechnung führen soll.'},
+      {t:`${chip('r','Rechnung 1')} Alle Kekse: ${b} · ${p} = ${n}`,why:'„Mit je“ bedeutet: Auf jedem Blech sind gleich viele. Das ist Malnehmen.'},
+      {t:`${chip('r','Rechnung 2')} Übrig: ${n} − ${k} = <b>${r}</b>`,why:'„Gegessen“ heißt: Sie sind weg. Das ist Minus.'},
+      {t:`${chip('a','Antwort')} Es sind noch ${r} Kekse da.`,why:'Diese Aufgabe hatte zwei Rechenschritte. Das ist bei Sachaufgaben oft so.'}]}},
+  laengeKomma(){const p2=x=>String(x).padStart(2,'0');
+    if(Math.random()<.5){const c=R(1,19)*5;return{kind:'num',unit:'cm',text:`0,${p2(c)} m = ? cm`,answer:c,steps:[{t:'Das Komma trennt Meter und Zentimeter, wie beim Geld Euro und Cent.',why:'1 m = 100 cm. Hinter dem Komma stehen immer zwei Stellen für die Zentimeter.'},{t:'Vor dem Komma steht 0. Es ist also weniger als 1 Meter.'},{t:`Hinter dem Komma stehen die Zentimeter: <b>${c} cm</b>`,why:`So wie 0,${p2(c)} € genau ${c} Cent sind.`}]}}
+    const cm=R(5,99);return{kind:'num',dec:1,unit:'m',solTxt:`0,${p2(cm)} m`,text:`${cm} cm = ? m`,answer:cm,steps:[{t:`100 cm sind 1 m. ${cm} cm sind weniger als 1 m.`},{t:`Also 0 m und ${cm} cm.`},{t:`Mit Komma: <b>0,${p2(cm)} m</b>`,why:'Vor dem Komma die Meter, dahinter die Zentimeter mit zwei Stellen.'}]}}
+};
+K.sach=()=>Math.random()<.25?K.kekse():capN(M.sach)();
+
+/* Welche Themen im Zahlenraum bis 100 anders aussehen: [Name, Beschreibung, Generator] – null = ausblenden */
+const ZR100={
+  bis1000:['Plus & Minus bis 100','Zehner und Einer, mit Übergang',mix(M.plus100,M.minus100)],
+  schriftAdd:['Schriftlich addieren','Zweistellig, mit Übertrag',K.schriftAdd],
+  laengen:['Längen','Zentimeter und Meter bis 100',K.laengen],
+  zahlen3:['Zahlen bis 100','Zahlenstrahl, Nachbarn, größer/kleiner',mix(N.strahl100,N.vergleich2,N.nachbar2)],
+  gewicht:['Gewichte','Gramm, Kilogramm und Schätzen',K.gewicht],
+  liter:['Liter','Schätzen und rechnen bis 100',K.liter],
+  zeit3:[0,0,mix(capN(N.zeitUmr),N.kalender)],
+  zauber:[0,0,mix(N.zauber,N.folge2,N.dreieck)],
+  ueberschlag:[0,'Runden und schnell schätzen',K.ueberschlag],
+  t_11:['Trick: Mal 11','Die Ziffer zweimal schreiben',K.mal11],
+  t_von:[0,'100 − 37 blitzschnell',capN(T.von100)],
+  t_59:[0,'7 · 9 = 70 − 7',capN(T.mal5und9)],
+  t_99:['Trick: Plus 19, 29 und Minus 19','Über den Zehner',K.plus19],
+  schriftSub:[0,'Zweistellig, mit Ergänzen',K.schriftSub],
+  schriftMal:[0,'Zweistellig mal einstellig',K.schriftMal],
+  teilen:[0,'Zahlen bis 100 zerlegen',K.teilen],
+  runden:[0,'Auf Zehner runden',K.runden],
+  sach:[0,0,K.sach],
+  laenge4:[0,'0,45 m = 45 cm',K.laengeKomma],
+  gewicht4:[0,'Schätzen und rechnen bis 100',mix(K.gewicht,K.liter)],
+  ueberschlag4:[0,'Runden und schnell schätzen',K.ueberschlag],
+  t_nik100:null,t_quad:null,t_kreuz:null,
+  t_von4:[0,'100 − 58 blitzschnell',capN(T.von100)],
+  t_dh:[0,'14 · 5 = 7 · 10',K.dopHalb],
+  t_neun:[0,0,K.neuner],
+  pvs:[0,0,capN(N.pvs)]
+};
+const zr=()=>me().zr===1000?1000:100;
+function applyZR(){const small=zr()===100,ma=SUBJECTS.find(s=>s.id==='ma');
+  [3,4].forEach(g=>(ma.grades[g]||[]).forEach(t=>{if(!t._o)t._o=[t[1],t[2],t[3]];const r=ZR100[t[0]];t.hidden=false;
+    if(small&&r===null){t.hidden=true;[t[1],t[2],t[3]]=t._o;return}
+    if(small&&r){t[1]=r[0]||t._o[0];t[2]=r[1]||t._o[1];t[3]=r[2]}else[t[1],t[2],t[3]]=t._o}))}
+function zrBar(){const v=zr();return`<div class="zr"><span>Zahlenraum für ${esc(me().name)}:</span><button class="${v===100?'on':''}" data-act="zr" data-v="100">bis 100</button><button class="${v===1000?'on':''}" data-act="zr" data-v="1000">bis 1000 und mehr</button></div>`}
 
 const ICON={leaf:'<svg viewBox="0 0 40 40" width="38" height="38" aria-hidden="true"><path d="M8 32 C8 16 18 7 34 6 C34 22 25 32 10 32Z" fill="#fff"/><path d="M8 33 L26 15" stroke="var(--c)" stroke-width="2.5" stroke-linecap="round"/></svg>',
  globe:'<svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="none" stroke="#fff" stroke-width="3"/><ellipse cx="20" cy="20" rx="7" ry="15" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M5 20 H35 M8 12 H32 M8 28 H32" stroke="#fff" stroke-width="2.5"/></svg>'};
@@ -2098,13 +2246,14 @@ function renderHome(){
   if(S.editing>=0){const i=document.getElementById('nm'+S.editing);i.focus();i.select();i.addEventListener('keydown',e=>{if(e.key==='Enter')act('saveName',{i:S.editing})})}
 }
 
-function topicOrder(s){const L=s.grades[S.grade],gr=GRP[s.id];if(!gr)return L.map((_,i)=>[null,i]);const out=[],used=new Set();
-  gr.forEach(([h,ids])=>{const idx=ids.map(id=>L.findIndex(t=>t[0]===id)).filter(i=>i>=0);if(idx.length){out.push([h]);idx.forEach(i=>{out.push([null,i]);used.add(i)})}});
-  const rest=L.map((_,i)=>i).filter(i=>!used.has(i));if(rest.length){out.push(['Weitere']);rest.forEach(i=>out.push([null,i]))}return out}
-function renderTopics(){
+function topicOrder(s){const L=s.grades[S.grade],gr=GRP[s.id],vis=i=>!L[i].hidden;if(!gr)return L.map((_,i)=>[null,i]).filter(x=>vis(x[1]));const out=[],used=new Set();
+  gr.forEach(([h,ids])=>{const idx=ids.map(id=>L.findIndex(t=>t[0]===id)).filter(i=>i>=0&&vis(i));if(idx.length){out.push([h]);idx.forEach(i=>{out.push([null,i]);used.add(i)})}});
+  const rest=L.map((_,i)=>i).filter(i=>!used.has(i)&&vis(i));if(rest.length){out.push(['Weitere']);rest.forEach(i=>out.push([null,i]))}return out}
+function renderTopics(){applyZR();
   const s=subj();
   app.innerHTML=`${bar('home',s.name,`Übt gerade: ${esc(me().name)}`)}
   <div class="grades" style="--c:var(${s.color})">${[2,3,4].map(g=>`<button class="grade ${S.grade===g?'on':''}" data-act="grade" data-g="${g}"><b>Klasse ${g}</b><span>${GRADE_SUB[g]}</span></button>`).join('')}</div>
+  ${s.id==='ma'&&S.grade>=3?zrBar():''}
   ${s.id==='er'?`<button class="helper-card atl" data-act="atlas"><span class="gl">${ICON.globe}</span><span><span class="nm">Atlas öffnen</span><span class="ds">Tippe auf Länder und Bundesländer und lerne sie kennen.</span></span></button>`:''}
   <div class="topics" style="--c:var(${s.color})">${topicOrder(s).map(([hd,i])=>{if(hd)return`<div class="tgroup">${hd}</div>`;const t=s.grades[S.grade][i];const b=me().best[`${s.id}-${S.grade}-${t[0]}`];
     return `<button class="topic" data-act="topic" data-i="${i}"><span class="tx"><span class="nm">${t[1]}</span><br><span class="ds">${t[2]}</span></span>${(me().test||{})[`${s.id}-${S.grade}-${t[0]}`]!=null?medalSVG(medalOf(me().test[`${s.id}-${S.grade}-${t[0]}`]),22):''}<span class="best ${b==null?'none':''}">${STAR}${b==null?'':`${b}/${ROUND}`}</span><span class="go">${NEXT}</span></button>`}).join('')}</div>
@@ -2119,7 +2268,7 @@ const stripVis=t=>String(t).replace(/<div class="(col|map[^"]*|fig[^"]*)"[\s\S]*
 function mathSpeak(s){return s.replace(/(\d)\.(\d{3})/g,'$1$2').replace(/·/g,' mal ').replace(/ : /g,' geteilt durch ').replace(/−/g,' minus ').replace(/\+/g,' plus ').replace(/ = \?/g,' ist wie viel').replace(/ \? /g,' wie viel ').replace(/=/g,' ist ').replace(/→/g,', also ').replace(/≈/g,' ungefähr ').replace(/✓/g,'').replace(/cm²/g,' Quadratzentimeter').replace(/(\d) ?km\b/g,'$1 Kilometer').replace(/(\d) ?cm\b/g,'$1 Zentimeter').replace(/(\d) ?min\b/g,'$1 Minuten').replace(/(\d) ?m\b/g,'$1 Meter').replace(/(\d) ?ct\b/g,'$1 Cent').replace(/(\d)[\s\u00a0]?€/g,'$1 Euro').replace(/\bE = Einer/g,'E wie Einer')}
 let PLAY=null,PLAY_T=null;
 function stopSpeech(){PLAY=null;clearTimeout(PLAY_T);try{canSpeak&&speechSynthesis.cancel()}catch(e){}}
-function speakStep(st,onend){st=stepObj(st);const txt=mathSpeak(plain(st.say||stripVis(st.t)))+(st.why?'. '+mathSpeak(plain(st.why)):'');say(txt,'de-DE',1,onend)}
+function speakStep(st,onend){st=stepObj(st);say(mixSegs((st.say||stripVis(st.t))+(st.why?'. '+st.why:'')),null,1,onend)}
 const SC={
   lesson:{get:()=>S.lshown,set:v=>{S.lshown=v},steps:()=>S.lq.steps,r:()=>renderLesson()},
   quiz:{get:()=>Q.shown,set:v=>{Q.shown=v},steps:()=>Q.steps||cur().steps,r:()=>renderQuiz()},
@@ -2185,7 +2334,7 @@ function renderQuiz(){
     ans=`<div class="answer"><div class="display ${Q.input?'':'empty'}" aria-live="polite">${Q.input||'?'}${q.unit?`<span class="unit">${q.unit}</span>`:''}</div>
     ${done?'':`<div class="pad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button class="key" data-act="key" data-k="${n}">${n}</button>`).join('')}<button class="key del" data-act="key" data-k="del" aria-label="Löschen">${DEL}</button><button class="key" data-act="key" data-k="0">0</button><button class="key check" data-act="check">Prüfen</button></div>`}</div>`;
   }else if(q.kind==='speak'){
-    ans=`<div class="answer">${canSpeak?`<div class="row"><button class="btn ghost listen" data-act="sayEn">${SPK}Anhören</button><button class="btn ghost listen" data-act="saySlow">${SPK}Langsam</button></div>`:`<div class="hint">${q.help[1]}</div>`}
+    ans=`<div class="answer">${canSpeak?`<div class="row"><button class="btn ghost listen" data-act="sayEn">${SPK}Anhören</button><button class="btn ghost listen" data-act="saySlow">${SPK}Langsam</button></div>`:`<div class="hint">${stepObj(q.help[1]).t}</div>`}
     ${done?'':`<div class="label" style="text-align:center">Jetzt laut nachsprechen. Hat es geklappt?</div><div class="row"><button class="btn ghost" data-act="spokeNo">Nochmal üben</button><button class="btn" data-act="spokeYes">Gut geklappt!</button></div>`}</div>`;
   }else if(q.kind==='text'){
     const peek=!canSpeak&&!Q.peeked&&!done;
@@ -2258,7 +2407,7 @@ function renderResult(){if(Q&&Q.review)return renderReviewResult();
   <div class="row" style="width:100%"><button class="btn ghost" data-act="hub">Zum Thema</button><button class="btn" data-act="${Q.test?'goTest':'again'}">${Q.test?'Test nochmal':'Nochmal üben'}</button></div></div>
   <div style="--c:var(${s.color})">${review}</div>`;
 }
-function render(){stopSpeech();({home:renderHome,topics:renderTopics,hub:renderHub,quiz:renderQuiz,result:renderResult,lesson:renderLesson,helper:renderHelper,atlas:renderAtlas,eltern:renderEltern})[S.screen]();window.scrollTo(0,0)}
+function render(){stopSpeech();applyZR();({home:renderHome,topics:renderTopics,hub:renderHub,quiz:renderQuiz,result:renderResult,lesson:renderLesson,helper:renderHelper,atlas:renderAtlas,eltern:renderEltern})[S.screen]();window.scrollTo(0,0)}
 
 /* ---------- Lernen: Beispiel mit Erklär-Tafel ---------- */
 function renderLesson(){
@@ -2302,6 +2451,7 @@ function act(a,d){
   switch(a){
     case 'home':S.screen='home';render();break;
     case 'eltern':S.screen='eltern';render();break;
+    case 'zr':me().zr=+d.v;save();renderTopics();break;
     case 'profile':store.active=+d.i;save();renderHome();break;
     case 'editName':S.editing=+d.i;renderHome();break;
     case 'saveName':{const inp=document.getElementById('nm'+d.i);const v=(inp&&inp.value.trim())||store.profiles[d.i].name;store.profiles[d.i].name=v;store.active=+d.i;S.editing=-1;save();renderHome();break}
@@ -2345,9 +2495,9 @@ function act(a,d){
     case 'hop':S.h.op=d.op;S.h.res=null;stopSpeech();renderHelper();break;
     case 'hsolve':helperSolve();break;
     case 'hnew':stopSpeech();S.h={a:'',b:'',op:S.h.op,res:null,shown:1};renderHelper();window.scrollTo(0,0);{const i=document.getElementById('ha');i&&i.focus()}break;
-    case 'read':{const q=cur();say(mathSpeak(q.speak||plain(q.text+(q.sub?' '+q.sub:''))),q.speakLang||'de-DE');break}
+    case 'read':{const q=cur();if(q.speak){const en=/^en/.test(q.speakLang||'');say(en?q.speak:mathSpeak(q.speak),q.speakLang||'de-DE')}else say(mixSegs(q.text+(q.sub?' '+q.sub:'')));break}
     case 'sayEn':say(cur().say,'en-GB',.85);break;
-    case 'saySlow':say(cur().say,'en-GB',.55);break;
+    case 'saySlow':say(cur().say,'en-GB',.7);break;
     case 'spokeYes':check(true);break;
     case 'spokeNo':check(false);break;
     case 'sayWordSlow':{const q=cur();say(q.say,'de-DE',.55);break}
