@@ -591,6 +591,22 @@ button,a,select,input{touch-action:manipulation}
 .hlab.on{fill:#FFD23F; font-size:16px}.hlab.sm{font-size:11px; stroke-width:2.5px}
 .hl0{font:800 10px var(--display); fill:#fff}
 .linkbtn.skip{align-self:center; margin-top:4px; font-size:16px}
+.qcard.intro{gap:14px}
+.spl{font:800 24px var(--display); fill:var(--ink); text-anchor:middle}
+.msteps{display:flex; flex-direction:column; gap:10px}
+.mrow{display:flex; flex-direction:column; gap:4px; border:3px solid var(--line); border-radius:16px; padding:10px 14px; background:var(--card)}
+.mrow.cur{border-color:var(--c); background:color-mix(in srgb,var(--c) 7%,var(--card))}
+.mrow.ok{border-color:var(--ok); opacity:.92}
+.mrow .ml{font-size:14px; font-weight:800; color:var(--muted)}
+.mrow .mx{font-family:var(--display); font-weight:800; font-size:clamp(24px,7vw,32px)}
+.mbox{display:inline-block; min-width:1.6em; padding:0 .25em; margin:0 .1em; text-align:center; border-radius:10px; background:var(--paper); border:2.5px dashed var(--c)}
+.mrow.ok .mbox{border-style:solid; border-color:var(--ok); color:var(--ok)}
+.mrow.shake{animation:shake .35s}
+.mmsg{background:color-mix(in srgb,var(--star) 22%,var(--card)); border-radius:12px; padding:10px 12px; font-size:16px; line-height:1.4}
+.teachhead{display:flex; gap:12px; align-items:center; background:var(--card); border:3px solid var(--c); border-radius:20px; padding:12px 14px; box-shadow:var(--shadow)}.teachhead b{font-family:var(--display); font-size:21px}.teachhead span{color:var(--muted); font-size:15px}
+.ihead{display:flex; gap:12px; align-items:center}.ihead b{font-family:var(--display); font-size:21px}.ihead span{color:var(--muted); font-size:15px}
+.ist{background:color-mix(in srgb,var(--c) 7%,var(--card)); border-radius:16px; padding:12px 14px; display:flex; flex-direction:column; gap:8px}
+.ist .it{font-size:19px; line-height:1.45; font-weight:700}.ist .iw{font-size:16px; line-height:1.5; color:var(--ink)}
 .mgl{font:800 18px var(--display); fill:#fff; text-anchor:middle}
 .wq{fill:var(--accent); font-family:var(--display); font-weight:800}
 @media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
@@ -780,8 +796,8 @@ function halbAdd(a,b){const parts=placeParts(b),jumps=[],st=[];let cur=a;
   st.push({t:`Wir rechnen <b>${a} + ${b}</b>.`,why:'Die Klötze zeigen, woraus die Zahlen bestehen: Eine Platte ist 100, eine Stange ist 10, ein Würfel ist 1.',vis:blocksPair(a,'+',b)});
   if(parts.length>1)st.push({t:`Zerlege die zweite Zahl in ihre Teile: ${b} = ${parts.join(' + ')}.`,why:'Mit glatten Zahlen wie 30 oder 200 rechnet man viel leichter als mit der ganzen Zahl auf einmal. Darum nehmen wir sie auseinander.',vis:stt(b)});
   parts.forEach(x=>{const n=cur+x;
-    if(x<10&&cur%10+x>10&&cur%10!==0){const k=10-cur%10,nx=cur+k;jumps.push(k,x-k);
-      st.push({t:`Jetzt die Einer: ${cur} + ${x}. Das geht über den Zehner! Rechne erst bis zum nächsten Zehner: ${cur} + ${k} = ${nx}. Dann den Rest: ${nx} + ${x-k} = <b>${n}</b>.`,why:`Das nennt man Zehnerübergang. Bis zur ${nx} fehlen genau ${k}. Von ${x} bleiben dann noch ${x-k} übrig.`,vis:lineSVG(a,jumps.slice())})}
+    if(x<10&&cur%10+x>10&&cur%10!==0){const c=zueCore(cur,x,false,jumps.slice(),a);
+      st.push({t:`Jetzt die Einer: ${cur} + ${x}. Das geht <b>über den Zehner</b>! Darum: erst bis zum Zehner, dann den Rest.`,why:'Das nennt man Zehnerübergang. Wir machen drei kleine Schritte.'});jumps.push(c.k,c.r);st.push(...c.steps)}
     else{jumps.push(x);const name=partName(x),cnt=x>=100?x/100:x>=10?x/10:x;
       st.push({t:`Jetzt die ${name}: ${cur} + ${x} = <b>${n}</b>.`,why:x>=10?`${cnt} ${name} dazu heißt: ${cnt}-mal um ${x/cnt} weiterzählen: ${Array.from({length:Math.min(cnt,6)},(_,i)=>cur+(i+1)*(x/cnt)).join(', ')}${cnt>6?' …':''}.`:`Zähle einfach ${x} weiter: ${Array.from({length:x},(_,i)=>cur+i+1).join(', ')}.`,vis:lineSVG(a,jumps.slice())})}
     cur=n});
@@ -793,7 +809,7 @@ function halbSub(a,b){const parts=placeParts(b),jumps=[],st=[];let cur=a;
   parts.forEach(x=>{const n=cur-x;
     if(x<10&&cur%10<x){const k=cur%10,nx=cur-k;
       if(k===0){jumps.push(-x);st.push({t:`Jetzt die Einer: ${cur} − ${x} = <b>${n}</b>.`,why:`Von einem vollen Zehner ${x} weg: Denk an ${10-x} + ${x} = 10. Also bleiben ${n}.`,vis:lineSVG(a,jumps.slice(),1)})}
-      else{jumps.push(-k,-(x-k));st.push({t:`Jetzt die Einer: ${cur} − ${x}. Das geht über den Zehner! Erst zurück bis zum Zehner: ${cur} − ${k} = ${nx}. Dann den Rest: ${nx} − ${x-k} = <b>${n}</b>.`,why:`Zehnerübergang rückwärts: Bis zur ${nx} sind es ${k} Schritte zurück. Von ${x} bleiben noch ${x-k} übrig.`,vis:lineSVG(a,jumps.slice(),1)})}}
+      else{const c=zueCore(cur,x,true,jumps.slice(),a);st.push({t:`Jetzt die Einer: ${cur} − ${x}. Das geht <b>über den Zehner</b>! Darum: erst zurück bis zum Zehner, dann den Rest.`,why:'Zehnerübergang rückwärts in drei kleinen Schritten.'});jumps.push(-c.k,-c.r);st.push(...c.steps)}}
     else{jumps.push(-x);const name=partName(x);st.push({t:`Nimm die ${name} weg: ${cur} − ${x} = <b>${n}</b>.`,why:x>=10?`Zähle in ${x>=100?'Hunderter':'Zehner'}-Schritten rückwärts: ${Array.from({length:Math.min(x/(x>=100?100:10),6)},(_,i)=>cur-(i+1)*(x>=100?100:10)).join(', ')}.`:`Zähle ${x} Schritte rückwärts.`,vis:lineSVG(a,jumps.slice(),1)})}
     cur=n});
   st.push({t:`Fertig: ${a} − ${b} = <b>${a-b}</b>`,why:`Probe mit der Umkehraufgabe: ${a-b} + ${b} = ${a}. Stimmt!`,vis:lineSVG(a,jumps.slice(),1)});
@@ -2505,7 +2521,7 @@ function renderTopics(){applyZR();
   <div class="topics" style="--c:var(${s.color})">${G.length===1&&!G[0].h?G[0].idx.map(i=>topicRow(s,i)).join(''):G.map((g,gi)=>{const done=g.idx.filter(i=>me().best[`${s.id}-${S.grade}-${s.grades[S.grade][i][0]}`]!=null).length,on=gi===open;
     return`<div class="tgrp ${on?'open':''}"><button class="tghead" data-act="grp" data-g="${gi}" aria-expanded="${on}"><span class="tgn">${g.h}</span><span class="tgc">${done?`${done} von ${g.idx.length} geübt`:`${g.idx.length} ${g.idx.length===1?'Thema':'Themen'}`}</span><span class="chev">${NEXT}</span></button>${on?`<div class="tglist">${g.idx.map(i=>topicRow(s,i)).join('')}</div>`:''}</div>`}).join('')}</div>
   <p class="note">Klasse 2 zum Wiederholen, Klasse 4 als Vorschau.</p>`}
-function updDisplay(){const q=cur(),d=app.querySelector('.display');if(!d||app.querySelector('.fb')){renderQuiz();return}
+function updDisplay(){if(cur().kind==='multi'){renderQuiz();return}const q=cur(),d=app.querySelector('.display');if(!d||app.querySelector('.fb')){renderQuiz();return}
   d.classList.toggle('empty',!Q.input);d.innerHTML=(Q.input||'?')+((q.money||q.dec)?`<span class="unit">${q.dec?q.unit:'€'}</span>`:q.unit?`<span class="unit">${q.unit}</span>`:'')}
 
 /* ================= Karten vergrößern und verschieben (zwei Finger / Tasten + −) ================= */
@@ -2641,7 +2657,7 @@ function wiGen(list,konz){return()=>{const[e,q,a,w,why]=pick(list);const opts=sh
     steps:[...(kk?[merkStep(kk)]:[]),...why.split(/(?<=[.!?])\s+(?=[A-ZÄÖÜ„🔬])/).map(t=>({t})),{t:`Die Antwort ist: <b>${a}</b>.`}]}}}
 const WIX={
   gewitter(){const km=R(1,5),s=km*3;
-    return{kind:'num',unit:'km',long:1,text:`Du siehst einen Blitz und zählst bis zum Donner <b>${s} Sekunden</b>. Wie viele Kilometer ist das Gewitter ungefähr entfernt?`,visual:scene('⚡','🌩️','👂'),answer:km,
+    return{introAdd:{t:'So rechnest du: <b>Sekunden : 3 = Kilometer</b>.',why:'Beispiel: Du zählst 6 Sekunden. 6 : 3 = 2. Das Gewitter ist ungefähr 2 Kilometer weit weg.',vis:gewitterSVG(6)},kind:'num',unit:'km',long:1,text:`Du siehst einen Blitz und zählst bis zum Donner <b>${s} Sekunden</b>. Wie viele Kilometer ist das Gewitter ungefähr entfernt?`,visual:scene('⚡','🌩️','👂'),answer:km,
       steps:[{t:'Der Donner ist <b>Schall</b>. Schall fliegt ungefähr <b>340 Meter in einer Sekunde</b> durch die Luft.',why:'Das ist so weit wie drei Fußballfelder – in einer einzigen Sekunde.',vis:schallSVG()},
         {t:'Merkregel: In <b>3 Sekunden</b> schafft der Schall ungefähr <b>1 Kilometer</b>.',why:'3 mal 340 Meter sind 1020 Meter. Das ist ungefähr 1 Kilometer.',vis:gewitterSVG(0)},
         {t:'Den Blitz siehst du sofort, denn er ist Licht – und Licht ist fast eine Million Mal schneller als Schall.',why:'Die Sekunden, die du zählst, sind also genau die Zeit, die der Donner zu dir unterwegs ist.'},
@@ -2725,12 +2741,12 @@ function wippeSVG(w1,d1,w2,d2){const u=46,cx=180,y=104;let g=`<path d="M${cx} ${
   g+=d2?P(cx+d2*u,w2>w1?'🧔':'👧',w2):`<text x="${cx+2*u}" y="${y-20}" font-size="40" text-anchor="middle" class="wq">?</text><text x="${cx+2*u}" y="${y-62}" class="wk">${w2} kg</text>`;
   return`<div class="fig"><svg viewBox="16 20 328 128" style="width:100%;max-width:420px" role="img" aria-label="Wippe">${g}</svg></div>`}
 Object.assign(WIX,{
-  schwimmt(){const[e,n,a,why]=pick(SINK);return{kind:'choice',text:`Du legst ${n} ins Wasser. Was passiert?`,visual:scene(e,'🌊'),options:['schwimmt','sinkt'],answer:a,single:1,
+  schwimmt(){const[e,n,a,why]=pick(SINK);return{intro:[merkStep('schwimmen'),{t:'Leichter als gleich viel Wasser → es <b>schwimmt</b>. Schwerer als gleich viel Wasser → es <b>sinkt</b>.',why:'Luft im Inneren (wie bei einem Schiff oder einem Korken) macht Dinge leichter.'}],kind:'choice',text:`Du legst ${n} ins Wasser. Was passiert?`,visual:scene(e,'🌊'),options:['schwimmt','sinkt'],answer:a,single:1,
     steps:[{t:'Ob etwas schwimmt, hängt nicht nur vom Gewicht ab. Wichtig ist: Ist es schwerer oder leichter als <b>gleich viel Wasser</b>?',why:'Ein riesiges Holzschiff schwimmt, ein kleiner Nagel sinkt.'},{t:why},{t:`${n.charAt(0).toUpperCase()+n.slice(1)} <b>${a}</b>. 🔬 Probier es in der Badewanne aus!`}]}},
-  aggregat(){const[e,n,a]=pick(AGG);return{kind:'choice',text:`Ist ${n} fest, flüssig oder gasförmig?`,visual:picBox(e),options:['fest','flüssig','gasförmig'],answer:a,single:1,
+  aggregat(){const[e,n,a]=pick(AGG);return{intro:[merkStep('waerme')],kind:'choice',text:`Ist ${n} fest, flüssig oder gasförmig?`,visual:picBox(e),options:['fest','flüssig','gasförmig'],answer:a,single:1,
     steps:[{t:'<b>Fest</b>: hat eine eigene Form. <b>Flüssig</b>: fließt und passt sich dem Gefäß an. <b>Gasförmig</b>: verteilt sich überall in der Luft.',why:'Diese drei Formen heißen Aggregatzustände.'},{t:`${n.charAt(0).toUpperCase()+n.slice(1)} ist <b>${a}</b>.`}]}},
   wippe(){const[w1,d1,w2,d2]=pick(WIPPE),pr=w1*d1;const who=w2>w1?'Papa':'deine kleine Schwester';
-    return{kind:'num',unit:'m',long:1,text:`Du wiegst ${w1} kg und sitzt ${d1} m von der Mitte der Wippe entfernt. ${who.charAt(0).toUpperCase()+who.slice(1)} wiegt ${w2} kg. Wie weit von der Mitte muss ${w2>w1?'er':'sie'} sitzen, damit die Wippe gerade ist?`,visual:wippeSVG(w1,d1,w2,0),answer:d2,
+    return{intro:[merkStep('hebel'),{t:'Beispiel: Du wiegst 30 kg und sitzt 2 m von der Mitte. 30 · 2 = 60. Papa wiegt 60 kg. 60 · <b>1</b> = 60 – also muss er <b>1 m</b> von der Mitte sitzen.',why:'Rechne für die andere Seite rückwärts: Ergebnis geteilt durch das Gewicht.',vis:wippeSVG(30,2,60,1)}],kind:'num',unit:'m',long:1,text:`Du wiegst ${w1} kg und sitzt ${d1} m von der Mitte der Wippe entfernt. ${who.charAt(0).toUpperCase()+who.slice(1)} wiegt ${w2} kg. Wie weit von der Mitte muss ${w2>w1?'er':'sie'} sitzen, damit die Wippe gerade ist?`,visual:wippeSVG(w1,d1,w2,0),answer:d2,
       steps:[{t:'Hebelgesetz: <b>Gewicht · Abstand</b> muss auf beiden Seiten gleich groß sein.',why:'Wer schwerer ist, muss näher an die Mitte. Wer leichter ist, weiter nach außen.'},
         {t:`Deine Seite: ${w1} · ${d1} = <b>${pr}</b>`},
         {t:`Andere Seite: ${w2} · ? = ${pr} → ${pr} : ${w2} = <b>${d2}</b>`,why:'Das ist eine Umkehraufgabe vom Malnehmen.'},
@@ -2959,6 +2975,48 @@ const WIH={
 };
 WI_FACTS.push(['🌍','Im Januar ist die Erde der Sonne näher als im Juli. Trotzdem ist bei uns dann Winter – weil die Erdachse schräg steht.'],['🌕','Das Wort „Monat“ kommt von „Mond“: Von Vollmond zu Vollmond dauert es ungefähr einen Monat.'],['🇦🇺','In Australien feiern die Kinder Weihnachten im Sommer – dort ist die Jahreszeit genau umgekehrt.'],['🔵','Im Weltall ist der Himmel schwarz, auch wenn die Sonne scheint. Den blauen Himmel macht nur unsere Luft.']);
 
+/* ================= Zehnerübergang: erst bis zum Zehner, dann den Rest ================= */
+function splitSVG(b,k,r){return`<div class="fig"><svg viewBox="0 0 200 112" style="width:min(220px,62vw)" role="img" aria-label="${b} wird zerlegt in ${k} und ${r}"><rect x="70" y="6" width="60" height="40" rx="10" fill="var(--card)" stroke="var(--c-ma)" stroke-width="3"/><text x="100" y="35" class="spl">${b}</text><line x1="86" y1="46" x2="52" y2="66" stroke="var(--c-ma)" stroke-width="3"/><line x1="114" y1="46" x2="148" y2="66" stroke="var(--c-ma)" stroke-width="3"/><rect x="20" y="66" width="62" height="40" rx="10" fill="#E8F5E9" stroke="#27B363" stroke-width="3"/><text x="51" y="95" class="spl">${k}</text><rect x="118" y="66" width="62" height="40" rx="10" fill="#FFF3E0" stroke="#FF9433" stroke-width="3"/><text x="149" y="95" class="spl">${r}</text></svg><div class="note" style="margin:2px 0 0"><span style="color:#27B363;font-weight:800">${k}</span> bis zum Zehner, <span style="color:#E07B10;font-weight:800">${r}</span> bleiben übrig</div></div>`}
+const countTo=(a,z,sub)=>{const L=[];for(let x=a;sub?x>z:x<z;)L.push(sub?--x:++x);return L.join(', ')};
+/* Die drei kleinen Schritte über den Zehner (a ist die Startzahl, e die einstellige Zahl) */
+function zueCore(a,e,sub,jumpsBefore,start){const k=sub?a%10:10-a%10,z=sub?a-k:a+k,r=e-k,res=sub?z-r:z+r,J=jumpsBefore||[],S0=start==null?a:start,sg=sub?'−':'+';
+  return{k,z,r,res,steps:[
+   {t:`<b>Schritt 1 – ${sub?'zurück':'bis'} zum Zehner:</b> ${a} ${sg} <b>${k}</b> = ${z}`,why:sub?`Von ${a} rückwärts bis zur Zehnerzahl ${z} sind es ${k} Schritte: ${countTo(a,z,1)}.`:`Von ${a} bis zur nächsten Zehnerzahl ${z} fehlen ${k}. Zähle: ${countTo(a,z)}.`,vis:lineSVG(S0,[...J,sub?-k:k],sub?1:0)},
+   {t:`<b>Schritt 2 – zerlegen:</b> ${e} = ${k} + <b>${r}</b>. Es bleiben noch <b>${r}</b> übrig.`,why:`Die ${k} hast du in Schritt 1 schon ${sub?'weggenommen':'dazugetan'}. Von der ${e} bleiben ${r}.`,vis:splitSVG(e,k,r)},
+   {t:`<b>Schritt 3 – den Rest ${sub?'wegnehmen':'dazu'}:</b> ${z} ${sg} ${r} = <b>${res}</b>`,why:`Von der glatten Zehnerzahl aus geht das ganz leicht.`,vis:lineSVG(S0,[...J,sub?-k:k,sub?-r:r],sub?1:0)}]}}
+const zueOK=(a,e,sub)=>sub?(a%10!==0&&a%10<e):(a%10!==0&&a%10+e>10);
+const Z={
+  one(sub){let a,e;do{e=R(3,9);a=sub?R(11,99):R(11,98-e)}while(!zueOK(a,e,sub)||(sub?a-e<1:a+e>100));
+    const c=zueCore(a,e,sub),sg=sub?'−':'+';
+    return{kind:'multi',text:`${a} ${sg} ${e} = ?`,sub:`Rechne in Schritten: erst ${sub?'zurück':''} bis zum Zehner, dann den Rest.`,answer:c.res,
+      parts:[{label:`${sub?'Zurück':'Bis'} zum Zehner`,pre:`${a} ${sg} `,post:` = ${c.z}`,answer:c.k,hint:sub?`Wie viele Schritte sind es von ${a} zurück bis ${c.z}?`:`Wie viel fehlt von ${a} bis ${c.z}? Zähle weiter: ${a+1}, ${a+2} …`},
+        {label:'Was bleibt übrig?',pre:`${e} = ${c.k} + `,post:'',answer:c.r,hint:`Die ${c.k} hast du schon benutzt. Wie viel fehlt noch bis ${e}?`},
+        {label:`Jetzt den Rest ${sub?'weg':'dazu'}`,pre:`${c.z} ${sg} ${c.r} = `,post:'',answer:c.res,hint:`Von ${c.z} aus noch ${c.r} ${sub?'zurück':'weiter'}.`}],
+      steps:[{t:`Aufgabe: <b>${a} ${sg} ${e}</b>. Das geht über den Zehner – darum rechnen wir in drei kleinen Schritten.`,why:sub?`Die Zehnerzahl vor ${a} ist ${c.z}. Bis dorthin ist es leicht.`:`Die nächste Zehnerzahl nach ${a} ist ${c.z}. Bis dorthin ist es leicht.`,vis:blocksPair(a,sg,e)},...c.steps,
+        {t:`Fertig: ${a} ${sg} ${e} = <b>${c.res}</b>`,why:`Kurz gesagt: ${a} ${sg} ${c.k} = ${c.z}, dann ${c.z} ${sg} ${c.r} = ${c.res}.`}]}},
+  two(sub){let a,b;do{b=R(13,59);a=sub?R(b+11,99):R(11,99-b)}while(b%10<3||!zueOK(sub?a-(b-b%10):a+(b-b%10),b%10,sub)||(sub?a-b<1:a+b>99));
+    const T=b-b%10,E=b%10,m=sub?a-T:a+T,c=zueCore(m,E,sub,[sub?-T:T],a),sg=sub?'−':'+';
+    return{kind:'multi',text:`${a} ${sg} ${b} = ?`,sub:`Erst die Zehner, dann ${sub?'zurück':''} bis zum Zehner, dann den Rest.`,answer:c.res,
+      parts:[{label:`Erst die Zehner ${sub?'weg':'dazu'}`,pre:`${a} ${sg} ${T} = `,post:'',answer:m,hint:`${T/10} ${T===10?'Zehner':'Zehner'} ${sub?'weniger':'mehr'}: Die Einer bleiben gleich.`},
+        {label:`${sub?'Zurück':'Bis'} zum Zehner`,pre:`${m} ${sg} `,post:` = ${c.z}`,answer:c.k,hint:sub?`Wie viele Schritte von ${m} zurück bis ${c.z}?`:`Wie viel fehlt von ${m} bis ${c.z}?`},
+        {label:'Was bleibt von den Einern übrig?',pre:`${E} = ${c.k} + `,post:'',answer:c.r,hint:`Die ${c.k} hast du schon benutzt. Wie viel fehlt noch bis ${E}?`},
+        {label:`Jetzt den Rest ${sub?'weg':'dazu'}`,pre:`${c.z} ${sg} ${c.r} = `,post:'',answer:c.res,hint:`Von ${c.z} aus noch ${c.r} ${sub?'zurück':'weiter'}.`}],
+      steps:[{t:`Aufgabe: <b>${a} ${sg} ${b}</b>. Zerlege ${b} in Zehner und Einer: ${b} = ${T} + ${E}.`,why:'Erst die Zehner, dann die Einer – und bei den Einern über den Zehner in kleinen Schritten.',vis:blocksPair(a,sg,b)},
+        {t:`<b>Erst die Zehner:</b> ${a} ${sg} ${T} = <b>${m}</b>`,why:`${T/10} Zehner ${sub?'weniger':'mehr'}. Die Einer bleiben gleich.`,vis:lineSVG(a,[sub?-T:T],sub?1:0)},...c.steps,
+        {t:`Fertig: ${a} ${sg} ${b} = <b>${c.res}</b>`,why:`Probe mit der Umkehraufgabe: ${c.res} ${sub?'+':'−'} ${b} = ${a}.`}]}}
+};
+function multiCheck(){const q=cur(),i=Q.pi||0,p=q.parts[i],v=Number(Q.input);if(!Q.input)return;Q.input='';
+  if(v===p.answer){Q.pi=i+1;Q.ptries=0;Q.pmsg='';if(Q.pi>=q.parts.length){check(q.answer);return}Q.state='ask';tone('ok');renderQuiz();return}
+  if(Q.test){Q.pi=q.parts.length;check(-99999);return}
+  Q.ptries=(Q.ptries||0)+1;
+  if(Q.ptries>=2){Q.help++;Q.pmsg=`Das ist <b>${p.answer}</b>. ${p.hint}`;Q.pi=i+1;Q.ptries=0;if(Q.pi>=q.parts.length){check(q.answer);return}}
+  else Q.pmsg=`Noch nicht. ${p.hint}`;
+  Q.state='ask';renderQuiz();const d=app.querySelector('.mrow.cur');d&&d.classList.add('shake')}
+function multiAns(q,done){const pi=done?q.parts.length:(Q.pi||0);
+  return`<div class="msteps">${q.parts.map((p,i)=>i>pi?'':`<div class="mrow ${i<pi?'ok':'cur'}"><span class="ml">${i+1}. ${p.label}</span><span class="mx">${p.pre}<b class="mbox">${i<pi?p.answer:(Q.input||'?')}</b>${p.post}</span></div>`).join('')}
+  ${Q.pmsg&&!done?`<div class="mmsg">${Q.pmsg}</div>`:''}</div>
+  ${done?'':`<div class="pad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button class="key" data-act="key" data-k="${n}">${n}</button>`).join('')}<button class="key del" data-act="key" data-k="del" aria-label="Löschen">${DEL}</button><button class="key" data-act="key" data-k="0">0</button><button class="key check" data-act="check">Prüfen</button></div>`}`}
+
 const ICON={leaf:'<svg viewBox="0 0 40 40" width="38" height="38" aria-hidden="true"><path d="M8 32 C8 16 18 7 34 6 C34 22 25 32 10 32Z" fill="#fff"/><path d="M8 33 L26 15" stroke="var(--c)" stroke-width="2.5" stroke-linecap="round"/></svg>',
  globe:'<svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="none" stroke="#fff" stroke-width="3"/><ellipse cx="20" cy="20" rx="7" ry="15" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M5 20 H35 M8 12 H32 M8 28 H32" stroke="#fff" stroke-width="2.5"/></svg>'};
 const SUBJECTS=[
@@ -3013,7 +3071,9 @@ addT('wi',3,[['wi_himmel','Tag, Nacht & Mond','Mondphasen und blauer Himmel – 
 addT('wi',4,[['wi_jahr','Jahreszeiten, Mond & Finsternis','Warum gibt es Sommer und Winter?',mix(wiGen(WI.himmel,1),wiGen(WI.himmel,1),WIH.jahreszeit,WIH.mondname,WIH.zuab),lernKonzept(['jahreszeiten','mondphasen','finsternis','tagnacht','himmel'])]]);
 addT('er',3,[['mond','Tag, Nacht & Mondphasen','Warum der Mond sich verändert',mix(wiGen(WI.himmel,1),WIH.mondname,WIH.zuab),lernKonzept(['tagnacht','mondphasen'])]]);
 addT('er',4,[['jahreszeiten','Jahreszeiten & Erdachse','Warum ist es im Sommer warm?',mix(wiGen(WI.himmel,1),WIH.jahreszeit,WIH.jahreszeit),lernKonzept(['jahreszeiten','finsternis'])]]);
-const GRP={wi:[['Erde, Mond & Himmel',['wi_himmel','wi_jahr']],['Physik & Natur',['wi_schwimmt2','wi_phys3','wi_phys4','wi_phys4b','wi_schall','wi_schall4']],['Mensch & Tiere',['wi_koerper2','wi_koerper','wi_tiere2','wi_tiere']],['Welt & Geschichte',['wi_erde','wi_erde4','wi_gesch']],['Alltag & Kultur',['wi_zeit','wi_kultur']],['Quiz',['wi_quiz']]],ma:[['Rechentricks: schnell im Kopf',['t_plus9','t_ausgl','t_fast','t_nik','t_11','t_von','t_59','t_99','t_nik100','t_quad','t_kreuz','t_von4','t_dh','t_neun']],['Rechnen & Zahlen',['zahlen2','zahlen3','plus100','minus100','mal2510','mal','geteilt','bis1000','doppelt','rest','schriftAdd','schriftSub','schriftMal','teilen','runden','pvs','sach','rechenart','ueberschlag','ueberschlag4']],['Größen: Geld, Zeit, Längen, Gewicht',['geld','einkauf','einkauf4','uhr','uhr5','zeit3','zeitspanne','fahrplan','laengen','laenge4','gewicht','liter','gewicht4']],['Geometrie',['formen','lage','umfang','koerper','netz','spiegel','wuerfelbau','flaeche','symm']],['Daten, Zufall & Muster',['strich','diagramm','diagramm4','zufall','zufall4','kombi','muster2','zauber']]],
+addT('ma',2,[['zue','Zehnerübergang','35 + 7: erst bis 40, dann den Rest',mix(()=>Z.one(false),()=>Z.one(false),()=>Z.one(true))]]);
+addT('ma',3,[['zue3','Zehnerübergang mit Zehnern','47 + 28 in kleinen Schritten',mix(()=>Z.two(false),()=>Z.two(true),()=>Z.one(false),()=>Z.one(true))]]);
+const GRP={wi:[['Erde, Mond & Himmel',['wi_himmel','wi_jahr']],['Physik & Natur',['wi_schwimmt2','wi_phys3','wi_phys4','wi_phys4b','wi_schall','wi_schall4']],['Mensch & Tiere',['wi_koerper2','wi_koerper','wi_tiere2','wi_tiere']],['Welt & Geschichte',['wi_erde','wi_erde4','wi_gesch']],['Alltag & Kultur',['wi_zeit','wi_kultur']],['Quiz',['wi_quiz']]],ma:[['Rechentricks: schnell im Kopf',['t_plus9','t_ausgl','t_fast','t_nik','t_11','t_von','t_59','t_99','t_nik100','t_quad','t_kreuz','t_von4','t_dh','t_neun']],['Rechnen & Zahlen',['zue','zue3','zahlen2','zahlen3','plus100','minus100','mal2510','mal','geteilt','bis1000','doppelt','rest','schriftAdd','schriftSub','schriftMal','teilen','runden','pvs','sach','rechenart','ueberschlag','ueberschlag4']],['Größen: Geld, Zeit, Längen, Gewicht',['geld','einkauf','einkauf4','uhr','uhr5','zeit3','zeitspanne','fahrplan','laengen','laenge4','gewicht','liter','gewicht4']],['Geometrie',['formen','lage','umfang','koerper','netz','spiegel','wuerfelbau','flaeche','symm']],['Daten, Zufall & Muster',['strich','diagramm','diagramm4','zufall','zufall4','kombi','muster2','zauber']]],
  de:[['Lesen',['lesen2','lesen3','lesen4']],['Rechtschreibung',['bildwort','diktat2','diktat3','diktat4','silben','ie','ck','doppel2','doppel','dehnungsh','ableiten','dass','abc','woerterbuch','woerterbuch4','satzzeichen','rede','gross']],['Grammatik',['artikel','nomen','wortart','mehrzahl','zusammen','wortfamilie','wortfamilie4','verben','steigern','zeit','subjekt']]],
  er:[['Heimat',['heimat2','heimat3','heimat4']],['Deutschland & Welt',['ort','land','karte2','de','blk','bl','welt','eul','eu']],['Weltall',['planeten','sonnensystem','planeten4','mond','jahreszeiten']]]};
 GRP.ma.push(GRP.ma.shift()); // Rechentricks als Bonus ans Ende
@@ -3136,10 +3196,10 @@ function medalSVG(m,size){if(!m)return'';size=size||34;return`<svg class="medal"
 function renderHub(){const s=subj(),k=topicKey(),b=me().best[k],t=(me().test||{})[k];
   app.innerHTML=`${bar('topics',S.topic[1],`${s.name} · Klasse ${S.grade}`)}
   <div class="hub" style="--c:var(${s.color})">
-  <div class="hello">${owl('happy',74)}<div class="bubble"><b>${S.topic[1]}</b><br>${b==null?'Neu für dich? Tippe auf <b>Lernen</b>.':b>=ROUND-1?'Super! Probier mal den <b>Test</b>.':'Weiter so! Tippe auf <b>Üben</b>.'}</div></div>
+  <div class="hello">${owl('happy',74)}<div class="bubble"><b>${S.topic[1]}</b><br>${b==null?'Neu für dich? Tippe auf <b>Üben</b> – Stella zeigt dir zuerst an einem Beispiel, wie es geht.':b>=ROUND-1?'Super! Probier mal den <b>Test</b>.':'Weiter so! Tippe auf <b>Üben</b>.'}</div></div>
   ${(()=>{const sc=(me().sched||{})[TK()];if(!sc)return'';const ago=today()-sc.last,dd=sc.due-today();return`<p class="note" style="text-align:left;margin:0">Zuletzt geübt: ${ago===0?'heute':ago===1?'gestern':`vor ${ago} Tagen`}. ${dd<=0?'<b>Heute wieder dran!</b>':`Nächste Wiederholung ${dd===1?'morgen':`in ${dd} Tagen`}.`}</p>`})()}
-  <button class="hubbtn" data-act="goLearn"><span class="hn">1</span><span class="tx"><span class="nm">Lernen</span><span class="ds">Stella zeigt dir, wie es geht.</span></span>${NEXT}</button>
-  <button class="hubbtn" data-act="practice"><span class="hn">2</span><span class="tx"><span class="nm">Üben</span><span class="ds">${ROUND} Aufgaben. Stella hilft dir.</span></span><span class="best">${STAR}${b==null?'–':b+'/'+ROUND}</span></button>
+  <button class="hubbtn" data-act="goLearn"><span class="hn">1</span><span class="tx"><span class="nm">Lernen</span><span class="ds">Nur zuschauen: Stella erklärt Beispiele.</span></span>${NEXT}</button>
+  <button class="hubbtn" data-act="practice"><span class="hn">2</span><span class="tx"><span class="nm">Üben</span><span class="ds">Erst ein Beispiel, dann ${ROUND} Aufgaben. Stella hilft dir.</span></span><span class="best">${STAR}${b==null?'–':b+'/'+ROUND}</span></button>
   <button class="hubbtn" data-act="goTest"><span class="hn">3</span><span class="tx"><span class="nm">Test</span><span class="ds">${TEST_N} Aufgaben ohne Hilfe. Schaffst du Gold? 🥇</span></span><span class="best">${t==null?'':medalSVG(medalOf(t))||`${t}/${TEST_N}`}</span></button>
   </div>`}
 
@@ -3152,11 +3212,44 @@ function newRound(test){
 }
 function readQ(q){if(q.kind==='text'||q.kind==='speak'||q.autoplay)return;if(q.speak){const en=/^en/.test(q.speakLang||'');say(en?q.speak:mathSpeak(q.speak),q.speakLang||'de-DE')}else say(mixSegs(q.text+(q.sub?' '+q.sub:'')))}
 const autoRead=()=>{const m=store.autoRead||'k2';return m==='all'||(m==='k2'&&S.grade===2)};
-function startQ(){stopSpeech();Object.assign(Q,{input:'',tries:0,state:'ask',shown:1,wrong:[],steps:null,peeked:false,help:0,showSteps:false,tray:[],buildMsg:''});renderQuiz();const q=cur();if(q.kind==='text'){Q_T=setTimeout(()=>say(q.say,'de-DE',q.sentence?.75:.8),250);focusDikt()}if(q.kind==='speak')Q_T=setTimeout(()=>say(q.say,'en-GB',.85),250);if(q.autoplay)Q_T=setTimeout(()=>say(q.speak,q.speakLang||'en-GB',.85),300);if(autoRead()&&!Q.review)readQ(q)}
+function startQ(){stopSpeech();Object.assign(Q,{input:'',tries:0,state:'ask',shown:1,wrong:[],steps:null,peeked:false,help:0,showSteps:false,tray:[],buildMsg:'',pi:0,ptries:0,pmsg:''});if(Q.i===0&&!Q.taught&&useTeach()){Q.taught=true;Q.back=false;Q.teachQ=makeTeachQ();Q.tshown=1;Q.state='teach';renderTeach();autoSpeak('teach');return}if(useIntro(cur())){Q.state='intro';renderIntro();if(autoRead()||store.explainVoice!==false)speakIntro();return}renderQuiz();const q=cur();if(q.kind==='text'){Q_T=setTimeout(()=>say(q.say,'de-DE',q.sentence?.75:.8),250);focusDikt()}if(q.kind==='speak')Q_T=setTimeout(()=>say(q.say,'en-GB',.85),250);if(q.autoplay)Q_T=setTimeout(()=>say(q.speak,q.speakLang||'en-GB',.85),300);if(autoRead()&&!Q.review)readQ(q)}
 function focusDikt(){const i=document.getElementById('dikt');if(i&&matchMedia('(pointer:fine)').matches)i.focus()}
 const cur=()=>Q.qs[Q.i];
 const solText=q=>q.solTxt?q.solTxt:q.money||q.kind==='build'?euro(q.answer):q.kind==='num'?fmt(q.answer)+(q.unit?' '+q.unit:''):esc(q.answer);
+/* Erst beibringen, dann üben: Jede Übungsrunde beginnt mit einem Beispiel, das Stella Schritt für Schritt erklärt */
+function lessonTask(q){return q.kind==='speak'?`<div class="qtext long">${q.text}</div><div>${q.sub}</div>${q.visual||''}`:q.kind==='text'?`<div class="qtext long">${q.sentence?'Beispielsatz':'Beispielwort'}: „${esc(q.answer)}“</div>${q.visual||''}`
+  :`<div class="qtext ${q.long?'long':''}">${q.text}</div>${q.sub?`<div style="font-weight:700">${q.sub}</div>`:''}${q.visual||''}${q.kind==='choice'?`<div class="note" style="text-align:left">Antworten zur Auswahl: ${q.options.map(esc).join(' · ')}</div>`:''}`}
+SC.teach={get:()=>Q.tshown,set:v=>{Q.tshown=v},steps:()=>Q.teachQ.steps,r:()=>renderTeach()};
+const useTeach=()=>!!Q&&!Q.test&&!Q.review&&!!S.topic&&!useIntro(cur());
+function makeTeachQ(){const g=S.topic[4]||S.topic[3],keys=new Set(Q.qs.map(x=>plain(x.text)+'|'+x.answer));let t;for(let i=0;i<8;i++){t=g();if(!keys.has(plain(t.text)+'|'+t.answer))break}return t}
+function renderTeach(){const q=Q.teachQ,s=subj(),N=Q.n,all=Q.tshown>=q.steps.length,first=!me().best[topicKey()]&&!Q.back;
+  const prog=Array.from({length:N},(_,i)=>`<i class="${i<Q.res.length?(Q.res[i]?'ok':'no'):i===Q.i?'cur':''}"></i>`).join('');
+  app.innerHTML=`${bar('hub',S.topic[1],`${s.name} · Klasse ${S.grade}`)}
+  <div style="--c:var(${s.color});display:flex;flex-direction:column;gap:16px">
+  <div class="prog" style="grid-template-columns:repeat(${N},1fr)">${prog}</div>
+  <div class="teachhead">${owl('think',56)}<div><b>${Q.back?'Schau dir das Beispiel nochmal an':'Erst lernen, dann selbst machen'}</b><br><span>${Q.back?'Danach geht es mit deiner Aufgabe weiter.':'Stella zeigt dir an einem Beispiel, wie es geht. Danach bist du dran!'}</span></div></div>
+  <div class="qcard"><div class="qhead"><span class="label">So geht's – ein Beispiel</span></div>${lessonTask(q)}</div>
+  <div class="fb explain">${tafelHTML('teach',q.steps,Q.tshown)}
+  ${all&&q.kind!=='text'&&q.kind!=='speak'?`<div class="sol">Lösung: ${solText(q)}</div>`:''}${all&&q.solVis?`<div class="solvis">${q.solVis}</div>`:''}
+  ${all?`<button class="btn" data-act="${Q.back?'teachBack':'teachDone'}" style="width:100%">${Q.back?'Zurück zu meiner Aufgabe ›':'Jetzt bin ich dran! ›'}</button>`:''}</div>
+  ${all?'':`<button class="linkbtn" data-act="${Q.back?'teachBack':'teachDone'}" style="align-self:center">${Q.back?'Zurück zu meiner Aufgabe':first?'Überspringen':'Ich kann das schon – los geht’s'}</button>`}</div>`}
+/* Erst erklären, dann fragen (Wissen und Weltall) */
+const INTRO_ER=new Set(['planeten','sonnensystem','planeten4','mond','jahreszeiten']);
+const introSteps=q=>[...(q.intro||(q.steps||[]).slice(0,-1)),...(q.introAdd?[q.introAdd]:[])].map(stepObj);
+const useIntro=q=>!!Q&&!Q.test&&!Q.review&&!!S.topic&&(S.subj==='wi'||(S.subj==='er'&&INTRO_ER.has(S.topic[0])))&&introSteps(q).length>0;
+function speakIntro(){say(mixSegs(introSteps(cur()).map(x=>stripVis(x.t)+(x.why?'. '+x.why:'')).join('. ')))}
+function renderIntro(){const q=cur(),s=subj(),N=Q.n,st=introSteps(q);let nv=0;
+  const prog=Array.from({length:N},(_,i)=>`<i class="${i<Q.res.length?(Q.res[i]?'ok':'no'):i===Q.i?'cur':''}"></i>`).join('');
+  app.innerHTML=`${bar('hub',S.topic[1],`${s.name} · Klasse ${S.grade}`)}
+  <div style="--c:var(${s.color});display:flex;flex-direction:column;gap:16px">
+  <div class="prog" style="grid-template-columns:repeat(${N},1fr)">${prog}</div>
+  <div class="qcard intro"><div class="qhead"><span class="qnum">Aufgabe ${Q.i+1} von ${N}</span>${canSpeak?`<button class="speak" data-act="introSay">${SPK}Vorlesen</button>`:''}</div>
+  <div class="ihead">${owl('think',58)}<div><b>Erst lesen, dann antworten</b><br><span>Stella erklärt dir, was du wissen musst. Danach kommt die Frage.</span></div></div>
+  ${st.map(x=>{const v=x.vis&&nv<2?(nv++,`<div class="t-vis">${x.vis}</div>`):'';return`<div class="ist"><div class="it">${x.t}</div>${v}${x.why?`<div class="iw">${x.why}</div>`:''}</div>`}).join('')}
+  <button class="btn" data-act="introDone">Verstanden – zur Frage ›</button></div></div>`}
 function renderQuiz(){
+  if(Q&&Q.state==='intro')return renderIntro();
+  if(Q&&Q.state==='teach')return renderTeach();
   const q=cur(),N=Q.n,s=Q.review?(SUBJECTS.find(x=>x.id===q._sid)||subj()):subj();
   const prog=Array.from({length:N},(_,i)=>`<i class="${i<Q.res.length?(Q.res[i]?'ok':'no'):i===Q.i?'cur':''}"></i>`).join('');
   const done=Q.state==='ok'||Q.state==='explain'||Q.state==='tw';
@@ -3171,6 +3264,7 @@ function renderQuiz(){
     <div class="label">Auf dem Tisch</div><div class="tray">${Q.tray.length?Q.tray.map((v,i)=>`<button class="mbtn" data-act="untray" data-i="${i}" ${done?'disabled':''} aria-label="${mName(v)} zurücknehmen">${mImg(v)}</button>`).join(''):'<span class="empty">Noch nichts hingelegt</span>'}</div>
     <div class="sumline">Hingelegt: <b>${euro(sum)}</b> <span>von ${euro(q.answer)}</span></div>
     ${done?'':`<div class="row"><button class="btn ghost" data-act="trayClear">Alles zurück</button><button class="btn" data-act="checkBuild">Prüfen</button></div>`}</div>`;
+  }else if(q.kind==='multi'){ans=multiAns(q,done);
   }else if(q.kind==='num'){
     ans=`<div class="answer"><div class="display ${Q.input?'':'empty'}" aria-live="polite">${Q.input||'?'}${q.unit?`<span class="unit">${q.unit}</span>`:''}</div>
     ${done?'':`<div class="pad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button class="key" data-act="key" data-k="${n}">${n}</button>`).join('')}<button class="key del" data-act="key" data-k="del" aria-label="Löschen">${DEL}</button><button class="key" data-act="key" data-k="0">0</button><button class="key check" data-act="check">Prüfen</button></div>`}</div>`;
@@ -3211,7 +3305,7 @@ function renderQuiz(){
   <div class="qcard"><div class="qhead"><span class="qnum">${Q.test?'<b>Test</b> · ':''}Aufgabe ${Q.i+1} von ${N}</span>${canSpeak&&q.kind!=='text'&&q.kind!=='speak'?`<button class="speak" data-act="read">${SPK}Vorlesen</button>`:''}</div>
   <div class="qtext ${q.long?'long':''}">${q.text}</div>${q.sub?`<div class="qnum" style="font-size:18px;font-weight:700;color:var(--ink)">${q.sub}</div>`:''}${q.visual||''}
   ${helpBox}${Q.state==='retry'?fb:''}${ans}
-  ${helpBtn}
+  ${Q.teachQ&&!Q.test&&(Q.state==='ask'||Q.state==='retry')?`<button class="linkbtn" data-act="teachShow" style="align-self:center">📖 Beispiel nochmal ansehen</button>`:''}${useIntro(q)&&(Q.state==='ask'||Q.state==='retry')?`<button class="linkbtn" data-act="introShow" style="align-self:center">📖 Erklärung nochmal lesen</button>`:''}${helpBtn}
   </div>${Q.state==='retry'?'':fb}</div>`;
   if(Q.state==='retry'){const dsp=app.querySelector('.display');dsp&&dsp.classList.add('shake')}
 }
@@ -3321,13 +3415,19 @@ function act(a,d){
     case 'trayClear':Q.tray=[];Q.state='ask';renderQuiz();break;
     case 'checkBuild':if(!Q.tray.length)return;check(Q.tray.reduce((a,b)=>a+b,0));break;
     case 'key':if(Q.state!=='ask'&&Q.state!=='retry')return;if(d.k===','){if(!(cur().money||cur().dec)||Q.input.includes(','))return;Q.input=(Q.input||'0')+',';if(Q.state==='retry')Q.state='ask';updDisplay();break}if(Q.input.includes(',')&&d.k!=='del'&&Q.input.split(',')[1].length>=2)return;if(d.k==='del')Q.input=Q.input.slice(0,-1);else if(Q.input.length<7)Q.input=(Q.input==='0'?'':Q.input)+d.k;if(Q.state==='retry')Q.state='ask';updDisplay();break;
-    case 'check':if(!Q.input)return;check(Q.input);break;
+    case 'check':if(!Q.input)return;if(cur().kind==='multi'){multiCheck();break}check(Q.input);break;
     case 'opt':check(cur().options[+d.i]);break;
     case 'help':Q.help++;renderQuiz();{const h=app.querySelector('.hint');h&&h.scrollIntoView({block:'nearest'});const hl=helpList(cur());if(voiceOn())speakStep(hl[Q.help-1])}break;
     case 'giveup':{const q=cur();Q.state='explain';Q.shown=1;Q.res.push(false);addWrong(q);renderQuiz();scrollTafel();autoSpeak('quiz');break}
     case 'why':Q.showSteps=true;Q.shown=1;renderQuiz();scrollTafel();autoSpeak('quiz');break;
     case 'next':stopSpeech();Q.i++;if(Q.i>=Q.n){finishRound()}else{startQ();window.scrollTo(0,0)}break;
     case 'settings':S.screen='settings';render();break;
+    case 'teachDone':stopSpeech();startQ();window.scrollTo(0,0);break;
+    case 'teachShow':stopSpeech();Q.back=true;Q.tshown=Q.teachQ.steps.length;Q.state='teach';renderTeach();window.scrollTo(0,0);break;
+    case 'teachBack':stopSpeech();Q.back=false;Q.state='ask';renderQuiz();window.scrollTo(0,0);break;
+    case 'introDone':{stopSpeech();Q.state='ask';renderQuiz();window.scrollTo(0,0);const q=cur();if(autoRead())readQ(q);if(q.autoplay)say(q.speak,q.speakLang||'en-GB',.85);break}
+    case 'introShow':stopSpeech();Q.state='intro';renderIntro();window.scrollTo(0,0);break;
+    case 'introSay':speakIntro();break;
     case 'autoRead':{const o=['k2','all','off'],c=store.autoRead||'k2';store.autoRead=o[(o.indexOf(c)+1)%3];save();renderSettings();break}
     case 'nextTopic':{const n=nextTopicIdx();if(n==null){S.screen='topics';render();break}S.topic=subj().grades[S.grade][n];S.screen='hub';render();break}
     case 'factSay':{const f=app.querySelector('.factcard .ft');f&&say(mathSpeak(f.textContent.replace('Wusstest du schon?','Wusstest du schon? ')),'de-DE');break}
@@ -3368,8 +3468,8 @@ app.addEventListener('input',e=>{if(e.target.id==='dikt'&&Q)Q.input=e.target.val
 app.addEventListener('keydown',e=>{if(e.target.id==='dikt'&&e.key==='Enter'){e.preventDefault();act('checkText',{})}if((e.target.id==='ha'||e.target.id==='hb')&&e.key==='Enter'){e.preventDefault();helperSolve()}});
 app.addEventListener('click',e=>{if(Date.now()<ZP_BLOCK&&e.target.closest('.zwrap')&&!e.target.closest('.zbtns'))return;const m=e.target.closest('[data-map]');if(m&&S.screen==='atlas'){act('atlasSel',{i:m.getAttribute('data-i')});return}const b=e.target.closest('[data-act]');if(!b||b.disabled)return;act(b.dataset.act,b.dataset)});
 document.addEventListener('keydown',e=>{
-  if(S.screen!=='quiz'||!Q||e.target.tagName==='INPUT')return;const q=cur();
-  if(q.kind==='num'&&(Q.state==='ask'||Q.state==='retry')){if(/^[0-9]$/.test(e.key))act('key',{k:e.key});else if(e.key===','||e.key==='.')act('key',{k:','});else if(e.key==='Backspace')act('key',{k:'del'});else if(e.key==='Enter')act('check',{})}
+  if(S.screen!=='quiz'||!Q||e.target.tagName==='INPUT')return;const q=cur();if(Q.state==='intro'){if(e.key==='Enter')act('introDone',{});return}if(Q.state==='teach'){if(e.key==='Enter')act(Q.tshown>=Q.teachQ.steps.length?(Q.back?'teachBack':'teachDone'):'tNext',{scope:'teach'});return}
+  if((q.kind==='num'||q.kind==='multi')&&(Q.state==='ask'||Q.state==='retry')){if(/^[0-9]$/.test(e.key))act('key',{k:e.key});else if(e.key===','||e.key==='.')act('key',{k:','});else if(e.key==='Backspace')act('key',{k:'del'});else if(e.key==='Enter')act('check',{})}
   else if(e.key==='Enter'&&(Q.state==='ok'||Q.state==='tw'||(Q.state==='explain'&&Q.shown>=(Q.steps||q.steps).length)))act('next',{});
   else if(e.key==='Enter'&&Q.state==='explain')act('tNext',{scope:'quiz'});
 });
