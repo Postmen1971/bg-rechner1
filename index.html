@@ -16,7 +16,7 @@
   --paper:#F3F7FB; --grid:#DCE8F3; --card:#FFFFFF; --ink:#1D2A44; --muted:#5A6A86; --line:#D8E2EE;
   --accent:#FF6A3D; --accent-ink:#FFFFFF; --star:#FFB400; --star-soft:#FFF1C7;
   --ok:#159A62; --ok-soft:#DDF5EA; --warn:#C77700; --warn-soft:#FFF0D6; --bad:#D6405A;
-  --c-ma:#2F6FD6; --c-de:#D23F79; --c-sa:#2E9B4F; --c-en:#0B98AE; --c-er:#B8690F;
+  --c-ma:#2F6FD6; --c-de:#D23F79; --c-sa:#2E9B4F; --c-en:#0B98AE; --c-er:#B8690F; --c-wi:#7A4FD0;
   --shadow:0 2px 0 rgba(29,42,68,.10);
   --display:"Baloo 2", "Comic Sans MS", system-ui, sans-serif;
   --body:"Andika", "Trebuchet MS", system-ui, sans-serif;
@@ -27,7 +27,7 @@
     --paper:#131A28; --grid:#1B2436; --card:#1C2638; --ink:#ECF1F8; --muted:#9FAEC6; --line:#2C3A54;
     --accent:#FF7C55; --accent-ink:#1A0E08; --star:#FFC53D; --star-soft:#3A3217;
     --ok:#3CCB8A; --ok-soft:#153526; --warn:#FFB64D; --warn-soft:#3A2C12; --bad:#FF6B84;
-    --c-ma:#6EA2FF; --c-de:#FF6FA6; --c-sa:#5ACB78; --c-en:#35C6DC; --c-er:#F2A541;
+    --c-ma:#6EA2FF; --c-de:#FF6FA6; --c-sa:#5ACB78; --c-en:#35C6DC; --c-er:#F2A541; --c-wi:#B39BFF;
     --shadow:0 2px 0 rgba(0,0,0,.35);
   }
 }
@@ -36,7 +36,7 @@
   --paper:#131A28; --grid:#1B2436; --card:#1C2638; --ink:#ECF1F8; --muted:#9FAEC6; --line:#2C3A54;
   --accent:#FF7C55; --accent-ink:#1A0E08; --star:#FFC53D; --star-soft:#3A3217;
   --ok:#3CCB8A; --ok-soft:#153526; --warn:#FFB64D; --warn-soft:#3A2C12; --bad:#FF6B84;
-  --c-ma:#6EA2FF; --c-de:#FF6FA6; --c-sa:#5ACB78; --c-en:#35C6DC; --c-er:#F2A541;
+  --c-ma:#6EA2FF; --c-de:#FF6FA6; --c-sa:#5ACB78; --c-en:#35C6DC; --c-er:#F2A541; --c-wi:#B39BFF;
   --shadow:0 2px 0 rgba(0,0,0,.35);
 }
 *{box-sizing:border-box}
@@ -90,7 +90,7 @@ section{display:flex; flex-direction:column; gap:10px}
 .grades{display:grid; grid-template-columns:repeat(auto-fit,minmax(0,1fr)); gap:8px}
 .grade{background:var(--card); border:3px solid var(--line); border-radius:16px; padding:10px 6px; display:flex; flex-direction:column; align-items:center; gap:0}
 .grade b{font-family:var(--display); font-size:22px; font-weight:800}
-.grade span{font-size:13px; color:var(--muted)}
+.grade span{font-size:14px; color:var(--muted)}
 .grade.on{border-color:var(--c); background:var(--c); color:#fff}
 .grade.on span{color:rgba(255,255,255,.9)}
 
@@ -391,7 +391,7 @@ mark{background:var(--warn-soft); color:var(--bad); border-bottom:3px solid var(
 .map .kr.reg{fill:#FFE08A}
 .map .rlab{font:italic 800 15px var(--body); fill:#1463D8; paint-order:stroke; stroke:var(--card); stroke-width:4px}
 .map .klab{font:800 13px var(--display); fill:#1D2A44; text-anchor:middle; paint-order:stroke; stroke:#fff; stroke-width:3px}
-.map .land{font:italic 800 16px var(--body); fill:#2E7D32; text-anchor:middle; paint-order:stroke; stroke:#fff; stroke-width:4px}
+.map text.land{font:italic 800 16px var(--body); fill:#2E7D32; text-anchor:middle; paint-order:stroke; stroke:#fff; stroke-width:4px}
 .map .city.home{fill:var(--accent)} .map .clab.home{font-size:20px; fill:var(--accent)}
 .map .cmp{fill:var(--card); stroke:var(--ink); stroke-width:2} .map .cmpn{font:800 13px var(--display); fill:var(--ink); text-anchor:middle}
 .map .nb.hl{fill:var(--accent)!important}
@@ -500,7 +500,7 @@ button,a,select,input{touch-action:manipulation}
 .tool .gl{flex:none; width:46px; height:46px; border-radius:14px; background:var(--c); color:#fff; display:grid; place-items:center; font-family:var(--display); font-weight:800; font-size:26px}
 .tool .gl svg{width:30px; height:30px}
 .tool b{font-family:var(--display); font-weight:800; font-size:17px; line-height:1.15; hyphens:auto; -webkit-hyphens:auto}
-.tool>span:last-child{font-size:13px; color:var(--muted); line-height:1.3}
+.tool>span:last-child{font-size:14px; color:var(--muted); line-height:1.3}
 .tool>span.tx{color:var(--ink); font-size:inherit}
 .tool .tx .small{font-size:14px; color:var(--muted)}
 .kfig.ktall{max-width:460px; margin:0 auto}
@@ -564,6 +564,35 @@ button,a,select,input{touch-action:manipulation}
 .kpills button.on{background:#5B4BC4; color:#fff}
 @media (min-width:640px){.kinfo{flex-direction:row; align-items:flex-start}.kinfo .kfig.small{flex:none; width:220px; margin:0}}
 
+.zwrap{position:relative; touch-action:pan-x pan-y; border-radius:18px; overflow:hidden; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none}
+.zwrap.zoomed{touch-action:none}
+.zwrap.zoomed path{vector-effect:non-scaling-stroke}
+.zwrap>.map,.zwrap>.kfig{margin:0}
+.zbtns{position:absolute; right:8px; bottom:8px; display:flex; flex-direction:column; gap:8px; z-index:2}
+.zbtns button{width:44px; height:44px; border-radius:14px; border:2px solid var(--line); background:var(--card); color:var(--ink); font:800 26px/1 var(--display); box-shadow:0 2px 8px rgba(0,0,0,.18); display:grid; place-items:center; padding:0}
+.zwrap:not(.zoomed) .zr0{display:none}
+.zhint{margin:-4px 2px 0; font-size:14px; color:var(--muted); line-height:1.35}
+.atabs .grade{padding:10px 2px; min-width:0}
+.atabs .grade b{font-size:clamp(14px,4.3vw,20px); hyphens:manual; -webkit-hyphens:manual; line-height:1.1; text-align:center}
+@media (max-width:560px){.qcard.atlas{padding:10px; gap:10px} .qcard.atlas .ainfo{padding:0 6px 6px}}
+.map .land.pc0,.map .kr.pc0{fill:#FFD98A}.map .land.pc1,.map .kr.pc1{fill:#AEDD8F}.map .land.pc2,.map .kr.pc2{fill:#FFB38A}
+.map .land.pc3,.map .kr.pc3{fill:#CDB4F5}.map .land.pc4,.map .kr.pc4{fill:#F9A8C9}.map .land.pc5,.map .kr.pc5{fill:#E3C9A3}
+.map .land[class*=" pc"]{stroke:#fff; stroke-width:1.3}
+.map .kr[class*=" pc"]{stroke:#fff; stroke-width:1.8}
+.map .kr.hl,.map .land.hl{stroke:#1D2A44; stroke-width:2.2}
+.factcard{display:flex; align-items:flex-start; gap:12px; background:color-mix(in srgb,var(--c-wi) 10%,var(--card)); border:3px solid var(--c-wi); border-radius:20px; padding:14px; box-shadow:var(--shadow)}
+.factcard .fe{font-size:36px; line-height:1; flex:none}
+.factcard .ft{flex:1; font-size:16px; line-height:1.45}
+.factcard .ft b{font-family:var(--display); font-size:18px; color:var(--c-wi)}
+.factcard .speak{flex:none}
+.wl{font:700 13px var(--body); fill:var(--muted); text-anchor:middle}
+.wk{font:800 15px var(--display); fill:var(--ink); text-anchor:middle}
+.hlab{font:800 14px var(--display); fill:#fff; text-anchor:middle; paint-order:stroke; stroke:#0E1433; stroke-width:3px}
+.hlab.on{fill:#FFD23F; font-size:16px}.hlab.sm{font-size:11px; stroke-width:2.5px}
+.hl0{font:800 10px var(--display); fill:#fff}
+.linkbtn.skip{align-self:center; margin-top:4px; font-size:16px}
+.mgl{font:800 18px var(--display); fill:#fff; text-anchor:middle}
+.wq{fill:var(--accent); font-family:var(--display); font-weight:800}
 @media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
 </style>
 </head>
@@ -1138,14 +1167,34 @@ const GEO_O={"Pazifik": [[111, 243], [971, 225]], "Atlantik": [[404, 188], [447,
 const CONT_CLS={'Europa':'k-eu','Asien':'k-as','Afrika':'k-af','Australien':'k-au','Antarktika':'k-an','Nordamerika':'k-na','Südamerika':'k-sa'};
 const CONTS=Object.keys(CONT_CLS);
 const pin=(x,y,s=1)=>`<g class="pin" transform="translate(${x},${y}) scale(${s})"><path d="M0,0 C-8,-12 -13,-17 -13,-25 A13,13 0 1 1 13,-25 C13,-17 8,-12 0,0Z"/><circle cx="0" cy="-25" r="5.5"/></g>`;
+/* ================= Bunte Karten: Nachbarn bekommen verschiedene Farben ================= */
+function pathPts(d){const pts=[];let x=0,y=0,sx=0,sy=0;const re=/([MmLlHhVvZzCcQqSsTtAa])([^MmLlHhVvZzCcQqSsTtAa]*)/g;let m;
+  while((m=re.exec(d))){const c=m[1],n=(m[2].match(/-?\d*\.?\d+(?:e-?\d+)?/g)||[]).map(Number);
+    if(c==='M'||c==='L'){for(let i=0;i+1<n.length;i+=2){x=n[i];y=n[i+1];if(c==='M'&&i===0){sx=x;sy=y}pts.push([x,y])}}
+    else if(c==='m'||c==='l'){for(let i=0;i+1<n.length;i+=2){x+=n[i];y+=n[i+1];if(c==='m'&&i===0){sx=x;sy=y}pts.push([x,y])}}
+    else if(c==='H'){n.forEach(v=>{x=v;pts.push([x,y])})}else if(c==='h'){n.forEach(v=>{x+=v;pts.push([x,y])})}
+    else if(c==='V'){n.forEach(v=>{y=v;pts.push([x,y])})}else if(c==='v'){n.forEach(v=>{y+=v;pts.push([x,y])})}
+    else if(c==='Z'||c==='z'){x=sx;y=sy}
+    else if(n.length>=2){const abs=c===c.toUpperCase();const lx=n[n.length-2],ly=n[n.length-1];if(abs){x=lx;y=ly}else{x+=lx;y+=ly}pts.push([x,y])}}
+  return pts}
+const MCOL={};
+/* ds: Liste von Pfaden; gibt für jeden eine Farbnummer 0..5 zurück, Nachbarn verschieden */
+function mapColors(key,ds,eps){if(MCOL[key])return MCOL[key];eps=eps||3;const cell=new Map(),N=ds.length,adj=Array.from({length:N},()=>new Set());
+  ds.forEach((d,i)=>{if(!d)return;pathPts(d).forEach(([x,y])=>{const k=Math.round(x/eps)+','+Math.round(y/eps);let s=cell.get(k);if(!s)cell.set(k,s=new Set());s.add(i)})});
+  cell.forEach((s,k)=>{const[a,b]=k.split(',').map(Number);const here=[...s];
+    for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++){const o=cell.get((a+dx)+','+(b+dy));if(!o)continue;here.forEach(i=>o.forEach(j=>{if(i!==j){adj[i].add(j);adj[j].add(i)}}))}});
+  const order=[...Array(N).keys()].sort((a,b)=>adj[b].size-adj[a].size),col=Array(N).fill(-1);
+  const cnt=Array(6).fill(0);order.forEach(i=>{const used=new Set([...adj[i]].map(j=>col[j]));let b=-1;for(let c=0;c<6;c++)if(!used.has(c)&&(b<0||cnt[c]<cnt[b]))b=c;if(b<0)b=0;col[i]=b;cnt[b]++});
+  return MCOL[key]=col}
+
 function worldSVG(o={}){
   const cs=GEO_W.c.map((c,i)=>{let k='land';if(o.colorful||o.hlCont)k+=' '+CONT_CLS[c[2]];
     if(o.hlCont)k+=c[2]===o.hlCont?' hl':' dim';if(o.sel===i)k+=' sel';
     return`<path class="${k}" d="${c[4]}"${o.tap?` data-map="w" data-i="${i}"`:''}/>`}).join('');
   return`<div class="map"><svg viewBox="-6 -6 ${GEO_W.w+12} ${GEO_W.h+12}" role="img" aria-label="Weltkarte"><path class="sea" d="${GEO_W.o}"/>${cs}${o.marker?pin(o.marker[0],o.marker[1],1.6):''}</svg></div>`;
 }
-function europeSVG(o={}){const E=GEO_E;
-  const cs=E.c.map((c,i)=>{let k='land';if(c[2]!=='Europa'&&c[0]!=='TUR')k+=' far';if(o.hl===c[0])k+=' hl';if(o.sel===i)k+=' sel';
+function europeSVG(o={}){const E=GEO_E,pc=mapColors('eu',E.c.map(c=>c[4]),4);
+  const cs=E.c.map((c,i)=>{let k='land';if(c[2]!=='Europa'&&c[0]!=='TUR')k+=' far';else k+=' pc'+pc[i];if(o.hl===c[0])k+=' hl';if(o.sel===i)k+=' sel';
     return`<path class="${k}" d="${c[4]}"${o.tap?` data-map="e" data-i="${i}"`:''}/>`}).join('');
   const cap=o.cap&&E.cap[o.cap]?`<circle class="cap" cx="${E.cap[o.cap][1]}" cy="${E.cap[o.cap][2]}" r="5"/>`:'';
   return`<div class="map"><svg viewBox="0 0 ${E.w} ${E.h}" role="img" aria-label="Europakarte"><rect class="sea" width="${E.w}" height="${E.h}" rx="18"/>${cs}${cap}</svg></div>`;
@@ -1460,7 +1509,8 @@ const GEO_WN={"w":520,"h":365,"kr":[["Rems-Murr-Kreis","M524-4l0,357.5l-4-1.2l-1
 const rp=(D,lon,lat)=>[(lon-D.pj[0])*D.pj[2]*D.pj[3],(D.pj[1]-lat)*D.pj[3]];
 function regionMap(D,o={}){
   const nb=D.nb.map((n,i)=>`<path class="nb n${i%5} ${o.hlNb===n[0]?'hl':''}" d="${n[1]}"/>`).join('');
-  const kr=D.kr.map((k,i)=>{let c='kr';if(o.region&&k[4])c+=' reg';if(o.hl===k[0])c+=' hl';if(o.sel===i)c+=' sel';return`<path class="${c}" d="${k[1]}"${o.tap?` data-map="${o.tap}" data-i="${i}"`:''}/>`}).join('');
+  const pc=mapColors('kr'+D.kr.length+D.kr[0][0],D.kr.map(k=>k[1]),3);
+  const kr=D.kr.map((k,i)=>{let c='kr';if(o.region&&k[4])c+=' reg';if(!o.region||k[4])c+=' pc'+pc[i];if(o.hl===k[0])c+=' hl';if(o.sel===i)c+=' sel';return`<path class="${c}" d="${k[1]}"${o.tap?` data-map="${o.tap}" data-i="${i}"`:''}/>`}).join('');
   let add='';
   if(o.lake){const[x1,y1]=rp(D,9.03,47.80),[x2,y2]=rp(D,9.72,47.50),cx=(x1+x2)/2,cy=(y1+y2)/2,rx=Math.hypot(x2-x1,y2-y1)/2+2,a=Math.atan2(y2-y1,x2-x1)*180/Math.PI;add+=`<ellipse class="lake" cx="${cx}" cy="${cy}" rx="${rx}" ry="${rx*.34}" transform="rotate(${a} ${cx} ${cy})"/>`}
   if(o.rivers!==false)add+=D.riv.map(r=>`<path class="riv ${o.hlRiver===r[0]?'hl':''}" d="${r[1]}"/>`).join('');
@@ -2387,6 +2437,7 @@ function renderKosmos(){const K=S.kosmos||(S.kosmos={view:'orb',sel:null}),o={ta
   ${fig}
   ${K.sel?kInfo(K.sel):`<div class="kintro">${owl('think',54)}<p>${K_INTRO[K.view]}</p></div>`}
   <div class="kpills">${['Sonne',...PLN].map(n=>`<button class="${K.sel===n?'on':''}" data-act="kSel" data-p="${n}">${n}</button>`).join('')}</div>`;
+  zoomAll('.kfig:not(.kscroll):not(.small)','kos-'+K.view);
   if(K.view==='size'&&K.sel){const sc=app.querySelector('.kscroll'),t=sc&&sc.querySelector(`[data-p="${K.sel}"]`);if(t){const r=t.getBoundingClientRect(),rs=sc.getBoundingClientRect();sc.scrollLeft+=r.left-rs.left-rs.width/2+r.width/2}}}
 
 /* ================= Startseite, Einstellungen, Themenliste (übersichtlicher) ================= */
@@ -2401,6 +2452,7 @@ function renderHome(){
   ${SUBJECTS.map(s=>`<button class="subj" style="--c:var(${s.color})" data-act="subject" data-id="${s.id}"><span class="gl">${s.glyph}</span><span class="nm">${s.name}</span><span class="ds">${s.desc}</span></button>`).join('')}
   </div></section>
   ${w+tp?reviewCard():''}
+  ${factCard()}
   <section><div class="label">Entdecken und Helfen</div><div class="tools">
     <button class="tool" style="--c:var(--c-ma)" data-act="helper"><span class="gl">?</span><span class="tx"><b>Hausaufgaben-Helfer</b><br><span class="small">Rechenaufgabe aus dem Heft eintippen – Stella erklärt sie Schritt für Schritt.</span></span></button>
     <button class="tool" style="--c:var(--c-er)" data-act="atlas"><span class="gl">${ICON.globe}</span><b>Atlas</b><span>Deutschland, Europa, Welt</span></button>
@@ -2426,6 +2478,7 @@ function voiceSettings(){
     <p class="vq q${q}">Qualität: <b>${QNAME[q]}</b>${q>=2?' ✓':''}</p>${q<2?`<p class="vtip">💡 <b>So klingt Stella viel besser:</b> ${voiceHowTo()}</p>`:''}`}
     ${canSpeak?`<div class="vrow"><label>Automatisch</label><span>Stella liest Erklärungen von selbst vor</span><button class="speak" data-act="voiceExplainToggle">${store.explainVoice===false?'Aus':'An'}</button></div>`:''}
   </div>
+  <div class="vrow"><label>Vorlesen</label><span>Jede Aufgabe automatisch vorlesen (hilft Kindern, die noch nicht so schnell lesen)</span><button class="speak" data-act="autoRead">${{off:'Aus',k2:'Nur Klasse 2',all:'Immer'}[store.autoRead||'k2']}</button></div>
   <div class="vrow"><label>Klang</label><span>Töne bei richtigen Antworten</span><button class="speak" data-act="soundToggle">${store.sound===false?'Aus':'An'}</button></div>
   ${canSpeak&&voicesFor('en').length?`<details class="vmore"><summary>Weitere Einstellungen</summary><div class="vrow"><label for="v-en">Englisch</label><select id="v-en" data-lang="en">${voicesFor('en').slice().sort((a,b)=>voiceScore(b,'en-GB')-voiceScore(a,'en-GB')).map(x=>{const c=pickVoice('en-GB');return`<option value="${esc(x.voiceURI)}" ${c&&c.voiceURI===x.voiceURI?'selected':''}>${voiceQuality(x)>=2?'★ ':''}${esc(x.name)} (${esc(x.lang)})</option>`}).join('')}</select><button class="speak" data-act="voiceTest" data-lang="en">${SPK}Probe</button></div><p class="small">Die Gerätestimme für Englisch wird nur benutzt, wenn für ein Wort keine eingebaute Aufnahme da ist.</p></details>`:''}
   </div></section>`}
@@ -2450,10 +2503,461 @@ function renderTopics(){applyZR();
   ${s.id==='ma'&&S.grade>=3?zrBar():''}
   ${s.id==='er'?`<div class="tools two"><button class="tool" style="--c:var(--c-er)" data-act="atlas"><span class="gl">${ICON.globe}</span><b>Atlas</b><span>Länder antippen</span></button><button class="tool" style="--c:#5B4BC4" data-act="kosmos"><span class="gl">🪐</span><b>Weltall</b><span>Planeten antippen</span></button></div>`:''}
   <div class="topics" style="--c:var(${s.color})">${G.length===1&&!G[0].h?G[0].idx.map(i=>topicRow(s,i)).join(''):G.map((g,gi)=>{const done=g.idx.filter(i=>me().best[`${s.id}-${S.grade}-${s.grades[S.grade][i][0]}`]!=null).length,on=gi===open;
-    return`<div class="tgrp ${on?'open':''}"><button class="tghead" data-act="grp" data-g="${gi}" aria-expanded="${on}"><span class="tgn">${g.h}</span><span class="tgc">${done?`${done} von ${g.idx.length} geübt`:`${g.idx.length} Themen`}</span><span class="chev">${NEXT}</span></button>${on?`<div class="tglist">${g.idx.map(i=>topicRow(s,i)).join('')}</div>`:''}</div>`}).join('')}</div>
+    return`<div class="tgrp ${on?'open':''}"><button class="tghead" data-act="grp" data-g="${gi}" aria-expanded="${on}"><span class="tgn">${g.h}</span><span class="tgc">${done?`${done} von ${g.idx.length} geübt`:`${g.idx.length} ${g.idx.length===1?'Thema':'Themen'}`}</span><span class="chev">${NEXT}</span></button>${on?`<div class="tglist">${g.idx.map(i=>topicRow(s,i)).join('')}</div>`:''}</div>`}).join('')}</div>
   <p class="note">Klasse 2 zum Wiederholen, Klasse 4 als Vorschau.</p>`}
 function updDisplay(){const q=cur(),d=app.querySelector('.display');if(!d||app.querySelector('.fb')){renderQuiz();return}
   d.classList.toggle('empty',!Q.input);d.innerHTML=(Q.input||'?')+((q.money||q.dec)?`<span class="unit">${q.dec?q.unit:'€'}</span>`:q.unit?`<span class="unit">${q.unit}</span>`:'')}
+
+/* ================= Karten vergrößern und verschieben (zwei Finger / Tasten + −) ================= */
+const ZS={},ZC={};let ZP_BLOCK=0,LAST_TAP={t:0,x:0,y:0,k:''};
+function wrapZoom(el,key){if(!el||el.parentElement.classList.contains('zwrap'))return;
+  const w=document.createElement('div');w.className='zwrap';w.dataset.zk=key;el.parentNode.insertBefore(w,el);w.appendChild(el);
+  w.insertAdjacentHTML('beforeend',`<div class="zbtns"><button data-act="zIn" data-k="${key}" aria-label="Vergrößern">+</button><button data-act="zOut" data-k="${key}" aria-label="Verkleinern">−</button><button data-act="zReset" data-k="${key}" aria-label="Ganze Karte zeigen" class="zr0">⤢</button></div>`);
+  enableZoom(w,el.querySelector('svg'),key)}
+function enableZoom(wrap,svg,key){if(!svg)return;const b0=svg.viewBox.baseVal,B={x:b0.x,y:b0.y,w:b0.width,h:b0.height},bk=[B.x,B.y,B.w,B.h].join(','),MAXZ=8;
+  let V=ZS[key]&&ZS[key].bk===bk?{...ZS[key].v}:{...B},raf=0,lastZ=0;
+  const texts=[...svg.querySelectorAll('text')].map(t=>{const cs=getComputedStyle(t);return[t,parseFloat(cs.fontSize)||16,parseFloat(cs.strokeWidth)||0]}),
+    dots=[...svg.querySelectorAll('circle.city,circle.cap')].map(c=>[c,+c.getAttribute('r')||4]);
+  const sizeFix=()=>{raf=0;const z=B.w/V.w;if(Math.abs(z-lastZ)<.03)return;lastZ=z;const k=Math.min(z,1.7)/z; // Schrift wächst nur wenig mit
+    texts.forEach(([t,fs,sw])=>{t.style.fontSize=(fs*k)+'px';if(sw)t.style.strokeWidth=(sw*k)+'px'});dots.forEach(([c,r])=>c.setAttribute('r',(r*Math.max(k,.35)).toFixed(2)))};
+  const apply=()=>{V.w=Math.min(B.w,Math.max(B.w/MAXZ,V.w));V.h=V.w*B.h/B.w;
+    V.x=Math.min(B.x+B.w-V.w,Math.max(B.x,V.x));V.y=Math.min(B.y+B.h-V.h,Math.max(B.y,V.y));
+    svg.setAttribute('viewBox',`${V.x.toFixed(2)} ${V.y.toFixed(2)} ${V.w.toFixed(2)} ${V.h.toFixed(2)}`);ZS[key]={bk,v:{...V}};
+    wrap.classList.toggle('zoomed',B.w/V.w>1.02);if(!raf)raf=requestAnimationFrame(sizeFix)};
+  const pt=(cx,cy)=>{const r=svg.getBoundingClientRect();return{x:V.x+(cx-r.left)/r.width*V.w,y:V.y+(cy-r.top)/r.height*V.h}};
+  const zoomAt=(cx,cy,f)=>{const p=pt(cx,cy),nw=Math.min(B.w,Math.max(B.w/MAXZ,V.w/f)),k=nw/V.w;V.x=p.x-(p.x-V.x)*k;V.y=p.y-(p.y-V.y)*k;V.w=nw;V.h=nw*B.h/B.w;apply()};
+  const center=f=>{const r=svg.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,f)};
+  let T=null;
+  wrap.addEventListener('touchstart',e=>{const t=e.touches;
+    if(t.length===2){e.preventDefault();T={m:'pinch',d:Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY),cx:(t[0].clientX+t[1].clientX)/2,cy:(t[0].clientY+t[1].clientY)/2,V:{...V}};ZP_BLOCK=Date.now()+600}
+    else if(t.length===1)T={m:B.w/V.w>1.02?'pan':'tap',x:t[0].clientX,y:t[0].clientY,V:{...V},moved:false,t:Date.now()}},{passive:false});
+  wrap.addEventListener('touchmove',e=>{if(!T)return;const t=e.touches,r=svg.getBoundingClientRect();
+    if(T.m==='pinch'&&t.length===2){e.preventDefault();const d=Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY),cx=(t[0].clientX+t[1].clientX)/2,cy=(t[0].clientY+t[1].clientY)/2;
+      V={...T.V};zoomAt(T.cx,T.cy,d/T.d);V.x-=(cx-T.cx)/r.width*V.w;V.y-=(cy-T.cy)/r.height*V.h;apply();ZP_BLOCK=Date.now()+600}
+    else if(t.length===1&&T.m!=='pinch'){if(T.m==='pan')e.preventDefault();const dx=t[0].clientX-T.x,dy=t[0].clientY-T.y;if(!T.moved&&Math.hypot(dx,dy)<8)return;T.moved=true;
+      if(T.m==='pan'){V.x=T.V.x-dx/r.width*V.w;V.y=T.V.y-dy/r.height*V.h;apply();ZP_BLOCK=Date.now()+450}}},{passive:false});
+  wrap.addEventListener('touchend',e=>{if(!T)return;
+    if(e.touches.length===1&&T.m==='pinch'){T={m:'pan',x:e.touches[0].clientX,y:e.touches[0].clientY,V:{...V},moved:true};return}
+    if(e.touches.length===0){if(T.m!=='pinch'&&!T.moved&&Date.now()-T.t<300&&!e.target.closest('.zbtns')){const now=Date.now(),L=LAST_TAP;
+        if(L.k===key&&now-L.t<350&&Math.hypot(T.x-L.x,T.y-L.y)<40){e.preventDefault();zoomAt(T.x,T.y,2);ZP_BLOCK=now+500;LAST_TAP={t:0,x:0,y:0,k:''}}else LAST_TAP={t:now,x:T.x,y:T.y,k:key}}
+      T=null}},{passive:false});
+  ['gesturestart','gesturechange'].forEach(ev=>wrap.addEventListener(ev,e=>e.preventDefault()));
+  wrap.addEventListener('wheel',e=>{if(!e.ctrlKey&&!e.metaKey&&B.w/V.w<=1.02)return;e.preventDefault();zoomAt(e.clientX,e.clientY,Math.exp(-e.deltaY*(e.ctrlKey?.01:.002)))},{passive:false});
+  let M=null;
+  wrap.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||B.w/V.w<=1.02||e.target.closest('.zbtns'))return;M={x:e.clientX,y:e.clientY,V:{...V},moved:false,id:e.pointerId}});
+  wrap.addEventListener('pointermove',e=>{if(!M)return;const r=svg.getBoundingClientRect(),dx=e.clientX-M.x,dy=e.clientY-M.y;if(!M.moved&&Math.hypot(dx,dy)<5)return;if(!M.moved)try{wrap.setPointerCapture(M.id)}catch(x){}M.moved=true;V.x=M.V.x-dx/r.width*V.w;V.y=M.V.y-dy/r.height*V.h;apply();ZP_BLOCK=Date.now()+300});
+  ['pointerup','pointercancel'].forEach(ev=>wrap.addEventListener(ev,()=>{M=null}));
+  wrap.addEventListener('dblclick',e=>{if(e.target.closest('.zbtns'))return;e.preventDefault();zoomAt(e.clientX,e.clientY,2)});
+  ZC[key]={in:()=>center(1.8),out:()=>center(1/1.8),reset:()=>{V={...B};apply()}};
+  apply()}
+function zoomAll(sel,prefix){app.querySelectorAll(sel).forEach((m,i)=>wrapZoom(m,`${prefix}-${i}`))}
+
+/* ================= Allgemeinwissen ================= */
+/* Eintrag: [Bild, Frage, richtige Antwort, [falsche Antworten], Erklärung] */
+const WI={
+ zeit:[
+  ['📅','Wie viele Tage hat ein Jahr?','365',['100','52','12'],'Die Erde braucht 365 Tage für eine Runde um die Sonne. Alle vier Jahre gibt es ein Schaltjahr mit 366 Tagen.'],
+  ['📅','Wie viele Monate haben 31 Tage?','7',['5','6','12'],'Januar, März, Mai, Juli, August, Oktober und Dezember haben 31 Tage. Tipp: Zähl an den Fingerknöcheln ab – Knöchel haben 31 Tage, Lücken weniger.'],
+  ['🗓️','Wie viele Tage hat der Februar in einem Schaltjahr?','29',['28','30','31'],'Normalerweise hat der Februar 28 Tage. Im Schaltjahr bekommt er einen Tag dazu, also 29.'],
+  ['⏳','Wie viele Jahre sind ein Jahrhundert?','100',['10','1000','50'],'„Hundert“ steckt schon im Wort: Ein Jahrhundert sind 100 Jahre. Ein Jahrzehnt sind 10 Jahre, ein Jahrtausend 1000 Jahre.'],
+  ['⏳','Wie viele Jahre sind ein Jahrzehnt?','10',['100','12','1000'],'Ein Jahrzehnt sind 10 Jahre. „Zehn“ steckt im Wort.'],
+  ['⏱️','Wie viele Sekunden hat eine Minute?','60',['100','10','30'],'Eine Minute hat 60 Sekunden. Der Sekundenzeiger braucht genau 60 Sekunden für eine Runde.'],
+  ['🌍','Wie viele Stunden hat ein Tag?','24',['12','60','10'],'In 24 Stunden dreht sich die Erde einmal um sich selbst. Der kurze Uhrzeiger läuft dabei zweimal herum.'],
+  ['🍂','Wie viele Jahreszeiten gibt es bei uns?','4',['2','3','12'],'Frühling, Sommer, Herbst und Winter. Jede Jahreszeit dauert ungefähr drei Monate.'],
+  ['🎄','An welchem Tag ist Heiligabend?','24. Dezember',['6. Dezember','31. Dezember','1. Januar'],'Heiligabend ist am 24. Dezember. Am 6. Dezember ist Nikolaus, am 31. Dezember Silvester.'],
+  ['🇩🇪','Welcher Tag ist der Tag der Deutschen Einheit?','3. Oktober',['1. Mai','24. Dezember','1. Januar'],'Am 3. Oktober 1990 wurden West- und Ostdeutschland wieder ein Land. Darum ist an diesem Tag ein Feiertag.']],
+ tiere:[
+  ['🐋','Welches ist das größte Tier der Welt?','Blauwal',['Elefant','Giraffe','Hai'],'Der Blauwal wird bis zu 30 Meter lang. Er ist das größte Tier, das es je gab – größer als jeder Dinosaurier.'],
+  ['🐆','Welches ist das schnellste Landtier?','Gepard',['Löwe','Pferd','Hase'],'Der Gepard schafft kurz bis zu etwa 100 Kilometer pro Stunde. So schnell wie ein Auto auf der Landstraße!'],
+  ['🦒','Welches Tier ist am höchsten?','Giraffe',['Elefant','Kamel','Pferd'],'Eine Giraffe wird bis zu 5 Meter hoch. So kommt sie an die Blätter oben in den Bäumen.'],
+  ['🐘','Welches ist das größte Tier an Land?','Afrikanischer Elefant',['Nashorn','Nilpferd','Giraffe'],'Ein afrikanischer Elefant kann so viel wiegen wie sechs Autos.'],
+  ['🦤','Welcher Vogel ist der größte der Welt?','Strauß',['Adler','Pinguin','Storch'],'Der Strauß ist der größte Vogel. Er kann nicht fliegen, aber sehr schnell rennen.'],
+  ['🦅','Welcher Vogel ist im Sturzflug am schnellsten?','Wanderfalke',['Spatz','Taube','Papagei'],'Der Wanderfalke stürzt sich mit über 300 Kilometern pro Stunde auf seine Beute. Kein Tier ist schneller.'],
+  ['🦇','Welches Säugetier kann fliegen?','Fledermaus',['Eichhörnchen','Igel','Maus'],'Die Fledermaus ist das einzige Säugetier, das richtig fliegen kann. Sie orientiert sich nachts mit Ultraschall.'],
+  ['🐳','Ist ein Wal ein Fisch?','Nein, ein Säugetier',['Ja, ein Fisch','Ja, ein Reptil','Nein, ein Vogel'],'Wale atmen Luft mit einer Lunge und die Jungen trinken Milch. Darum sind sie Säugetiere, keine Fische.'],
+  ['🐸','Was wird aus einer Kaulquappe?','ein Frosch',['ein Fisch','ein Käfer','eine Schlange'],'Aus dem Froschlaich schlüpfen Kaulquappen. Sie bekommen Beine, verlieren den Schwanz und werden zu Fröschen.'],
+  ['🐻','Welches Tier hält Winterschlaf?','Igel',['Fuchs','Reh','Amsel'],'Der Igel schläft im Winter in einem Laubhaufen. Fuchs und Reh bleiben wach.'],
+  ['🦕','Wann sind die Dinosaurier ausgestorben?','vor etwa 66 Millionen Jahren',['vor etwa 100 Jahren','vor etwa 2000 Jahren','sie leben noch'],'Wahrscheinlich ist damals ein riesiger Brocken aus dem Weltall auf die Erde gestürzt. Die Vögel sind übrigens Nachfahren der Dinosaurier.']],
+ natur:[
+  ['🔊','Wie schnell ist der Schall in der Luft ungefähr?','etwa 340 Meter pro Sekunde',['etwa 3 Meter pro Sekunde','etwa 34 Kilometer pro Sekunde','so schnell wie das Licht'],'Schall braucht für 1 Kilometer ungefähr 3 Sekunden. Das ist schneller als ein Flugzeug, aber viel langsamer als Licht.'],
+  ['⚡','Warum sieht man den Blitz, bevor man den Donner hört?','Licht ist schneller als Schall',['Der Donner kommt später','Die Augen sind besser als die Ohren','Der Blitz ist näher'],'Blitz und Donner entstehen gleichzeitig. Das Licht ist aber fast sofort bei uns, der Schall braucht für jeden Kilometer etwa 3 Sekunden.'],
+  ['💡','Was ist schneller: Licht oder Schall?','Licht',['Schall','Beide gleich','Kommt aufs Wetter an'],'Licht ist das Schnellste überhaupt: etwa 300.000 Kilometer in einer Sekunde. In einer Sekunde könnte es siebenmal um die Erde sausen.'],
+  ['🌊','Wo ist Schall schneller: im Wasser oder in der Luft?','im Wasser',['in der Luft','überall gleich','im Weltall'],'Im Wasser ist Schall etwa viermal so schnell wie in der Luft. Darum können sich Wale über weite Strecken hören.'],
+  ['🚀','Kann man im Weltall etwas hören?','Nein, dort gibt es keine Luft',['Ja, alles ist lauter','Ja, aber nur leise','Nur Musik'],'Schall braucht Luft, Wasser oder etwas Festes, um sich auszubreiten. Im Weltall ist es darum ganz still.'],
+  ['🧊','Bei wie viel Grad gefriert Wasser zu Eis?','0 Grad',['10 Grad','100 Grad','minus 50 Grad'],'Unter 0 Grad Celsius wird Wasser fest und gefriert zu Eis.'],
+  ['♨️','Bei wie viel Grad kocht Wasser?','100 Grad',['50 Grad','0 Grad','1000 Grad'],'Bei 100 Grad Celsius kocht Wasser und wird zu Wasserdampf.'],
+  ['🧊','Warum schwimmt Eis auf dem Wasser?','Eis ist leichter als gleich viel Wasser',['Eis ist warm','Eis hat Luftballons','Wasser schiebt es hoch, weil es kalt ist'],'Wenn Wasser gefriert, dehnt es sich aus. Ein Eiswürfel ist darum leichter als gleich viel Wasser und schwimmt oben.'],
+  ['🌈','Was braucht man für einen Regenbogen?','Sonnenlicht und Regentropfen',['Wolken und Wind','Mondlicht und Schnee','Nebel und Dunkelheit'],'Die Regentropfen zerlegen das Sonnenlicht in seine Farben. Du siehst ihn, wenn die Sonne hinter dir ist und es vor dir regnet.'],
+  ['🌍','Welche Kraft zieht alles zur Erde hinunter?','die Schwerkraft',['der Wind','der Magnetismus','die Reibung'],'Die Erde zieht alles an. Darum fällt ein Apfel vom Baum nach unten und wir schweben nicht weg.'],
+  ['🌱','Was geben Pflanzen in die Luft ab, das wir zum Atmen brauchen?','Sauerstoff',['Rauch','Wasserdampf','Staub'],'Pflanzen nehmen Kohlendioxid auf und geben mit Hilfe des Sonnenlichts Sauerstoff ab. Ohne Pflanzen könnten wir nicht atmen.'],
+  ['🔌','Welches Material leitet Strom gut?','Metall, zum Beispiel Kupfer',['Holz','Plastik','Gummi'],'In Kabeln steckt Kupfer, weil es Strom gut leitet. Außen ist Plastik, damit man sich nicht verletzt.'],
+  ['☀️','Wie heiß ist es ungefähr an der Oberfläche der Sonne?','etwa 5500 Grad',['etwa 100 Grad','etwa 40 Grad','etwa 1 Million Grad'],'Die Oberfläche der Sonne ist etwa 5500 Grad heiß. Ein Backofen schafft nur etwa 250 Grad.'],
+  ['🌙','Leuchtet der Mond selbst?','Nein, er wird von der Sonne angestrahlt',['Ja, er glüht','Ja, aber nur nachts','Nein, er spiegelt Lampen'],'Der Mond ist ein grauer Stein. Wir sehen ihn, weil die Sonne ihn anstrahlt – wie eine Taschenlampe einen Ball.']],
+ koerper:[
+  ['🦴','Wie viele Knochen hat ein Erwachsener ungefähr?','etwa 200',['etwa 20','etwa 2000','etwa 50'],'Ein Erwachsener hat 206 Knochen. Babys haben sogar fast 300 – viele wachsen später zusammen.'],
+  ['🦷','Wie viele Milchzähne hat ein Kind?','20',['10','32','50'],'Ein Kind hat 20 Milchzähne. Sie fallen nach und nach aus und werden durch die bleibenden Zähne ersetzt. Erwachsene haben bis zu 32 Zähne.'],
+  ['🖐️','Welches ist das größte Organ des Menschen?','die Haut',['das Herz','die Lunge','das Gehirn'],'Die Haut bedeckt den ganzen Körper. Sie schützt uns, fühlt und hält uns warm.'],
+  ['❤️','Wie oft schlägt das Herz eines Kindes in Ruhe ungefähr in einer Minute?','etwa 80- bis 100-mal',['etwa 10-mal','etwa 500-mal','etwa 3-mal'],'Leg zwei Finger an dein Handgelenk oder deinen Hals und zähl eine Minute lang mit. Nach dem Rennen schlägt es noch schneller.'],
+  ['👃','Wie viele Sinne hat der Mensch?','5',['3','7','10'],'Sehen, Hören, Riechen, Schmecken und Tasten. Für jeden Sinn gibt es ein Sinnesorgan: Augen, Ohren, Nase, Zunge und Haut.'],
+  ['🫁','Womit atmen wir?','mit der Lunge',['mit dem Magen','mit dem Herzen','mit der Leber'],'Die Lunge holt Sauerstoff aus der Luft. Das Herz pumpt ihn dann mit dem Blut in den ganzen Körper.'],
+  ['💧','Wie viel von deinem Körper ist Wasser?','mehr als die Hälfte',['fast nichts','ein Zehntel','alles'],'Ungefähr zwei Drittel deines Körpers sind Wasser. Darum musst du jeden Tag genug trinken.'],
+  ['🧠','Womit denken wir?','mit dem Gehirn',['mit dem Herzen','mit dem Bauch','mit den Muskeln'],'Das Gehirn ist die Schaltzentrale. Es steuert alles – auch, dass du atmest, ohne daran zu denken.']],
+ erde:[
+  ['🏔️','Wie heißt der höchste Berg der Welt?','Mount Everest',['Zugspitze','Feldberg','Montblanc'],'Der Mount Everest im Himalaya ist fast 8850 Meter hoch – so hoch, wie Flugzeuge fliegen.'],
+  ['⛰️','Wie heißt der höchste Berg Deutschlands?','Zugspitze',['Feldberg','Brocken','Mount Everest'],'Die Zugspitze in Bayern ist fast 3000 Meter hoch. Der höchste Berg in Baden-Württemberg ist der Feldberg im Schwarzwald.'],
+  ['🌊','Welcher ist der größte Ozean?','Pazifik',['Atlantik','Indischer Ozean','Nordsee'],'Der Pazifik ist größer als alle Kontinente zusammen.'],
+  ['🌏','Welcher ist der größte Kontinent?','Asien',['Afrika','Europa','Australien'],'In Asien liegen zum Beispiel China, Indien und ein großer Teil von Russland. Dort leben mehr als die Hälfte aller Menschen.'],
+  ['🗺️','Welches Land ist das größte der Welt?','Russland',['China','Deutschland','Brasilien'],'Russland reicht von Europa bis nach Asien. Es ist fast 50-mal so groß wie Deutschland.'],
+  ['🐪','Wie heißt die größte heiße Wüste der Welt?','Sahara',['Gobi','Schwarzwald','Alpen'],'Die Sahara liegt im Norden von Afrika. Sie ist ungefähr so groß wie ganz Europa.'],
+  ['🏞️','Welcher Fluss fließt auf der längsten Strecke durch Deutschland?','Rhein',['Neckar','Rems','Elbe'],'Der Rhein fließt etwa 865 Kilometer durch Deutschland – auch an Baden-Württemberg entlang – bis in die Nordsee.'],
+  ['👨‍👩‍👧','Wie viele Menschen leben ungefähr in Deutschland?','über 80 Millionen',['etwa 8 Millionen','etwa 800 Millionen','etwa 8 Milliarden'],'In Deutschland leben über 80 Millionen Menschen. Auf der ganzen Erde sind es etwa 8 Milliarden.'],
+  ['🌍','Wie viele Menschen leben ungefähr auf der Erde?','etwa 8 Milliarden',['etwa 8 Millionen','etwa 80 Millionen','etwa 800'],'Auf der Erde leben etwa 8 Milliarden Menschen. Das ist eine 8 mit neun Nullen.'],
+  ['🇪🇺','Wie viele Länder gehören zur Europäischen Union?','27',['12','50','100'],'27 Länder arbeiten in der EU zusammen. Viele davon bezahlen mit dem Euro, so wie wir.']],
+ geschichte:[
+  ['📖','Wer erfand den Buchdruck mit beweglichen Buchstaben?','Johannes Gutenberg',['Carl Benz','Albert Einstein','Martin Luther'],'Um das Jahr 1450 erfand Gutenberg in Mainz den Buchdruck. Vorher wurden Bücher mit der Hand abgeschrieben.'],
+  ['🚗','Wer baute das erste Auto mit Benzinmotor?','Carl Benz',['Gottlieb Daimler','Karl Drais','Robert Bosch'],'1886 fuhr der Motorwagen von Carl Benz in Mannheim. Fast gleichzeitig baute Gottlieb Daimler in Cannstatt ein Auto.'],
+  ['🏠','In welcher Stadt in der Nähe von Waiblingen wurde der Auto-Erfinder Gottlieb Daimler geboren?','Schorndorf',['Hamburg','Berlin','München'],'Gottlieb Daimler wurde 1834 in Schorndorf im Remstal geboren – ganz in deiner Nähe!'],
+  ['🚲','Wer erfand die Laufmaschine, den Vorläufer des Fahrrads?','Karl Drais',['Carl Benz','Johannes Gutenberg','Isaac Newton'],'1817 fuhr Karl Drais in Mannheim mit seiner Laufmaschine. Man stieß sich mit den Füßen ab – Pedale gab es noch nicht.'],
+  ['🌕','Wer betrat als erster Mensch den Mond?','Neil Armstrong',['Christoph Kolumbus','Albert Einstein','Juri Gagarin'],'Im Juli 1969 setzte Neil Armstrong als erster Mensch seinen Fuß auf den Mond. Juri Gagarin war 1961 der erste Mensch im Weltall.'],
+  ['🏰','Wie nennt man die Zeit der Ritter und Burgen?','Mittelalter',['Steinzeit','Neuzeit','Eiszeit'],'Das Mittelalter dauerte ungefähr 1000 Jahre. Damals gab es Ritter, Burgen und Klöster.'],
+  ['🧱','Welche lange Grenzmauer bauten die Römer auch durch unsere Gegend?','den Limes',['die Chinesische Mauer','die Berliner Mauer','den Hadrianswall'],'Der Limes verlief auch durch den Rems-Murr-Kreis, zum Beispiel bei Welzheim. Dort kann man noch Reste eines Römerkastells sehen.'],
+  ['🧱','Wann fiel die Berliner Mauer?','1989',['1945','2000','1900'],'Die Mauer trennte Berlin und Deutschland in Ost und West. Am 9. November 1989 wurde sie geöffnet. Ein Jahr später war Deutschland wieder vereint.'],
+  ['🔺','In welchem Land stehen die berühmten Pyramiden von Gizeh?','Ägypten',['Italien','China','Mexiko'],'Die alten Ägypter bauten die Pyramiden vor über 4500 Jahren als Grabmäler für ihre Könige, die Pharaonen.'],
+  ['📡','Was war am Stuttgarter Fernsehturm etwas ganz Neues?','Er war der erste Fernsehturm aus Beton',['Er war der höchste Turm der Welt','Er dreht sich','Er ist aus Gold'],'Der Stuttgarter Fernsehturm wurde 1956 fertig. Er war der erste Fernsehturm der Welt aus Stahlbeton und wurde zum Vorbild für viele andere.']],
+ kultur:[
+  ['⚽','Wie viele Spieler hat eine Fußballmannschaft auf dem Feld?','11',['9','7','15'],'Elf Spieler pro Mannschaft, einer davon ist der Torwart.'],
+  ['🏅','Wie viele Ringe hat die Olympia-Flagge?','5',['3','4','7'],'Die fünf Ringe stehen für die fünf Erdteile, aus denen die Sportler kommen.'],
+  ['🏅','Wie oft finden Olympische Sommerspiele statt?','alle 4 Jahre',['jedes Jahr','alle 2 Jahre','alle 10 Jahre'],'Olympische Sommerspiele gibt es alle 4 Jahre. Dazwischen, auch alle 4 Jahre, gibt es die Winterspiele.'],
+  ['🎹','Wie viele Tasten hat ein Klavier?','88',['50','100','24'],'Ein Klavier hat 88 Tasten: 52 weiße und 36 schwarze.'],
+  ['🎸','Wie viele Saiten hat eine Gitarre normalerweise?','6',['4','8','12'],'Eine normale Gitarre hat 6 Saiten. Eine Bassgitarre hat meistens nur 4.'],
+  ['🎼','Welcher berühmte Komponist wurde taub und schrieb trotzdem wunderschöne Musik?','Ludwig van Beethoven',['Wolfgang Amadeus Mozart','Johann Sebastian Bach','Elvis Presley'],'Beethoven wurde in Bonn geboren. Obwohl er nichts mehr hören konnte, komponierte er seine berühmte 9. Sinfonie.'],
+  ['🖼️','Wer malte die Mona Lisa?','Leonardo da Vinci',['Pablo Picasso','Vincent van Gogh','Albrecht Dürer'],'Leonardo da Vinci war Maler und Erfinder. Die Mona Lisa hängt in Paris im Museum Louvre.'],
+  ['🇩🇪','Welche Farben hat die deutsche Flagge?','Schwarz, Rot, Gold',['Rot, Weiß, Blau','Schwarz, Weiß, Rot','Grün, Weiß, Rot'],'Die Streifen sind von oben nach unten: Schwarz, Rot, Gold.'],
+  ['💶','Wie heißt das Geld in Deutschland?','Euro',['Mark','Dollar','Franken'],'Seit 2002 bezahlen wir mit dem Euro. Vorher gab es die D-Mark.'],
+  ['🗣️','Welche Sprache spricht man in Österreich?','Deutsch',['Österreichisch','Italienisch','Französisch'],'In Österreich spricht man Deutsch. Auch in einem großen Teil der Schweiz wird Deutsch gesprochen.']]
+};
+function wiGen(list,konz){return()=>{const[e,q,a,w,why]=pick(list);const opts=shuf([a,...w]);const kk=konz&&(konzeptOf(q)||konzeptOf(q+' '+why));
+  return{kind:'choice',long:1,text:q,visual:picBox(e),options:opts,answer:a,single:opts.some(o=>o.length>16)?1:undefined,
+    steps:[...(kk?[merkStep(kk)]:[]),...why.split(/(?<=[.!?])\s+(?=[A-ZÄÖÜ„🔬])/).map(t=>({t})),{t:`Die Antwort ist: <b>${a}</b>.`}]}}}
+const WIX={
+  gewitter(){const km=R(1,5),s=km*3;
+    return{kind:'num',unit:'km',long:1,text:`Du siehst einen Blitz und zählst bis zum Donner <b>${s} Sekunden</b>. Wie viele Kilometer ist das Gewitter ungefähr entfernt?`,visual:scene('⚡','🌩️','👂'),answer:km,
+      steps:[{t:'Der Donner ist <b>Schall</b>. Schall fliegt ungefähr <b>340 Meter in einer Sekunde</b> durch die Luft.',why:'Das ist so weit wie drei Fußballfelder – in einer einzigen Sekunde.',vis:schallSVG()},
+        {t:'Merkregel: In <b>3 Sekunden</b> schafft der Schall ungefähr <b>1 Kilometer</b>.',why:'3 mal 340 Meter sind 1020 Meter. Das ist ungefähr 1 Kilometer.',vis:gewitterSVG(0)},
+        {t:'Den Blitz siehst du sofort, denn er ist Licht – und Licht ist fast eine Million Mal schneller als Schall.',why:'Die Sekunden, die du zählst, sind also genau die Zeit, die der Donner zu dir unterwegs ist.'},
+        {t:`So rechnest du: ${s} Sekunden : 3 = <b>${km}</b>. Das Gewitter ist ungefähr <b>${km} km</b> weit weg.`,why:km<=3?'Weniger als 10 Sekunden: Das Gewitter ist nah! Geh schnell in ein Haus oder ins Auto.':'Werden die Sekunden weniger, kommt das Gewitter näher.',vis:gewitterSVG(s)}]}},
+  echo(){const m=pick([170,340,510]),s=m*2/340;
+    return{kind:'choice',long:1,text:`Du rufst laut vor einer Felswand, die <b>${m} Meter</b> weit weg ist. Wann hörst du dein Echo?`,visual:scene('🧒','📢','⛰️'),options:['nach etwa 1 Sekunde','nach etwa 2 Sekunden','nach etwa 3 Sekunden','sofort'],answer:`nach etwa ${s} Sekunde${s>1?'n':''}`,single:1,
+      steps:[{t:'Ein Echo ist dein eigener Ruf, der von der Felswand <b>zurückprallt</b> – wie ein Ball von einer Mauer.',why:'Der Schall fliegt ungefähr 340 Meter in einer Sekunde.',vis:schallSVG()},{t:'Der Schall muss zur Felswand <b>hin</b> und wieder <b>zurück</b>.',why:`Das sind ${m} + ${m} = ${2*m} Meter.`},{t:`${2*m} Meter sind also ungefähr <b>${s} Sekunde${s>1?'n':''}</b>.`}]}}
+};
+const WI_FACTS=[
+  ['🔊','Der Schall braucht für einen Kilometer etwa 3 Sekunden. Zähl beim Gewitter die Sekunden zwischen Blitz und Donner und teile durch 3 – dann weißt du, wie weit es weg ist.'],
+  ['🐋','Das Herz eines Blauwals ist so groß wie ein kleines Auto.'],
+  ['🦴','Babys haben fast 300 Knochen, Erwachsene nur 206. Viele Knochen wachsen zusammen.'],
+  ['💡','Licht ist so schnell, dass es in einer Sekunde siebenmal um die Erde sausen könnte.'],
+  ['🐌','Manche Schnecken können bis zu drei Jahre lang schlafen.'],
+  ['🌍','Die Erde dreht sich – am Äquator mit über 1600 Kilometern pro Stunde. Wir merken es nicht, weil wir uns mitdrehen.'],
+  ['🐝','Für ein Glas Honig fliegen Bienen zusammen eine Strecke, die mehrmals um die Erde reicht.'],
+  ['🚗','Der Auto-Erfinder Gottlieb Daimler wurde in Schorndorf geboren – ganz in der Nähe von Waiblingen.'],
+  ['🧱','Durch den Rems-Murr-Kreis lief vor fast 2000 Jahren der Limes, die Grenze des Römischen Reichs.'],
+  ['🌈','Einen Regenbogen siehst du nur, wenn die Sonne hinter dir ist und es vor dir regnet.'],
+  ['🦒','Eine Giraffe hat genauso viele Halswirbel wie du: sieben. Ihre sind nur viel länger.'],
+  ['❄️','Jede Schneeflocke hat sechs Ecken – und keine sieht genau gleich aus wie die andere.'],
+  ['🧠','Dein Gehirn arbeitet auch im Schlaf. Dabei sortiert es, was du am Tag gelernt hast.'],
+  ['🌙','Auf dem Mond sind die Fußspuren der Astronauten noch da. Dort gibt es keinen Wind, der sie verweht.'],
+  ['🐙','Ein Tintenfisch hat drei Herzen und blaues Blut.'],
+  ['🎹','Ein Klavier hat 88 Tasten: 52 weiße und 36 schwarze.'],
+  ['📡','Der Stuttgarter Fernsehturm war der erste Fernsehturm der Welt aus Beton.'],
+  ['🐘','Elefanten können mit ihren Füßen Geräusche von anderen Elefanten spüren, die kilometerweit weg sind.'],
+  ['💧','Ungefähr zwei Drittel deines Körpers sind Wasser.'],
+  ['🦅','Der Wanderfalke ist im Sturzflug schneller als ein ICE: über 300 Kilometer pro Stunde.']];
+function factCard(){const f=WI_FACTS[(today()+store.active*7)%WI_FACTS.length];
+  return`<div class="factcard"><span class="fe">${f[0]}</span><div class="ft"><b>Wusstest du schon?</b><br>${f[1]}</div><button class="speak sq" data-act="factSay" aria-label="Vorlesen">${SPK}</button></div>`}
+
+/* ---------- Physik für Klasse 3 und 4 (mit Experimenten zum Ausprobieren) ---------- */
+WI.physik3=[
+  ['🍎','Wie heißt die Kraft, mit der die Erde alles zu sich zieht?','Schwerkraft oder Gravitation',['Magnetkraft','Windkraft','Muskelkraft'],'Die Erde ist riesig und schwer. Darum zieht sie alles zu ihrer Mitte hin – den Apfel vom Baum und dich auf den Boden.'],
+  ['🗣️','Wie entsteht Schall?','wenn etwas schwingt',['wenn es hell wird','wenn es kalt wird','wenn etwas leuchtet'],'Trommel, Gitarrensaite oder Stimmbänder zittern ganz schnell hin und her. 🔬 Leg die Hand an deinen Hals und summe!'],
+  ['⏱️','Wie weit kommt der Schall ungefähr in 3 Sekunden?','etwa 1 Kilometer',['etwa 3 Meter','etwa 100 Kilometer','etwa 300.000 Kilometer'],'Schall fliegt ungefähr 340 Meter in einer Sekunde. 3 mal 340 Meter sind ungefähr 1000 Meter, also 1 Kilometer.'],
+  ['🧲','Was zieht ein Magnet an?','eine Büroklammer aus Eisen',['ein Holzklötzchen','einen Radiergummi','eine Glasmurmel'],'Magnete ziehen Dinge aus Eisen an, außerdem Nickel und Cobalt. 🔬 Probier es aus: Halte einen Magneten an die Sachen in deinem Mäppchen.'],
+  ['🧲','Was passiert, wenn zwei gleiche Magnetpole (Nord und Nord) zusammenkommen?','Sie stoßen sich ab',['Sie ziehen sich an','Gar nichts','Sie werden warm'],'Gleiche Pole stoßen sich ab, verschiedene Pole (Nord und Süd) ziehen sich an. 🔬 Probier es mit zwei Magneten aus – du spürst richtig, wie sie sich wegdrücken.'],
+  ['🧭','Wohin zeigt die Nadel eines Kompasses?','nach Norden',['nach Süden','zur Sonne','zum nächsten Haus'],'Die Kompassnadel ist ein kleiner Magnet. Die Erde ist wie ein riesiger Magnet und dreht die Nadel nach Norden.'],
+  ['💡','Wann leuchtet eine Lampe an der Batterie?','Wenn der Stromkreis geschlossen ist',['Wenn nur ein Kabel dran ist','Wenn die Batterie im Kühlschrank war','Immer'],'Der Strom muss im Kreis fließen: von der Batterie durch das Kabel zur Lampe und wieder zurück. Ist der Kreis unterbrochen, bleibt die Lampe dunkel.'],
+  ['🔘','Was macht ein Lichtschalter?','Er öffnet und schließt den Stromkreis',['Er macht Strom','Er speichert Licht','Er kühlt die Lampe'],'Schalter an: Der Kreis ist geschlossen, Strom fließt. Schalter aus: Der Kreis ist offen, die Lampe geht aus.'],
+  ['⚠️','Warum darf man niemals an einer Steckdose spielen?','Der Strom dort ist lebensgefährlich',['Sie geht kaputt','Sie wird schmutzig','Das ist nur verboten, aber nicht gefährlich'],'Aus der Steckdose kommen 230 Volt – das kann tödlich sein. Eine kleine Batterie hat nur 1,5 Volt, damit darfst du experimentieren.'],
+  ['🌞','Wann ist dein Schatten am kürzesten?','Mittags, wenn die Sonne hoch steht',['Morgens','Abends','Nachts'],'Steht die Sonne hoch am Himmel, fällt das Licht fast von oben – der Schatten ist kurz. Morgens und abends steht sie tief, dann wird der Schatten lang.'],
+  ['🔦','Wie entsteht ein Schatten?','Etwas hält das Licht auf',['Das Licht wird schwarz','Die Lampe ist kaputt','Die Luft wird dunkel'],'Licht geht geradeaus. Wo ein Gegenstand im Weg ist, kommt kein Licht hin – dort ist der Schatten. 🔬 Mach mit der Taschenlampe Schattentiere an der Wand!'],
+  ['🪞','Was macht ein Spiegel mit dem Licht?','Er wirft es zurück',['Er schluckt es','Er macht es bunt','Er macht es wärmer'],'Ein Spiegel ist ganz glatt und wirft das Licht zurück. Darum siehst du dich darin.'],
+  ['🥛','Ist ein „leeres“ Glas wirklich leer?','Nein, es ist Luft darin',['Ja, ganz leer','Nein, Wasser','Nein, Licht'],'Luft nimmt Platz ein, auch wenn man sie nicht sieht. 🔬 Stopf ein Taschentuch in ein Glas und drück es umgedreht unter Wasser: Das Taschentuch bleibt trocken!'],
+  ['🎈','Warum steigt ein Heißluftballon nach oben?','Warme Luft steigt nach oben',['Der Wind schiebt ihn','Er ist magnetisch','Er hat einen Motor nach oben'],'Warme Luft ist leichter als kalte Luft und steigt nach oben. Darum ist es oben im Zimmer auch wärmer als am Boden.'],
+  ['👕','Welches T-Shirt wird in der Sonne am heißesten?','das schwarze',['das weiße','das gelbe','alle gleich'],'Dunkle Farben schlucken das Sonnenlicht und werden warm. Helle Farben werfen es zurück. Darum trägt man im Sommer gern helle Kleidung.'],
+  ['🌡️','Was misst ein Thermometer?','die Temperatur',['die Länge','das Gewicht','die Zeit'],'Mit dem Thermometer misst man, wie warm oder kalt etwas ist – in Grad Celsius.'],
+  ['🔍','Was macht eine Lupe?','Sie lässt Dinge größer aussehen',['Sie macht Dinge leichter','Sie macht Licht','Sie misst die Größe'],'Das gewölbte Glas der Lupe lenkt das Licht so um, dass kleine Dinge größer aussehen. 🔬 Ein Wassertropfen auf einer Folie wirkt auch wie eine Lupe!'],
+  ['☀️','Wohin verschwindet das Wasser einer Pfütze, wenn die Sonne scheint?','Es verdunstet in die Luft',['Es versickert immer','Die Sonne trinkt es','Es wird zu Eis'],'Die Wärme verwandelt das Wasser in unsichtbaren Wasserdampf. Er steigt in die Luft und bildet später Wolken.']];
+WI.physik4=[
+  ['🌏','Warum fallen die Menschen in Australien nicht von der Erde herunter?','Die Erde zieht alles zu ihrer Mitte hin',['Sie haben Klebeschuhe','Dort gibt es mehr Luft','Australien liegt oben'],'Die Schwerkraft zieht alles zur Erdmitte. „Unten“ ist für alle Menschen die Erde unter ihren Füßen – egal, wo auf der Kugel sie wohnen.'],
+  ['🌙','Wie hoch könntest du auf dem Mond ungefähr springen?','etwa sechsmal so hoch wie auf der Erde',['gar nicht','genauso hoch','bis ins Weltall'],'Der Mond ist kleiner und zieht schwächer an. Dort wiegst du nur ein Sechstel so viel wie auf der Erde.'],
+  ['🌍','Warum fliegt der Mond nicht einfach ins Weltall davon?','Die Erde hält ihn mit ihrer Schwerkraft fest',['Er ist angebunden','Er ist zu schwer zum Fliegen','Der Wind schiebt ihn zurück'],'Die Schwerkraft der Erde hält den Mond auf seiner Bahn – wie ein Ball an einer unsichtbaren Schnur, den du im Kreis schleuderst.'],
+  ['⚖️','Papa und du sitzt auf einer Wippe. Wer muss näher an die Mitte, damit sie im Gleichgewicht ist?','der Schwerere',['der Leichtere','beide ganz außen','egal'],'Auf der Wippe zählt Gewicht mal Abstand. Der Schwerere muss näher an die Mitte, der Leichtere weiter nach außen.'],
+  ['🪨','Warum kann man mit einer langen Stange einen schweren Stein leichter anheben?','Ein langer Hebel braucht weniger Kraft',['Die Stange ist magnetisch','Der Stein wird leichter','Die Stange ist schwer'],'Das ist das Hebelgesetz: Je länger der Hebel, desto weniger Kraft brauchst du. Das wusste schon Archimedes vor über 2000 Jahren.'],
+  ['🏗️','Wozu benutzt man einen Flaschenzug?','um schwere Lasten mit weniger Kraft zu heben',['um Flaschen zu öffnen','um schneller zu laufen','um Strom zu machen'],'Beim Flaschenzug laufen Seile über mehrere Rollen. Man muss länger ziehen, braucht aber viel weniger Kraft.'],
+  ['⛸️','Warum rutscht man auf Eis so leicht aus?','Auf Eis gibt es sehr wenig Reibung',['Eis ist magnetisch','Eis ist schief','Die Schuhe sind zu leicht'],'Reibung bremst. Auf glattem Eis gibt es kaum Reibung, darum rutscht man. Streusand macht die Reibung wieder größer.'],
+  ['👟','Warum haben Schuhe ein Profil mit Rillen?','damit sie mehr Reibung haben und man nicht ausrutscht',['damit sie leichter sind','damit Wasser hineinkommt','nur zum Schmuck'],'Die Rillen greifen in den Boden und sorgen für Reibung. Auch Autoreifen haben deshalb ein Profil.'],
+  ['🪶','Was fällt schneller zu Boden: eine Feder oder ein Stein?','der Stein, weil die Luft die Feder bremst',['die Feder','beide gleich schnell, immer','keins von beiden'],'Die Luft bremst die leichte, breite Feder. Ohne Luft fallen beide gleich schnell – das hat ein Astronaut 1971 auf dem Mond mit Hammer und Feder gezeigt!'],
+  ['💧','In welchen drei Formen gibt es Wasser?','fest, flüssig und gasförmig',['nass, trocken und feucht','hart, weich und warm','blau, weiß und grau'],'Eis ist fest, Wasser ist flüssig und Wasserdampf ist gasförmig. Man nennt das die drei Aggregatzustände.'],
+  ['🧈','Was passiert beim Schmelzen?','Etwas Festes wird flüssig',['Etwas Flüssiges wird fest','Etwas wird zu Gas','Etwas wird kleiner'],'Wärme lässt Festes schmelzen: Eis wird zu Wasser, Butter in der Pfanne wird flüssig. Beim Erstarren ist es umgekehrt.'],
+  ['🚿','Warum beschlägt der Badezimmerspiegel nach dem Duschen?','Wasserdampf wird am kalten Spiegel wieder zu Wasser',['Der Spiegel schwitzt','Seife fliegt durch die Luft','Der Spiegel wird nass gespritzt'],'Heißes Duschwasser verdunstet. Trifft der Dampf auf den kalten Spiegel, wird er wieder zu winzigen Wassertropfen. Das heißt Kondensieren.'],
+  ['🌉','Warum haben große Brücken kleine Lücken (Dehnungsfugen)?','Weil sich das Material bei Wärme ausdehnt',['Damit Regen abläuft','Zum Sparen','Damit es klappert'],'Wird es warm, dehnen sich Stahl und Beton ein kleines bisschen aus. Ohne Lücken würde die Brücke im Sommer Risse bekommen.'],
+  ['🥄','Welcher Löffel wird im heißen Tee schneller heiß?','der Metalllöffel',['der Holzlöffel','der Plastiklöffel','alle gleich schnell'],'Metall leitet Wärme sehr gut, Holz und Plastik kaum. Darum haben Kochtöpfe oft Griffe aus Kunststoff.'],
+  ['🎸','Was gibt einen höheren Ton: eine kurze, gespannte Saite oder eine lange, lockere?','die kurze, gespannte Saite',['die lange, lockere','beide gleich','keine gibt einen Ton'],'Schall entsteht durch Schwingungen. Kurze, straffe Saiten schwingen schneller – das klingt höher. 🔬 Spann ein Gummiband und zupf es mal locker, mal straff.'],
+  ['🌬️','Woher bekommt ein Windrad seine Energie?','vom Wind',['von der Sonne direkt','aus der Steckdose','von Benzin'],'Der Wind dreht die Flügel. Ein Generator im Windrad macht daraus Strom.'],
+  ['🔆','Was macht eine Solarzelle?','Sie macht aus Sonnenlicht Strom',['Sie macht Wärme aus Strom','Sie speichert Wasser','Sie macht Wind'],'Solarzellen auf dem Dach verwandeln Sonnenlicht direkt in Strom.'],
+  ['🌈','Woraus besteht weißes Sonnenlicht?','aus allen Regenbogenfarben',['nur aus Gelb','aus Schwarz und Weiß','aus gar keiner Farbe'],'Weißes Licht ist eine Mischung aus allen Farben. Ein Prisma oder Regentropfen zerlegt es wieder in die Regenbogenfarben.']];
+const SINK=[['🍾','eine Korkenscheibe','schwimmt','Kork ist voller winziger Luftbläschen und sehr leicht.'],['🔩','ein Eisennagel','sinkt','Eisen ist schwerer als gleich viel Wasser.'],['🪵','ein Holzklotz','schwimmt','Holz ist leichter als gleich viel Wasser.'],['🪨','ein Stein','sinkt','Ein Stein ist viel schwerer als gleich viel Wasser.'],
+  ['🍎','ein Apfel','schwimmt','Im Apfel steckt viel Luft zwischen den Zellen.'],['🪙','eine Münze','sinkt','Metall ist schwerer als gleich viel Wasser.'],['🦆','eine Plastikente','schwimmt','Sie ist innen hohl und voller Luft.'],['🔑','ein Schlüssel','sinkt','Der Schlüssel ist aus Metall.'],
+  ['🧊','ein Eiswürfel','schwimmt','Eis ist etwas leichter als gleich viel Wasser.'],['🔮','eine Glasmurmel','sinkt','Glas ist schwerer als gleich viel Wasser.'],['🍶','eine leere, verschlossene Flasche','schwimmt','Die eingeschlossene Luft trägt sie.'],['🟤','eine Kugel aus Knete','sinkt','Als Kugel sinkt Knete. 🔬 Forme sie aber zu einem Schiffchen – dann schwimmt sie, weil sie mehr Wasser zur Seite drückt!']];
+const AGG=[['🪨','ein Stein','fest'],['🧃','Apfelsaft','flüssig'],['♨️','Wasserdampf','gasförmig'],['🥛','Milch','flüssig'],['🧊','ein Eiswürfel','fest'],['🌬️','die Luft','gasförmig'],['🫒','Speiseöl','flüssig'],['🪵','ein Stück Holz','fest'],['🎈','das Gas in einem Luftballon','gasförmig'],['🥄','ein Löffel','fest']];
+const WIPPE=[[30,2,60,1],[20,3,60,1],[20,2,40,1],[25,2,50,1],[30,3,90,1],[20,3,30,2],[30,2,20,3],[40,2,80,1],[45,2,90,1],[30,3,45,2]];
+function wippeSVG(w1,d1,w2,d2){const u=46,cx=180,y=104;let g=`<path d="M${cx} ${y+6} l-22 38 h44z" fill="#7A8AA3"/><rect x="${cx-3*u-16}" y="${y-6}" width="${6*u+32}" height="12" rx="6" fill="#C98A4B"/>`;
+  for(let i=1;i<=3;i++)[-1,1].forEach(s=>{g+=`<line x1="${cx+s*i*u}" y1="${y+7}" x2="${cx+s*i*u}" y2="${y+16}" stroke="var(--muted)" stroke-width="2"/><text x="${cx+s*i*u}" y="${y+34}" class="wl">${i} m</text>`});
+  const P=(x,e,w)=>`<text x="${x}" y="${y-12}" font-size="40" text-anchor="middle">${e}</text><text x="${x}" y="${y-58}" class="wk">${w} kg</text>`;
+  g+=P(cx-d1*u,w1<w2?'🧒':'🧔',w1);
+  g+=d2?P(cx+d2*u,w2>w1?'🧔':'👧',w2):`<text x="${cx+2*u}" y="${y-20}" font-size="40" text-anchor="middle" class="wq">?</text><text x="${cx+2*u}" y="${y-62}" class="wk">${w2} kg</text>`;
+  return`<div class="fig"><svg viewBox="16 20 328 128" style="width:100%;max-width:420px" role="img" aria-label="Wippe">${g}</svg></div>`}
+Object.assign(WIX,{
+  schwimmt(){const[e,n,a,why]=pick(SINK);return{kind:'choice',text:`Du legst ${n} ins Wasser. Was passiert?`,visual:scene(e,'🌊'),options:['schwimmt','sinkt'],answer:a,single:1,
+    steps:[{t:'Ob etwas schwimmt, hängt nicht nur vom Gewicht ab. Wichtig ist: Ist es schwerer oder leichter als <b>gleich viel Wasser</b>?',why:'Ein riesiges Holzschiff schwimmt, ein kleiner Nagel sinkt.'},{t:why},{t:`${n.charAt(0).toUpperCase()+n.slice(1)} <b>${a}</b>. 🔬 Probier es in der Badewanne aus!`}]}},
+  aggregat(){const[e,n,a]=pick(AGG);return{kind:'choice',text:`Ist ${n} fest, flüssig oder gasförmig?`,visual:picBox(e),options:['fest','flüssig','gasförmig'],answer:a,single:1,
+    steps:[{t:'<b>Fest</b>: hat eine eigene Form. <b>Flüssig</b>: fließt und passt sich dem Gefäß an. <b>Gasförmig</b>: verteilt sich überall in der Luft.',why:'Diese drei Formen heißen Aggregatzustände.'},{t:`${n.charAt(0).toUpperCase()+n.slice(1)} ist <b>${a}</b>.`}]}},
+  wippe(){const[w1,d1,w2,d2]=pick(WIPPE),pr=w1*d1;const who=w2>w1?'Papa':'deine kleine Schwester';
+    return{kind:'num',unit:'m',long:1,text:`Du wiegst ${w1} kg und sitzt ${d1} m von der Mitte der Wippe entfernt. ${who.charAt(0).toUpperCase()+who.slice(1)} wiegt ${w2} kg. Wie weit von der Mitte muss ${w2>w1?'er':'sie'} sitzen, damit die Wippe gerade ist?`,visual:wippeSVG(w1,d1,w2,0),answer:d2,
+      steps:[{t:'Hebelgesetz: <b>Gewicht · Abstand</b> muss auf beiden Seiten gleich groß sein.',why:'Wer schwerer ist, muss näher an die Mitte. Wer leichter ist, weiter nach außen.'},
+        {t:`Deine Seite: ${w1} · ${d1} = <b>${pr}</b>`},
+        {t:`Andere Seite: ${w2} · ? = ${pr} → ${pr} : ${w2} = <b>${d2}</b>`,why:'Das ist eine Umkehraufgabe vom Malnehmen.'},
+        {t:`${who.charAt(0).toUpperCase()+who.slice(1)} muss <b>${d2} m</b> von der Mitte entfernt sitzen.`,vis:wippeSVG(w1,d1,w2,d2)}]}}
+});
+
+/* ================= Wissen: kindgerechte Erklärungen (Konzepte) ================= */
+const SVGW=(vb,g,lab)=>`<div class="fig"><svg viewBox="${vb}" style="width:100%;max-width:420px" role="img" aria-label="${lab||'Bild'}">${g}</svg></div>`;
+function schallSVG(){let a='';for(let i=1;i<=5;i++)a+=`<path d="M${74+i*36} 38 q16 44 0 88" fill="none" stroke="var(--c-wi)" stroke-width="5" stroke-linecap="round" opacity="${(1-i*.14).toFixed(2)}"/>`;
+  let d='';for(let i=0;i<9;i++)d+=`<circle cx="${96+i*22}" cy="148" r="${i%3===0?6:4.5}" fill="var(--muted)" opacity=".6"/>`;
+  return SVGW('0 0 360 190',`<text x="44" y="100" font-size="54" text-anchor="middle">🥁</text>${a}<text x="318" y="102" font-size="50" text-anchor="middle">👂</text>${d}<text x="180" y="182" class="wk">ungefähr 340 Meter in 1 Sekunde</text>`,'Schall wandert von der Trommel zum Ohr')}
+function gewitterSVG(sec){const km=sec?Math.round(sec/3):0,N=Math.max(3,km),u=270/N,x0=60;
+  let g=`<text x="${x0}" y="56" font-size="42" text-anchor="middle">⛈️</text><line x1="${x0}" y1="80" x2="${x0+N*u}" y2="80" stroke="var(--muted)" stroke-width="3"/>`;
+  for(let i=0;i<=N;i++)g+=`<line x1="${x0+i*u}" y1="71" x2="${x0+i*u}" y2="89" stroke="var(--muted)" stroke-width="3"/><text x="${x0+i*u}" y="112" class="wk">${i} km</text><text x="${x0+i*u}" y="134" class="wl">${i*3} Sek.</text>`;
+  if(km)g+=`<text x="${x0+km*u}" y="58" font-size="36" text-anchor="middle">🧒</text><path d="M${x0+22} 40 Q${x0+km*u/2} 8 ${x0+km*u-20} 40" fill="none" stroke="var(--c-wi)" stroke-width="3" stroke-dasharray="6 5"/>`;
+  return SVGW('0 0 380 146',g,'Pro Kilometer 3 Sekunden')}
+function lichtSVG(){let g=`<rect x="250" y="16" width="16" height="150" rx="4" fill="var(--line)"/><text x="40" y="104" font-size="44" text-anchor="middle">🔦</text>`;
+  [-36,-18,0,18,36].forEach(dy=>{const hit=Math.abs(dy)<=18;g+=`<line x1="66" y1="92" x2="${hit?150:250}" y2="${hit?92+dy*.55:92+dy*2.1}" stroke="#F5B700" stroke-width="3" stroke-linecap="round"/>`});
+  g+=`<text x="160" y="104" font-size="40" text-anchor="middle">🧸</text><path d="M250 54 L250 130 L266 130 L266 54Z" fill="#2B2B3A" opacity=".75"/><text x="300" y="96" class="wl" text-anchor="middle">Schatten</text>`;
+  return SVGW('0 0 340 176',g,'Licht geht geradeaus, dahinter ist Schatten')}
+function gravSVG(){const cx=180,cy=126,r=64;let g=`<defs><marker id="gah" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#E0474C"/></marker></defs><circle cx="${cx}" cy="${cy}" r="${r}" fill="#3C8DDE"/><path d="M${cx-42} ${cy-28} q26 -22 46 4 q-4 30 -34 30z" fill="#56B45A"/><path d="M${cx+8} ${cy+14} q32 -6 42 20 q-14 26 -36 16z" fill="#4CA34F"/><circle cx="${cx}" cy="${cy}" r="4" fill="#fff"/>`;
+  [0,90,180,270].forEach(a=>{const t=a*Math.PI/180,x=cx+Math.sin(t)*(r+16),y=cy-Math.cos(t)*(r+16);g+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="28" text-anchor="middle" dominant-baseline="central" transform="rotate(${a} ${x.toFixed(1)} ${y.toFixed(1)})">🧍</text>`});
+  [45,135,225,315].forEach(a=>{const t=a*Math.PI/180,p=k=>[(cx+Math.sin(t)*(r+k)).toFixed(1),(cy-Math.cos(t)*(r+k)).toFixed(1)];const[x1,y1]=p(48),[x2,y2]=p(10);g+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#E0474C" stroke-width="3" marker-end="url(#gah)"/>`});
+  return SVGW('0 0 360 252',g,'Die Erde zieht alles zu ihrer Mitte')}
+function teilchenSVG(){const box=(x,lab,pts,c)=>`<rect x="${x}" y="14" width="104" height="104" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="3"/>${pts.map(([a,b])=>`<circle cx="${x+a}" cy="${14+b}" r="7" fill="${c}"/>`).join('')}<text x="${x+52}" y="142" class="wk">${lab}</text>`;
+  const fest=[];for(let i=0;i<4;i++)for(let j=0;j<4;j++)fest.push([22+i*20,22+j*20]);
+  const fl=[[16,92],[34,86],[52,94],[70,88],[88,93],[24,72],[44,68],[63,74],[82,70],[34,52],[56,54],[76,50]];
+  const gas=[[20,24],[72,18],[50,52],[86,64],[18,84],[60,92]];
+  return SVGW('0 0 360 150',box(6,'fest',fest,'#4C86F0')+box(128,'flüssig',fl,'#27B363')+box(250,'gasförmig',gas,'#E0598B'),'Teilchen in fest, flüssig und gasförmig')}
+function magnetSVG(){const bar=(x,y,l,r)=>`<rect x="${x}" y="${y}" width="56" height="30" fill="${l==='N'?'#E0474C':'#2E9B4F'}"/><rect x="${x+56}" y="${y}" width="56" height="30" fill="${r==='N'?'#E0474C':'#2E9B4F'}"/><text x="${x+28}" y="${y+21}" class="mgl">${l}</text><text x="${x+84}" y="${y+21}" class="mgl">${r}</text>`;
+  return SVGW('0 0 360 170',`${bar(10,20,'N','S')}${bar(238,20,'N','S')}<text x="180" y="42" class="wk">→ ziehen an ←</text>${bar(10,104,'N','S')}${bar(238,104,'S','N')}<text x="180" y="126" class="wk">← stoßen ab →</text>`,'Magnete')}
+function schwimmSVG(){return SVGW('0 0 360 180',`<rect x="0" y="90" width="360" height="90" fill="#9FD3F5"/><path d="M110 70 h140 l-24 44 h-92z" fill="#C98A4B"/><text x="180" y="62" font-size="34" text-anchor="middle">🧸</text>
+  <line x1="180" y1="168" x2="180" y2="122" stroke="#1D6FD6" stroke-width="5" marker-end="url(#sah)"/><line x1="290" y1="40" x2="290" y2="80" stroke="#E0474C" stroke-width="5" marker-end="url(#sah2)"/>
+  <defs><marker id="sah" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#1D6FD6"/></marker><marker id="sah2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#E0474C"/></marker></defs>
+  <text x="208" y="160" class="wk" text-anchor="start">Wasser drückt nach oben</text><text x="300" y="30" class="wk">Gewicht</text>`,'Auftrieb')}
+const KONZ={
+ schall:{merke:'Schall entsteht, wenn etwas schwingt. Er fliegt ungefähr <b>340 Meter in einer Sekunde</b> durch die Luft.',kurz:'Die Schwingung schubst die Luftteilchen an, die schubsen ihre Nachbarn – wie Dominosteine – bis zu deinem Ohr.',vis:schallSVG,
+  title:'Was ist Schall – und wie schnell ist er?',q:['Wie weit kommt der Schall ungefähr in 3 Sekunden?','etwa 1 Kilometer',['etwa 3 Meter','etwa 300.000 Kilometer','gar nicht weit']],
+  lesson:[{t:'Schall entsteht, wenn etwas <b>schwingt</b> – also ganz schnell hin und her zittert.',why:'Eine Trommel, eine Gitarrensaite oder deine Stimmbänder im Hals schwingen. 🔬 Leg die Hand an deinen Hals und summe – du spürst das Zittern!',vis:scene('🥁','🎸','🗣️')},
+   {t:'Die Schwingung schubst die winzigen <b>Luftteilchen</b> an. Die schubsen ihre Nachbarn, die schubsen wieder ihre Nachbarn …',why:'Wie bei einer Reihe Dominosteine: Jeder Stein bleibt fast an seinem Platz, aber der Schubs wandert weiter – bis in dein Ohr. Dort bringt er dein Trommelfell zum Schwingen, und du hörst etwas.',vis:schallSVG()},
+   {t:'Schall ist schnell: ungefähr <b>340 Meter in einer Sekunde</b>.',why:'Das ist so weit wie drei Fußballfelder hintereinander – in einer einzigen Sekunde! Schneller als jedes Rennauto.'},
+   {t:'Merkregel: Für <b>1 Kilometer</b> braucht der Schall ungefähr <b>3 Sekunden</b>.',why:'3 mal 340 Meter sind 1020 Meter, also ungefähr 1 Kilometer. Mit dieser Regel kannst du ausrechnen, wie weit ein Gewitter weg ist.',vis:gewitterSVG(0)},
+   {t:'Schall braucht etwas zum Anschubsen: Luft, Wasser oder etwas Festes.',why:'Im Wasser ist Schall sogar ungefähr viermal so schnell, weil die Teilchen dort enger zusammen sind. Im Weltall gibt es keine Luft – dort ist es ganz still.'}]},
+ licht:{merke:'Licht ist das Schnellste, was es gibt: ungefähr <b>300.000 Kilometer in einer Sekunde</b>. Es geht immer geradeaus.',kurz:'Wo etwas dem Licht im Weg steht, kommt kein Licht hin – dort ist der Schatten.',vis:lichtSVG,
+  title:'Wie schnell ist Licht – und wie entsteht ein Schatten?',q:['Was ist schneller?','Licht',['Schall','beide gleich schnell','das kommt aufs Wetter an']],
+  lesson:[{t:'Licht kommt von <b>Lichtquellen</b>: Sonne, Lampe, Kerze oder Blitz.',why:'Der Mond ist keine Lichtquelle. Er wird nur von der Sonne angestrahlt, wie ein Ball von einer Taschenlampe.',vis:scene('☀️','💡','🕯️','⚡')},
+   {t:'Licht ist das Schnellste, was es gibt: ungefähr <b>300.000 Kilometer in einer Sekunde</b>.',why:'In einer einzigen Sekunde könnte das Licht siebenmal um die ganze Erde sausen.'},
+   {t:'Licht ist fast <b>eine Million Mal schneller</b> als Schall.',why:'Schall schafft 340 Meter in einer Sekunde, Licht 300.000 Kilometer. Darum siehst du beim Gewitter zuerst den Blitz und hörst erst danach den Donner – obwohl beides gleichzeitig passiert.'},
+   {t:'Licht geht immer <b>geradeaus</b>. Steht etwas im Weg, kommt dahinter kein Licht hin: Dort ist der <b>Schatten</b>.',why:'🔬 Mach mit einer Taschenlampe Schattentiere an der Wand. Geht deine Hand näher an die Lampe, wird der Schatten größer.',vis:lichtSVG()},
+   {t:'Ein Spiegel wirft das Licht zurück. Darum siehst du dich darin.',why:'Helle Flächen werfen viel Licht zurück, dunkle schlucken es. Darum wird ein schwarzes T-Shirt in der Sonne so warm.'}]},
+ schwerkraft:{merke:'Die Erde zieht alles zu ihrer Mitte hin. Diese Kraft heißt <b>Schwerkraft</b> oder <b>Gravitation</b>.',kurz:'Darum fallen Dinge nach unten und wir bleiben auf dem Boden stehen – überall auf der Erdkugel.',vis:gravSVG,
+  title:'Warum fallen wir nicht von der Erde herunter?',q:['Wie heißt die Kraft, mit der die Erde uns festhält?','Schwerkraft (Gravitation)',['Magnetkraft','Windkraft','Muskelkraft']],
+  lesson:[{t:'Alles, was eine Masse hat, zieht andere Dinge ein kleines bisschen an. Diese Anziehung heißt <b>Gravitation</b> oder <b>Schwerkraft</b>.',why:'Bei kleinen Dingen merkt man das nicht. Aber die Erde ist so riesig und schwer, dass ihre Anziehung sehr stark ist.'},
+   {t:'Die Erde zieht alles zu ihrer <b>Mitte</b> hin. „Unten“ heißt immer: in Richtung Erdmitte.',why:'Darum stehen auch die Kinder in Australien – auf der anderen Seite der Erdkugel – fest auf dem Boden. Für sie ist „unten“ genauso die Erde unter ihren Füßen.',vis:gravSVG()},
+   {t:'Wenn du hochspringst, zieht dich die Erde sofort wieder zurück. Ein Ball, den du loslässt, fällt nach unten.',why:'Der Forscher Isaac Newton hat sich vor über 300 Jahren gefragt, warum ein Apfel immer nach unten fällt – und hat so die Schwerkraft erklärt.'},
+   {t:'Der Mond ist viel kleiner als die Erde und zieht schwächer. Auf dem Mond wiegst du nur ein <b>Sechstel</b> so viel.',why:'Dort könntest du ungefähr sechsmal so hoch springen wie hier! Die Astronauten sind auf dem Mond richtig herumgehüpft.'},
+   {t:'Die Schwerkraft hält auch den Mond bei der Erde und die Erde bei der Sonne.',why:'Ohne Schwerkraft würde der Mond ins Weltall davonfliegen. So kreist er um die Erde – wie ein Ball an einer unsichtbaren Schnur.'}]},
+ magnet:{merke:'Magnete ziehen Dinge aus <b>Eisen</b> an. Jeder Magnet hat einen Nordpol und einen Südpol.',kurz:'Verschiedene Pole ziehen sich an, gleiche Pole stoßen sich ab.',vis:magnetSVG,
+  title:'Wie funktioniert ein Magnet?',q:['Was passiert, wenn zwei Nordpole zusammenkommen?','Sie stoßen sich ab',['Sie ziehen sich an','Gar nichts','Sie werden heiß']],
+  lesson:[{t:'Ein Magnet zieht Dinge aus <b>Eisen</b> an – zum Beispiel Büroklammern oder Nägel.',why:'Holz, Plastik, Papier oder Glas zieht er nicht an. 🔬 Teste die Sachen aus deinem Mäppchen!',vis:scene('🧲','📎','🔩')},
+   {t:'Jeder Magnet hat zwei Enden: den <b>Nordpol</b> und den <b>Südpol</b>.',why:'Oft ist der Nordpol rot und der Südpol grün angemalt.',vis:magnetSVG()},
+   {t:'<b>Verschiedene</b> Pole ziehen sich an. <b>Gleiche</b> Pole stoßen sich ab.',why:'Halte zwei Magnete mit den gleichen Enden zusammen: Du spürst, wie sie sich wegdrücken – wie mit einem unsichtbaren Kissen dazwischen.'},
+   {t:'Die Magnetkraft wirkt sogar durch Papier, Holz und Wasser hindurch.',why:'Darum hält ein Magnet ein Bild am Kühlschrank fest – durch das Papier hindurch.'},
+   {t:'Die Erde ist selbst wie ein riesiger Magnet. Darum zeigt eine Kompassnadel immer nach Norden.',why:'Die Nadel ist ein kleiner Magnet, der sich nach der Erde ausrichtet. So finden Seeleute und Wanderer ihren Weg.',vis:scene('🧭','🌍')}]},
+ strom:{merke:'Strom fließt nur, wenn der <b>Stromkreis geschlossen</b> ist – von der Batterie durch die Lampe und wieder zurück.',kurz:'Ist der Kreis irgendwo unterbrochen, bleibt die Lampe aus.',vis:()=>circuitSVG('closed'),
+  title:'Wie fließt Strom?',q:['Wann leuchtet die Lampe?','wenn der Stromkreis geschlossen ist',['wenn ein Kabel fehlt','wenn die Batterie leer ist','immer']],
+  lesson:[{t:'Strom fließt nur im <b>Kreis</b>: von der Batterie durch ein Kabel zur Lampe und durch ein zweites Kabel zurück.',why:'Stell dir eine Rennbahn vor: Die Autos können nur fahren, wenn die Strecke rundherum geschlossen ist.',vis:circuitSVG('closed')},
+   {t:'Ist der Kreis irgendwo <b>unterbrochen</b>, fließt kein Strom – die Lampe bleibt dunkel.',why:'Ein Schalter macht genau das: Er öffnet oder schließt den Kreis.',vis:circuitSVG('open')},
+   {t:'Metall leitet Strom gut, zum Beispiel Kupfer in Kabeln. Holz, Plastik und Gummi leiten nicht.',why:'Darum sind Kabel innen aus Kupfer und außen mit Plastik umhüllt – so kann man sie gefahrlos anfassen.'},
+   {t:'⚠️ Strom aus der Steckdose ist <b>lebensgefährlich</b>.',why:'Eine kleine Batterie hat 1,5 Volt – damit darfst du experimentieren. Die Steckdose hat 230 Volt. Spiele niemals daran!'}]},
+ schwimmen:{merke:'Das Wasser <b>drückt von unten</b> gegen alles, was darin liegt. Ist ein Ding leichter als gleich viel Wasser, schwimmt es.',kurz:'Ist es schwerer als gleich viel Wasser, sinkt es.',vis:schwimmSVG,
+  title:'Warum schwimmt ein Schiff?',q:['Warum schwimmt ein riesiges Schiff aus Stahl?','Es ist hohl und voller Luft',['Stahl ist leichter als Wasser','Es hat einen Motor','Es ist magnetisch']],
+  lesson:[{t:'Wasser <b>drückt von unten</b> gegen alles, was darin liegt. Das nennt man Auftrieb.',why:'🔬 Drück einen Ball in der Badewanne unter Wasser – du spürst, wie das Wasser ihn nach oben drückt.',vis:schwimmSVG()},
+   {t:'Ist ein Ding <b>leichter als gleich viel Wasser</b>, schwimmt es. Ist es schwerer, sinkt es.',why:'Ein Holzklotz ist leichter als ein gleich großes Stück Wasser – er schwimmt. Ein Stein ist schwerer – er sinkt.',vis:scene('🪵','🌊','🪨')},
+   {t:'Ein Schiff aus Stahl schwimmt, weil es <b>hohl</b> ist: innen ist viel Luft.',why:'Das ganze Schiff mit seiner Luft ist leichter als das Wasser, das es zur Seite drückt.'},
+   {t:'🔬 Probier es mit Knete aus: Als Kugel sinkt sie. Als Schiffchen geformt schwimmt sie!',why:'Das Schiffchen drückt viel mehr Wasser zur Seite – und bekommt darum mehr Auftrieb.'}]},
+ waerme:{merke:'Alles besteht aus winzigen <b>Teilchen</b>. Wird es wärmer, bewegen sie sich schneller.',kurz:'So wird Eis zu Wasser und Wasser zu Dampf: fest, flüssig, gasförmig.',vis:teilchenSVG,
+  title:'Warum schmilzt Eis?',q:['Was passiert mit Eis, wenn es warm wird?','Es wird flüssig',['Es wird härter','Es wird zu Stein','gar nichts']],
+  lesson:[{t:'Alles besteht aus winzig kleinen <b>Teilchen</b> – so klein, dass man sie nicht sehen kann.',why:'Holz, Wasser, Luft und auch du: alles ist aus Teilchen gebaut.'},
+   {t:'<b>Fest</b>: Die Teilchen sitzen ganz eng und wackeln nur. <b>Flüssig</b>: Sie rutschen aneinander vorbei. <b>Gasförmig</b>: Sie fliegen frei herum.',why:'Darum hat ein Eiswürfel eine feste Form, Wasser passt sich jedem Glas an und Dampf verteilt sich im ganzen Raum.',vis:teilchenSVG()},
+   {t:'<b>Wärme</b> heißt: Die Teilchen bewegen sich schneller.',why:'Wird Eis warm, wackeln die Teilchen so stark, dass sie sich lösen: Es schmilzt. Wird Wasser sehr heiß (100 Grad), fliegen sie davon: Es verdampft.'},
+   {t:'Wird es kalt, werden die Teilchen langsamer: Dampf wird wieder zu Wasser, Wasser bei 0 Grad zu Eis.',why:'Das siehst du am beschlagenen Spiegel nach dem Duschen oder an Eisblumen am Fenster.'},
+   {t:'Warme Dinge brauchen ein bisschen mehr Platz – sie <b>dehnen sich aus</b>.',why:'Darum haben Brücken kleine Lücken, und warme Luft steigt nach oben – so fliegt ein Heißluftballon.'}]},
+ hebel:{merke:'Bei einem Hebel zählt <b>Gewicht mal Abstand</b>. Ein langer Hebel spart Kraft.',kurz:'Wer auf der Wippe schwerer ist, muss näher an die Mitte.',vis:()=>wippeSVG(30,2,60,1),
+  title:'Wie funktioniert eine Wippe?',q:['Wer muss auf der Wippe näher an die Mitte?','der Schwerere',['der Leichtere','beide ganz außen','egal']],
+  lesson:[{t:'Eine Wippe ist ein <b>Hebel</b>: ein Brett, das sich um einen Punkt in der Mitte dreht.',why:'Hebel gibt es überall: Schere, Flaschenöffner, Schubkarre, Türklinke.',vis:scene('✂️','🍾','🛒','🚪')},
+   {t:'Auf der Wippe zählt <b>Gewicht mal Abstand</b> zur Mitte. Auf beiden Seiten muss das gleich sein.',why:'Papa wiegt 60 kg, du 30 kg. Wenn Papa 1 Meter von der Mitte sitzt und du 2 Meter: 60 · 1 = 60 und 30 · 2 = 60. Die Wippe ist im Gleichgewicht!',vis:wippeSVG(30,2,60,1)},
+   {t:'Darum muss der <b>Schwerere näher an die Mitte</b> und der Leichtere weiter nach außen.'},
+   {t:'Ein <b>langer Hebel</b> spart Kraft.',why:'Mit einer langen Stange kannst du sogar einen schweren Stein anheben. Der Forscher Archimedes sagte schon vor über 2000 Jahren: „Gebt mir einen festen Punkt, und ich hebe die Welt aus den Angeln!“'}]},
+ reibung:{merke:'<b>Reibung</b> entsteht, wenn zwei Flächen aneinander reiben. Sie bremst.',kurz:'Raue Flächen haben viel Reibung, glatte wenig.',vis:()=>scene('👟','🧊','⛸️'),
+  title:'Was ist Reibung?',q:['Warum rutscht man auf Eis leicht aus?','weil es kaum Reibung gibt',['weil Eis magnetisch ist','weil Eis schief ist','weil es zu viel Reibung gibt']],
+  lesson:[{t:'Wenn zwei Flächen aneinander reiben, <b>bremsen</b> sie sich gegenseitig. Das heißt Reibung.',why:'🔬 Reib deine Hände schnell aneinander: Sie werden warm. Auch das macht die Reibung.'},
+   {t:'<b>Raue</b> Flächen haben viel Reibung, <b>glatte</b> Flächen wenig.',why:'Auf glattem Eis gibt es kaum Reibung – darum rutscht man so leicht aus. Streusand macht den Weg wieder rau.',vis:scene('🧊','⛸️')},
+   {t:'Manchmal wollen wir viel Reibung: Schuhsohlen und Autoreifen haben ein Profil mit Rillen.',why:'Damit greifen sie in den Boden und rutschen nicht weg. Auch Bremsen funktionieren durch Reibung.',vis:scene('👟','🚲')},
+   {t:'Manchmal wollen wir wenig Reibung: Schlitten, Schlittschuhe und Rutschen sind darum glatt.',why:'Ein bisschen Öl an der Fahrradkette macht die Reibung kleiner – dann läuft sie leichter.'}]}
+};
+KONZ.gewitter={...KONZ.schall,title:'Wie weit ist das Gewitter weg?',q:['Du zählst 6 Sekunden zwischen Blitz und Donner. Wie weit ist das Gewitter ungefähr weg?','etwa 2 Kilometer',['etwa 6 Kilometer','etwa 20 Kilometer','direkt über mir']],
+  lesson:[{t:'Blitz und Donner entstehen <b>gleichzeitig</b>. Der Blitz ist Licht, der Donner ist Schall.',vis:scene('⚡','🌩️')},
+   {t:'Der Schall ist viel langsamer als das Licht: ungefähr <b>340 Meter in einer Sekunde</b>.',why:'Das Licht vom Blitz ist sofort bei dir. Der Donner braucht länger – für jeden Kilometer ungefähr 3 Sekunden.',vis:schallSVG()},
+   {t:'So geht es: Wenn du den Blitz siehst, zählst du langsam: „einundzwanzig, zweiundzwanzig, dreiundzwanzig …“ – bis der Donner kommt.',why:'Jedes „einundzwanzig“ dauert ungefähr eine Sekunde.'},
+   {t:'Teile die Sekunden durch 3. Das Ergebnis sagt dir, wie viele <b>Kilometer</b> das Gewitter entfernt ist.',why:'6 Sekunden : 3 = 2. Das Gewitter ist ungefähr 2 Kilometer weit weg.',vis:gewitterSVG(6)},
+   {t:'⚠️ Sind es weniger als 10 Sekunden, ist das Gewitter ganz nah. Dann schnell in ein Haus oder ins Auto!',why:'Werden die Sekunden von Mal zu Mal weniger, kommt das Gewitter näher.'}]};
+function konzeptOf(text){const t=String(text);
+  if(/Jahreszeit|Erdachse|Australien|längste Tag|im Sommer wärmer/.test(t))return'jahreszeiten';if(/finsternis|in die Sonne schauen/i.test(t))return'finsternis';
+  if(/Mondphase|Sichel|Neumond|Vollmond|Rundung des Mondes/.test(t))return'mondphasen';if(/Tag und Nacht|geht die Sonne auf/.test(t))return'tagnacht';if(/Himmel (blau|abends)|Himmel blau/.test(t))return'himmel';
+  if(/Gewitter|Donner/.test(t))return'gewitter';if(/Schall|hören|Echo|Ton\b|Töne|Saite/.test(t))return'schall';
+  if(/Schwerkraft|Gravitation|fällt|fallen|herunter|Mond.*spring|zu sich zieht|zieht alles/.test(t))return'schwerkraft';if(/Magnet|Kompass/.test(t))return'magnet';
+  if(/Strom|Lampe|Schalter|Steckdose|Solarzelle|Windrad/.test(t))return'strom';if(/schwimmt|Schiff|sinkt/.test(t))return'schwimmen';
+  if(/Wippe|Hebel|Flaschenzug|Stange/.test(t))return'hebel';if(/Reibung|rutscht|Profil/.test(t))return'reibung';
+  if(/Eis\b|Eis |gefriert|kocht|Schmelz|fest, flüssig|verdunst|beschlägt|ausdehn|Dehnungsfugen|Löffel|Heißluft|T-Shirt|Thermometer|Pfütze/.test(t))return'waerme';
+  if(/Licht|Schatten|Spiegel|Regenbogen|Lupe|Blitz|angestrahlt/.test(t))return'licht';return null}
+function merkStep(k){const K=KONZ[k];return{t:`💡 Merke: ${K.merke}`,why:K.kurz,vis:K.vis()}}
+/* Lern-Erklärung zu einem Thema: Stella erklärt das Prinzip Schritt für Schritt */
+function lernKonzept(keys){return()=>{const k=pick(keys),K=KONZ[k];const[q,a,w]=K.q;
+  return{kind:'choice',long:1,text:`<b>${K.title}</b><br><span style="font-weight:600">${q}</span>`,visual:K.vis(),options:shuf([a,...w]),answer:a,single:1,
+    steps:[...K.lesson,{t:`Zum Schluss die Frage: ${q} → <b>${a}</b>`}]}}}
+
+/* ================= Erde, Mond & Himmel: Jahreszeiten, Mondphasen, Tag/Nacht, Finsternis, blauer Himmel ================= */
+const sunG=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r*1.35}" fill="#FFD23F" opacity=".25"/><circle cx="${x}" cy="${y}" r="${r}" fill="#FFC21A"/>`;
+/* Erde mit Tag- und Nachtseite, schräger Achse (oben nach rechts geneigt) */
+function earthG(x,y,r,sx,sy,o={}){const a=Math.atan2(sy-y,sx-x)*180/Math.PI,t=23.4*Math.PI/180,ax=Math.sin(t)*r*1.55,ay=Math.cos(t)*r*1.55;
+  return`<circle cx="${x}" cy="${y}" r="${r}" fill="#3C8DDE"/><path d="M${x+r*.15} ${y-r*.55} q${r*.45} ${-r*.1} ${r*.55} ${r*.35} q${-r*.2} ${r*.4} ${-r*.5} ${r*.3}z" fill="#56B45A"/>
+  <path d="M${x} ${y-r} A${r} ${r} 0 0 0 ${x} ${y+r}Z" fill="#0B1230" opacity=".62" transform="rotate(${a} ${x} ${y})"/>
+  ${o.axis===false?'':`<line x1="${(x-ax).toFixed(1)}" y1="${(y+ay).toFixed(1)}" x2="${(x+ax).toFixed(1)}" y2="${(y-ay).toFixed(1)}" stroke="#fff" stroke-width="2.4" stroke-dasharray="${o.dash||''}"/><text x="${(x+ax+5).toFixed(1)}" y="${(y-ay-3).toFixed(1)}" class="hl0">N</text>`}`}
+const SEASON_POS={Sommer:[52,138],Herbst:[200,212],Winter:[348,138],Frühling:[200,64]};
+function jahrSVG(o={}){let g=`<rect width="400" height="270" rx="20" fill="#0E1433"/><ellipse cx="200" cy="138" rx="148" ry="74" fill="none" stroke="#8FA3D9" stroke-dasharray="5 6" stroke-width="1.6"/>`;
+  g+=`<path d="M66 172 q18 26 54 36" fill="none" stroke="#8FA3D9" stroke-width="2" marker-end="url(#jah)"/><defs><marker id="jah" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#8FA3D9"/></marker></defs>`;
+  g+=sunG(200,138,26);
+  Object.entries(SEASON_POS).forEach(([n,[x,y]])=>{const on=o.sel===n,q=o.mark===n;g+=earthG(x,y,on||q?19:16,200,138);
+    g+=`<text x="${x}" y="${y+(y<100?-30:y>180?40:36)}" class="hlab${on?' on':''}">${q?'?':o.labels===false?'':n}</text>`;if(on||q)g+=`<circle cx="${x}" cy="${y}" r="27" fill="none" stroke="#FFD23F" stroke-width="3"/>`});
+  return`<div class="kfig"><svg viewBox="0 0 400 270" role="img" aria-label="Die Erde auf ihrer Bahn um die Sonne">${starsBg(400,270,40,11)}${g}</svg></div>`}
+/* Sommer: Sonnenstrahlen steil – Winter: flach */
+function winkelSVG(){const pan=(x,deg,lab,sub)=>{const t=deg*Math.PI/180,w=44,L=110,cx=x+90,gy=150,len=w/Math.sin(t);
+    const dx=Math.cos(t),dy=Math.sin(t);let g=`<rect x="${x}" y="0" width="180" height="200" rx="16" fill="var(--card)" stroke="var(--line)" stroke-width="2"/><line x1="${x+10}" y1="${gy}" x2="${x+170}" y2="${gy}" stroke="#8B6B3E" stroke-width="5"/>`;
+    const p1=[cx-len/2,gy],p2=[cx+len/2,gy],s1=[p1[0]-dx*L,gy-dy*L],s2=[p2[0]-dx*L,gy-dy*L];
+    g+=`<path d="M${s1} L${p1} L${p2} L${s2}Z" fill="#FFD23F" opacity=".55"/><line x1="${p1[0]}" y1="${gy+6}" x2="${p2[0]}" y2="${gy+6}" stroke="#F26B1D" stroke-width="6" stroke-linecap="round"/>`;
+    g+=`<text x="${(s1[0]+s2[0])/2-dx*16}" y="${(s1[1]+s2[1])/2-dy*16+8}" font-size="24" text-anchor="middle">☀️</text><text x="${x+90}" y="${gy+30}" class="wk">${lab}</text><text x="${x+90}" y="${gy+46}" class="wl" style="font-size:11px">${sub}</text>`;return g};
+  return SVGW('0 0 380 202',pan(0,80,'Sommer','steil: kleiner, heißer Fleck')+pan(200,30,'Winter','flach: verteilt, kühler'),'Sonnenstrahlen im Sommer und Winter')}
+/* Mondphase zeichnen: f=0 Neumond, .25 zunehmender Halbmond, .5 Vollmond, .75 abnehmender Halbmond */
+function moonP(cx,cy,r,f){const k=Math.cos(2*Math.PI*f),rx=(Math.abs(k)*r).toFixed(1),wax=f<=.5,cr=k>0,top=`${cx} ${cy-r}`,bot=`${cx} ${cy+r}`;
+  return`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#2B3350" stroke="#56618A" stroke-width="1"/><path d="M${top} A${r} ${r} 0 0 ${wax?1:0} ${bot} A${rx} ${r} 0 0 ${wax?(cr?0:1):(cr?1:0)} ${top}Z" fill="#F4E9B8"/>`}
+const PHASES=[[0,'Neumond'],[.13,'zunehmende Sichel'],[.25,'zunehmender Halbmond'],[.5,'Vollmond'],[.75,'abnehmender Halbmond'],[.87,'abnehmende Sichel']];
+function phasenSVG(sel){const fs=[0,.13,.25,.37,.5,.63,.75,.87],n=['Neu-\nmond','','Halb-\nmond','','Voll-\nmond','','Halb-\nmond',''];
+  let g=`<rect width="400" height="140" rx="18" fill="#0E1433"/>`;fs.forEach((f,i)=>{const x=28+i*49;g+=moonP(x,58,19,f);if(n[i])n[i].split('\n').forEach((l,j)=>g+=`<text x="${x}" y="${98+j*16}" class="hlab sm">${l}</text>`)});
+  g+=`<text x="${28+49*2}" y="22" class="hlab sm">← zunehmend</text><text x="${28+49*6}" y="22" class="hlab sm">abnehmend →</text>`;
+  return`<div class="kfig"><svg viewBox="0 0 400 140" role="img" aria-label="Mondphasen">${starsBg(400,140,20,2)}${g}</svg></div>`}
+function oneMoonSVG(f){return`<div class="kfig small"><svg viewBox="0 0 240 170" role="img" aria-label="Mond"><rect width="240" height="170" rx="20" fill="#0E1433"/>${starsBg(240,170,22,7)}${moonP(120,85,58,f)}</svg></div>`}
+/* Mond auf seiner Bahn um die Erde, Sonnenlicht kommt von links */
+function mondbahnSVG(){let g=`<rect width="400" height="280" rx="20" fill="#0E1433"/>`;for(let i=0;i<6;i++)g+=`<line x1="6" y1="${40+i*40}" x2="60" y2="${40+i*40}" stroke="#FFD23F" stroke-width="3" opacity=".7" marker-end="url(#mah)"/>`;
+  g+=`<defs><marker id="mah" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#FFD23F"/></marker></defs><text x="40" y="22" class="hlab sm">Sonnenlicht</text>`;
+  const cx=230,cy=140,R=92;g+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#8FA3D9" stroke-dasharray="5 6"/>${earthG(cx,cy,22,-400,cy,{axis:false})}`;
+  [[180,'Vollmond',.5],[90,'Halbmond',.75],[0,'Neumond',0],[270,'Halbmond',.25]].forEach(([a,n,f])=>{const t=a*Math.PI/180,x=cx-Math.cos(t)*R,y=cy+Math.sin(t)*R;
+    g+=`<circle cx="${x}" cy="${y}" r="13" fill="#2B3350"/><path d="M${x} ${y-13} A13 13 0 0 0 ${x} ${y+13}Z" fill="#F4E9B8"/>`;
+    const lx=x+(a===0?40:a===180?-44:0),ly=y+(a===90?28:a===270?-20:5);g+=`<text x="${lx}" y="${ly}" class="hlab sm">${n}</text>`});
+  return`<div class="kfig"><svg viewBox="0 0 400 280" role="img" aria-label="Der Mond kreist um die Erde">${g}</svg></div>`}
+function tagnachtSVG(){let g=`<rect width="400" height="210" rx="20" fill="#0E1433"/>${sunG(40,105,34)}`;for(let i=0;i<4;i++)g+=`<line x1="90" y1="${60+i*30}" x2="190" y2="${60+i*30}" stroke="#FFD23F" stroke-width="2.5" opacity=".6"/>`;
+  g+=earthG(270,105,62,-300,105,{axis:false})+`<text x="236" y="112" class="hlab">Tag</text><text x="305" y="112" class="hlab">Nacht</text><path d="M220 182 q50 22 100 0" fill="none" stroke="#B8C4EA" stroke-width="3" marker-end="url(#tah)"/><defs><marker id="tah" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#B8C4EA"/></marker></defs><text x="270" y="30" class="hlab sm">dreht sich in 24 Stunden einmal</text>`;
+  return`<div class="kfig"><svg viewBox="0 0 400 210" role="img" aria-label="Tag und Nacht">${starsBg(400,210,30,6)}${g}</svg></div>`}
+function finsterSVG(){const row=(y,t,a,b,bn)=>`<text x="200" y="${y-38}" class="hlab">${t}</text>${sunG(46,y,26)}<path d="M80 ${y-26} L${b-6} ${y-4} L${b-6} ${y+4} L80 ${y+26}Z" fill="#FFD23F" opacity=".14"/>${a}`;
+  let g=`<rect width="400" height="250" rx="20" fill="#0E1433"/>`;
+  g+=row(72,'Sonnenfinsternis: Der Mond steht vor der Sonne',`<circle cx="210" cy="72" r="9" fill="#9AA3B5"/><path d="M219 66 L330 70 L330 74 L219 78Z" fill="#000" opacity=".6"/>`+earthG(340,72,24,46,72,{axis:false}),210);
+  g+=row(190,'Mondfinsternis: Die Erde steht vor dem Mond',earthG(210,190,24,46,190,{axis:false})+`<path d="M234 178 L330 186 L330 194 L234 202Z" fill="#000" opacity=".6"/><circle cx="335" cy="190" r="10" fill="#B5462E"/>`,210);
+  return`<div class="kfig"><svg viewBox="0 0 400 250" role="img" aria-label="Sonnen- und Mondfinsternis">${starsBg(400,250,30,8)}${g}</svg></div>`}
+function himmelSVG(){return SVGW('0 0 380 150',`<defs><linearGradient id="hb1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D8BE8"/><stop offset="1" stop-color="#A9D4FF"/></linearGradient><linearGradient id="hb2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B4BC4"/><stop offset=".55" stop-color="#F28B50"/><stop offset="1" stop-color="#FFD27A"/></linearGradient></defs>
+  <rect x="4" y="4" width="180" height="120" rx="14" fill="url(#hb1)"/><circle cx="140" cy="34" r="14" fill="#FFF3B0"/><rect x="196" y="4" width="180" height="120" rx="14" fill="url(#hb2)"/><circle cx="286" cy="112" r="16" fill="#FF8A3D"/><rect x="196" y="112" width="180" height="12" fill="#3A2C55"/>
+  <text x="94" y="144" class="wk">mittags: blau</text><text x="286" y="144" class="wk">abends: rot</text>`,'Blauer Himmel und Abendrot')}
+Object.assign(KONZ,{
+ jahreszeiten:{merke:'Die Erdachse ist <b>schräg geneigt</b> (etwa 23 Grad). Darum bekommt unsere Hälfte der Erde mal mehr und mal weniger Sonne.',kurz:'Neigt sich unsere Hälfte zur Sonne, ist bei uns Sommer – neigt sie sich weg, ist Winter.',vis:()=>jahrSVG(),
+  title:'Warum gibt es Jahreszeiten?',q:['Warum ist bei uns im Sommer warm und im Winter kalt?','Weil die Erdachse schräg steht',['Weil die Erde im Sommer näher an der Sonne ist','Weil die Sonne im Sommer heißer brennt','Weil der Mond im Winter die Sonne verdeckt']],
+  lesson:[{t:'Die Erde kreist in einem Jahr einmal um die Sonne. Dabei steht ihre <b>Achse schräg</b> – etwa 23 Grad geneigt, wie ein schiefer Kreisel.',why:'Die Achse ist eine gedachte Linie durch Nordpol und Südpol. Sie zeigt immer in dieselbe Richtung – egal, wo die Erde gerade auf ihrer Bahn ist.',vis:jahrSVG()},
+   {t:'Im <b>Sommer</b> ist unsere Nordhälfte der Erde zur Sonne <b>hingeneigt</b>. Im <b>Winter</b> ist sie von der Sonne <b>weggeneigt</b>.',why:'Dazwischen liegen Frühling und Herbst. Darum gibt es vier Jahreszeiten.',vis:jahrSVG({sel:'Sommer'})},
+   {t:'Im Sommer steht die Sonne mittags <b>hoch</b> am Himmel. Ihre Strahlen treffen <b>steil</b> auf und wärmen eine kleine Fläche ganz stark.',why:'Im Winter steht sie tief, die Strahlen kommen flach und verteilen sich auf eine große Fläche – es wird nicht so warm. 🔬 Leuchte mit einer Taschenlampe gerade und dann schräg auf den Tisch: Schräg wird der Lichtfleck größer und dunkler.',vis:winkelSVG()},
+   {t:'Außerdem sind im Sommer die <b>Tage länger</b>: Die Sonne scheint viele Stunden und kann die Erde lange aufwärmen.',why:'Am 21. Juni ist bei uns der längste Tag, am 21. Dezember der kürzeste.'},
+   {t:'Achtung, ein häufiger Irrtum: Es liegt <b>nicht</b> daran, dass die Erde im Sommer näher an der Sonne ist.',why:'Im Januar ist die Erde der Sonne sogar ein bisschen näher als im Juli! Und wenn bei uns Sommer ist, ist in Australien auf der Südhälfte gerade Winter.'}]},
+ mondphasen:{merke:'Der Mond leuchtet nicht selbst. Die Sonne beleuchtet immer eine Hälfte von ihm. Weil er um die Erde kreist, sehen wir mal mehr, mal weniger von dieser hellen Hälfte.',kurz:'Von Vollmond zu Vollmond dauert es etwa einen Monat.',vis:()=>phasenSVG(),
+  title:'Warum sieht der Mond mal rund und mal wie eine Sichel aus?',q:['Wie lange dauert es von einem Vollmond bis zum nächsten?','etwa einen Monat',['einen Tag','eine Woche','ein Jahr']],
+  lesson:[{t:'Der Mond leuchtet nicht selbst. Er ist ein grauer Steinball, den die <b>Sonne anstrahlt</b>. Eine Hälfte ist immer hell, die andere dunkel.',why:'Genau wie die Erde: Auf der Seite zur Sonne ist Tag, auf der anderen Nacht.'},
+   {t:'Der Mond <b>kreist um die Erde</b>. Für eine Runde braucht er ungefähr <b>einen Monat</b>.',why:'Das Wort „Monat“ kommt sogar von „Mond“!',vis:mondbahnSVG()},
+   {t:'Je nachdem, wo der Mond gerade ist, sehen wir von der Erde aus <b>mehr oder weniger</b> von seiner hellen Hälfte.',why:'Steht er hinter der Erde, sehen wir die ganze helle Seite: <b>Vollmond</b>. Steht er zwischen Erde und Sonne, zeigt er uns seine dunkle Seite: <b>Neumond</b> – wir sehen ihn gar nicht.'},
+   {t:'Dazwischen wird er erst zur Sichel, dann zum Halbmond, dann zum Vollmond (<b>zunehmend</b>) – und danach wieder kleiner (<b>abnehmend</b>).',vis:phasenSVG()},
+   {t:'Merktrick: Ist die helle Rundung <b>links</b>, sieht der Mond aus wie ein kleines <b>a</b> – er nimmt <b>a</b>b. Ist sie rechts, nimmt er zu.',why:'🔬 Probier es mit einer Lampe und einem Ball im dunklen Zimmer: Halte den Ball vor dich und dreh dich langsam im Kreis – du siehst alle Mondphasen!'}]},
+ tagnacht:{merke:'Die Erde <b>dreht sich</b> in 24 Stunden einmal um sich selbst. Die Seite, die zur Sonne zeigt, hat Tag – die andere Nacht.',kurz:'Die Sonne bewegt sich gar nicht über den Himmel – wir drehen uns mit der Erde an ihr vorbei.',vis:()=>tagnachtSVG(),
+  title:'Warum gibt es Tag und Nacht?',q:['Warum wird es abends dunkel?','Weil sich unsere Seite der Erde von der Sonne wegdreht',['Weil die Sonne ausgeht','Weil die Wolken die Sonne verdecken','Weil der Mond vor die Sonne kommt']],
+  lesson:[{t:'Die Erde <b>dreht sich</b> wie ein Kreisel – in 24 Stunden einmal ganz herum.',why:'Wir merken das nicht, weil wir uns mit allem um uns herum mitdrehen – wie in einem fahrenden Zug, der ganz ruhig fährt.',vis:tagnachtSVG()},
+   {t:'Auf der Seite, die zur Sonne zeigt, ist <b>Tag</b>. Auf der anderen Seite ist <b>Nacht</b>.',why:'Wenn bei uns Mittag ist, ist auf der anderen Seite der Erde, zum Beispiel in Australien, gerade tiefe Nacht.'},
+   {t:'Die Sonne scheint im <b>Osten aufzugehen</b> und im <b>Westen unterzugehen</b>.',why:'In Wirklichkeit bewegt sich nicht die Sonne – wir drehen uns morgens zu ihr hin und abends von ihr weg.'},
+   {t:'🔬 Probier es aus: Stell dir vor, deine Nase ist dein Haus. Dreh dich langsam vor einer Lampe im Kreis.',why:'Wenn deine Nase zur Lampe zeigt, ist Mittag. Wenn sie weg zeigt, ist Mitternacht.'}]},
+ finsternis:{merke:'Bei einer <b>Sonnenfinsternis</b> schiebt sich der Mond vor die Sonne. Bei einer <b>Mondfinsternis</b> fällt der Schatten der Erde auf den Mond.',kurz:'Niemals ohne Schutzbrille in die Sonne schauen!',vis:()=>finsterSVG(),
+  title:'Was ist eine Sonnenfinsternis?',q:['Was passiert bei einer Sonnenfinsternis?','Der Mond schiebt sich vor die Sonne',['Die Sonne geht aus','Die Erde steht vor dem Mond','Eine große Wolke kommt']],
+  lesson:[{t:'Manchmal stehen Sonne, Mond und Erde genau in einer Reihe. Dann gibt es eine <b>Finsternis</b>.',vis:finsterSVG()},
+   {t:'<b>Sonnenfinsternis</b>: Der Mond steht genau zwischen Sonne und Erde und verdeckt die Sonne. Mitten am Tag wird es dämmrig.',why:'Der Mond ist viel kleiner als die Sonne – aber auch viel näher an uns. Darum kann er sie ganz verdecken, so wie dein Daumen vor dem Auge ein ganzes Haus verdecken kann.'},
+   {t:'⚠️ Schau <b>niemals</b> direkt in die Sonne – auch nicht bei einer Finsternis!',why:'Das Sonnenlicht kann deine Augen für immer verletzen. Man braucht eine spezielle Sonnenfinsternis-Brille.'},
+   {t:'<b>Mondfinsternis</b>: Die Erde steht zwischen Sonne und Mond. Ihr Schatten fällt auf den Mond – er wird dunkel und oft rötlich.',why:'Eine Mondfinsternis kann man ohne Gefahr anschauen.'}]},
+ himmel:{merke:'Sonnenlicht besteht aus allen Farben. Die Luft verteilt das <b>blaue Licht</b> besonders stark in alle Richtungen – darum ist der Himmel blau.',kurz:'Abends muss das Licht einen langen Weg durch die Luft. Das Blau ist unterwegs verteilt, übrig bleiben Rot und Orange: Abendrot.',vis:()=>himmelSVG(),
+  title:'Warum ist der Himmel blau?',q:['Warum ist der Himmel abends oft rot?','Das Licht hat einen langen Weg durch die Luft, Blau wird unterwegs verteilt',['Die Sonne wird abends rot angemalt','Die Wolken sind rot','Der Mond färbt den Himmel']],
+  lesson:[{t:'Das weiße Sonnenlicht besteht aus <b>allen Regenbogenfarben</b>.',why:'Das siehst du, wenn ein Regenbogen das Licht in seine Farben zerlegt.'},
+   {t:'Die winzigen Teilchen der Luft <b>verteilen das blaue Licht</b> viel stärker als die anderen Farben – in alle Richtungen.',why:'Darum kommt von überall am Himmel blaues Licht zu deinen Augen: Der Himmel sieht blau aus.',vis:himmelSVG()},
+   {t:'Morgens und abends steht die Sonne tief. Ihr Licht muss einen <b>viel längeren Weg</b> durch die Luft zurücklegen.',why:'Unterwegs wird das Blau zur Seite verteilt. Bei uns kommen vor allem Rot, Orange und Gelb an: Morgenrot und Abendrot.'},
+   {t:'Im Weltall gibt es keine Luft. Darum ist der Himmel dort schwarz – auch wenn die Sonne scheint.',why:'Das sehen die Astronauten auf der Raumstation.'}]}
+});
+WI.himmel=[
+  ['🌍','Warum gibt es Jahreszeiten?','Weil die Erdachse schräg steht',['Weil die Erde im Sommer näher an der Sonne ist','Weil die Sonne mal heißer, mal kälter ist','Weil der Mond die Sonne verdeckt'],'Die schräge Erdachse sorgt dafür, dass sich unsere Hälfte der Erde im Sommer zur Sonne neigt und im Winter von ihr weg. Die Entfernung zur Sonne ist nicht der Grund – im Januar ist die Erde der Sonne sogar etwas näher!'],
+  ['📐','Wie schräg ist die Erdachse ungefähr geneigt?','etwa 23 Grad',['gar nicht','etwa 90 Grad','etwa 180 Grad'],'Die Erdachse ist etwa 23 Grad geneigt. Ohne diese Neigung gäbe es bei uns keine Jahreszeiten.'],
+  ['☀️','Warum ist es im Sommer wärmer als im Winter?','Die Sonne steht höher und scheint länger',['Die Sonne ist im Sommer größer','Im Sommer gibt es mehr Wolken','Der Wind ist im Sommer warm'],'Im Sommer treffen die Sonnenstrahlen steil auf und die Tage sind lang. Im Winter kommen sie flach und die Tage sind kurz.'],
+  ['🇦🇺','Bei uns ist Sommer. Welche Jahreszeit ist dann in Australien?','Winter',['auch Sommer','Frühling','Herbst'],'Australien liegt auf der Südhälfte der Erde. Wenn sich unsere Nordhälfte zur Sonne neigt, ist die Südhälfte weggeneigt – dort ist Winter. Weihnachten feiern die Kinder dort im Sommer am Strand!'],
+  ['🌞','In welchem Monat ist bei uns der längste Tag?','im Juni',['im Dezember','im März','im Oktober'],'Am 21. Juni ist Sommeranfang und der längste Tag des Jahres. Am 21. Dezember ist der kürzeste Tag.'],
+  ['🌗','Warum gibt es Tag und Nacht?','Die Erde dreht sich in 24 Stunden einmal um sich selbst',['Die Sonne geht abends aus','Der Mond schiebt sich vor die Sonne','Die Erde fliegt von der Sonne weg'],'Die Seite der Erde, die zur Sonne zeigt, hat Tag. Die andere Seite hat Nacht. Wir drehen uns mit der Erde mit.'],
+  ['🌅','In welcher Himmelsrichtung geht die Sonne auf?','im Osten',['im Westen','im Norden','im Süden'],'Morgens geht die Sonne im Osten auf, mittags steht sie im Süden, abends geht sie im Westen unter. Merke: Im Osten geht sie auf, im Süden steigt sie hoch, im Westen will sie untergehen, im Norden ist sie nie zu sehen.'],
+  ['🌙','Warum sieht der Mond mal rund und mal wie eine Sichel aus?','Wir sehen mal mehr, mal weniger von seiner beleuchteten Hälfte',['Die Erde wirft ihren Schatten auf ihn','Er wird jeden Monat größer und kleiner','Wolken verdecken einen Teil'],'Die Sonne beleuchtet immer eine Hälfte des Mondes. Weil er um die Erde kreist, sehen wir diese helle Hälfte von verschiedenen Seiten. Achtung: Der Erdschatten ist nicht der Grund – der macht nur die seltene Mondfinsternis.'],
+  ['🌕','Wie lange dauert es von einem Vollmond bis zum nächsten?','etwa einen Monat',['einen Tag','eine Woche','ein Jahr'],'Der Mond braucht ungefähr 29 Tage, bis er wieder gleich aussieht. Das Wort „Monat“ kommt von „Mond“.'],
+  ['🌑','Wie heißt es, wenn man den Mond gar nicht sieht?','Neumond',['Vollmond','Halbmond','Mondfinsternis'],'Bei Neumond steht der Mond zwischen Erde und Sonne. Er zeigt uns seine dunkle Seite.'],
+  ['🌘','Die helle Rundung des Mondes ist links, wie bei einem kleinen a. Was macht der Mond?','Er nimmt ab',['Er nimmt zu','Er bleibt gleich','Er geht kaputt'],'Merktrick: Sieht er aus wie ein „a“, nimmt er ab. Ist die Rundung rechts, nimmt er zu.'],
+  ['🌒','Was passiert bei einer Sonnenfinsternis?','Der Mond schiebt sich vor die Sonne',['Die Sonne geht aus','Die Erde steht vor dem Mond','Eine große Wolke kommt'],'Mond, Sonne und Erde stehen genau in einer Reihe. Der kleine, aber nahe Mond kann die große, aber weit entfernte Sonne ganz verdecken.'],
+  ['😎','Warum darf man nie direkt in die Sonne schauen?','Das Licht kann die Augen für immer verletzen',['Man muss sonst niesen','Die Sonne wird sonst böse','Das ist nur unhöflich'],'Das Sonnenlicht ist so stark, dass es die Augen schädigen kann – auch bei einer Sonnenfinsternis. Man braucht dafür eine spezielle Schutzbrille.'],
+  ['🔵','Warum ist der Himmel blau?','Die Luft verteilt das blaue Licht besonders stark',['Der Himmel spiegelt das Meer','Die Luft ist blau angemalt','Die Sonne ist blau'],'Sonnenlicht hat alle Farben. Die Luft verteilt das Blau in alle Richtungen, darum kommt von überall blaues Licht zu uns. Mit dem Meer hat das nichts zu tun!'],
+  ['🌇','Warum ist der Himmel abends oft rot?','Das Licht muss einen langen Weg durch die Luft',['Die Sonne wird abends rot angemalt','Die Wolken sind rot','Der Mond färbt den Himmel'],'Abends steht die Sonne tief, ihr Licht geht lange durch die Luft. Das Blau wird unterwegs verteilt, übrig bleiben Rot und Orange.']];
+const WIH={
+  jahreszeit(){const n=pick(Object.keys(SEASON_POS));return{kind:'choice',long:1,text:'Die Erde ist an der markierten Stelle. Welche Jahreszeit ist dann bei uns?',visual:jahrSVG({mark:n,labels:false}),options:['Frühling','Sommer','Herbst','Winter'],answer:n,single:1,
+    steps:[merkStep('jahreszeiten'),{t:'Schau auf die Achse durch den Nordpol (N). Wir wohnen auf der Nordhälfte der Erde.'},
+      {t:n==='Sommer'?'Der Nordpol ist zur Sonne <b>hingeneigt</b>: Bei uns ist <b>Sommer</b>.':n==='Winter'?'Der Nordpol ist von der Sonne <b>weggeneigt</b>: Bei uns ist <b>Winter</b>.':n==='Herbst'?'Die Erde ist gerade vom Sommer weitergewandert (der Pfeil zeigt die Richtung). Nach dem Sommer kommt der <b>Herbst</b>.':'Die Erde ist vom Winter weitergewandert. Nach dem Winter kommt der <b>Frühling</b>.',vis:jahrSVG({sel:n})}]}},
+  mondname(){const[f,n]=pick(PHASES);return{kind:'choice',text:'Wie heißt diese Mondphase?',visual:oneMoonSVG(f),options:optsFrom(n,PHASES.map(x=>x[1])),answer:n,single:1,
+    steps:[merkStep('mondphasen'),{t:'Neumond: unsichtbar. Vollmond: ganz rund. Halbmond: halb hell. Sichel: nur ein schmaler Streifen.',vis:phasenSVG()},
+      {t:f===0||f===.5?`Das ist der <b>${n}</b>.`:`Die helle Seite ist ${f<.5?'<b>rechts</b>: Er nimmt <b>zu</b>':'<b>links</b>, wie beim kleinen a: Er nimmt <b>ab</b>'}. Das ist der/die <b>${n}</b>.`}]}},
+  zuab(){const[f]=pick(PHASES.filter(p=>p[0]!==0&&p[0]!==.5)),z=f<.5;return{kind:'choice',text:'Nimmt der Mond gerade zu oder ab?',visual:oneMoonSVG(f),options:['Er nimmt zu','Er nimmt ab'],answer:z?'Er nimmt zu':'Er nimmt ab',single:1,
+    steps:[{t:'Merktrick: Ist die helle Rundung <b>links</b>, sieht der Mond aus wie ein kleines <b>a</b> – er nimmt <b>a</b>b.'},{t:'Ist die helle Rundung <b>rechts</b>, nimmt er <b>zu</b> und wird bald Vollmond.'},{t:`Hier ist die helle Seite ${z?'rechts':'links'}: <b>${z?'Er nimmt zu':'Er nimmt ab'}</b>.`}]}}
+};
+WI_FACTS.push(['🌍','Im Januar ist die Erde der Sonne näher als im Juli. Trotzdem ist bei uns dann Winter – weil die Erdachse schräg steht.'],['🌕','Das Wort „Monat“ kommt von „Mond“: Von Vollmond zu Vollmond dauert es ungefähr einen Monat.'],['🇦🇺','In Australien feiern die Kinder Weihnachten im Sommer – dort ist die Jahreszeit genau umgekehrt.'],['🔵','Im Weltall ist der Himmel schwarz, auch wenn die Sonne scheint. Den blauen Himmel macht nur unsere Luft.']);
 
 const ICON={leaf:'<svg viewBox="0 0 40 40" width="38" height="38" aria-hidden="true"><path d="M8 32 C8 16 18 7 34 6 C34 22 25 32 10 32Z" fill="#fff"/><path d="M8 33 L26 15" stroke="var(--c)" stroke-width="2.5" stroke-linecap="round"/></svg>',
  globe:'<svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="none" stroke="#fff" stroke-width="3"/><ellipse cx="20" cy="20" rx="7" ry="15" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M5 20 H35 M8 12 H32 M8 28 H32" stroke="#fff" stroke-width="2.5"/></svg>'};
@@ -2501,9 +3005,17 @@ addT('ma',3,[['t_nik','Indisch: Einmaleins 6 bis 9','Über Kreuz zum Ergebnis',T
 addT('ma',4,[['t_nik100','Indisch: Mal nahe 100','97 · 96 im Kopf',T.nik100],['t_quad','Indisch: Zahlen mit 5 am Ende','35 · 35 = 1225',T.quadrat5],['t_kreuz','Indisch: Über Kreuz malnehmen','Zweistellig mal zweistellig',T.kreuz],['t_von4','Indisch: Alle von 9, die letzte von 10','1000 − 358 blitzschnell',T.von100],['t_dh','Trick: Verdoppeln und Halbieren','16 · 25 = 4 · 100',T.dopHalb],['t_neun','Trick: Neunerprobe','Ergebnisse prüfen',T.neuner]]);
 addT('er',3,[['planeten','Die Planeten','Namen, Reihenfolge, Merkmale – mit Bildern',mix(K3.markiert,K3.reihe,K3.merkmal,K3.platz,K3.anzahl,K3.sonne)]]);
 addT('er',4,[['sonnensystem','Sonnensystem: Größen & Abstände','Wie groß? Wie weit? Mit echten Bildern',mix(K4.groesser,K4.erden,K4.weit,K4.mal,K4.jahr,K4.wissen)],['planeten4','Die Planeten','Namen und Reihenfolge wiederholen',mix(K3.markiert,K3.reihe,K3.merkmal,K3.platz)]]);
-const GRP={ma:[['Rechentricks: schnell im Kopf',['t_plus9','t_ausgl','t_fast','t_nik','t_11','t_von','t_59','t_99','t_nik100','t_quad','t_kreuz','t_von4','t_dh','t_neun']],['Rechnen & Zahlen',['zahlen2','zahlen3','plus100','minus100','mal2510','mal','geteilt','bis1000','doppelt','rest','schriftAdd','schriftSub','schriftMal','teilen','runden','pvs','sach','rechenart','ueberschlag','ueberschlag4']],['Größen: Geld, Zeit, Längen, Gewicht',['geld','einkauf','einkauf4','uhr','uhr5','zeit3','zeitspanne','fahrplan','laengen','laenge4','gewicht','liter','gewicht4']],['Geometrie',['formen','lage','umfang','koerper','netz','spiegel','wuerfelbau','flaeche','symm']],['Daten, Zufall & Muster',['strich','diagramm','diagramm4','zufall','zufall4','kombi','muster2','zauber']]],
+SUBJECTS.push({id:'wi',name:'Wissen',glyph:'💡',color:'--c-wi',desc:'Physik, Natur, Rekorde, Erfindungen',grades:{2:[],3:[],4:[]}});
+addT('wi',2,[['wi_zeit','Rund ums Jahr','Tage, Monate, Feiertage',wiGen(WI.zeit)],['wi_tiere2','Tier-Rekorde','Wer ist der Größte, wer der Schnellste?',wiGen(WI.tiere)],['wi_koerper2','Mein Körper','Knochen, Zähne, Sinne',wiGen(WI.koerper)],['wi_schwimmt2','Schwimmt oder sinkt?','Ausprobieren in der Badewanne',WIX.schwimmt,lernKonzept(['schwimmen'])]]);
+addT('wi',3,[['wi_phys3','Physik: Magnet, Strom & Licht','Mit Experimenten zum Ausprobieren',mix(wiGen(WI.physik3,1),wiGen(WI.physik3,1),WIX.schwimmt),lernKonzept(['magnet','strom','licht','schwerkraft','schwimmen'])],['wi_schall','Schall, Licht & Gewitter','Wie schnell ist der Schall?',mix(wiGen(WI.natur,1),wiGen(WI.natur,1),WIX.gewitter),lernKonzept(['schall','licht','gewitter'])],['wi_koerper','Körper-Wissen','Herz, Haut, Knochen und mehr',wiGen(WI.koerper)],['wi_tiere','Tiere','Rekorde und Erstaunliches',wiGen(WI.tiere)],['wi_erde','Erde & Rekorde','Höchster Berg, größtes Meer',wiGen(WI.erde)],['wi_kultur','Musik, Kunst & Sport','Was man wissen sollte',wiGen(WI.kultur)]]);
+addT('wi',4,[['wi_phys4','Physik: Schwerkraft, Hebel & Wärme','Gravitation, Wippe, Reibung, Schmelzen',mix(wiGen(WI.physik4,1),wiGen(WI.physik4,1),WIX.wippe,WIX.aggregat),lernKonzept(['schwerkraft','hebel','reibung','waerme'])],['wi_phys4b','Physik: Magnet, Strom & Licht','Wiederholen aus Klasse 3',mix(wiGen(WI.physik3,1),WIX.schwimmt),lernKonzept(['magnet','strom','licht','schwimmen'])],['wi_schall4','Schall, Licht & Echo','Gewitter und Echo berechnen',mix(wiGen(WI.natur,1),WIX.gewitter,WIX.echo),lernKonzept(['schall','licht','gewitter'])],['wi_gesch','Erfindungen & Geschichte','Gutenberg, Benz, Mondlandung, Römer',wiGen(WI.geschichte)],['wi_erde4','Erde & Rekorde','Länder, Menschen, Meere',wiGen(WI.erde)],['wi_quiz','Großes Wissens-Quiz','Von allem etwas',mix(wiGen(WI.natur,1),wiGen(WI.physik3,1),wiGen(WI.physik4,1),wiGen(WI.himmel,1),wiGen(WI.koerper),wiGen(WI.tiere),wiGen(WI.erde),wiGen(WI.geschichte),wiGen(WI.kultur))]]);
+addT('wi',3,[['wi_himmel','Tag, Nacht & Mond','Mondphasen und blauer Himmel – mit Bildern',mix(wiGen(WI.himmel,1),WIH.mondname,WIH.zuab),lernKonzept(['tagnacht','mondphasen','himmel'])]]);
+addT('wi',4,[['wi_jahr','Jahreszeiten, Mond & Finsternis','Warum gibt es Sommer und Winter?',mix(wiGen(WI.himmel,1),wiGen(WI.himmel,1),WIH.jahreszeit,WIH.mondname,WIH.zuab),lernKonzept(['jahreszeiten','mondphasen','finsternis','tagnacht','himmel'])]]);
+addT('er',3,[['mond','Tag, Nacht & Mondphasen','Warum der Mond sich verändert',mix(wiGen(WI.himmel,1),WIH.mondname,WIH.zuab),lernKonzept(['tagnacht','mondphasen'])]]);
+addT('er',4,[['jahreszeiten','Jahreszeiten & Erdachse','Warum ist es im Sommer warm?',mix(wiGen(WI.himmel,1),WIH.jahreszeit,WIH.jahreszeit),lernKonzept(['jahreszeiten','finsternis'])]]);
+const GRP={wi:[['Erde, Mond & Himmel',['wi_himmel','wi_jahr']],['Physik & Natur',['wi_schwimmt2','wi_phys3','wi_phys4','wi_phys4b','wi_schall','wi_schall4']],['Mensch & Tiere',['wi_koerper2','wi_koerper','wi_tiere2','wi_tiere']],['Welt & Geschichte',['wi_erde','wi_erde4','wi_gesch']],['Alltag & Kultur',['wi_zeit','wi_kultur']],['Quiz',['wi_quiz']]],ma:[['Rechentricks: schnell im Kopf',['t_plus9','t_ausgl','t_fast','t_nik','t_11','t_von','t_59','t_99','t_nik100','t_quad','t_kreuz','t_von4','t_dh','t_neun']],['Rechnen & Zahlen',['zahlen2','zahlen3','plus100','minus100','mal2510','mal','geteilt','bis1000','doppelt','rest','schriftAdd','schriftSub','schriftMal','teilen','runden','pvs','sach','rechenart','ueberschlag','ueberschlag4']],['Größen: Geld, Zeit, Längen, Gewicht',['geld','einkauf','einkauf4','uhr','uhr5','zeit3','zeitspanne','fahrplan','laengen','laenge4','gewicht','liter','gewicht4']],['Geometrie',['formen','lage','umfang','koerper','netz','spiegel','wuerfelbau','flaeche','symm']],['Daten, Zufall & Muster',['strich','diagramm','diagramm4','zufall','zufall4','kombi','muster2','zauber']]],
  de:[['Lesen',['lesen2','lesen3','lesen4']],['Rechtschreibung',['bildwort','diktat2','diktat3','diktat4','silben','ie','ck','doppel2','doppel','dehnungsh','ableiten','dass','abc','woerterbuch','woerterbuch4','satzzeichen','rede','gross']],['Grammatik',['artikel','nomen','wortart','mehrzahl','zusammen','wortfamilie','wortfamilie4','verben','steigern','zeit','subjekt']]],
- er:[['Heimat',['heimat2','heimat3','heimat4']],['Deutschland & Welt',['ort','land','karte2','de','blk','bl','welt','eul','eu']],['Weltall',['planeten','sonnensystem','planeten4']]]};
+ er:[['Heimat',['heimat2','heimat3','heimat4']],['Deutschland & Welt',['ort','land','karte2','de','blk','bl','welt','eul','eu']],['Weltall',['planeten','sonnensystem','planeten4','mond','jahreszeiten']]]};
 GRP.ma.push(GRP.ma.shift()); // Rechentricks als Bonus ans Ende
 
 const GRADE_SUB={2:'Wiederholen',3:'Jetzt dran',4:'Vorschau'};
@@ -2566,8 +3078,9 @@ function renderAtlas(){const A=S.atlas;let map='',info='';
   const selName=A.view==='de'?(A.sel!=null&&GEO_D.s[A.sel][0]):A.view==='eu'?(A.sel!=null&&GEO_E.c[A.sel][1]):(A.sel!=null&&GEO_W.c[A.sel][1]);
   app.innerHTML=`${bar(S.atlasBack||'home','Atlas','Tippe auf die Karte und entdecke')}
   <div style="--c:var(--c-er);display:flex;flex-direction:column;gap:14px">
-  <div class="grades">${[['hm','Heimat'],['de','Deutschland'],['eu','Europa'],['w','Welt']].map(([k,l])=>`<button class="grade ${A.view===k?'on':''}" data-act="atlasView" data-v="${k}"><b>${l}</b></button>`).join('')}</div>
-  <div class="qcard atlas">${map}<div class="ainfo">${info}${selName&&canSpeak?`<button class="speak" data-act="atlasSay">${SPK}Anhören</button>`:''}</div></div></div>`;
+  <div class="grades atabs">${[['hm','Heimat'],['de','Deutsch&shy;land'],['eu','Europa'],['w','Welt']].map(([k,l])=>`<button class="grade ${A.view===k?'on':''}" data-act="atlasView" data-v="${k}"><b>${l}</b></button>`).join('')}</div>
+  <div class="qcard atlas">${map}<p class="zhint">✌️ Mit zwei Fingern größer machen · mit einem Finger verschieben · antippen zum Auswählen</p><div class="ainfo">${info}${selName&&canSpeak?`<button class="speak" data-act="atlasSay">${SPK}Anhören</button>`:''}</div></div></div>`;
+  zoomAll('.qcard.atlas .map','atlas-'+A.view);
 }
 
 function topicOrder(s){const L=s.grades[S.grade],gr=GRP[s.id],vis=i=>!L[i].hidden;if(!gr)return L.map((_,i)=>[null,i]).filter(x=>vis(x[1]));const out=[],used=new Set();
@@ -2623,11 +3136,11 @@ function medalSVG(m,size){if(!m)return'';size=size||34;return`<svg class="medal"
 function renderHub(){const s=subj(),k=topicKey(),b=me().best[k],t=(me().test||{})[k];
   app.innerHTML=`${bar('topics',S.topic[1],`${s.name} · Klasse ${S.grade}`)}
   <div class="hub" style="--c:var(${s.color})">
-  <div class="hello">${owl('happy',74)}<div class="bubble"><b>${S.topic[1]}</b> – ${S.topic[2]}.<br>Ist das Thema neu für dich? Dann fang mit <b>Lernen</b> an.</div></div>
+  <div class="hello">${owl('happy',74)}<div class="bubble"><b>${S.topic[1]}</b><br>${b==null?'Neu für dich? Tippe auf <b>Lernen</b>.':b>=ROUND-1?'Super! Probier mal den <b>Test</b>.':'Weiter so! Tippe auf <b>Üben</b>.'}</div></div>
   ${(()=>{const sc=(me().sched||{})[TK()];if(!sc)return'';const ago=today()-sc.last,dd=sc.due-today();return`<p class="note" style="text-align:left;margin:0">Zuletzt geübt: ${ago===0?'heute':ago===1?'gestern':`vor ${ago} Tagen`}. ${dd<=0?'<b>Heute wieder dran!</b>':`Nächste Wiederholung ${dd===1?'morgen':`in ${dd} Tagen`}.`}</p>`})()}
-  <button class="hubbtn" data-act="goLearn"><span class="hn">1</span><span class="tx"><span class="nm">Lernen</span><span class="ds">Stella erklärt dir ein Beispiel Schritt für Schritt${canSpeak?' und liest alles vor':''}. Mit „Warum?“ bei jedem Schritt.</span></span>${NEXT}</button>
-  <button class="hubbtn" data-act="practice"><span class="hn">2</span><span class="tx"><span class="nm">Üben</span><span class="ds">${ROUND} Aufgaben. Wenn du nicht weiterweißt, hilft dir Stella.</span></span><span class="best">${STAR}${b==null?'–':b+'/'+ROUND}</span></button>
-  <button class="hubbtn" data-act="goTest"><span class="hn">3</span><span class="tx"><span class="nm">Test</span><span class="ds">${TEST_N} Aufgaben ohne Hilfe. Schaffst du Gold?</span></span><span class="best">${t==null?'':medalSVG(medalOf(t))||`${t}/${TEST_N}`}</span></button>
+  <button class="hubbtn" data-act="goLearn"><span class="hn">1</span><span class="tx"><span class="nm">Lernen</span><span class="ds">Stella zeigt dir, wie es geht.</span></span>${NEXT}</button>
+  <button class="hubbtn" data-act="practice"><span class="hn">2</span><span class="tx"><span class="nm">Üben</span><span class="ds">${ROUND} Aufgaben. Stella hilft dir.</span></span><span class="best">${STAR}${b==null?'–':b+'/'+ROUND}</span></button>
+  <button class="hubbtn" data-act="goTest"><span class="hn">3</span><span class="tx"><span class="nm">Test</span><span class="ds">${TEST_N} Aufgaben ohne Hilfe. Schaffst du Gold? 🥇</span></span><span class="best">${t==null?'':medalSVG(medalOf(t))||`${t}/${TEST_N}`}</span></button>
   </div>`}
 
 /* ---------- Üben & Test ---------- */
@@ -2637,7 +3150,9 @@ function newRound(test){
   P.seen[tk]=[...(P.seen[tk]||[]).filter(x=>!keys.has(x)),...keys].slice(-60);save();
   Q={qs,i:0,res:[],earned:0,n:qs.length,test:!!test,fails:{},t0:Date.now()};S.rv=null;startQ();
 }
-function startQ(){stopSpeech();Object.assign(Q,{input:'',tries:0,state:'ask',shown:1,wrong:[],steps:null,peeked:false,help:0,showSteps:false,tray:[],buildMsg:''});renderQuiz();const q=cur();if(q.kind==='text'){Q_T=setTimeout(()=>say(q.say,'de-DE',q.sentence?.75:.8),250);focusDikt()}if(q.kind==='speak')Q_T=setTimeout(()=>say(q.say,'en-GB',.85),250);if(q.autoplay)Q_T=setTimeout(()=>say(q.speak,q.speakLang||'en-GB',.85),300)}
+function readQ(q){if(q.kind==='text'||q.kind==='speak'||q.autoplay)return;if(q.speak){const en=/^en/.test(q.speakLang||'');say(en?q.speak:mathSpeak(q.speak),q.speakLang||'de-DE')}else say(mixSegs(q.text+(q.sub?' '+q.sub:'')))}
+const autoRead=()=>{const m=store.autoRead||'k2';return m==='all'||(m==='k2'&&S.grade===2)};
+function startQ(){stopSpeech();Object.assign(Q,{input:'',tries:0,state:'ask',shown:1,wrong:[],steps:null,peeked:false,help:0,showSteps:false,tray:[],buildMsg:''});renderQuiz();const q=cur();if(q.kind==='text'){Q_T=setTimeout(()=>say(q.say,'de-DE',q.sentence?.75:.8),250);focusDikt()}if(q.kind==='speak')Q_T=setTimeout(()=>say(q.say,'en-GB',.85),250);if(q.autoplay)Q_T=setTimeout(()=>say(q.speak,q.speakLang||'en-GB',.85),300);if(autoRead()&&!Q.review)readQ(q)}
 function focusDikt(){const i=document.getElementById('dikt');if(i&&matchMedia('(pointer:fine)').matches)i.focus()}
 const cur=()=>Q.qs[Q.i];
 const solText=q=>q.solTxt?q.solTxt:q.money||q.kind==='build'?euro(q.answer):q.kind==='num'?fmt(q.answer)+(q.unit?' '+q.unit:''):esc(q.answer);
@@ -2684,7 +3199,7 @@ function renderQuiz(){
     const stp=Q.steps||q.steps,all=Q.shown>=stp.length;
     fb=`<div class="fb explain">${tafelHTML('quiz',stp,Q.shown)}
     ${all&&q.kind!=='text'&&q.kind!=='speak'?`<div class="sol">Lösung: ${solText(q)}</div>`:''}${all&&q.solVis?`<div class="solvis">${q.solVis}</div>`:''}
-    ${all?`<div class="row">${q.say&&canSpeak&&q.kind!=='text'?`<button class="btn ghost" data-act="sayEn">Anhören</button>`:''}${nextBtn}</div>`:''}</div>`;
+    ${all?`<div class="row">${q.say&&canSpeak&&q.kind!=='text'?`<button class="btn ghost" data-act="sayEn">Anhören</button>`:''}${nextBtn}</div>`:`<button class="linkbtn skip" data-act="next">Weiter zur nächsten Aufgabe ›</button>`}</div>`;
   }
   const hl=helpList(q).map(stepObj);
   const lastHelp=Q.help>0?hl[Q.help-1]:null;
@@ -2721,6 +3236,7 @@ function finishRound(){if(Q.review){save();S.screen='result';render();if(Q.earne
   if(Q.test){me().test=me().test||{};const p=me().test[k];if(p==null||e>p)me().test[k]=e}
   else{const p=me().best[k];if(p==null||e>p)me().best[k]=e}
   save();S.screen='result';render();if(e>=Math.ceil(Q.n*.6)){confetti();tone('win')}}
+function nextTopicIdx(){const s=subj();if(!s||!S.topic)return null;const L=s.grades[S.grade],order=topicGroups(s).flatMap(g=>g.idx),i=order.indexOf(L.indexOf(S.topic));return i>=0&&i<order.length-1?order[i+1]:null}
 function renderResult(){if(Q&&Q.review)return renderReviewResult();
   const s=subj(),e=Q.earned,N=Q.n,md=Q.test?medalOf(e,N):null;
   const msg=e===N?'Alles richtig! Du bist ein Sternen-Profi.':e>=N*.75?'Toll gemacht! Fast alles richtig.':e>=N*.5?'Gut! Mit ein bisschen Übung klappt es noch besser.':'Nicht aufgeben! Schau dir die Erklärungen an und probier es nochmal.';
@@ -2731,7 +3247,7 @@ function renderResult(){if(Q&&Q.review)return renderReviewResult();
   ${md?medalSVG(md,70):''}
   <div class="bigstars">${Array.from({length:N},(_,i)=>`<span style="display:contents">${STAR.replace('<svg',`<svg class="${i<e?'on':''}" style="animation-delay:${i*90}ms"`)}</span>`).join('')}</div>
   <div class="score">${e} von ${N} richtig</div>${Q.test&&Q.secs?`<div class="note">Deine Zeit: ${Math.floor(Q.secs/60)} min ${Q.secs%60} s</div>`:''}<p>${msg}</p><p class="rkline">Du bist <b>${rankOf(me().stars).name}</b> mit insgesamt ${me().stars} Sternen.</p>
-  <div class="row" style="width:100%"><button class="btn ghost" data-act="hub">Zum Thema</button><button class="btn" data-act="${Q.test?'goTest':'again'}">${Q.test?'Test nochmal':'Nochmal üben'}</button></div></div>
+  <div class="row" style="width:100%"><button class="btn ghost" data-act="hub">Zum Thema</button><button class="btn ${e>=Q.n*.75&&nextTopicIdx()!=null?'ghost':''}" data-act="${Q.test?'goTest':'again'}">${Q.test?'Test nochmal':'Nochmal üben'}</button></div>${e>=Q.n*.75&&nextTopicIdx()!=null?`<button class="btn" data-act="nextTopic" style="width:100%">Weiter: ${subj().grades[S.grade][nextTopicIdx()][1]} ›</button>`:''}</div>
   <div style="--c:var(${s.color})">${review}</div>`;
 }
 function render(){stopSpeech();applyZR();({home:renderHome,topics:renderTopics,hub:renderHub,quiz:renderQuiz,result:renderResult,lesson:renderLesson,helper:renderHelper,atlas:renderAtlas,eltern:renderEltern,settings:renderSettings,kosmos:renderKosmos})[S.screen]();app.classList.remove('enter');void app.offsetWidth;app.classList.add('enter');window.scrollTo(0,0)}
@@ -2776,7 +3292,7 @@ function helperSolve(){const h=S.h;h.a=document.getElementById('ha').value;h.b=d
 
 function act(a,d){
   switch(a){
-    case 'home':S.screen='home';render();break;
+    case 'home':if(S.screen==='quiz'&&Q&&Q.i>0&&!confirm('Möchtest du wirklich aufhören? Deine Runde ist dann vorbei.'))break;S.screen='home';render();break;
     case 'eltern':S.screen='eltern';render();break;
     case 'zr':me().zr=+d.v;save();renderTopics();break;
     case 'profile':store.active=+d.i;save();renderHome();break;
@@ -2785,11 +3301,11 @@ function act(a,d){
     case 'grade':S.grade=+d.g;renderTopics();break;
     case 'topics':S.screen='topics';Q=null;render();break;
     case 'topic':S.topic=subj().grades[S.grade][+d.i];S.screen='hub';render();break;
-    case 'hub':S.screen='hub';render();break;
+    case 'hub':if(S.screen==='quiz'&&Q&&Q.i>0&&!confirm('Möchtest du wirklich aufhören? Deine Runde ist dann vorbei.'))break;S.screen='hub';render();break;
     case 'review0':startReview();break;
     case 'goTopic':{const f=findTopic(d.tk);if(!f)break;S.subj=f.sub.id;S.grade=f.g;S.topic=f.t;S.screen='hub';render();break}
-    case 'goLearn':S.lq=S.topic[3]();S.lshown=1;S.screen='lesson';render();autoSpeak('lesson');break;
-    case 'lnew':stopSpeech();S.lq=S.topic[3]();S.lshown=1;renderLesson();window.scrollTo(0,0);autoSpeak('lesson');break;
+    case 'goLearn':S.lq=(S.topic[4]||S.topic[3])();S.lshown=1;S.screen='lesson';render();autoSpeak('lesson');break;
+    case 'lnew':stopSpeech();S.lq=(S.topic[4]||S.topic[3])();S.lshown=1;renderLesson();window.scrollTo(0,0);autoSpeak('lesson');break;
     case 'lsay':say(S.lq.say,S.subj==='en'?'en-GB':'de-DE',.8);break;
     case 'practice':S.screen='quiz';stopSpeech();newRound(false);window.scrollTo(0,0);break;
     case 'again':S.screen='quiz';stopSpeech();newRound(false);window.scrollTo(0,0);break;
@@ -2812,6 +3328,12 @@ function act(a,d){
     case 'why':Q.showSteps=true;Q.shown=1;renderQuiz();scrollTafel();autoSpeak('quiz');break;
     case 'next':stopSpeech();Q.i++;if(Q.i>=Q.n){finishRound()}else{startQ();window.scrollTo(0,0)}break;
     case 'settings':S.screen='settings';render();break;
+    case 'autoRead':{const o=['k2','all','off'],c=store.autoRead||'k2';store.autoRead=o[(o.indexOf(c)+1)%3];save();renderSettings();break}
+    case 'nextTopic':{const n=nextTopicIdx();if(n==null){S.screen='topics';render();break}S.topic=subj().grades[S.grade][n];S.screen='hub';render();break}
+    case 'factSay':{const f=app.querySelector('.factcard .ft');f&&say(mathSpeak(f.textContent.replace('Wusstest du schon?','Wusstest du schon? ')),'de-DE');break}
+    case 'zIn':ZC[d.k]&&ZC[d.k].in();break;
+    case 'zOut':ZC[d.k]&&ZC[d.k].out();break;
+    case 'zReset':ZC[d.k]&&ZC[d.k].reset();break;
     case 'kosmos':S.kBack=S.screen==='topics'?'topics':'home';S.screen='kosmos';S.kosmos=S.kosmos||{view:'orb',sel:null};render();break;
     case 'kView':stopSpeech();S.kosmos.view=d.v;renderKosmos();break;
     case 'kSel':{stopSpeech();const K=S.kosmos;K.sel=K.sel===d.p?null:d.p;renderKosmos();const c=app.querySelector('.kinfo');c&&c.scrollIntoView({block:'nearest',behavior:'smooth'});if(K.sel)say(K.sel==='Sonne'?'Die Sonne':K.sel,'de-DE');break}
@@ -2844,7 +3366,7 @@ function act(a,d){
 app.addEventListener('change',e=>{if(e.target.tagName==='SELECT'&&e.target.dataset.lang)act('voiceSel',{lang:e.target.dataset.lang,value:e.target.value})});
 app.addEventListener('input',e=>{if(e.target.id==='dikt'&&Q)Q.input=e.target.value;if(S.h&&(e.target.id==='ha'||e.target.id==='hb'))S.h[e.target.id==='ha'?'a':'b']=e.target.value});
 app.addEventListener('keydown',e=>{if(e.target.id==='dikt'&&e.key==='Enter'){e.preventDefault();act('checkText',{})}if((e.target.id==='ha'||e.target.id==='hb')&&e.key==='Enter'){e.preventDefault();helperSolve()}});
-app.addEventListener('click',e=>{const m=e.target.closest('[data-map]');if(m&&S.screen==='atlas'){act('atlasSel',{i:m.getAttribute('data-i')});return}const b=e.target.closest('[data-act]');if(!b||b.disabled)return;act(b.dataset.act,b.dataset)});
+app.addEventListener('click',e=>{if(Date.now()<ZP_BLOCK&&e.target.closest('.zwrap')&&!e.target.closest('.zbtns'))return;const m=e.target.closest('[data-map]');if(m&&S.screen==='atlas'){act('atlasSel',{i:m.getAttribute('data-i')});return}const b=e.target.closest('[data-act]');if(!b||b.disabled)return;act(b.dataset.act,b.dataset)});
 document.addEventListener('keydown',e=>{
   if(S.screen!=='quiz'||!Q||e.target.tagName==='INPUT')return;const q=cur();
   if(q.kind==='num'&&(Q.state==='ask'||Q.state==='retry')){if(/^[0-9]$/.test(e.key))act('key',{k:e.key});else if(e.key===','||e.key==='.')act('key',{k:','});else if(e.key==='Backspace')act('key',{k:'del'});else if(e.key==='Enter')act('check',{})}
