@@ -669,6 +669,70 @@ button,a,select,input{touch-action:manipulation}
 .et.l2{background:var(--ok-soft);color:var(--ok);font-weight:700}.et.l1{background:var(--star-soft);color:var(--warn)}.et.l-1{background:var(--warn-soft);color:var(--bad);font-weight:700}
 .elegend{display:flex;flex-wrap:wrap;gap:6px}
 .etext{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 14px}.etext summary{cursor:pointer}.etext p{margin:8px 0;line-height:1.5}
+
+.abr{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px}.abr svg{width:100%;max-width:360px;height:auto}.wtabs{margin-bottom:4px}.wtabs button{flex:1 1 40%}.wtabs button.on{background:var(--c-wi);border-color:var(--c-wi)}
+.ebenen{display:flex;flex-direction:column;gap:10px}
+.ebene{background:var(--card);border:2px solid var(--line);border-left:8px solid var(--c);border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.eb-h{display:flex;align-items:center;gap:10px}.eb-e{font-size:34px}.eb-h b{font-family:var(--display);font-size:19px}.eb-r{font-size:16px;line-height:1.4}
+.rels{display:flex;flex-direction:column;gap:8px}
+.relc{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:10px 14px}.relc summary{display:flex;align-items:center;gap:10px;cursor:pointer;font-family:var(--display);font-size:19px}
+.rel-e{font-size:30px}.relc p{margin:8px 0;line-height:1.45}
+.relg{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:15.5px}.relg span{color:var(--muted)}
+.wirgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.wirc{background:var(--card);border:2px solid var(--line);border-top:6px solid var(--c-wi);border-radius:16px;padding:10px 12px}.wirc span{font-size:28px;display:block}.wirc b{font-family:var(--display);font-size:16px}.wirc p{margin:4px 0 0;font-size:14.5px;line-height:1.35;color:var(--muted)}
+.game{display:flex;flex-direction:column;gap:14px}
+.gstat{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;font-family:var(--display);font-weight:800}.gstat span{background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px}
+.memgrid{display:grid;gap:8px}
+.mcard{aspect-ratio:3/4;border-radius:14px;border:3px solid var(--c-wi);background:linear-gradient(135deg,var(--c-wi),#9C7BE8);color:#fff;font-size:26px;display:grid;place-items:center;padding:4px;transition:transform .2s}
+.mcard span{line-height:1.1;word-break:break-word;font-family:var(--display);font-weight:800}
+.mcard.up{background:var(--card);color:var(--ink);transform:rotateY(0)}.mcard.up span{font-size:clamp(15px,4.6vw,30px)}
+.mcard.ok{border-color:var(--ok);background:var(--ok-soft)}
+.simon{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:360px;margin:0 auto;width:100%}
+.spad{aspect-ratio:1;border-radius:24px;background:var(--pc);opacity:.45;border:4px solid rgba(0,0,0,.15);font-size:48px;transition:opacity .1s,transform .1s}
+.spad.lit{opacity:1;transform:scale(1.05);box-shadow:0 0 24px var(--pc)}
+.zbig{text-align:center;font-family:var(--display);font-weight:800;font-size:clamp(44px,15vw,72px);min-height:120px;display:grid;place-items:center;background:var(--card);border:3px solid var(--c-wi);border-radius:22px;letter-spacing:4px;padding:10px;word-break:break-all}
+.zbig.good{color:var(--ok);border-color:var(--ok);font-size:40px}.zbig.bad{color:var(--bad);border-color:var(--bad);font-size:40px}.zbig .small{letter-spacing:0}
+.fgrid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;background:var(--card);border:3px solid var(--c-wi);border-radius:22px;padding:16px;min-height:120px;align-items:center}
+.fgrid span{font-size:44px}.fgrid .fq{font-size:44px;opacity:.6}
+.fopts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.fopt{font-size:40px;aspect-ratio:1;border-radius:18px;background:var(--card);border:3px solid var(--line);border-bottom-width:6px}
+.gmsg{text-align:center;font-family:var(--display);font-weight:800;font-size:22px;margin:0}.gmsg.ok{color:var(--ok)}.gmsg.no{color:var(--bad)}
+.eliste{background:#FFFDF2;border:2px dashed #D9A800;border-radius:12px;padding:16px 20px;font-size:24px;line-height:1.7;font-family:var(--display);transform:rotate(-1deg)}
+.egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.eitem{display:flex;flex-direction:column;align-items:center;gap:2px;background:var(--card);border:3px solid var(--line);border-radius:14px;padding:8px 4px;font-weight:700;font-size:14px}.eitem span{font-size:32px}
+.eitem.ok{border-color:var(--ok);background:var(--ok-soft)}.eitem.no{border-color:var(--bad);background:var(--warn-soft)}.eitem.miss{border-color:var(--warn);border-style:dashed}
+
+.zslide{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;z-index:5;box-shadow:var(--shadow)}
+.zbar{display:flex;height:10px;border-radius:6px;overflow:hidden}.zbar i{display:block}
+.zbar-l{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;font-weight:800}
+#zr{width:100%;height:44px;accent-color:var(--accent);cursor:pointer}
+#zr::-webkit-slider-thumb{width:34px;height:34px}
+.zends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-weight:700}
+.zbtns2{align-items:center}.zbtns2 .btn{min-height:44px;font-size:17px}.zpos{font-family:var(--display);font-weight:800;color:var(--muted);min-width:64px;text-align:center}
+.zcard{background:var(--card);border:3px solid var(--ec);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.zc-top{display:flex;justify-content:space-between;gap:8px}.zc-era{background:var(--ec);color:#fff;border-radius:999px;padding:3px 12px;font-weight:800;font-size:14px}.zc-ago{color:var(--muted);font-weight:700;font-size:14px}
+.zc-h{display:flex;gap:12px;align-items:center}.zc-e{font-size:52px;line-height:1}.zc-y{font-family:var(--display);font-weight:800;color:var(--ec);font-size:18px}.zc-h b{font-family:var(--display);font-size:22px;line-height:1.2}
+.zcard>p{margin:0;font-size:17.5px;line-height:1.55}
+.zc-box{background:var(--paper);border-radius:14px;padding:10px 12px}.zc-box p{margin:4px 0 0;line-height:1.5}.zc-box.hz{background:var(--ok-soft)}
+.zcard .btn svg{width:22px;height:22px;vertical-align:-4px;margin-right:6px;display:inline-block}.zbtns2 .btn{padding:6px 10px;white-space:nowrap}.zlink{display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:17px}
+
+.game .btn svg,.relc .btn svg,.result .btn svg{width:22px;height:22px;vertical-align:-4px;margin-right:6px;display:inline-block}
+.esel{background:var(--card);border:2px solid var(--line);border-left:6px solid var(--c);border-radius:16px;padding:10px 14px;display:flex;flex-direction:column;gap:6px}
+.es-h{display:flex;align-items:center;gap:10px}.es-h span{font-size:26px}.es-h b{flex:1;font-family:var(--display);font-size:17px}.es-h .t-ic{width:40px;height:40px}.es-h .t-ic svg{width:20px;height:20px}
+.es-m{font-family:var(--display);font-weight:800;font-size:18px;color:var(--c);line-height:1.35}
+.kchain{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px;background:var(--card);border:3px solid var(--c-wi);border-radius:20px;padding:12px}
+.kit{display:flex;flex-direction:column;align-items:center}.kit b{font-size:38px}.kit i{font-style:normal;font-size:12px;font-weight:800;color:var(--muted)}.karr{color:var(--muted);font-weight:800}
+.kstory{background:#FFFDF2;border:2px dashed #D9A800;border-radius:14px;padding:12px 14px}.kstory p{margin:0 0 8px;font-size:17.5px;line-height:1.5}.kstory p b{margin-right:4px}
+.kdone{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}.kdone span{width:44px;height:44px;border-radius:12px;background:var(--ok-soft);display:grid;place-items:center;font-size:28px}.kdone span.q{background:var(--paper);color:var(--muted);font-weight:800;font-size:18px}
+.rooms{display:flex;flex-direction:column;gap:8px}.room{display:flex;gap:12px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:10px 12px}.room p{margin:4px 0 0;line-height:1.45}.room .re{font-size:38px}
+.room.big{justify-content:center;font-family:var(--display);font-size:20px;border:3px solid var(--c-wi)}
+.egrid.two{grid-template-columns:1fr 1fr}
+.gextra{background:var(--star-soft);border-radius:14px;padding:10px 14px;font-weight:700}
+
+.game .btn svg,.relc .btn svg,.result .btn svg{width:22px;height:22px;vertical-align:-4px;margin-right:6px;display:inline-block}
+.wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;max-width:260px;margin:6px auto;background:#E8F5E9;border:3px solid #9BC79A;border-radius:14px;padding:6px}
+.wgrid span{aspect-ratio:1;display:grid;place-items:center;font-size:30px;background:#fff;border-radius:8px}.wgrid span.home{background:#FFF1C7}.wgrid span.hl{outline:4px solid var(--accent)}
+.sbform{display:flex;flex-direction:column;gap:6px}
+.awrow .ebar{margin:4px 0}
 </style>
 </head>
 <body>
@@ -2518,6 +2582,10 @@ function renderHome(){
     <button class="tool" style="--c:var(--c-de)" data-act="lpfad"><span class="gl">📖</span><b>Lesepfad</b><span>Laut lesen und verstehen</span></button>
     <button class="tool" style="--c:var(--c-de)" data-act="schreibList"><span class="gl">✏️</span><b>Schreibwerkstatt</b><span>Eigene Geschichten</span></button>
     <button class="tool" style="--c:var(--c-sa)" data-act="machmit"><span class="gl">✋</span><b>Mach mit!</b><span>Messen, bauen, forschen</span></button>
+    <button class="tool" style="--c:var(--c-wi)" data-act="welt"><span class="gl">🌍</span><b>Wir und die Welt</b><span>Politik, Religionen, Miteinander</span></button>
+    <button class="tool" style="--c:#E0598B" data-act="games"><span class="gl">🧠</span><b>Gedächtnis & Lerntricks</b><span>Spiele, Merk-Tricks, Eselsbrücken</span></button>
+    <button class="tool" style="--c:#8D6E63" data-act="zeit"><span class="gl">🕰️</span><b>Zeitreise</b><span>Von der Steinzeit bis heute</span></button>
+    <button class="tool" style="--c:var(--c-wi)" data-act="awcheck"><span class="gl">🎯</span><b>Allgemeinwissen-Check</b><span>15 Bereiche, je 10 Fragen</span></button>
   </div></section>
   <button class="setrow" data-act="settings"><span>⚙️</span><span><b>Für Eltern: Einstellungen</b><br><span class="small">Namen, Stimme, Töne und Lernfortschritt</span></span><span class="go">${NEXT}</span></button>`;
 }
@@ -3412,7 +3480,7 @@ function todayCard(){const P=me();
   if(!placed.ma||!placed.de)it.push({e:'🧭',t:'Einstufung',s:`Finde heraus, was du in ${!placed.ma?'Mathe':'Deutsch'} schon kannst (ca. 5 Minuten)`,a:'place',d:`data-s="${!placed.ma?'ma':'de'}"`,done:false});
   const tp=(tk,e,lab)=>{if(!tk)return;const f=findTopic(tk);if(!f)return;it.push({e,t:`${lab}: ${f.t[1]}`,s:`${f.sub.name} · Klasse ${f.g}${f.g<klasse()?' – noch eine kleine Lücke schließen':''}`,a:'goTopic',d:`data-tk="${esc(tk)}"`,done:hasTag('tk:'+tk)})};
   tp(pl.ma,'🔢','Neu');tp(pl.de,'📝','Neu');
-  if(pl.blitz&&BLITZ[pl.blitz])it.push({e:'⚡',t:`Blitzrechnen: ${BLITZ[pl.blitz].n}`,s:'Eine Minute – schlag deinen Rekord',a:'blitzGo',d:`data-m="${pl.blitz}"`,done:hasTag('blitz')});
+  if(pl.blitz&&BLITZ[pl.blitz])it.push({e:'⚡',t:`Blitzrechnen: ${BLITZ[pl.blitz].n}`,s:'Eine Minute – schlag deinen Rekord',a:'blitzGo',d:`data-m="${pl.blitz}"`,done:hasTag('blitz')});{const gk=Object.keys(GAMES)[today()%Object.keys(GAMES).length];it.push({e:'🧠',t:`Gedächtnis: ${GAMES[gk].n}`,s:'Ein kurzes Spiel für dein Gehirn',a:'gStart',d:`data-g="${gk}"`,done:hasTag('game')})}
   if(pl.lese&&typeof LP!=='undefined'){const x=LP.find(y=>y.id===pl.lese);if(x)it.push({e:'📖',t:`Lesen: ${x.ti}`,s:'Laut vorlesen und Fragen beantworten',a:'lpOpen',d:`data-id="${x.id}"`,done:hasTag('lese')})}
   const w=dueWrong().length,tpn=dueTopics().length;if(w+tpn)it.push({e:'🔁',t:'Wiederholen',s:`${w+tpn} ${w+tpn===1?'Sache ist':'Sachen sind'} wieder dran`,a:'review0',d:'',done:hasTag('review')});
   const n=it.filter(x=>x.done).length;
@@ -3470,7 +3538,7 @@ Object.assign(EXT_SCR,{placeRes:renderPlaceRes,blitz:renderBlitz});
 function topicTools(s){const T=[];
   if(s.id==='ma')T.push(['--c-ma','⚡','Blitzrechnen','1 Minute, eigener Rekord','blitzMenu','']);
   if(s.id==='de')T.push(['--c-de','📖','Lesepfad','Laut lesen, Fragen beantworten','lpfad',''],['--c-de','✏️','Schreibwerkstatt','Eigene Geschichten','schreibList','']);
-  if(['ma','de','sa','wi'].includes(s.id))T.push([s.color,'✋','Mach mit!','Mit echten Dingen lernen','machmit',`data-s="${s.id}"`]);
+  if(s.id==='wi')T.push(['--c-wi','🎯','Allgemeinwissen-Check','15 Bereiche testen','awcheck',''],['#2E9B4F','🪪','Mein Steckbrief','Adresse & Notruf','steckbrief','']);if(s.id==='wi')T.push(['--c-wi','🌍','Wir und die Welt','Politik, Religionen, Miteinander','welt',''],['--c-wi','🕰️','Zeitreise','Schieber durch die Geschichte','zeit',''],['--c-wi','🧠','Gedächtnis-Spiele','Memory, Melodie & mehr','games','']);if(['ma','de','sa','wi'].includes(s.id))T.push([s.color,'✋','Mach mit!','Mit echten Dingen lernen','machmit',`data-s="${s.id}"`]);
   return T.length?`<div class="tools two">${T.map(([c,e,b,sub,a,d])=>`<button class="tool" style="--c:var(${c})" data-act="${a}" ${d}><span class="gl">${e}</span><b>${b}</b><span>${sub}</span></button>`).join('')}</div>`:''}
 {const gt=GRP.ma.find(x=>/^Rechentricks/.test(x[0]));if(gt)gt[0]='Rechentricks – wenn die Grundlagen sitzen'}
 
@@ -3678,7 +3746,784 @@ function renderEltern(){const P=me(),g=S.eg||klasse()||3,t=today();
   <p class="note">Alle Daten bleiben nur auf diesem Gerät. „Sicher“ heißt: mindestens 7 von 8 im Üben, alles richtig im Test oder in der Einstufung gelöst.</p>`}
 Object.assign(EXT_ACT,{eG:d=>{S.eg=+d.g;renderEltern();return true}});
 
+/* ================= Politik, Religionen, Miteinander – kindgerecht erklärt =================
+   Wer gerade im Amt ist, steht NUR hier. Nach einer Wahl einfach diese Zeilen ändern. */
+const AMT={stand:'Oktober 2026',kanzler:'Friedrich Merz',praesident:'Frank-Walter Steinmeier',mp:'Cem Özdemir',ob:'Sebastian Wolf',stadt:'Waiblingen'};
+const POL3=[
+ ['🇩🇪','Wer ist der Bundeskanzler von Deutschland?',AMT.kanzler,['Cem Özdemir','Frank-Walter Steinmeier','Sebastian Wolf'],`Der Bundeskanzler leitet die Regierung von ganz Deutschland. Im ${AMT.stand} ist das ${AMT.kanzler}. Er wird nicht direkt vom Volk gewählt, sondern von den Abgeordneten im Bundestag.`],
+ ['🏛️','Wer ist der Ministerpräsident von Baden-Württemberg – also der „Landesvater“?',AMT.mp,[AMT.kanzler,'Frank-Walter Steinmeier','Sebastian Wolf'],`Jedes Bundesland hat seine eigene Regierung. Ihr Chef heißt Ministerpräsident. In Baden-Württemberg ist das seit Mai 2026 ${AMT.mp}. Er arbeitet in Stuttgart.`],
+ ['🏘️',`Wie heißt der Oberbürgermeister von ${AMT.stadt}?`,AMT.ob,[AMT.mp,AMT.kanzler,'Frank-Walter Steinmeier'],`Der Oberbürgermeister ist der Chef der Stadtverwaltung im Rathaus. Die Menschen in ${AMT.stadt} haben ${AMT.ob} gewählt.`],
+ ['🎖️','Wer ist der Bundespräsident?',AMT.praesident,[AMT.kanzler,AMT.mp,AMT.ob],'Der Bundespräsident ist das Staatsoberhaupt. Er vertritt Deutschland, empfängt Gäste aus aller Welt und unterschreibt die Gesetze. Regieren tut aber der Bundeskanzler.'],
+ ['🏙️','Was ist die Hauptstadt von Deutschland?','Berlin',['Stuttgart','München','Bonn'],'In Berlin sitzen der Bundestag, der Bundeskanzler und der Bundespräsident.'],
+ ['🏰','Was ist die Landeshauptstadt von Baden-Württemberg?','Stuttgart',['Waiblingen','Karlsruhe','Freiburg'],'In Stuttgart arbeiten der Landtag und die Landesregierung.'],
+ ['🗺️','Wie viele Bundesländer hat Deutschland?','16',['10','12','20'],'Deutschland besteht aus 16 Bundesländern. Baden-Württemberg ist eines davon.'],
+ ['🏳️','Welche Farben hat die deutsche Flagge?','Schwarz, Rot, Gold',['Rot, Weiß, Blau','Schwarz, Gelb, Grün','Blau, Gelb, Rot'],'Schwarz-Rot-Gold – „Gold“ sagt man, auch wenn es gelb aussieht.'],
+ ['🗳️','Wer wählt in Deutschland die Abgeordneten für den Bundestag?','Die Erwachsenen ab 18 Jahren',['Nur die Kinder','Nur der Bundeskanzler','Niemand'],'Alle deutschen Bürgerinnen und Bürger ab 18 dürfen den Bundestag wählen. Die Wahl ist geheim: Niemand darf sehen, was du ankreuzt.'],
+ ['🏫','Wer entscheidet über Schulen und Ferien in Baden-Württemberg?','Das Land Baden-Württemberg',['Der Bundespräsident','Die Europäische Union','Der Bäcker'],'Schule ist Sache der Bundesländer. Darum haben die Bundesländer verschiedene Ferien und Lehrpläne. Zuständig ist das Kultusministerium in Stuttgart.'],
+ ['🛝','Wer entscheidet, ob in Waiblingen ein neuer Spielplatz gebaut wird?','Der Gemeinderat der Stadt',['Der Bundestag in Berlin','Die Europäische Union','Der Bundespräsident'],'Was nur die eigene Stadt betrifft, entscheidet die Stadt selbst: der Gemeinderat und der Oberbürgermeister.'],
+ ['👥','Was ist ein Ministerium?','Ein Amt, das sich um ein bestimmtes Thema kümmert',['Ein Museum','Eine Kirche','Ein Spielplatz'],'Die Regierung teilt sich die Arbeit auf: Es gibt zum Beispiel ein Ministerium für Schule, eines für Umwelt und eines für Verkehr. Chef ist jeweils ein Minister oder eine Ministerin.']];
+const POL4=[...POL3,
+ ['📜','Wie heißt die Verfassung von Deutschland – das wichtigste Regelbuch?','das Grundgesetz',['die Straßenverkehrsordnung','das Telefonbuch','die Hausordnung'],'Das Grundgesetz gibt es seit 1949. Darin stehen die Grundrechte, die für alle Menschen in Deutschland gelten.'],
+ ['💎','Wie lautet der erste Satz im Grundgesetz?','Die Würde des Menschen ist unantastbar.',['Alle müssen Fußball spielen.','Der Stärkste hat recht.','Kinder müssen schweigen.'],'Würde heißt: Jeder Mensch ist wertvoll und muss mit Respekt behandelt werden – egal wer er ist.'],
+ ['⚖️','Was steht in Artikel 3 des Grundgesetzes?','Niemand darf wegen Herkunft, Sprache oder Glauben benachteiligt werden',['Nur reiche Menschen haben Rechte','Männer sind wichtiger als Frauen','Es gibt keine Regeln'],'Männer und Frauen sind gleichberechtigt. Niemand darf wegen seiner Herkunft, Sprache, seines Glaubens oder einer Behinderung schlechter behandelt werden.'],
+ ['🙏','Was bedeutet Religionsfreiheit?','Jeder darf selbst entscheiden, woran er glaubt',['Alle müssen das Gleiche glauben','Niemand darf glauben','Nur am Sonntag darf man glauben'],'Das steht in Artikel 4 des Grundgesetzes. Man darf an Gott glauben, an etwas anderes – oder an gar keinen Gott.'],
+ ['🏛️','Wie heißt das Parlament von Baden-Württemberg?','der Landtag',['der Bundestag','der Gemeinderat','das Rathaus'],'Im Landtag in Stuttgart machen die Abgeordneten Gesetze für Baden-Württemberg. Bei der Landtagswahl in Baden-Württemberg dürfen schon 16-Jährige wählen.'],
+ ['🇪🇺','Wie viele Länder gehören zur Europäischen Union?','27',['12','50','5'],'Die EU ist ein Zusammenschluss von 27 Ländern in Europa. Sie machen gemeinsame Regeln – zum Beispiel, dass alle neuen Handys den gleichen Ladestecker (USB-C) haben.'],
+ ['⭐','Wie sieht die Flagge der Europäischen Union aus?','12 goldene Sterne im Kreis auf blauem Grund',['Ein rotes Kreuz','Schwarz-Rot-Gold','Ein Adler'],'Die 12 Sterne stehen für Einheit und Vollständigkeit – nicht für die Zahl der Länder.'],
+ ['🤝','Was bedeutet „Demokratie“?','Das Volk bestimmt mit – durch Wahlen und Abstimmungen',['Ein König bestimmt alles','Nur Kinder bestimmen','Niemand darf etwas sagen'],'In einer Demokratie wählen die Menschen ihre Vertreter. Jeder darf seine Meinung sagen. Und Gerichte achten darauf, dass sich auch die Regierung an die Gesetze hält.'],
+ ['🗞️','Warum ist eine freie Presse in einer Demokratie wichtig?','Damit alle erfahren, was die Politiker tun',['Damit es Werbung gibt','Damit Zeitungen teuer sind','Das ist nicht wichtig'],'Zeitungen, Radio und Fernsehen dürfen frei berichten und auch kritisieren. So können sich die Menschen eine Meinung bilden.'],
+ ['🧮','Was passiert, wenn bei einer Wahl keine Partei mehr als die Hälfte der Sitze hat?','Mehrere Parteien arbeiten zusammen (Koalition)',['Die Wahl wird abgesagt','Der Lauteste gewinnt','Es gibt keine Regierung mehr'],`Dann schließen sich Parteien zu einer Koalition zusammen. In Baden-Württemberg regieren seit 2026 zum Beispiel Grüne und CDU gemeinsam.`]];
+const REL=[
+ ['✝️','Wie heißt das Gotteshaus der Christen?','Kirche',['Moschee','Synagoge','Tempel'],'Christen beten in der Kirche. Oft hört man am Sonntag die Kirchenglocken.'],
+ ['☪️','Wie heißt das Gotteshaus der Muslime?','Moschee',['Kirche','Synagoge','Pagode'],'Muslime beten in der Moschee. Von einem Turm, dem Minarett, wird in manchen Ländern zum Gebet gerufen.'],
+ ['✡️','Wie heißt das Gotteshaus der Juden?','Synagoge',['Moschee','Kirche','Tempel'],'Juden beten in der Synagoge. Dort wird aus der Tora vorgelesen.'],
+ ['📖','Wie heißt das heilige Buch der Christen?','die Bibel',['der Koran','die Tora','das Wörterbuch'],'Die Bibel hat zwei Teile: das Alte Testament (das auch Juden kennen) und das Neue Testament über Jesus.'],
+ ['📗','Wie heißt das heilige Buch der Muslime?','der Koran',['die Bibel','die Tora','das Märchenbuch'],'Muslime glauben, dass Gott (auf Arabisch „Allah“) dem Propheten Mohammed den Koran mitgeteilt hat.'],
+ ['📜','Wie heißt das heilige Buch der Juden?','die Tora',['der Koran','die Bibel','das Lexikon'],'Die Tora ist eine Schriftrolle, die von Hand geschrieben wird. Sie ist auch der Anfang der christlichen Bibel.'],
+ ['🎄','Was feiern Christen an Weihnachten?','die Geburt von Jesus',['das Ende des Fastens','den Auszug aus Ägypten','den Frühlingsanfang'],'Christen glauben, dass Jesus der Sohn Gottes ist. An Weihnachten feiern sie seinen Geburtstag.'],
+ ['🌙','Was machen viele Muslime im Monat Ramadan?','Sie fasten tagsüber',['Sie schmücken einen Baum','Sie suchen Ostereier','Sie fahren in den Urlaub'],'Von Sonnenaufgang bis Sonnenuntergang essen und trinken viele erwachsene Muslime nichts. Am Ende feiern sie das Zuckerfest (Eid al-Fitr) mit der Familie.'],
+ ['🕎','Was ist Chanukka?','ein jüdisches Lichterfest',['ein christliches Osterfest','ein Fußballturnier','ein muslimisches Gebet'],'An acht Tagen wird jeden Abend eine Kerze mehr angezündet. Es erinnert an ein Wunder mit Öl, das acht Tage lang brannte.'],
+ ['🙏','Wie oft am Tag beten gläubige Muslime?','fünfmal',['einmal im Jahr','nie','hundertmal'],'Muslime beten fünfmal am Tag in Richtung Mekka. Dafür benutzen sie oft einen Gebetsteppich.'],
+ ['🕯️','Was ist der Sabbat (Schabbat)?','der jüdische Ruhetag',['ein Musikinstrument','ein christliches Fest','ein Gebetsteppich'],'Der Sabbat beginnt am Freitagabend und endet am Samstagabend. Man ruht sich aus, betet und isst gemeinsam.'],
+ ['☸️','Was machen Buddhisten oft, um ruhig und achtsam zu werden?','Sie meditieren',['Sie fasten nie','Sie rennen um die Wette','Sie schlafen den ganzen Tag'],'Beim Meditieren sitzt man ganz still und achtet auf seinen Atem. Buddha war ein Mensch, der vor sehr langer Zeit in Indien lebte und andere lehrte, freundlich und mitfühlend zu sein.'],
+ ['🪔','Was ist Diwali?','ein hinduistisches Lichterfest',['ein christliches Weihnachtslied','ein jüdischer Ruhetag','ein Fastenmonat'],'Bei Diwali zünden Hindus viele kleine Lichter an. Das Licht steht dafür, dass das Gute stärker ist als das Böse.']];
+const REL4=[...REL,
+ ['👴','Welcher Mann ist für Juden, Christen UND Muslime ein wichtiger Stammvater?','Abraham',['Buddha','Zeus','Kolumbus'],'Abraham (auf Arabisch Ibrahim) glaubte an den einen Gott. Darum nennt man Judentum, Christentum und Islam auch „abrahamitische Religionen“ – sie sind wie Geschwister.'],
+ ['⛰️','Welcher Prophet bekam nach der Überlieferung die Zehn Gebote?','Mose',['Mohammed','Jesus','Buddha'],'Mose (auf Arabisch Musa) ist für Juden, Christen und Muslime ein wichtiger Prophet. Die Zehn Gebote sagen zum Beispiel: Du sollst nicht stehlen.'],
+ ['🕊️','Welche Rolle hat Jesus im Islam?','Er ist ein wichtiger Prophet',['Er kommt im Islam nicht vor','Er ist ein König von Rom','Er ist ein Engel'],'Christen glauben, dass Jesus der Sohn Gottes ist. Muslime verehren Jesus (Isa) als großen Propheten. Auch Maria, seine Mutter, ist im Koran wichtig.'],
+ ['🌟','Wen sehen Muslime als den letzten Propheten an?','Mohammed',['Mose','Abraham','Noah'],'Mohammed lebte vor etwa 1400 Jahren in Mekka und Medina, im heutigen Saudi-Arabien.'],
+ ['❤️','Welche Regel gibt es in fast allen Religionen?','Behandle andere so, wie du selbst behandelt werden möchtest',['Hilf nur deinen Freunden','Iss nie Gemüse','Sei immer der Erste'],'Diese Regel heißt die „Goldene Regel“. Man findet sie im Christentum, im Islam, im Judentum, im Buddhismus, im Hinduismus – und auch Menschen ohne Religion finden sie wichtig.'],
+ ['🤲','Was ist allen großen Religionen wichtig?','Armen und Schwachen zu helfen',['Möglichst viel Geld zu haben','Andere auszulachen','Allein zu bleiben'],'Christen sprechen von Nächstenliebe, Muslime geben die Zakat (eine Spende für Arme), Juden die Zedaka. Überall geht es darum, zu teilen.'],
+ ['🍽️','Was gibt es im Christentum, im Islam und im Judentum?','eine Zeit des Fastens',['einen Weihnachtsbaum','einen Gebetsteppich','eine Kippa'],'Christen fasten vor Ostern, Muslime im Ramadan, Juden zum Beispiel an Jom Kippur. Beim Fasten verzichtet man auf etwas, um an Gott und an andere zu denken.'],
+ ['🧑‍🤝‍🧑','Glauben alle Menschen an einen Gott?','Nein – manche glauben an Gott, manche nicht, und beides ist in Ordnung',['Ja, alle','Nein, niemand','Nur Kinder'],'In Deutschland leben Christen, Muslime, Juden, Buddhisten, Hindus und viele Menschen ohne Religion. Wichtig ist, dass wir uns gegenseitig respektieren.'],
+ ['🧢','Was ist eine Kippa?','eine kleine Kopfbedeckung, die jüdische Männer beim Beten tragen',['ein Gebetsteppich','ein Kirchenlied','eine Süßigkeit'],'Mit der Kippa zeigt man Respekt vor Gott. Auch in anderen Religionen bedecken manche Menschen beim Beten den Kopf.']];
+const WIR=[
+ ['😊','Welche Gefühle haben Kinder auf der ganzen Welt?','Alle: Freude, Angst, Wut und Traurigkeit',['Nur Kinder in Deutschland sind fröhlich','Manche Kinder haben keine Gefühle','Nur Erwachsene haben Gefühle'],'Egal wo ein Kind lebt, welche Sprache es spricht oder wie es aussieht: Es lacht, wenn es sich freut, und weint, wenn es traurig ist. Genau wie du.'],
+ ['🎨','Warum haben Menschen verschiedene Hautfarben?','Weil ihre Vorfahren an Orten mit unterschiedlich viel Sonne lebten',['Weil manche Menschen besser sind','Weil sie sich angemalt haben','Weil sie verschiedenes Essen mögen'],'Unsere Haut hat einen Farbstoff, der vor Sonne schützt. Wo die Sonne stark scheint, haben Menschen oft mehr davon. Die Hautfarbe sagt nichts darüber aus, wie ein Mensch ist.'],
+ ['🧬','Wie ähnlich sind sich alle Menschen in ihrem Bauplan (den Genen)?','fast ganz gleich – zu über 99 Prozent',['gar nicht','nur zur Hälfte','das weiß niemand'],'Unter der Haut sind wir alle fast gleich gebaut: gleiches Herz, gleiches Blut, gleiches Gehirn. Alle Menschen sind eine große Familie.'],
+ ['🌍','Wo lebten die allerersten Menschen?','in Afrika',['in Amerika','in Australien','am Nordpol'],'Forscher haben herausgefunden: Unsere gemeinsamen Vorfahren lebten in Afrika. Von dort aus sind Menschen nach und nach über die ganze Welt gewandert.'],
+ ['🗣️','Wie viele Sprachen gibt es ungefähr auf der Welt?','über 7000',['genau 10','nur 1','100'],'Kinder auf der ganzen Welt sagen „Mama“, spielen Fangen und lieben Geschichten – nur in anderen Wörtern. Jede Sprache ist gleich viel wert.'],
+ ['🙅','Was ist ein Vorurteil?','Man denkt schlecht über jemanden, ohne ihn zu kennen',['Ein Urteil vor Gericht','Ein Teil vom Fahrrad','Ein Lob'],'Ein Vorurteil ist wie eine Brille, durch die man falsch sieht. Am besten lernt man den anderen erst kennen – dann merkt man oft, wie viel man gemeinsam hat.'],
+ ['🧩','Ein neues Kind kommt in die Klasse und spricht noch wenig Deutsch. Was ist gut?','Es freundlich begrüßen und mit ihm spielen',['Es auslachen','Es nicht beachten','Über es tuscheln'],'Stell dir vor, du kommst in ein fremdes Land. Wie froh wärst du über ein freundliches Kind! Spielen klappt auch ohne viele Worte.'],
+ ['♿','Ein Kind sitzt im Rollstuhl. Was stimmt?','Es kann vieles genauso, manches anders – und es will dazugehören',['Es kann gar nichts','Man soll nicht mit ihm reden','Es ist krank im Kopf'],'Viele Rollstuhlfahrer spielen Basketball, tanzen oder gewinnen Medaillen bei den Paralympics. Fragen ist erlaubt: „Wie kann ich dir helfen?“'],
+ ['🍲','Was haben alle Menschen auf der Welt gemeinsam?','Sie brauchen Essen, Wasser, ein Zuhause und Menschen, die sie lieb haben',['Sie essen alle Spätzle','Sie sprechen alle Deutsch','Sie mögen alle die gleiche Farbe'],'Was wir zum Leben brauchen, ist bei allen Menschen gleich. Das verbindet uns mehr als alles, was uns unterscheidet.'],
+ ['🌈','Was bedeutet der Satz „Anders ist nicht schlechter“?','Jeder Mensch ist gleich viel wert, auch wenn er anders aussieht oder glaubt',['Alle müssen gleich aussehen','Nur Gleiche dürfen Freunde sein','Andere sind schlechter'],'Wäre die Welt nicht langweilig, wenn alle gleich wären? Unterschiede machen das Leben bunt. Gleich sind wir in dem, was zählt: in unserer Würde und unseren Gefühlen.'],
+ ['🛑','Jemand wird wegen seiner Herkunft beschimpft. Was ist richtig?','Stopp sagen, dem Kind beistehen und einen Erwachsenen holen',['Mitlachen','Wegschauen','Mitmachen'],'Wer zuschaut und nichts tut, hilft dem, der gemein ist. Mut heißt: zusammen „Stopp!“ sagen. Hilfe zu holen ist kein Petzen.'],
+ ['🎉','Deine Freundin feiert ein anderes Fest als du. Was kannst du tun?','Neugierig fragen und dich mit ihr freuen',['Sagen, dass ihr Fest doof ist','Nicht mehr mit ihr spielen','Es verbieten'],'Ob Weihnachten, Zuckerfest, Chanukka oder Diwali: Bei allen Festen geht es um Familie, Licht, Freude und gutes Essen. Es ist schön, voneinander zu lernen.']];
+addT('wi',2,[['wi_wir2','Wir sind alle Menschen','Gleiche Gefühle, viele Sprachen',wiGen(WIR.slice(0,9))],['wi_feste2','Feste und Gotteshäuser','Kirche, Moschee, Synagoge',wiGen(REL.filter(x=>/Gotteshaus|Weihnachten|Diwali|Chanukka|Ramadan/.test(x[1])))],['wi_pol2','Unsere Stadt und unser Land','Bürgermeister, Hauptstadt, Flagge',wiGen(POL3.filter(x=>/Oberbürgermeister|Hauptstadt|Flagge|Spielplatz/.test(x[1])))]]);
+addT('wi',3,[['wi_pol3','Wer regiert uns?','Kanzler, Landesvater, Bürgermeister',wiGen(POL3)],['wi_rel3','Religionen der Welt','Gotteshäuser, Bücher, Feste',wiGen(REL)],['wi_wir3','Miteinander','Vorurteile, Mut, Freundschaft',wiGen(WIR)]]);
+addT('wi',4,[['wi_pol4','Demokratie & Grundgesetz','Wahlen, Grundrechte, Europa',wiGen(POL4)],['wi_rel4','Propheten & Gemeinsamkeiten','Abraham, Mose, Jesus, Mohammed',wiGen(REL4.slice(13).concat(REL4.slice(13)).concat(REL))],['wi_wir4','Alle gleich viel wert','Würde, Gleichberechtigung, Mut',wiGen(WIR.concat(POL4.filter(x=>/Würde|Artikel 3|Religionsfreiheit/.test(x[1]))))]]);
+GRP.wi.unshift(['Politik, Religion & Miteinander',['wi_pol2','wi_pol3','wi_pol4','wi_rel3','wi_rel4','wi_feste2','wi_wir2','wi_wir3','wi_wir4']]);
+WI_FACTS.push(['❤️','In fast allen Religionen gibt es die „Goldene Regel“: Behandle andere so, wie du selbst behandelt werden möchtest.'],['🧬','Alle Menschen auf der Welt sind in ihrem Bauplan zu über 99 Prozent gleich. Wir sind eine große Familie.'],['📜','Der erste Satz im Grundgesetz lautet: „Die Würde des Menschen ist unantastbar.“ Das heißt: Jeder Mensch ist wertvoll.'],['👴','Abraham ist für Juden, Christen und Muslime ein wichtiger Stammvater. Darum nennt man diese drei Religionen auch Geschwister-Religionen.']);
+
+/* ---------- Bild-Seiten: Wer regiert uns? · Religionen entdecken · Wir sind alle Menschen ---------- */
+const EBENEN=[
+ {e:'🏘️',n:'Unsere Stadt',o:AMT.stadt,wer:`Oberbürgermeister ${AMT.ob} und der Gemeinderat`,wo:'im Rathaus',was:'Spielplätze, Kindergärten, Schwimmbad, Büchereien, Straßen in der Stadt',c:'#2E9B4F'},
+ {e:'🏰',n:'Unser Bundesland',o:'Baden-Württemberg',wer:`Ministerpräsident ${AMT.mp} und der Landtag`,wo:'in Stuttgart',was:'Schulen, Lehrpläne und Ferien, Polizei, Unis',c:'#D9A800'},
+ {e:'🇩🇪',n:'Unser Land',o:'Deutschland',wer:`Bundeskanzler ${AMT.kanzler} und der Bundestag · Bundespräsident ${AMT.praesident}`,wo:'in Berlin',was:'Gesetze für ganz Deutschland, Kindergeld, Autobahnen, Bundeswehr',c:'#D6405A'},
+ {e:'🇪🇺',n:'Europa',o:'Europäische Union (27 Länder)',wer:'das Europäische Parlament und die EU-Kommission',wo:'in Brüssel und Straßburg',was:'gemeinsame Regeln für alle Länder, z. B. ein gleicher Ladestecker für Handys',c:'#2F6FD6'}];
+const RELS=[
+ {e:'✝️',n:'Christentum',p:'Jesus',h:'Kirche',b:'Bibel',f:'Weihnachten, Ostern',g:'Sie falten die Hände oder knien. Ein bekanntes Gebet ist das „Vaterunser“. Der besondere Tag ist der Sonntag.',gl:'Christen glauben an einen Gott und daran, dass Jesus Gottes Sohn ist.'},
+ {e:'☪️',n:'Islam',p:'Mohammed',h:'Moschee',b:'Koran',f:'Zuckerfest, Opferfest',g:'Fünfmal am Tag beten sie in Richtung Mekka, oft auf einem Gebetsteppich: stehen, verbeugen, sich niederknien. Der besondere Tag ist der Freitag.',gl:'Muslime glauben an einen Gott (Allah) und daran, dass Mohammed sein letzter Prophet war.'},
+ {e:'✡️',n:'Judentum',p:'Abraham und Mose',h:'Synagoge',b:'Tora',f:'Pessach, Chanukka',g:'Männer tragen beim Beten oft eine Kippa und einen Gebetsschal. Der besondere Tag ist der Sabbat (Freitagabend bis Samstagabend).',gl:'Juden glauben an einen Gott. Das Judentum ist die älteste dieser drei Religionen.'},
+ {e:'☸️',n:'Buddhismus',p:'Buddha',h:'Tempel / Kloster',b:'Lehrreden des Buddha',f:'Vesakh (Buddhas Geburtstag)',g:'Sie meditieren: still sitzen, ruhig atmen, freundlich an alle Lebewesen denken.',gl:'Buddhisten folgen der Lehre von Buddha: Sei mitfühlend und tu keinem Lebewesen weh.'},
+ {e:'🕉️',n:'Hinduismus',p:'keine einzelne Gründerfigur',h:'Tempel',b:'Veden',f:'Diwali (Lichterfest), Holi (Farbenfest)',g:'Sie beten im Tempel oder an einem kleinen Altar zu Hause, mit Blumen, Kerzen und Liedern.',gl:'Hindus verehren das Göttliche in vielen Formen. Die meisten Hindus leben in Indien.'}];
+const GEMEIN=['❤️ <b>Goldene Regel:</b> Behandle andere so, wie du behandelt werden willst.','🤲 <b>Teilen:</b> Armen und Schwachen helfen.','🕯️ <b>Licht:</b> Viele Feste feiern das Licht – Weihnachten, Chanukka, Diwali.','🍽️ <b>Fasten:</b> Verzichten, um an Gott und andere zu denken.','👨‍👩‍👧 <b>Familie:</b> Feste feiert man zusammen, mit gutem Essen.','🙏 <b>Beten:</b> Mit Gott sprechen, danken und um Hilfe bitten.'];
+function abrahamSVG(){return`<div class="abr"><svg viewBox="0 0 340 140" role="img" aria-label="Abraham ist Stammvater von Judentum, Christentum und Islam"><rect x="115" y="6" width="110" height="38" rx="12" fill="#FFF1C7" stroke="#D9A800" stroke-width="3"/><text x="170" y="31" text-anchor="middle" font-size="16" font-weight="800" fill="#1D2A44">Abraham</text>
+  <path d="M170 44 V64 M58 64 H282 M58 64 V86 M170 64 V86 M282 64 V86" stroke="#9AA7BA" stroke-width="3" fill="none"/>
+  ${[['Judentum',58,'#2F6FD6'],['Christentum',170,'#D6405A'],['Islam',282,'#2E9B4F']].map(([t,x,c])=>`<rect x="${x-54}" y="86" width="108" height="38" rx="12" fill="#fff" stroke="${c}" stroke-width="3"/><text x="${x}" y="110" text-anchor="middle" font-size="14" font-weight="800" fill="#1D2A44">${t}</text>`).join('')}</svg><div class="note">Drei Religionen – wie Geschwister mit dem gleichen Urgroßvater Abraham</div></div>`}
+function renderWelt(){const v=S.wv||'pol';
+  const tabs=`<div class="seg wtabs">${[['pol','🏛️ Wer regiert?'],['staat','⚖️ Staatsformen'],['rel','🕊️ Religionen'],['wir','🤝 Wir alle']].map(([k,l])=>`<button class="${v===k?'on':''}" data-act="wView" data-v="${k}">${l}</button>`).join('')}</div>`;
+  let body='';
+  if(v==='pol')body=`<div class="hello">${owl('happy',60)}<div class="bubble">In Deutschland gibt es nicht nur <b>einen</b> Chef. Es gibt mehrere Ebenen – wie die Stockwerke eines Hauses. Jede kümmert sich um andere Dinge. Und alle werden von den Menschen <b>gewählt</b>.</div></div>
+    <div class="ebenen">${EBENEN.slice().reverse().map(x=>`<div class="ebene" style="--c:${x.c}"><div class="eb-h"><span class="eb-e">${x.e}</span><div><b>${x.n}</b><br><span class="small">${x.o}</span></div></div><div class="eb-r"><b>Wer?</b> ${x.wer} – ${x.wo}</div><div class="eb-r"><b>Kümmert sich um:</b> ${x.was}</div></div>`).join('')}</div>
+    <div class="rcard"><b>🗳️ So funktioniert eine Wahl</b><span>Jeder Erwachsene hat <b>eine Stimme</b>. Man kreuzt geheim auf einem Zettel an, wen man möchte. Wer die meisten Stimmen bekommt, darf für eine Zeit lang bestimmen. Danach wird neu gewählt. So ist es auch bei der Klassensprecherwahl!</span></div>
+    <p class="note">Stand: ${AMT.stand}. Nach einer Wahl können sich die Namen ändern.</p>`;
+  if(v==='staat')body=renderStaat();
+  if(v==='rel')body=`<div class="hello">${owl('happy',60)}<div class="bubble">Auf der Welt glauben Menschen an Verschiedenes. Sie beten auf unterschiedliche Weise – aber sie haben <b>viel mehr gemeinsam</b>, als man denkt. Und auch Menschen ohne Religion gehören selbstverständlich dazu.</div></div>
+    <div class="rels">${RELS.map((x,i)=>`<details class="relc" ${i===0?'open':''}><summary><span class="rel-e">${x.e}</span><b>${x.n}</b></summary><p>${x.gl}</p>
+      <div class="relg"><span>👤 Wichtige Person</span><b>${x.p}</b><span>🏛️ Gotteshaus</span><b>${x.h}</b><span>📖 Heiliges Buch</span><b>${x.b}</b><span>🎉 Feste</span><b>${x.f}</b></div><p><b>🙏 So beten sie:</b> ${x.g}</p></details>`).join('')}</div>
+    ${abrahamSVG()}
+    <div class="rcard"><b>Das haben die Religionen gemeinsam</b>${GEMEIN.map(t=>`<div>${t}</div>`).join('')}</div>
+    <p class="note">Alles stark vereinfacht für Kinder. In jeder Religion gibt es viele verschiedene Richtungen und Bräuche.</p>`;
+  if(v==='wir')body=`<div class="hello">${owl('cheer',60)}<div class="bubble">Menschen sehen verschieden aus, sprechen andere Sprachen und feiern andere Feste. Aber innen drin sind wir uns <b>ganz ähnlich</b>.</div></div>
+    <div class="wirgrid">${[['❤️','Gleiche Gefühle','Jedes Kind freut sich, hat mal Angst und ist mal traurig.'],['🧬','Fast gleicher Bauplan','Zu über 99 Prozent sind alle Menschen gleich gebaut.'],['🌍','Eine Familie','Unsere gemeinsamen Vorfahren lebten in Afrika.'],['🍲','Gleiche Bedürfnisse','Essen, Wasser, ein Zuhause, Freunde und Liebe.'],['🎨','Bunte Haut','Die Hautfarbe schützt vor Sonne – sie sagt nichts darüber, wie ein Mensch ist.'],['🗣️','7000 Sprachen','Aber Lachen versteht man überall.'],['⚖️','Gleiche Rechte','Im Grundgesetz steht: Niemand darf wegen Herkunft, Sprache oder Glauben benachteiligt werden.'],['🤝','Anders ist nicht schlechter','Unterschiede machen die Welt bunt.']].map(([e,h,t])=>`<div class="wirc"><span>${e}</span><b>${h}</b><p>${t}</p></div>`).join('')}</div>
+    <div class="rcard"><b>💪 So bist du ein guter Freund für alle</b><div>👋 Neue Kinder freundlich begrüßen.</div><div>❓ Neugierig fragen statt auslachen.</div><div>🛑 „Stopp!“ sagen, wenn jemand gemein ist – und Hilfe holen.</div><div>🪞 Überlegen: Wie würde ich mich fühlen?</div></div>`;
+  app.innerHTML=`${bar(S.wBack||'home','🌍 Wir und die Welt','Politik, Religionen, Miteinander')}${tabs}${body}
+  <button class="btn" data-act="wQuiz" style="width:100%">Jetzt Fragen dazu üben ›</button>`}
+Object.assign(EXT_ACT,{
+  welt:d=>{stopSpeech();if(d&&d.v)S.wv=d.v;S.wBack=S.screen==='topics'?'topics':'home';S.screen='welt';render();return true},
+  wView:d=>{S.wv=d.v;renderWelt();window.scrollTo(0,0);return true},
+  wQuiz:()=>{const g=klasse()||3,v=S.wv||'pol',id={pol:{2:'wi_pol2',3:'wi_pol3',4:'wi_pol4'},rel:{2:'wi_feste2',3:'wi_rel3',4:'wi_rel4'},wir:{2:'wi_wir2',3:'wi_wir3',4:'wi_wir4'},staat:{2:'wi_pol2',3:'wi_staat3',4:'wi_staat4'}}[v][g];act('goTopic',{tk:`wi|${g}|${id}`});return true}
+});
+Object.assign(EXT_SCR,{welt:renderWelt});
+
+LP.push(
+ {id:'feste',g:3,ic:'🪔',ti:'Ein Fest für alle',p:['In der Klasse 3c gibt es eine besondere Tradition: Jedes Kind darf von einem Fest erzählen, das seine Familie feiert.','Ben erzählt von Weihnachten. „Wir schmücken einen Baum, singen Lieder und gehen in die Kirche. Wir feiern, dass Jesus geboren wurde.“','Amira erzählt vom Zuckerfest. „Einen Monat lang fasten meine Eltern tagsüber. Danach feiern wir drei Tage. Wir ziehen schöne Kleider an, besuchen Verwandte und es gibt ganz viele Süßigkeiten.“','Noam zeigt einen Leuchter mit neun Armen. „Bei Chanukka zünden wir acht Abende lang jeden Tag ein Licht mehr an.“ Und Priya erzählt von Diwali, dem Lichterfest, bei dem überall kleine Öllampen leuchten.','Frau Yilmaz lächelt. „Fällt euch etwas auf?“ Lena ruft: „Bei allen Festen gibt es Licht, Familie und gutes Essen!“ Am Ende des Schuljahres feiert die Klasse zusammen ein Lichterfest – mit Kerzen, Plätzchen, Baklava und Liedern aus vielen Ländern.'],
+  qs:[['Was dürfen die Kinder in der Klasse 3c erzählen?','von einem Fest ihrer Familie',['von ihrem Haustier','von ihren Ferien'],'Jedes Kind darf von einem Fest erzählen, das seine Familie feiert.'],['Was machen Amiras Eltern vor dem Zuckerfest?','Sie fasten tagsüber.',['Sie schmücken einen Baum.','Sie zünden acht Lichter an.'],'Einen Monat lang fasten meine Eltern tagsüber.'],['Wie lange wird Chanukka gefeiert?','acht Abende',['einen Tag','einen Monat'],'acht Abende lang'],['Was haben alle Feste gemeinsam?','Licht, Familie und gutes Essen',['Geschenke unter dem Baum','Fasten'],'Bei allen Festen gibt es Licht, Familie und gutes Essen!'],['Was feiert die Klasse am Ende des Schuljahres?','ein gemeinsames Lichterfest',['ein Fußballturnier','einen Faschingsumzug'],'feiert die Klasse zusammen ein Lichterfest']]},
+ {id:'wahl',g:4,ic:'🗳️',ti:'Die Klassensprecherwahl',p:['In der Klasse 4a wird ein neuer Klassensprecher gewählt. Drei Kinder wollen sich zur Wahl stellen: Malik, Sophie und Jan.','Jedes Kind darf eine kurze Rede halten. Jan verspricht: „Wenn ihr mich wählt, gibt es keine Hausaufgaben mehr!“ Einige lachen. „Das kann ein Klassensprecher gar nicht bestimmen“, sagt Frau Berger.','Sophie sagt: „Ich möchte, dass wir einen Klassenrat machen, in dem jeder seine Meinung sagen darf.“ Malik erklärt: „Ich kümmere mich darum, dass Streit fair gelöst wird, und rede mit der Schulleitung über neue Spielgeräte für den Pausenhof.“','Dann wird gewählt. Jedes Kind bekommt einen Zettel und schreibt geheim einen Namen darauf. Die Zettel kommen in eine Schachtel, die Wahlurne. Zwei Kinder zählen die Stimmen laut an der Tafel aus.','Malik bekommt 12 Stimmen, Sophie 10 und Jan 3. Malik ist Klassensprecher, Sophie wird seine Stellvertreterin. Jan gratuliert den beiden. „So funktioniert Demokratie“, sagt Frau Berger. „Auch in der großen Politik wird genau so gewählt – nur mit viel mehr Menschen.“'],
+  qs:[['Wie viele Kinder wollen Klassensprecher werden?','drei',['zwei','fünf'],'Drei Kinder wollen sich zur Wahl stellen'],['Warum kann Jan sein Versprechen nicht halten?','Ein Klassensprecher bestimmt nicht über Hausaufgaben.',['Er ist krank.','Er hat keine Zeit.'],'Das kann ein Klassensprecher gar nicht bestimmen'],['Warum schreiben die Kinder den Namen geheim auf?','Damit jeder frei wählen kann, ohne dass andere es sehen',['Weil sie sich schämen','Weil die Lehrerin es so mag'],'schreibt geheim einen Namen darauf'],['Wie viele Stimmen bekommt Sophie?','10',['12','3'],'Malik bekommt 12 Stimmen, Sophie 10 und Jan 3.'],['Wie verhält sich Jan nach der Wahl?','Er gratuliert fair.',['Er ist beleidigt.','Er will neu wählen.'],'Jan gratuliert den beiden.']]});
+
+/* ================= Staatsformen, Wirtschaftsideen, Extremismus, Frieden – kindgerecht und ausgewogen ================= */
+const STAAT=[
+ ['👑','Wer bestimmt in einer absoluten Monarchie?','Ein König oder eine Königin ganz allein',['Alle Menschen gemeinsam','Die Kinder','Niemand'],'Früher gab es in vielen Ländern Könige, die alles allein bestimmten. Das Amt wurde in der Familie vererbt – das Volk konnte nicht wählen.'],
+ ['🇬🇧','Großbritannien hat einen König. Ist es trotzdem eine Demokratie?','Ja – der König repräsentiert, aber das gewählte Parlament regiert',['Nein, der König bestimmt alles','Nein, dort wird nie gewählt','Großbritannien hat keine Regierung'],'Das nennt man parlamentarische Monarchie. Auch Schweden, Dänemark, Spanien und die Niederlande haben Könige – und sind trotzdem Demokratien.'],
+ ['🗳️','Was ist das Wichtigste an einer Demokratie?','Die Menschen wählen ihre Regierung und können sie wieder abwählen',['Der Stärkste bestimmt','Es gibt keine Regeln','Nur eine Partei ist erlaubt'],'In einer Demokratie gibt es freie Wahlen, mehrere Parteien, freie Meinung und unabhängige Gerichte. Wer schlecht regiert, kann bei der nächsten Wahl abgewählt werden.'],
+ ['🚫','Was ist eine Diktatur?','Ein Herrscher oder eine kleine Gruppe bestimmt alles, und Kritik ist verboten',['Ein Land mit freien Wahlen','Ein Land ohne Regierung','Ein Fest'],'In einer Diktatur darf man nicht frei seine Meinung sagen. Zeitungen werden kontrolliert, und wer widerspricht, kann bestraft werden. Deutschland war von 1933 bis 1945 eine schlimme Diktatur.'],
+ ['⚖️','Was bedeutet Gewaltenteilung?','Die Macht wird auf drei Teile aufgeteilt, damit niemand zu mächtig wird',['Man teilt einen Kuchen','Polizisten teilen sich Autos','Nur einer hat alle Macht'],'Das Parlament macht die Gesetze, die Regierung führt sie aus, und die Gerichte prüfen, ob alles gerecht ist. Die drei kontrollieren sich gegenseitig – wie beim Fußball, wo der Schiedsrichter nicht mitspielt.'],
+ ['🕌','Was ist ein Gottesstaat (Theokratie)?','Ein Land, in dem religiöse Führer die Regeln bestimmen',['Ein Land ohne Religion','Ein Land mit einem Fußballverein','Ein Land mit vielen Kirchen'],'In einem Gottesstaat gelten religiöse Regeln als Gesetz, und religiöse Führer haben die Macht. In Deutschland sind Staat und Religion getrennt: Jeder darf glauben, was er möchte.'],
+ ['🌐','Was sind die Vereinten Nationen (UNO)?','Ein Zusammenschluss fast aller Länder der Welt für Frieden',['Ein Fußballturnier','Eine Firma','Ein Land in Afrika'],'Die UNO wurde 1945 nach dem Zweiten Weltkrieg gegründet. Dort reden die Länder miteinander, statt Krieg zu führen. Die Menschenrechte und die Kinderrechte wurden dort beschlossen.'],
+ ['🕊️','Was ist der beste Weg, einen Streit zwischen Ländern zu lösen?','Miteinander reden und einen Kompromiss finden',['Krieg führen','Den anderen beleidigen','Einfach wegschauen'],'Ein Kompromiss heißt: Beide geben ein bisschen nach, und am Ende können beide damit leben. Das gilt für Länder genauso wie für dich und deinen Freund.']];
+const WIRT=[
+ ['🏪','Was bedeutet Kapitalismus?','Firmen und Läden gehören Privatleuten, und Preise entstehen durch Angebot und Nachfrage',['Alles gehört dem Staat','Es gibt kein Geld','Der König besitzt alles'],'Im Kapitalismus kann jeder eine Firma gründen und Geld verdienen. Befürworter sagen: Das führt zu Erfindungen und vielen Waren. Kritiker sagen: Manche werden sehr reich und andere bleiben arm.'],
+ ['📚','Wer hatte die Idee des Kommunismus vor etwa 175 Jahren?','Karl Marx und Friedrich Engels',['Martin Luther','Albert Einstein','Napoleon'],'Marx und Engels lebten im 19. Jahrhundert. Damals arbeiteten viele Menschen, auch Kinder, sehr hart in Fabriken für wenig Lohn, während die Fabrikbesitzer reich wurden. Das fanden sie ungerecht. 1848 schrieben sie gemeinsam das „Kommunistische Manifest“.'],
+ ['🤝','Was war das Ziel von Marx und Engels?','Eine Welt ohne Reiche und Arme, in der allen alles gemeinsam gehört',['Dass einer alles besitzt','Dass es nur Könige gibt','Dass niemand mehr arbeitet'],'Ihre Idee: Fabriken und Land sollen allen gemeinsam gehören, und jeder bekommt, was er braucht. „Kommunismus“ kommt vom lateinischen Wort für „gemeinsam“.'],
+ ['🧱','Was ist passiert, als Länder wie die Sowjetunion oder die DDR versucht haben, den Kommunismus umzusetzen?','Es wurden Diktaturen mit wenig Freiheit, und die Wirtschaft funktionierte oft schlecht',['Alle wurden reich und frei','Es gab keine Regierung mehr','Es wurde eine Monarchie'],'Die Idee von Gleichheit klang für viele schön. Aber in diesen Ländern bestimmte nur eine Partei alles, Kritik war verboten, und oft fehlten Waren in den Läden. In der DDR durften die Menschen nicht frei reisen – darum gab es die Berliner Mauer. 1989 fiel sie durch friedliche Proteste.'],
+ ['🇩🇪','Welche Wirtschaftsform hat Deutschland?','Soziale Marktwirtschaft',['Kommunismus','Absolute Monarchie','Tauschhandel'],'Die soziale Marktwirtschaft ist eine Mischung: Firmen gehören Privatleuten und es gibt freien Wettbewerb – aber der Staat hilft Menschen, die krank, arbeitslos oder alt sind, zum Beispiel mit Krankenversicherung und Rente.'],
+ ['🏥','Was bedeutet „sozial“ in sozialer Marktwirtschaft?','Die Starken helfen mit, dass auch Schwache gut leben können',['Jeder ist nur für sich','Alle verdienen genau gleich viel','Es gibt keine Steuern'],'Wer mehr verdient, zahlt mehr Steuern. Davon bezahlt der Staat zum Beispiel Schulen, Straßen, Krankenhäuser und Hilfe für Familien.'],
+ ['🧺','Was bedeutet Sozialismus?','Eine Idee, bei der der Staat stärker für Gleichheit sorgen soll',['Ein Wort für König','Ein Sport','Eine Religion'],'Sozialismus ist ein weites Wort: Manche meinen damit eine Diktatur wie in der DDR, andere meinen eine Demokratie mit viel Unterstützung für Arbeiter und Arme. Darüber wird bis heute viel diskutiert.'],
+ ['⚖️','Welche Frage beschäftigt alle Wirtschaftsideen?','Wie werden Arbeit und Reichtum gerecht verteilt?',['Wer hat die schönste Flagge?','Welches Essen ist am besten?','Wer ist am größten?'],'Kapitalismus setzt vor allem auf Freiheit, Kommunismus vor allem auf Gleichheit. Die meisten Länder suchen heute einen Mittelweg zwischen beidem.']];
+const EXTREM=[
+ ['🤔','Was bedeutet „radikal“?','Jemand will etwas von Grund auf und sehr stark verändern',['Jemand fährt sehr schnell Rad','Jemand ist sehr müde','Jemand ist immer leise'],'„Radikal“ kommt von „radix“ – Wurzel. Radikale Ideen dürfen in einer Demokratie gesagt werden, solange man sich an die Regeln hält und niemandem Gewalt antut.'],
+ ['🔥','Was wollen Extremisten?','Die Demokratie abschaffen – manche sogar mit Gewalt',['Mehr Spielplätze bauen','Freundlich miteinander reden','Bei Wahlen helfen'],'Extremisten wollen, dass nur ihre eigene Meinung gilt. Es gibt sie mit ganz unterschiedlichen Ideen: von links, von rechts oder aus religiösen Gründen. Gemeinsam ist ihnen: Sie lehnen die Rechte anderer Menschen ab.'],
+ ['🛡️','Wer schützt in Deutschland die Demokratie vor Extremisten?','Die Gerichte, die Polizei – und wir alle',['Niemand','Nur der Bundespräsident','Nur die Kinder'],'Das Grundgesetz sagt: Die Demokratie darf sich wehren. Am stärksten ist sie aber, wenn viele Menschen mitmachen, wählen gehen und fair miteinander umgehen.'],
+ ['👂','Jemand hat eine andere Meinung als du. Was ist demokratisch?','Zuhören, mit Argumenten antworten und respektvoll bleiben',['Ihn anschreien','Ihm verbieten zu reden','Ihn auslachen'],'In einer Demokratie streitet man mit Worten, nicht mit Fäusten. Man darf anderer Meinung sein und trotzdem befreundet bleiben.'],
+ ['🧱','Was erinnert die Menschen in Deutschland daran, warum Demokratie so wertvoll ist?','Die Zeit des Nationalsozialismus und die geteilte Stadt Berlin',['Das Oktoberfest','Die Fußball-WM','Der Weihnachtsmarkt'],'Unter den Nationalsozialisten wurden Millionen Menschen verfolgt und ermordet, weil sie anders waren oder anders dachten – zum Beispiel Juden. Damit so etwas nie wieder passiert, schützt das Grundgesetz die Würde jedes Menschen.'],
+ ['🌍','Was hilft Menschen am meisten, friedlich zusammenzuleben?','Sich kennenlernen, zuhören und gemeinsame Regeln einhalten',['Sich voneinander fernhalten','Immer recht haben wollen','Nur mit Gleichen reden'],'Wer andere kennenlernt, merkt: Wir haben viel mehr gemeinsam, als uns trennt. Darum sind Freundschaften zwischen ganz unterschiedlichen Menschen so wertvoll.']];
+addT('wi',3,[['wi_staat3','Wie Länder regiert werden','König, Demokratie, Diktatur',wiGen(STAAT.filter(x=>!/Gottesstaat|Gewaltenteilung/.test(x[1])))]]);
+addT('wi',4,[['wi_staat4','Staatsformen & Frieden','Demokratie, Monarchie, Diktatur, UNO',wiGen(STAAT)],['wi_wirt4','Kapitalismus, Kommunismus & Co.','Marx und Engels, soziale Marktwirtschaft',wiGen(WIRT)],['wi_extrem4','Radikal, extrem – und friedlich','Streiten mit Worten, nicht mit Fäusten',wiGen(EXTREM)]]);
+GRP.wi[0][1].push('wi_staat3','wi_staat4','wi_wirt4','wi_extrem4');
+const FORMEN=[
+ {e:'🗳️',n:'Demokratie',w:'Alle (über Wahlen)',f:'Meinung, Presse und Glauben sind frei. Die Regierung kann abgewählt werden.',bsp:'Deutschland, Frankreich, Japan, Indien',c:'#2E9B4F'},
+ {e:'👑',n:'Parlamentarische Monarchie',w:'Gewähltes Parlament – König oder Königin repräsentiert',f:'Wie eine Demokratie, nur mit einem Königshaus.',bsp:'Großbritannien, Spanien, Schweden',c:'#2F6FD6'},
+ {e:'🏰',n:'Absolute Monarchie',w:'Ein König allein',f:'Das Volk wählt nicht. Das Amt wird vererbt.',bsp:'früher in fast ganz Europa',c:'#D9A800'},
+ {e:'🚫',n:'Diktatur',w:'Einer oder eine kleine Gruppe',f:'Keine freien Wahlen, Kritik ist verboten.',bsp:'Deutschland 1933–1945, die DDR',c:'#D6405A'}];
+const IDEEN=[
+ {e:'🏪',n:'Kapitalismus',z:'Freiheit: Jeder darf eine Firma gründen und Geld verdienen.',pro:'Viele Erfindungen und Waren, viel Freiheit.',con:'Es kann große Unterschiede zwischen Reichen und Armen geben.'},
+ {e:'🤝',n:'Kommunismus (Idee von Marx und Engels, 1848)',z:'Gleichheit: Alles gehört allen gemeinsam, es gibt keine Reichen und Armen.',pro:'Die Idee: Niemand wird ausgenutzt, alle bekommen, was sie brauchen.',con:'Wo man es versuchte (Sowjetunion, DDR), entstanden Diktaturen ohne Freiheit, und oft fehlten Waren.'},
+ {e:'🇩🇪',n:'Soziale Marktwirtschaft (Deutschland)',z:'Ein Mittelweg: freie Wirtschaft – aber der Staat hilft den Schwächeren.',pro:'Freiheit und Hilfe für Kranke, Alte und Arbeitslose.',con:'Man muss immer neu aushandeln, wie viel der Staat tun soll.'}];
+function renderStaat(){return`<div class="hello">${owl('think',60)}<div class="bubble">Auf der Welt gibt es verschiedene Ideen, <b>wer</b> in einem Land bestimmt und <b>wie</b> man Arbeit und Geld verteilt. Wer sie kennt, versteht andere Länder und Menschen besser.</div></div>
+  <div class="label">Wer bestimmt? – Staatsformen</div>
+  <div class="ebenen">${FORMEN.map(x=>`<div class="ebene" style="--c:${x.c}"><div class="eb-h"><span class="eb-e">${x.e}</span><div><b>${x.n}</b><br><span class="small">Es bestimmt: ${x.w}</span></div></div><div class="eb-r">${x.f}</div><div class="eb-r small">Beispiele: ${x.bsp}</div></div>`).join('')}</div>
+  <div class="label">Wie wird Reichtum verteilt? – Wirtschaftsideen</div>
+  <div class="rels">${IDEEN.map(x=>`<details class="relc"><summary><span class="rel-e">${x.e}</span><b>${x.n}</b></summary><p><b>Die Idee:</b> ${x.z}</p><p>👍 ${x.pro}</p><p>🤔 ${x.con}</p></details>`).join('')}</div>
+  <div class="rcard"><b>🔥 Radikal oder extrem – was ist der Unterschied?</b><span><b>Radikal</b> heißt: Jemand will etwas sehr stark verändern. Das darf man sagen. <b>Extrem</b> heißt: Jemand will die Demokratie abschaffen und die Rechte anderer wegnehmen – manche sogar mit Gewalt. Das gibt es mit ganz verschiedenen Ideen. Die Demokratie schützt sich dagegen.</span></div>
+  <div class="rcard done"><b>🕊️ Miteinander statt gegeneinander</b><div>👂 Zuhören, auch wenn jemand anders denkt.</div><div>💬 Mit Worten streiten, nie mit Fäusten.</div><div>🤝 Einen Kompromiss suchen: Beide geben ein bisschen nach.</div><div>⚖️ Regeln gelten für alle – auch für die Mächtigen.</div><div>❤️ Jeder Mensch hat die gleiche Würde.</div></div>
+  <p class="note">Stark vereinfacht für Kinder. Über viele dieser Fragen diskutieren Erwachsene bis heute – und das ist gut so.</p>`}
+
+/* ================= Gedächtnis-Spiele: Kurzzeitgedächtnis trainieren – mit Rekorden, Stufen und Tagesserie ================= */
+const GAMES={
+  memory:{e:'🃏',n:'Memory',d:'Finde die Paare – mit Tieren, Englisch oder Einmaleins'},
+  simon:{e:'🎵',n:'Stellas Melodie',d:'Merk dir die Reihenfolge der Farben und Töne'},
+  zahlen:{e:'🔢',n:'Zahlen merken',d:'Wie viele Ziffern schaffst du?'},
+  fehlt:{e:'🔍',n:'Was fehlt?',d:'Schau genau hin – dann verschwindet etwas'},
+  liste:{e:'🛒',n:'Einkaufsliste',d:'Merk dir, was Mama einkaufen will'}};
+let GM=null,GM_ID=0;
+const gWait=(ms,f)=>{const id=GM_ID;setTimeout(()=>{if(id===GM_ID&&S.screen==='game')f()},ms)};
+function gRec(k){return((me().grec||{})[k])||0}
+function gEnd(k,score,better){const P=me();P.grec=P.grec||{};const old=P.grec[k]||0;const rec=better?(old===0||score<old):score>old;if(rec&&score>0)P.grec[k]=score;
+  const t=today();if(P.gday!==t){P.gstreak=P.gday===t-1?(P.gstreak||0)+1:1;P.gday=t}dayTag('game');sesBump();save();return{rec:rec&&score>0,old}}
+function gStars(n){n=Math.max(0,Math.min(3,n));const P=me();for(let i=0;i<n;i++){P.stars++;bumpDay()}save();return n}
+function playNote(f,dur=.35){if(store.sound===false)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t0=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(.18,t0+.02);g.gain.exponentialRampToValueAtTime(.001,t0+dur);o.connect(g).connect(AC.destination);o.start(t0);o.stop(t0+dur+.05)}catch(e){}}
+function renderGames(){const P=me(),st=P.gday>=today()-1?P.gstreak||0:0;
+  app.innerHTML=`${bar('home','🧠 Gedächtnis & Lerntricks','Kurz spielen, klug werden')}
+  <div class="tools two"><button class="tool" style="--c:var(--c-wi)" data-act="tricks" data-v="tricks"><span class="gl">📚</span><b>Merk-Tricks</b><span>So merkt man sich alles leichter</span></button><button class="tool" style="--c:#B86914" data-act="tricks" data-v="esel"><span class="gl">🐴</span><b>Eselsbrücken</b><span>Für Mathe, Deutsch, Englisch …</span></button></div>
+  <div class="hello">${owl('cheer',64)}<div class="bubble">Dein Gehirn ist wie ein Muskel: <b>Je öfter du übst, desto stärker wird es.</b> ${st?`Du spielst schon <b>${st} ${st===1?'Tag':'Tage'}</b> hintereinander! 🔥`:'Spiel jeden Tag ein bisschen und sammle eine Serie! 🔥'}</div></div>
+  <div class="topics" style="--c:var(--c-wi)">${Object.entries(GAMES).map(([k,g])=>{const r=k==='memory'?Object.entries(P.grec||{}).filter(([x])=>/^mem_/.test(x)).length:gRec(k);
+    return`<button class="topic" data-act="gStart" data-g="${k}"><span class="bz-e">${g.e}</span><span class="tx"><span class="nm">${g.n}</span><br><span class="ds">${g.d}${k!=='memory'&&r?` · Rekord: Stufe ${r}`:''}</span></span><span class="go">${NEXT}</span></button>`}).join('')}</div>
+  <div class="rcard"><b>💡 Gedächtnis-Tricks, die wirklich helfen</b><div>🗣️ <b>Leise mitsprechen:</b> Was man hört und sagt, merkt man sich besser.</div><div>📦 <b>Päckchen bilden:</b> 4 7 2 9 1 6 → „47 – 29 – 16“.</div><div>🎬 <b>Bilder im Kopf:</b> Stell dir eine lustige Geschichte mit den Dingen vor.</div><div>😴 <b>Gut schlafen:</b> Im Schlaf speichert das Gehirn, was du gelernt hast.</div></div>`}
+/* ---------- Memory ---------- */
+const MEM_TH={
+  tiere:{n:'🐾 Tiere',p:()=>shuf(['🐶','🐱','🦊','🐻','🐼','🐸','🦁','🐵','🐧','🦉','🐢','🦋','🐙','🦄']).map(x=>[x,x])},
+  englisch:{n:'🇬🇧 Englisch',p:()=>shuf([['🐶','dog'],['🐱','cat'],['🐭','mouse'],['🐴','horse'],['🐮','cow'],['🐷','pig'],['🐦','bird'],['🐟','fish'],['🐸','frog'],['🦁','lion'],['🍎','apple'],['🍌','banana']])},
+  mathe:{n:'✖️ Einmaleins',p:()=>{const out=[],seen=new Set();for(let i=0;i<200&&out.length<12;i++){const a=R(2,9),b=R(2,9);if(seen.has(a*b))continue;seen.add(a*b);out.push([`${a} · ${b}`,String(a*b)])}return out}},
+  flaggen:{n:'🏳️ Länder',p:()=>shuf([['🇩🇪','Deutschland'],['🇫🇷','Frankreich'],['🇮🇹','Italien'],['🇪🇸','Spanien'],['🇹🇷','Türkei'],['🇬🇧','England'],['🇬🇷','Griechenland'],['🇵🇱','Polen'],['🇦🇹','Österreich'],['🇨🇭','Schweiz'],['🇯🇵','Japan'],['🇺🇸','USA']])}};
+function memStart(th,n){const pairs=MEM_TH[th].p().slice(0,n);const cards=shuf(pairs.flatMap(([a,b],i)=>[{i,t:a},{i,t:b,alt:a!==b}]));GM={g:'memory',th,n,cards,open:[],done:new Set(),moves:0,lock:false};renderGame()}
+function memView(){if(!GM.cards){const P=me();return`<div class="label">Thema</div><div class="seg">${Object.entries(MEM_TH).map(([k,t])=>`<button class="${GM.th===k?'on':''}" data-act="memTh" data-v="${k}">${t.n}</button>`).join('')}</div>
+  <div class="label">Wie viele Paare?</div><div class="seg">${[[6,'6 – leicht'],[8,'8 – mittel'],[10,'10 – schwer']].map(([v,l])=>`<button data-act="memGo" data-v="${v}">${l}${gRec(`mem_${GM.th}_${v}`)?` · Rekord ${gRec(`mem_${GM.th}_${v}`)} Züge`:''}</button>`).join('')}</div>
+  <p class="note">Tippe zwei Karten an. Gehören sie zusammen, bleiben sie offen. Versuche, mit möglichst wenigen Zügen alle Paare zu finden.</p>`}
+  const cols=GM.n<=6?3:4;
+  return`<div class="gstat"><span>Züge: <b>${GM.moves}</b></span><span>Paare: <b>${GM.done.size}/${GM.n}</b></span>${gRec(`mem_${GM.th}_${GM.n}`)?`<span>Rekord: ${gRec(`mem_${GM.th}_${GM.n}`)}</span>`:''}</div>
+  <div class="memgrid" style="grid-template-columns:repeat(${cols},1fr)">${GM.cards.map((c,k)=>{const up=GM.open.includes(k)||GM.done.has(c.i);return`<button class="mcard ${up?'up':''} ${GM.done.has(c.i)?'ok':''}" data-act="memFlip" data-k="${k}" aria-label="${up?esc(c.t):'Karte'}"><span>${up?esc(c.t):'⭐'}</span></button>`}).join('')}</div>`}
+function memFlip(k){if(!GM||GM.lock)return;const c=GM.cards[k];if(GM.open.includes(k)||GM.done.has(c.i))return;GM.open.push(k);playNote(520,.12);
+  if(GM.open.length===2){GM.moves++;const[a,b]=GM.open.map(x=>GM.cards[x]);
+    if(a.i===b.i){GM.done.add(a.i);GM.open=[];tone('ok');if(GM.th==='englisch'){const w=a.alt?a.t:b.t;say(w,'en-GB',.85)}
+      if(GM.done.size===GM.n){const r=gEnd(`mem_${GM.th}_${GM.n}`,GM.moves,true);GM.res={score:GM.moves,rec:r.rec,old:r.old,stars:gStars(GM.moves<=GM.n*1.6?3:GM.moves<=GM.n*2.2?2:1),txt:`${GM.moves} Züge für ${GM.n} Paare`}}}
+    else{GM.lock=true;gWait(900,()=>{GM.open=[];GM.lock=false;renderGame()})}}
+  renderGame()}
+/* ---------- Stellas Melodie (Simon) ---------- */
+const PADS=[['#2E9B4F','🐸',392],['#D6405A','🐞',523],['#2F6FD6','🐳',659],['#E8A400','🐥',784]];
+function simonStart(){GM={g:'simon',seq:[],pos:0,show:-1,phase:'show'};simonNext()}
+function simonNext(){GM.seq.push(R(0,3));GM.pos=0;GM.phase='show';renderGame();let i=0;const sp=Math.max(330,650-GM.seq.length*25);
+  const step=()=>{if(i>=GM.seq.length){GM.show=-1;GM.phase='input';renderGame();return}GM.show=GM.seq[i];playNote(PADS[GM.seq[i]][2],.3);renderGame();gWait(sp,()=>{GM.show=-1;renderGame();i++;gWait(140,step)})};gWait(700,step)}
+function simonTap(k){if(!GM||GM.phase!=='input')return;playNote(PADS[k][2],.25);GM.show=k;renderGame();gWait(180,()=>{if(GM.phase==='input'){GM.show=-1;renderGame()}});
+  if(k!==GM.seq[GM.pos]){tone('no');const lvl=GM.seq.length-1;const r=gEnd('simon',lvl);GM.phase='end';GM.res={score:lvl,rec:r.rec,old:r.old,stars:gStars(Math.floor(lvl/3)),txt:`Du hast dir ${lvl} ${lvl===1?'Ton':'Töne'} gemerkt`};renderGame();return}
+  GM.pos++;if(GM.pos>=GM.seq.length){GM.phase='wait';tone('ok');gWait(700,simonNext)}}
+function simonView(){return`<div class="gstat"><span>Stufe: <b>${GM.seq.length}</b></span><span>${GM.phase==='show'?'👀 Gut zuschauen …':GM.phase==='input'?'👆 Jetzt du!':'✓'}</span>${gRec('simon')?`<span>Rekord: ${gRec('simon')}</span>`:''}</div>
+  <div class="simon">${PADS.map(([c,e],k)=>`<button class="spad ${GM.show===k?'lit':''}" style="--pc:${c}" data-act="simonTap" data-k="${k}" ${GM.phase!=='input'?'aria-disabled="true"':''}><span>${e}</span></button>`).join('')}</div>`}
+/* ---------- Zahlen merken ---------- */
+function zahlStart(back){GM={g:'zahlen',len:3,back:!!back,miss:0,phase:'ready',input:''};renderGame()}
+function zahlShow(){GM.num=Array.from({length:GM.len},(_,i)=>i===0?R(1,9):R(0,9)).join('');GM.phase='show';GM.input='';GM.k=-1;renderGame();let i=0;
+  const step=()=>{if(i>=GM.num.length){GM.k=-1;GM.phase='input';renderGame();return}GM.k=i;renderGame();gWait(850,()=>{GM.k=-2;renderGame();i++;gWait(200,step)})};gWait(500,step)}
+function zahlCheck(){const want=GM.back?[...GM.num].reverse().join(''):GM.num;if(GM.input===want){tone('ok');GM.len++;GM.miss=0;GM.phase='good';renderGame();gWait(900,zahlShow);return}
+  tone('no');GM.miss++;GM.phase='bad';renderGame();if(GM.miss>=2){const lvl=GM.len-1,key=GM.back?'zahlen_r':'zahlen';const r=gEnd(key,lvl);GM.phase='end';GM.res={score:lvl,rec:r.rec,old:r.old,stars:gStars(lvl-3),txt:`Du kannst dir ${lvl} Ziffern ${GM.back?'rückwärts ':''}merken`};gWait(1500,renderGame);return}gWait(1500,zahlShow)}
+function zahlView(){if(GM.phase==='ready')return`<p class="bubble">Gleich erscheinen Ziffern – eine nach der anderen. Merk sie dir und tippe sie danach ein${GM.back?' – aber <b>rückwärts</b>!':'.'}<br><span class="small">Tipp: Sprich leise mit und bilde Päckchen.</span></p><div class="row"><button class="btn big" data-act="zahlGo">Los geht's!</button></div>
+  <button class="btn ghost" data-act="zahlMode">${GM.back?'Lieber vorwärts spielen':'Profi-Modus: rückwärts'}</button>`;
+  const want=GM.back?[...GM.num].reverse().join(''):GM.num;
+  return`<div class="gstat"><span>${GM.len} Ziffern${GM.back?' · rückwärts':''}</span><span>${'❤️'.repeat(2-GM.miss)}${'🤍'.repeat(GM.miss)}</span>${gRec(GM.back?'zahlen_r':'zahlen')?`<span>Rekord: ${gRec(GM.back?'zahlen_r':'zahlen')}</span>`:''}</div>
+  <div class="zbig ${GM.phase}">${GM.phase==='show'?(GM.k>=0?GM.num[GM.k]:'&nbsp;'):GM.phase==='good'?'✓ Richtig!':GM.phase==='bad'?`<span class="small">Richtig war:</span><br>${want}`:(GM.input||'?')}</div>
+  ${GM.phase==='input'?`<div class="pad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button class="key" data-act="zahlKey" data-k="${n}">${n}</button>`).join('')}<button class="key del" data-act="zahlKey" data-k="del" aria-label="Löschen">${DEL}</button><button class="key" data-act="zahlKey" data-k="0">0</button><button class="key check" data-act="zahlKey" data-k="ok">OK</button></div>`:''}`}
+/* ---------- Was fehlt? ---------- */
+const FEHLT_POOL=['🍎','🚗','⚽','🎈','🐱','🌻','🔑','📚','🍦','🧸','🚲','⏰','🎸','🌈','🦒','🍕','✏️','🎁','🐢','🚀'];
+function fehltStart(){GM={g:'fehlt',n:4,lives:3,phase:'ready',lvl:0};renderGame()}
+function fehltShow(){const set=shuf(FEHLT_POOL).slice(0,GM.n);GM.set=set;GM.miss=pick(set);GM.phase='show';renderGame();gWait(2500+GM.n*500,()=>{GM.phase='hide';renderGame();gWait(600,()=>{GM.rest=shuf(set.filter(x=>x!==GM.miss));GM.opts=shuf([GM.miss,...shuf(FEHLT_POOL.filter(x=>!set.includes(x))).slice(0,1),...shuf(GM.rest).slice(0,2)]);GM.phase='ask';renderGame()})})}
+function fehltPick(x){if(GM.phase!=='ask')return;if(x===GM.miss){tone('ok');GM.lvl++;GM.n=Math.min(12,GM.n+1);GM.phase='good'}else{tone('no');GM.lives--;GM.phase='bad'}renderGame();
+  if(GM.lives<=0){const r=gEnd('fehlt',GM.lvl);GM.phase='end';GM.res={score:GM.lvl,rec:r.rec,old:r.old,stars:gStars(Math.floor(GM.lvl/3)),txt:`${GM.lvl} Runden geschafft`};gWait(1400,renderGame);return}gWait(1300,fehltShow)}
+function fehltView(){if(GM.phase==='ready')return`<p class="bubble">Schau dir die Dinge genau an. Dann verschwinden sie – und eins fehlt danach! Findest du heraus, welches?</p><button class="btn big" data-act="fehltGo">Los geht's!</button>`;
+  return`<div class="gstat"><span>Runde ${GM.lvl+1}</span><span>${'❤️'.repeat(GM.lives)}${'🤍'.repeat(3-GM.lives)}</span>${gRec('fehlt')?`<span>Rekord: ${gRec('fehlt')}</span>`:''}</div>
+  <div class="fgrid">${GM.phase==='show'?GM.set.map(x=>`<span>${x}</span>`).join(''):GM.phase==='ask'||GM.phase==='good'||GM.phase==='bad'?GM.rest.map(x=>`<span>${x}</span>`).join('')+`<span class="fq">?</span>`:'<span class="fq">🙈</span>'}</div>
+  ${GM.phase==='show'?'<p class="note">Gut anschauen …</p>':GM.phase==='ask'?`<div class="label">Was fehlt?</div><div class="fopts">${GM.opts.map(x=>`<button class="fopt" data-act="fehltPick" data-v="${x}">${x}</button>`).join('')}</div>`:GM.phase==='good'?'<p class="gmsg ok">✓ Richtig!</p>':GM.phase==='bad'?`<p class="gmsg no">Es fehlte: <span style="font-size:34px">${GM.miss}</span></p>`:''}`}
+/* ---------- Einkaufsliste ---------- */
+const EINK=[['🥛','Milch'],['🍞','Brot'],['🧀','Käse'],['🍎','Äpfel'],['🥚','Eier'],['🍌','Bananen'],['🥕','Karotten'],['🍅','Tomaten'],['🧈','Butter'],['🍫','Schokolade'],['🍝','Nudeln'],['🍚','Reis'],['🥨','Brezeln'],['🍯','Honig'],['🧃','Saft'],['🥒','Gurke']];
+function listeStart(){GM={g:'liste',k:3,lives:2,phase:'ready',lvl:0};renderGame()}
+function listeShow(){GM.list=shuf(EINK).slice(0,GM.k);GM.picked=[];GM.phase='show';renderGame();say('Bitte kaufe: '+GM.list.map(x=>x[1]).join(', '),'de-DE');gWait(2000+GM.k*1300,()=>{stopSpeech();GM.grid=shuf([...GM.list,...shuf(EINK.filter(x=>!GM.list.includes(x))).slice(0,Math.min(12,GM.k*2+3)-GM.k)]);GM.phase='ask';renderGame()})}
+function listePick(n){if(GM.phase!=='ask'||GM.picked.includes(n))return;const ok=GM.list.some(x=>x[1]===n);GM.picked.push(n);
+  if(!ok){tone('no');GM.lives--;GM.phase='bad';renderGame();if(GM.lives<=0){const r=gEnd('liste',GM.lvl);GM.phase='end';GM.res={score:GM.lvl,rec:r.rec,old:r.old,stars:gStars(GM.lvl-1),txt:`Du hast dir bis zu ${GM.lvl+2} Sachen gemerkt`};gWait(1500,renderGame);return}gWait(1500,listeShow);return}
+  playNote(660,.12);if(GM.list.every(x=>GM.picked.includes(x[1]))){tone('ok');GM.lvl++;GM.k=Math.min(9,GM.k+1);GM.phase='good';renderGame();gWait(1100,listeShow);return}renderGame()}
+function listeView(){if(GM.phase==='ready')return`<p class="bubble">Mama schickt dich einkaufen! Stella zeigt dir die Einkaufsliste und liest sie vor. Dann musst du alles im Laden finden.<br><span class="small">Tipp: Stell dir eine lustige Geschichte vor – „Die Milch tanzt mit dem Brot …“</span></p><button class="btn big" data-act="listeGo">Los geht's!</button>`;
+  return`<div class="gstat"><span>${GM.k} Sachen</span><span>${'❤️'.repeat(GM.lives)}${'🤍'.repeat(2-GM.lives)}</span>${gRec('liste')?`<span>Rekord: ${gRec('liste')}</span>`:''}</div>
+  ${GM.phase==='show'?`<div class="eliste"><b>📝 Einkaufsliste</b>${GM.list.map(([e,n])=>`<div>${e} ${n}</div>`).join('')}</div>`
+   :`<div class="label">${GM.phase==='good'?'✓ Alles gefunden!':GM.phase==='bad'?'Das stand nicht auf der Liste.':'Tippe alles an, was auf der Liste stand:'}</div><div class="egrid">${GM.grid.map(([e,n])=>{const p=GM.picked.includes(n),ok=GM.list.some(x=>x[1]===n);return`<button class="eitem ${p?(ok?'ok':'no'):''} ${GM.phase==='bad'&&ok&&!p?'miss':''}" data-act="listePick" data-v="${n}"><span>${e}</span>${n}</button>`}).join('')}</div>`}`}
+/* ---------- Rahmen ---------- */
+function renderGame(){if(!GM)return renderGames();const g=GAMES[GM.g];
+  if(GM.res&&(GM.g==='memory'?GM.done.size===GM.n:GM.phase==='end')){const r=GM.res;
+    app.innerHTML=`${bar('games',g.e+' '+g.n,'Geschafft!')}<div class="result">${owl(r.rec?'cheer':'happy',100)}<h2>${r.rec&&r.old?'Neuer Rekord!':r.rec?'Dein erster Rekord!':'Gut gemacht!'}</h2><div class="score">${r.txt}</div>
+    <p>${r.rec&&r.old?`Vorher: ${r.old}. Dein Gehirn wird stärker!`:r.old?`Dein Rekord: ${r.old}. Beim nächsten Mal knackst du ihn!`:''}${r.stars?` Du bekommst ${r.stars} ${r.stars===1?'Stern':'Sterne'}.`:''}</p>${r.extra?`<div class="gextra">${r.extra}</div>`:''}
+    <div class="row" style="width:100%"><button class="btn" data-act="gAgain">Nochmal</button><button class="btn ghost" data-act="games">Anderes Spiel</button></div></div>`;
+    if(r.rec&&!GM.cele){GM.cele=1;confetti();tone('win')}pauseHint();return}
+  const body=({memory:memView,simon:simonView,zahlen:zahlView,fehlt:fehltView,liste:listeView,...GAME_VIEW})[GM.g]();
+  app.innerHTML=`${bar('games',g.e+' '+g.n,g.d)}<div class="game" style="--c:var(--c-wi)">${body}</div>`}
+Object.assign(EXT_ACT,{
+  games:()=>{GM_ID++;GM=null;stopSpeech();S.screen='games';render();return true},
+  gStart:d=>{GM_ID++;stopSpeech();S.screen='game';({memory:()=>{GM={g:'memory',th:'tiere'};renderGame()},simon:simonStart,zahlen:()=>zahlStart(false),fehlt:fehltStart,liste:listeStart,...GAME_START})[d.g]();window.scrollTo(0,0);return true},
+  gAgain:()=>{const g=GM.g;GM_ID++;if(g==='memory')memStart(GM.th,GM.n);else act('gStart',{g});return true},
+  memTh:d=>{GM.th=d.v;renderGame();return true},
+  memGo:d=>{memStart(GM.th,+d.v);return true},
+  memFlip:d=>{memFlip(+d.k);return true},
+  simonTap:d=>{simonTap(+d.k);return true},
+  zahlGo:()=>{zahlShow();return true},
+  zahlMode:()=>{zahlStart(!GM.back);return true},
+  zahlKey:d=>{if(GM.phase!=='input')return true;if(d.k==='del')GM.input=GM.input.slice(0,-1);else if(d.k==='ok'){if(GM.input)zahlCheck();return true}else if(GM.input.length<12)GM.input+=d.k;
+    if(GM.input.length===GM.num.length){zahlCheck();return true}renderGame();return true},
+  fehltGo:()=>{fehltShow();return true},
+  fehltPick:d=>{fehltPick(d.v);return true},
+  listeGo:()=>{listeShow();return true},
+  listePick:d=>{listePick(d.v);return true}
+});
+Object.assign(EXT_SCR,{games:renderGames,game:renderGame});
+
+/* ================= Zeitreise: Schieber durch die Geschichte – mit Geschichte, Wirkung, Spuren heute und Kinderlexikon ================= */
+const ERAS={stein:['Steinzeit','#8D6E63'],antike:['Altertum','#D9A800'],mittel:['Mittelalter','#2F6FD6'],neu:['Neuzeit','#2E9B4F'],modern:['Unsere Zeit','#D6405A']};
+const ZEIT=[
+ {y:-300000,yl:'vor etwa 300.000 Jahren',era:'stein',e:'🦴',t:'Die ersten Menschen wie wir',k:'Homo sapiens',
+  txt:'In Afrika lebten die ersten Menschen, die so aussahen wie wir heute. Man nennt sie „Homo sapiens“ – das heißt „der weise Mensch“. Sie lebten in kleinen Gruppen, jagten Tiere, sammelten Beeren und Wurzeln und machten Werkzeuge aus Stein.',
+  wirk:'Von Afrika aus wanderten die Menschen nach und nach über die ganze Erde.',heute:'Alle Menschen auf der Welt stammen von diesen ersten Menschen ab – wir sind eine große Familie.'},
+ {y:-40000,yl:'vor etwa 40.000 Jahren',era:'stein',e:'🗿',t:'Neandertaler und die ersten Kunstwerke',k:'Neandertaler',
+  txt:'In Europa lebten damals die Neandertaler: kräftige Menschen, die Feuer machen konnten und ihre Toten begruben. Ungefähr zu dieser Zeit starben sie aus. Gleichzeitig schnitzten Menschen auf der Schwäbischen Alb kleine Figuren aus Mammut-Elfenbein und bauten Flöten aus Knochen.',
+  wirk:'Die Menschen begannen, Kunst und Musik zu machen – nicht nur, um zu überleben, sondern weil es schön ist.',heute:'Die Höhlen auf der Schwäbischen Alb sind heute Weltkulturerbe. Dort fand man einige der ältesten Kunstwerke und Musikinstrumente der Welt. Und in vielen Menschen steckt noch ein kleines bisschen Neandertaler-Erbgut.'},
+ {y:-10000,yl:'vor etwa 12.000 Jahren',era:'stein',e:'🌾',t:'Die Menschen werden sesshaft',k:'Jungsteinzeit',
+  txt:'Die Menschen merkten: Wenn man Samen in die Erde steckt, wachsen Pflanzen! Sie bauten Getreide an, zähmten Tiere wie Ziegen, Schafe und Rinder und bauten feste Häuser. Die ersten Dörfer entstanden.',
+  wirk:'Weil es genug zu essen gab, konnten mehr Menschen zusammenleben. Aus Dörfern wurden später Städte.',heute:'Brot, Milch, Käse und unsere Haustiere – das alles gibt es, weil Menschen damals mit Ackerbau und Viehzucht anfingen.'},
+ {y:-3300,yl:'um 3300 vor Christus',era:'antike',e:'✍️',t:'Die Schrift wird erfunden',k:'Schrift',
+  txt:'Im Land zwischen den Flüssen Euphrat und Tigris (heute im Irak) drückten Menschen Zeichen in weiche Tontafeln. Das war die Keilschrift. Fast gleichzeitig erfanden die Ägypter ihre Bilderschrift, die Hieroglyphen.',
+  wirk:'Endlich konnte man Wissen aufschreiben, statt es nur zu erzählen. Darum beginnt mit der Schrift die „Geschichte“ – alles davor nennt man Vorgeschichte.',heute:'Ohne die Erfindung der Schrift könntest du dieses Heft nicht lesen!'},
+ {y:-2560,yl:'um 2560 vor Christus',era:'antike',e:'🔺',t:'Die Pyramiden in Ägypten',k:'Pyramiden von Gizeh',
+  txt:'Am Fluss Nil lebten die alten Ägypter. Ihr König hieß Pharao. Für den Pharao Cheops bauten Tausende Arbeiter eine riesige Pyramide aus über zwei Millionen Steinblöcken – ganz ohne Kräne und Maschinen.',
+  wirk:'Die Ägypter waren Meister in Rechnen, Bauen und Sternekunde. Sie entwickelten einen Kalender mit 365 Tagen.',heute:'Die Cheops-Pyramide steht heute noch und ist das älteste der sieben Weltwunder. Und unser Kalender mit 365 Tagen hat dort seine Wurzeln.'},
+ {y:-776,yl:'776 vor Christus',era:'antike',e:'🏅',t:'Die ersten Olympischen Spiele',k:'Olympische Spiele',
+  txt:'Im alten Griechenland trafen sich Sportler in Olympia, um zu Ehren der Götter um die Wette zu laufen. Während der Spiele sollten alle Kriege ruhen.',
+  wirk:'Sport verband Menschen aus verschiedenen Städten friedlich miteinander.',heute:'Alle vier Jahre gibt es Olympische Spiele – mit Sportlern aus der ganzen Welt. Das olympische Feuer wird immer noch in Olympia entzündet.'},
+ {y:-508,yl:'um 500 vor Christus',era:'antike',e:'🏛️',t:'Demokratie in Athen',k:'Athen',
+  txt:'In der griechischen Stadt Athen durften die Bürger zum ersten Mal selbst mitbestimmen. Sie trafen sich auf einem Platz und stimmten über wichtige Fragen ab. Allerdings durften Frauen und Sklaven damals noch nicht mitmachen.',
+  wirk:'Zum ersten Mal hieß es: Nicht ein König bestimmt, sondern die Bürger gemeinsam.',heute:'Das Wort „Demokratie“ ist griechisch und heißt „Herrschaft des Volkes“. In Deutschland dürfen heute alle Erwachsenen wählen – Frauen und Männer.'},
+ {y:-221,yl:'221 vor Christus',era:'antike',e:'🐉',t:'Der erste Kaiser von China',k:'Chinesische Mauer',
+  txt:'Qin Shihuangdi vereinte viele kleine Reiche zu einem großen China. Er ließ an einer langen Mauer zum Schutz vor Angreifern bauen. Für sein Grab ließ er Tausende Soldaten aus Ton formen – die Terrakotta-Armee.',
+  wirk:'China wurde ein riesiges, einheitliches Reich mit einer gemeinsamen Schrift. Später erfanden die Chinesen das Papier, den Kompass und das Porzellan.',heute:'Die Chinesische Mauer und die Terrakotta-Armee kann man heute besuchen. Und auf Papier schreiben wir alle jeden Tag.'},
+ {y:0,yl:'um das Jahr 0',era:'antike',e:'✝️',t:'Jesus von Nazaret',k:'Jesus Christus',
+  txt:'In Israel, das damals zum Römischen Reich gehörte, wurde Jesus geboren. Als Erwachsener zog er durch das Land und erzählte den Menschen von Gott. Er sagte: Liebt einander – auch eure Feinde. Er kümmerte sich um Arme, Kranke und um Menschen, mit denen sonst keiner etwas zu tun haben wollte. Die Mächtigen fürchteten ihn, und er wurde gekreuzigt. Seine Anhänger glaubten, dass er von den Toten auferstanden ist.',
+  wirk:'Aus seinen Anhängern entstand das Christentum. Seine Botschaft der Nächstenliebe verbreitete sich über die ganze Welt.',heute:'Heute gibt es über zwei Milliarden Christen. Wir feiern Weihnachten und Ostern – und sogar unsere Jahreszahlen zählen ab seiner Geburt: „nach Christus“. Auch im Islam wird Jesus als großer Prophet verehrt.'},
+ {y:150,yl:'um 150 nach Christus',era:'antike',e:'🛡️',t:'Die Römer am Limes',k:'Limes',
+  txt:'Das Römische Reich war riesig – von England bis Ägypten. Mitten durch das heutige Baden-Württemberg bauten die Römer eine lange Grenzanlage mit Wachtürmen: den Limes. Ganz in der Nähe von Waiblingen, in Welzheim, stand ein römisches Kastell.',
+  wirk:'Die Römer brachten Straßen, Badehäuser, Wein und ihre Sprache Latein mit.',heute:'Viele deutsche Wörter kommen aus dem Latein: Fenster (fenestra), Mauer (murus), Wein (vinum). Unsere Buchstaben sind die lateinischen Buchstaben. Der Limes ist heute Weltkulturerbe.'},
+ {y:105,yl:'um 105 nach Christus',era:'antike',e:'📜',t:'Papier aus China',k:'Papier',
+  txt:'Ein chinesischer Beamter namens Cai Lun verbesserte die Herstellung von Papier: aus Pflanzenfasern, Lumpen und Wasser. Vorher schrieb man auf Bambus, Seide oder Tierhaut – schwer oder sehr teuer.',
+  wirk:'Papier war leicht und günstig. Über arabische Länder kam die Kunst des Papiermachens viele Jahrhunderte später nach Europa.',heute:'Hefte, Bücher, Zeitungen, Briefe – alles aus Papier.'},
+ {y:610,yl:'um 610 nach Christus',era:'mittel',e:'☪️',t:'Mohammed und der Islam',k:'Mohammed',
+  txt:'In der Stadt Mekka in Arabien lebte der Kaufmann Mohammed. Muslime glauben, dass ihm der Engel Gabriel Botschaften von Gott überbrachte. Er predigte, dass es nur einen Gott gibt und dass man Armen helfen soll. 622 zog er nach Medina – mit diesem Jahr beginnt der islamische Kalender.',
+  wirk:'Der Islam verbreitete sich schnell. In Städten wie Bagdad und Córdoba blühten später Wissenschaft, Medizin und Mathematik.',heute:'Heute gibt es fast zwei Milliarden Muslime. Unsere Ziffern 0 bis 9 wurden in Indien erfunden und kamen über arabische Gelehrte zu uns – darum heißen sie „arabische Ziffern“.'},
+ {y:800,yl:'800 nach Christus',era:'mittel',e:'👑',t:'Karl der Große wird Kaiser',k:'Karl der Große',
+  txt:'Karl war König der Franken. Er herrschte über große Teile von Europa – auch über das Gebiet des heutigen Deutschland und Frankreich. An Weihnachten im Jahr 800 krönte ihn der Papst in Rom zum Kaiser.',
+  wirk:'Karl gründete Schulen und ließ alte Bücher abschreiben, damit das Wissen nicht verloren ging.',heute:'Karl der Große wird oft „Vater Europas“ genannt. Deutschland und Frankreich sehen ihn beide als Teil ihrer Geschichte.'},
+ {y:1000,yl:'um 1000 nach Christus',era:'mittel',e:'⛵',t:'Wikinger fahren nach Amerika',k:'Wikinger',
+  txt:'Die Wikinger aus Skandinavien waren mutige Seefahrer. Leif Eriksson segelte mit seinen Leuten über den Atlantik bis nach Nordamerika – fast 500 Jahre vor Kolumbus.',
+  wirk:'Die Wikinger trieben Handel von Russland bis Spanien und gründeten Städte.',heute:'Unsere Wochentage erinnern an sie: Der Donnerstag ist nach dem Gott Thor (Donar) benannt.'},
+ {y:1152,yl:'1152',era:'mittel',e:'🏰',t:'Die Staufer – Kaiser aus unserer Heimat',k:'Staufer',
+  txt:'Die Staufer waren eine Adelsfamilie aus der Gegend um Göppingen, ganz in der Nähe von Waiblingen. Friedrich Barbarossa („Rotbart“) wurde 1152 König und später Kaiser. In dieser Zeit lebten Ritter auf Burgen, und überall entstanden Städte mit Marktplätzen.',
+  wirk:'In Italien nannte man die Anhänger der Staufer „Ghibellinen“ – das kommt von „Waiblingen“!',heute:'Waiblingen nennt sich „Stauferstadt“. Auf dem Hohenstaufen, einem Berg bei Göppingen, stand die Stammburg der Staufer.'},
+ {y:1347,yl:'1347',era:'mittel',e:'🐀',t:'Die Pest',k:'Pest',
+  txt:'Eine schreckliche Krankheit, die Pest, verbreitete sich in ganz Europa. Sie wurde von Flöhen übertragen, die auf Ratten lebten. Etwa jeder dritte Mensch in Europa starb. Die Menschen wussten damals noch nichts von Bakterien.',
+  wirk:'Man lernte, Kranke von Gesunden zu trennen, um Ansteckung zu verhindern.',heute:'Das Wort „Quarantäne“ kommt aus dieser Zeit: In Venedig mussten Schiffe 40 Tage (italienisch „quaranta“) warten, bevor jemand an Land durfte. Und heute wissen wir: Händewaschen schützt!'},
+ {y:1450,yl:'um 1450',era:'neu',e:'📖',t:'Gutenberg erfindet den Buchdruck',k:'Johannes Gutenberg',
+  txt:'Bücher wurden früher mit der Hand abgeschrieben – das dauerte für eine Bibel Jahre! Johannes Gutenberg aus Mainz erfand bewegliche Buchstaben aus Metall. Man konnte sie zu Wörtern zusammensetzen und viele Seiten schnell drucken.',
+  wirk:'Bücher wurden billiger, und mehr Menschen lernten lesen. Ideen und Wissen verbreiteten sich so schnell wie nie zuvor.',heute:'Jedes Buch, jede Zeitung und jedes Schulbuch geht auf diese Erfindung zurück.'},
+ {y:1492,yl:'1492',era:'neu',e:'🌎',t:'Kolumbus erreicht Amerika',k:'Christoph Kolumbus',
+  txt:'Christoph Kolumbus wollte mit drei Schiffen nach Westen segeln, um nach Indien zu kommen. Stattdessen landete er auf Inseln vor Amerika. In Amerika lebten schon seit Tausenden von Jahren Menschen – zum Beispiel die Azteken, die Maya und die Inka.',
+  wirk:'Für die Menschen in Amerika war das der Beginn einer schweren Zeit: Europäer eroberten ihr Land, und viele starben an Krankheiten und Gewalt. Zugleich tauschten die Kontinente Pflanzen und Tiere aus.',heute:'Kartoffeln, Tomaten, Mais und Kakao kamen aus Amerika zu uns. Ohne sie gäbe es keine Pommes, keine Pizza mit Tomatensoße und keine Schokolade!'},
+ {y:1517,yl:'1517',era:'neu',e:'📜',t:'Martin Luther und die Reformation',k:'Martin Luther',
+  txt:'Der Mönch Martin Luther fand, dass die Kirche vieles falsch machte – zum Beispiel ließ sie sich Geld für die Vergebung von Sünden bezahlen. Er schrieb 95 Sätze (Thesen) dagegen. Später übersetzte er die Bibel ins Deutsche, damit alle sie lesen konnten.',
+  wirk:'Die Christen teilten sich in katholische und evangelische Kirchen. Es gab leider auch lange, blutige Kriege darüber.',heute:'Es gibt katholische und evangelische Christen, die heute friedlich zusammenarbeiten. Luthers Bibel half, dass überall in Deutschland ein gemeinsames Deutsch gesprochen wurde.'},
+ {y:1769,yl:'1769',era:'neu',e:'🚂',t:'Die Dampfmaschine verändert die Welt',k:'Dampfmaschine',
+  txt:'James Watt verbesserte die Dampfmaschine. Sie konnte Maschinen in Fabriken antreiben, später auch Eisenbahnen und Schiffe. Viele Menschen zogen vom Land in die Städte, um in Fabriken zu arbeiten – oft auch Kinder, viele Stunden am Tag.',
+  wirk:'Das nennt man Industrialisierung. Es gab viel mehr Waren, aber die Arbeiter waren oft sehr arm. Darum dachten Menschen wie Karl Marx über Gerechtigkeit nach.',heute:'Eisenbahn, Fabriken, Maschinen – und Gesetze, die Kinderarbeit verbieten und Arbeiter schützen.'},
+ {y:1789,yl:'1789',era:'neu',e:'🇫🇷',t:'Die Französische Revolution',k:'Französische Revolution',
+  txt:'In Frankreich lebte der König in Pracht, während viele Menschen hungerten. Die Bürger von Paris stürmten das Gefängnis Bastille. Sie riefen: „Freiheit, Gleichheit, Brüderlichkeit!“ und schrieben die Rechte jedes Menschen auf.',
+  wirk:'Zum ersten Mal wurde in Europa laut gesagt: Alle Menschen haben von Geburt an die gleichen Rechte.',heute:'Die Menschenrechte gelten heute weltweit als Grundlage. In unserem Grundgesetz steht: Alle Menschen sind vor dem Gesetz gleich.'},
+ {y:1806,yl:'1806',era:'neu',e:'🎩',t:'Napoleon – und Württemberg wird Königreich',k:'Napoleon Bonaparte',
+  txt:'Napoleon Bonaparte war ein französischer General, der sich selbst zum Kaiser krönte. Er eroberte große Teile Europas. Mit seiner Hilfe wurde Württemberg 1806 ein Königreich – mit Stuttgart als Hauptstadt. 1815 wurde Napoleon bei Waterloo endgültig besiegt.',
+  wirk:'Napoleon veränderte die Landkarte Europas. Er brachte aber auch neue, moderne Gesetze, die für alle gleich galten.',heute:'Viele Grenzen in Süddeutschland stammen aus dieser Zeit. Das Neue Schloss in Stuttgart war das Schloss der württembergischen Könige.'},
+ {y:1848,yl:'1848',era:'neu',e:'📕',t:'Marx, Engels und die Revolution von 1848',k:'Karl Marx',
+  txt:'Karl Marx und Friedrich Engels schrieben das „Kommunistische Manifest“. Sie wollten, dass Arbeiter nicht mehr ausgenutzt werden. Im gleichen Jahr gingen in vielen deutschen Städten Menschen auf die Straße und forderten Freiheit und ein gewähltes Parlament.',
+  wirk:'Die Revolution scheiterte zwar zuerst – aber ihre Ideen blieben lebendig. Damals wurden die Farben Schwarz-Rot-Gold zum Zeichen für Einheit und Freiheit.',heute:'Unsere Flagge ist Schwarz-Rot-Gold. Und über die Frage, wie man Reichtum gerecht verteilt, diskutieren Menschen bis heute.'},
+ {y:1886,yl:'1886',era:'neu',e:'🚗',t:'Das erste Auto',k:'Automobil',
+  txt:'Carl Benz baute in Mannheim das erste Auto mit Motor. Fast zur gleichen Zeit tüftelte Gottlieb Daimler – geboren in Schorndorf im Remstal – in Cannstatt an seinem Motor.',
+  wirk:'Menschen und Waren konnten viel schneller reisen. Das Auto veränderte Städte, Straßen und das ganze Leben.',heute:'Stuttgart ist bis heute eine Autostadt. Und heute überlegen wir, wie man Autos sauberer macht, zum Beispiel mit Strom.'},
+ {y:1914,yl:'1914 bis 1918',era:'modern',e:'⚔️',t:'Der Erste Weltkrieg',k:'Erster Weltkrieg',
+  txt:'Viele Länder Europas führten gegeneinander Krieg. Millionen Soldaten starben in Schützengräben. Nach dem Krieg musste der deutsche Kaiser abdanken, und Deutschland wurde zum ersten Mal eine Demokratie: die Weimarer Republik.',
+  wirk:'In Deutschland durften 1919 zum ersten Mal auch Frauen wählen.',heute:'In fast jedem Dorf erinnert ein Denkmal an die Toten. Es mahnt: Nie wieder Krieg.'},
+ {y:1933,yl:'1933 bis 1945',era:'modern',e:'🕯️',t:'Diktatur und Zweiter Weltkrieg',k:'Nationalsozialismus',
+  txt:'Adolf Hitler und die Nationalsozialisten machten Deutschland zu einer Diktatur. Sie behaupteten, manche Menschen seien weniger wert. Sie verfolgten und ermordeten Millionen Menschen – vor allem Juden, aber auch Sinti und Roma, Menschen mit Behinderung und alle, die anders dachten. Deutschland begann den Zweiten Weltkrieg, in dem viele Millionen Menschen starben.',
+  wirk:'Am Ende lag Europa in Trümmern. Die Welt beschloss: So etwas darf nie wieder passieren.',heute:'In vielen Städten liegen kleine Messingsteine im Gehweg, die „Stolpersteine“. Sie erinnern an Menschen, die hier wohnten und verfolgt wurden. Darum steht im Grundgesetz: Die Würde des Menschen ist unantastbar.'},
+ {y:1949,yl:'1949',era:'modern',e:'📜',t:'Das Grundgesetz – Deutschland wird geteilt',k:'Grundgesetz',
+  txt:'Nach dem Krieg wurde Deutschland geteilt. Im Westen entstand die Bundesrepublik Deutschland mit dem Grundgesetz – eine Demokratie. Im Osten entstand die DDR, in der eine einzige Partei bestimmte. 1945 hatten die Länder der Welt schon die Vereinten Nationen gegründet, um Frieden zu sichern.',
+  wirk:'Westdeutschland lernte Demokratie und Freiheit. Die Menschen in der DDR durften nicht frei wählen und nicht frei reisen.',heute:'Das Grundgesetz ist bis heute unsere Verfassung. 1952 wurde übrigens unser Bundesland Baden-Württemberg gegründet.'},
+ {y:1963,yl:'1963',era:'modern',e:'✊🏾',t:'Martin Luther King: „Ich habe einen Traum“',k:'Martin Luther King',
+  txt:'In den USA durften schwarze Menschen in vielen Gegenden nicht in die gleichen Schulen, Busse oder Restaurants wie weiße Menschen. Der Pfarrer Martin Luther King kämpfte dagegen – immer ohne Gewalt. Vor 250.000 Menschen sagte er: „Ich habe einen Traum, dass meine Kinder eines Tages nicht nach ihrer Hautfarbe beurteilt werden, sondern nach ihrem Charakter.“',
+  wirk:'Die ungerechten Gesetze wurden abgeschafft. King bekam den Friedensnobelpreis.',heute:'Seine Worte sind ein Vorbild für alle, die sich friedlich für Gleichberechtigung einsetzen.'},
+ {y:1969,yl:'1969',era:'modern',e:'🌕',t:'Menschen landen auf dem Mond',k:'Mondlandung',
+  txt:'Mit der Rakete Apollo 11 flogen drei amerikanische Astronauten zum Mond. Neil Armstrong betrat als erster Mensch den Mond und sagte: „Ein kleiner Schritt für einen Menschen, ein riesiger Sprung für die Menschheit.“',
+  wirk:'Hunderte Millionen Menschen auf der ganzen Welt schauten gleichzeitig im Fernsehen zu.',heute:'Die Fußabdrücke der Astronauten sind immer noch auf dem Mond – dort gibt es keinen Wind, der sie verweht. Und viele Erfindungen aus der Raumfahrt benutzen wir heute im Alltag.'},
+ {y:1989,yl:'1989 und 1990',era:'modern',e:'🧱',t:'Die Mauer fällt – Deutschland wird eins',k:'Deutsche Wiedervereinigung',
+  txt:'Die Berliner Mauer trennte fast 30 Jahre lang Familien und Freunde. 1989 gingen in der DDR immer mehr Menschen friedlich auf die Straße, mit Kerzen statt Waffen. Am 9. November 1989 öffnete sich die Mauer. Am 3. Oktober 1990 wurde Deutschland wieder ein Land.',
+  wirk:'Eine friedliche Revolution – ganz ohne Krieg. Danach wuchsen auch die Länder Europas enger zusammen.',heute:'Der 3. Oktober ist der „Tag der Deutschen Einheit“ – ein Feiertag, an dem keine Schule ist.'},
+ {y:1991,yl:'1991',era:'modern',e:'🌐',t:'Das World Wide Web',k:'Internet',
+  txt:'Der Forscher Tim Berners-Lee erfand in der Schweiz das World Wide Web: Seiten im Internet, die man mit Links verbinden kann. Er wollte, dass Forscher auf der ganzen Welt ihr Wissen teilen können – und er machte seine Erfindung für alle kostenlos.',
+  wirk:'Menschen können heute in Sekunden mit der ganzen Welt sprechen und lernen.',heute:'Jede Webseite, jedes Video im Internet – und auch dieses Sternenheft – gibt es dank dieser Idee.'},
+ {y:2026,yl:'heute',era:'modern',e:'🌍',t:'Heute – und du bist dabei!',k:'Geschichte',
+  txt:'Über 8 Milliarden Menschen leben auf der Erde. Wir können um die Welt fliegen, mit Freunden auf anderen Kontinenten sprechen und Krankheiten heilen, an denen früher viele starben. Große Aufgaben warten noch: das Klima schützen, Frieden bewahren und dafür sorgen, dass alle Kinder zur Schule gehen können.',
+  wirk:'Alles, was du heute tust, wird einmal Geschichte sein.',heute:'Du schreibst Geschichte mit – jeden Tag, wenn du freundlich bist, lernst und anderen hilfst.'}
+].sort((a,b)=>a.y-b.y);
+const klex=k=>`https://klexikon.zum.de/index.php?search=${encodeURIComponent(k)}`;
+const agoTxt=y=>{if(y>=2026)return'jetzt';if(y<-5000)return'';const n=2026-y;return n>=10000?`vor etwa ${fmt(Math.round(n/1000)*1000)} Jahren`:`vor ${fmt(n)} Jahren`};
+function zeitCard(i){const x=ZEIT[i],[en,ec]=ERAS[x.era];
+  return`<div class="zcard" style="--ec:${ec}"><div class="zc-top"><span class="zc-era">${en}</span><span class="zc-ago">${agoTxt(x.y)}</span></div>
+  <div class="zc-h"><span class="zc-e">${x.e}</span><div><div class="zc-y">${x.yl}</div><b>${x.t}</b></div></div>
+  <p>${x.txt}</p><div class="zc-box"><b>🌍 Was hat es bewegt?</b><p>${x.wirk}</p></div><div class="zc-box hz"><b>👣 Spuren bis heute</b><p>${x.heute}</p></div>
+  <div class="row"><button class="btn ghost" data-act="zSay">${SPK} Vorlesen</button><a class="btn ghost zlink" href="${klex(x.k)}" target="_blank" rel="noopener">🔎 Mehr im Kinderlexikon</a></div></div>`}
+function zeitBar(i){const n=ZEIT.length;let segs='',start=0;ZEIT.forEach((x,k)=>{if(k===n-1||ZEIT[k+1].era!==x.era){segs+=`<i style="flex:${k-start+1};background:${ERAS[x.era][1]}" title="${ERAS[x.era][0]}"></i>`;start=k+1}});
+  return`<div class="zbar">${segs}</div><div class="zbar-l">${Object.values(ERAS).map(([n,c])=>`<span style="color:${c}">● ${n}</span>`).join('')}</div>`}
+function renderZeit(){const i=S.zi==null?ZEIT.length-1:S.zi;
+  app.innerHTML=`${bar(S.zBack||'home','🕰️ Zeitreise','Schieb dich durch die Geschichte')}
+  <div class="zslide">${zeitBar(i)}<input type="range" id="zr" min="0" max="${ZEIT.length-1}" step="1" value="${i}" aria-label="Zeitpunkt wählen">
+  <div class="zends"><span>🦴 erste Menschen</span><span>heute 🌍</span></div>
+  <div class="row zbtns2"><button class="btn ghost" data-act="zStep" data-v="-1">‹ früher</button><span class="zpos" id="zpos">${i+1} / ${ZEIT.length}</span><button class="btn ghost" data-act="zStep" data-v="1">später ›</button></div></div>
+  <div id="zcard">${zeitCard(i)}</div>
+  <button class="btn" data-act="zQuiz" style="width:100%">Zeitreise-Quiz: Was kam zuerst? ›</button>
+  <p class="note">Jahreszahlen vor langer Zeit sind Schätzungen der Forscher. Der Schieber geht von Ereignis zu Ereignis – nicht in gleich großen Jahresschritten.</p>`;
+  const r=document.getElementById('zr');r.addEventListener('input',()=>{S.zi=+r.value;document.getElementById('zcard').innerHTML=zeitCard(S.zi);document.getElementById('zpos').textContent=`${S.zi+1} / ${ZEIT.length}`;if(store.sound!==false)playNote(300+S.zi*18,.06)});
+  r.addEventListener('change',()=>{stopSpeech()})}
+/* Quiz: Was kam zuerst? / Wann war das? */
+const ZQ={first(){let a,b;do{a=pick(ZEIT);b=pick(ZEIT)}while(a===b||a.y===2026||b.y===2026||Math.abs(a.y-b.y)<20);const f=a.y<b.y?a:b;
+    return{kind:'choice',long:1,single:1,text:'Was war <b>früher</b>?',options:shuf([a.e+' '+a.t,b.e+' '+b.t]),answer:f.e+' '+f.t,
+      steps:[{t:`${a.e} <b>${a.t}</b>: ${a.yl}.`},{t:`${b.e} <b>${b.t}</b>: ${b.yl}.`},{t:`Früher war: <b>${f.t}</b>.`,why:f.wirk}]}},
+  era(){const x=pick(ZEIT.filter(z=>z.y<2026));const opts=[x.era,...shuf(Object.keys(ERAS).filter(k=>k!==x.era)).slice(0,3)];
+    return{kind:'choice',long:1,single:1,text:`In welche Zeit gehört: ${x.e} <b>${x.t}</b>?`,options:shuf(opts.map(k=>ERAS[k][0])),answer:ERAS[x.era][0],
+      steps:[{t:`${x.t}: ${x.yl}.`,why:x.txt.split('. ')[0]+'.'},{t:'Steinzeit: bis zur Erfindung der Schrift. Altertum: Ägypter, Griechen, Römer. Mittelalter: Ritter und Burgen (ca. 500–1500). Neuzeit: ab Buchdruck und Kolumbus. Unsere Zeit: ab etwa 1900.'},{t:`Es gehört zu: <b>${ERAS[x.era][0]}</b>.`}]}},
+  heute(){const x=pick(ZEIT.filter(z=>z.y<2026));const others=shuf(ZEIT.filter(z=>z!==x&&z.y<2026)).slice(0,2);
+    return{kind:'choice',long:1,single:1,text:`Welche Spur hat das bis heute hinterlassen: ${x.e} <b>${x.t}</b>?`,options:shuf([x.heute.split('. ')[0],...others.map(o=>o.heute.split('. ')[0])]),answer:x.heute.split('. ')[0],
+      steps:[{t:x.txt.split('. ').slice(0,2).join('. ')+'.'},{t:`Spur bis heute: <b>${x.heute}</b>`}]}}};
+addT('wi',3,[['wi_zeitreise3','Zeitreise durch die Geschichte','Was kam zuerst?',mix(ZQ.first,ZQ.first,ZQ.era)]]);
+addT('wi',4,[['wi_zeitreise4','Zeitreise durch die Geschichte','Epochen, Reihenfolge, Spuren bis heute',mix(ZQ.first,ZQ.era,ZQ.heute)]]);
+{const gw=GRP.wi.find(x=>/Geschichte/.test(x[0]));if(gw)gw[1].unshift('wi_zeitreise3','wi_zeitreise4')}
+Object.assign(EXT_ACT,{
+  zeit:()=>{stopSpeech();S.zBack=S.screen==='topics'?'topics':'home';S.screen='zeit';render();return true},
+  zStep:d=>{const n=Math.max(0,Math.min(ZEIT.length-1,(S.zi==null?ZEIT.length-1:S.zi)+(+d.v)));S.zi=n;stopSpeech();document.getElementById('zr').value=n;document.getElementById('zcard').innerHTML=zeitCard(n);document.getElementById('zpos').textContent=`${n+1} / ${ZEIT.length}`;return true},
+  zSay:()=>{const x=ZEIT[S.zi==null?ZEIT.length-1:S.zi];say(`${x.yl}: ${x.t}. ${x.txt} Was hat es bewegt? ${x.wirk} Spuren bis heute: ${x.heute}`,'de-DE');return true},
+  zQuiz:()=>{const g=klasse()===4?4:3;act('goTopic',{tk:`wi|${g}|wi_zeitreise${g}`});return true}
+});
+Object.assign(EXT_SCR,{zeit:renderZeit});
+
+/* ================= Merk-Werkstatt: Lerntricks verstehen, Eselsbrücken, Geschichten-Kette, Zimmer-Reise ================= */
+const TRICKS=[
+ {e:'📖',n:'Die Geschichten-Methode',k:'Verbinde die Dinge, die du dir merken willst, zu einer verrückten Geschichte.',
+  wie:['Nimm das erste und das zweite Ding und lass sie etwas zusammen tun.','Dann das zweite mit dem dritten – wie die Glieder einer Kette.','Je lustiger und verrückter, desto besser!'],
+  bsp:'Einkaufen: Milch, Brot, Äpfel. → „Die Milch badet in einer Brot-Badewanne, und Äpfel springen als Badeenten hinein.“',spiel:'kette'},
+ {e:'🎨',n:'Bilder im Kopf ausmalen',k:'Dein Gehirn merkt sich Bilder viel besser als Wörter.',
+  wie:['Mach das Bild RIESIG oder winzig klein.','Gib ihm Farben, Geräusche und Gerüche.','Lass es sich bewegen – und mach es lustig.'],
+  bsp:'Das Wort „Elefant“ auf Englisch heißt „elephant“. Stell dir einen Elefanten vor, der mit dem Rüssel ein „ph“ in den Sand malt.',spiel:'kette'},
+ {e:'🔗',n:'Mit Bekanntem verbinden',k:'Häng Neues an etwas, das du schon kennst – wie einen Mantel an einen Haken.',
+  wie:['Frag dich: Woran erinnert mich das?','Such ähnliche Wörter, Zahlen oder Erlebnisse.','Erkläre das Neue mit deinen eigenen Worten.'],
+  bsp:'Wo fließt die Rems in den Neckar? In Remseck – dort, wo die Rems „um die Eck“ in den Neckar biegt. Ein Wort, das du kennst, hilft beim Merken.',spiel:null},
+ {e:'🏠',n:'Die Zimmer-Reise',k:'Leg die Dinge in Gedanken an Orte in deinem Zuhause, die du gut kennst.',
+  wie:['Geh in Gedanken deinen Weg durch die Wohnung: Haustür, Flur, Küche …','Leg an jeden Ort ein Ding – und stell es dir übertrieben vor.','Zum Erinnern gehst du den Weg einfach noch mal ab.'],
+  bsp:'An der Haustür hängen lauter Bananen, im Flur steht alles voller Milch, in der Küche wächst ein Brot-Berg …',spiel:'reise'},
+ {e:'🎵',n:'Merksätze und Reime',k:'Ein Satz oder Reim, bei dem jedes Wort mit dem gesuchten Buchstaben beginnt – eine Eselsbrücke.',
+  wie:['Nimm die Anfangsbuchstaben der Dinge.','Bilde daraus einen Satz, den du gut findest.','Sag ihn ein paar Mal laut oder sing ihn.'],
+  bsp:'Planeten: „Mein Vater erklärt mir jeden Sonntag unseren Nachthimmel“ – Merkur, Venus, Erde, Mars, Jupiter, Saturn, Uranus, Neptun.',spiel:'esel'},
+ {e:'📦',n:'Päckchen bilden',k:'Viele Teile auf einmal sind schwer. In Päckchen geht es leichter.',
+  wie:['Teile lange Zahlen in Zweier- oder Dreier-Päckchen.','Teile lange Listen in Gruppen (Obst, Gemüse, Milchsachen).'],
+  bsp:'0 7 1 5 1 5 0 0 1 → „07151 – 500 – 1“. Telefonnummern schreibt man genau deshalb in Päckchen.',spiel:'zahlen'},
+ {e:'📅',n:'Wiederholen mit Pausen',k:'Lieber oft ein bisschen als einmal ganz viel.',
+  wie:['Heute lernen, morgen wiederholen …','… dann in 3 Tagen und in einer Woche.','Genau so macht es Stella bei „Wiederholen“.'],
+  bsp:'Zehn Vokabeln jeden Tag fünf Minuten bleiben viel besser hängen als 50 Vokabeln einmal eine Stunde lang.',spiel:null},
+ {e:'🧑‍🏫',n:'Lehrer spielen',k:'Wer etwas erklärt, versteht es selbst am besten.',
+  wie:['Erkläre das Gelernte deinem Kuscheltier, Mama, Papa oder Geschwistern.','Merkst du, wo du stockst? Das schaust du nochmal an.'],
+  bsp:'Erkläre deiner Oma, warum es Jahreszeiten gibt. Wenn sie es versteht, kannst du es!',spiel:null},
+ {e:'🤸',n:'Bewegen, sprechen, schlafen',k:'Das Gehirn lernt mit dem ganzen Körper.',
+  wie:['Sag das Gelernte laut, klatsch oder hüpf dazu.','Mach kleine Pausen und trink Wasser.','Schlaf gut: Im Schlaf sortiert das Gehirn, was du gelernt hast.'],
+  bsp:'Das Einmaleins beim Treppensteigen aufsagen: jede Stufe eine Zahl – 7, 14, 21, 28 …',spiel:null}];
+const ESEL=[
+ ['wi','🪐','Die Planeten der Reihe nach','„Mein Vater erklärt mir jeden Sonntag unseren Nachthimmel.“','Merkur, Venus, Erde, Mars, Jupiter, Saturn, Uranus, Neptun – die Anfangsbuchstaben passen.'],
+ ['er','🧭','Himmelsrichtungen im Uhrzeigersinn','„Nie Ohne Seife Waschen.“','Norden, Osten, Süden, Westen.'],
+ ['er','☀️','Wo steht die Sonne?','„Im Osten geht die Sonne auf, im Süden nimmt sie ihren Lauf, im Westen wird sie untergehn, im Norden ist sie nie zu sehn.“','Gilt für uns in Deutschland.'],
+ ['wi','🌙','Zunehmender oder abnehmender Mond?','„Ist der Mond rechts hell, wird er voll ganz schnell.“','Stellas Merkspruch: Leuchtet die rechte Seite, nimmt der Mond zu.'],
+ ['wi','⚡','Wie weit ist das Gewitter?','„Drei Sekunden – ein Kilometer.“','Zähl zwischen Blitz und Donner und teile durch 3.'],
+ ['wi','🦇','Stalaktiten und Stalagmiten','„Die Stalak-T-iten hängen von oben wie ein T, die Stalag-M-iten stehen wie ein M auf dem Boden.“','So verwechselst du die Tropfsteine nie mehr.'],
+ ['de','✏️','„nämlich“ ohne h','„Wer nämlich mit h schreibt, ist dämlich.“','Ein alter Schul-Merkspruch – und er reimt sich.'],
+ ['de','✏️','tz und ck','„Nach l, n, r – das merke ja – steht nie tz und nie ck.“','Darum: Herz, Pilz, Bank, Wolke – nicht Hertz oder Banck.'],
+ ['de','✏️','das oder dass?','„Kannst du ‚dieses‘ oder ‚welches‘ sagen, darfst du ‚das‘ mit einem s wagen.“','Das Auto, das (welches) dort steht. Ich weiß, dass du kommst.'],
+ ['de','✏️','Groß oder klein?','„Kannst du der, die oder das davorsetzen, schreibst du das Wort groß.“','der Hund, die Freude, das Spielen – Nomen schreibt man groß.'],
+ ['de','✏️','Doppelte Mitlaute','„Hörst du den Selbstlaut kurz und schnell, kommen zwei Mitlaute – wie bei Ball.“','Nach einem kurzen Selbstlaut stehen oft zwei gleiche Mitlaute: Sonne, Mutter, Ball.'],
+ ['ma','🐊','Größer > oder kleiner <','„Das Krokodil frisst immer die größere Zahl.“','Das offene Maul zeigt zur größeren Zahl: 8 > 3.'],
+ ['ma','✊','Wie viele Tage hat ein Monat?','„Knöchel-Regel: Auf dem Knöchel 31 Tage, in der Lücke 30.“','Fang am Zeigefinger-Knöchel mit Januar an. Februar ist die Ausnahme: 28 oder 29.'],
+ ['ma','🖐️','Das 9er-Einmaleins mit den Fingern','„Finger runter – links Zehner, rechts Einer.“','Für 3 · 9 klappst du den 3. Finger ein: links 2, rechts 7 → 27.'],
+ ['ma','✖️','Punkt vor Strich','„Mal und geteilt sind die Chefs – die kommen zuerst.“','3 + 4 · 2 = 3 + 8 = 11.'],
+ ['ma','🕐','Großer und kleiner Zeiger','„Der kleine Zeiger ist der langsame Opa – er zeigt die Stunden. Der große rennt die Minuten.“','Erst den kleinen Zeiger lesen, dann den großen.'],
+ ['ma','🔢','Einer, Zehner, Hunderter','„Die Einer stehen immer ganz rechts – wie der kleinste Zwerg am Ende der Reihe.“','In 357: 7 Einer, 5 Zehner, 3 Hunderter.'],
+ ['en','🌞','Sunday und Monday','„Sunday ist der Sonnen-Tag, Monday der Mond-Tag.“','Sun = Sonne, Moon = Mond – genau wie im Deutschen: Sonntag, Montag.'],
+ ['en','👐','Links und rechts (left/right)','„Streck beide Hände aus: Die linke Hand macht mit Daumen und Zeigefinger ein L – L wie left und links.“','Funktioniert auf Deutsch und Englisch!'],
+ ['wi','⛵','1492: Kolumbus','„In fourteen hundred ninety-two, Columbus sailed the ocean blue.“','Ein englischer Kinderreim – und gleich noch Englisch geübt.'],
+ ['wi','🧱','Mauerfall und Einheit','„9. November: Mauer offen – 3. Oktober: Deutschland eins.“','Der 3. Oktober ist der Tag der Deutschen Einheit.']];
+const ESEL_NM={ma:'Mathe',de:'Deutsch',en:'Englisch',er:'Erdkunde',wi:'Wissen'};
+function renderTricks(){const v=S.tv||'tricks',f=S.tf||'';
+  app.innerHTML=`${bar('games','📚 Merk-Werkstatt','Tricks, mit denen Lernen leichter geht')}
+  <div class="seg wtabs"><button class="${v==='tricks'?'on':''}" data-act="tView" data-v="tricks">🧠 Merk-Tricks</button><button class="${v==='esel'?'on':''}" data-act="tView" data-v="esel">🐴 Eselsbrücken</button></div>
+  ${v==='tricks'?`<div class="hello">${owl('happy',60)}<div class="bubble">Gedächtnis-Profis haben kein Wunder-Gehirn – sie kennen <b>Tricks</b>. Hier lernst du die besten. Bei manchen kannst du gleich ausprobieren, wie gut sie wirken!</div></div>
+   <div class="rels">${TRICKS.map((t,i)=>`<details class="relc" ${i===0?'open':''}><summary><span class="rel-e">${t.e}</span><b>${t.n}</b></summary><p>${t.k}</p><ol class="mmsteps">${t.wie.map(w=>`<li>${w}</li>`).join('')}</ol><div class="zc-box"><b>Beispiel:</b><p>${t.bsp}</p></div>
+     <div class="row"><button class="btn ghost" data-act="trickSay" data-i="${i}">${SPK} Vorlesen</button>${t.spiel?`<button class="btn" data-act="${t.spiel==='esel'?'tView':'gStart'}" data-g="${t.spiel}" data-v="esel">Ausprobieren ›</button>`:''}</div></details>`).join('')}</div>`
+  :`<div class="hello">${owl('happy',60)}<div class="bubble">Eine <b>Eselsbrücke</b> ist ein kleiner Satz, der dir hilft, dich an etwas zu erinnern. Der Name kommt daher, dass Esel nicht gern durch Wasser laufen – man baute ihnen eine kleine Brücke.</div></div>
+   <div class="seg">${[['','Alle'],...Object.entries(ESEL_NM)].map(([k,l])=>`<button class="${f===k?'on':''}" data-act="tFilt" data-v="${k}">${l}</button>`).join('')}</div>
+   <div class="topics">${ESEL.map((x,i)=>[x,i]).filter(([x])=>!f||x[0]===f).map(([x,i])=>`<div class="esel" style="--c:var(--c-${x[0]})"><div class="es-h"><span>${x[1]}</span><b>${x[2]}</b><button class="t-ic" data-act="eselSay" data-i="${i}" aria-label="Vorlesen">${SPK}</button></div><div class="es-m">${x[3]}</div><div class="small">${x[4]}</div></div>`).join('')}</div>
+   <div class="rcard"><b>✏️ Erfinde deine eigene Eselsbrücke!</b><span>Nimm die Anfangsbuchstaben von dem, was du dir merken willst, und bilde einen lustigen Satz. Eigene Eselsbrücken merkt man sich am allerbesten.</span></div>`}
+  <button class="btn" data-act="gStart" data-g="kette" style="width:100%">🔗 Geschichten-Kette spielen ›</button>`}
+/* ---------- Spiel: Geschichten-Kette ---------- */
+const KET_IT=[['🐘','der Elefant'],['🍌','die Banane'],['🚀','die Rakete'],['🐸','der Frosch'],['⚽','der Fußball'],['🍕','die Pizza'],['🦒','die Giraffe'],['🚲','das Fahrrad'],['🧸','der Teddy'],['🎸','die Gitarre'],['🍦','das Eis'],['🐧','der Pinguin'],['🌵','der Kaktus'],['🎈','der Luftballon'],['🦖','der Dino'],['⏰','der Wecker'],['🧦','die Socke'],['🐙','der Krake'],['☂️','der Regenschirm'],['🥕','die Karotte'],['👑','die Krone'],['🐝','die Biene']];
+const KET_V=['tanzen zusammen Walzer auf dem Rathausdach','fahren zusammen Achterbahn','spielen Fußball auf dem Mond','singen ganz laut in der Badewanne','fliegen auf einem Teppich über Waiblingen','essen gemeinsam einen riesigen Pudding','rutschen eine Regenbogen-Rutsche hinunter','machen eine wilde Kissenschlacht','hüpfen auf einem Trampolin bis zu den Wolken','putzen sich gegenseitig die Zähne','paddeln in einer Badewanne die Rems hinunter','bauen zusammen eine Sandburg so groß wie ein Haus'];
+const cap=t=>t[0].toUpperCase()+t.slice(1);
+function ketteStart(mode){GM={g:'kette',mode:mode||'story',n:5,lives:2,phase:'ready',lvl:0};renderGame()}
+function ketteShow(){GM.items=shuf(KET_IT).slice(0,GM.n);const vs=shuf(KET_V);GM.story=GM.items.slice(1).map((b,i)=>`${cap(GM.items[i][1])} und ${b[1]} ${vs[i%vs.length]}.`);GM.pos=0;GM.phase='learn';renderGame()}
+function ketteAsk(){stopSpeech();GM.grid=shuf([...GM.items,...shuf(KET_IT.filter(x=>!GM.items.includes(x))).slice(0,3)]);GM.pos=0;GM.wrong=null;GM.phase='ask';renderGame()}
+function kettePick(i){if(GM.phase!=='ask')return;const it=GM.grid[i];if(it===GM.items[GM.pos]){GM.pos++;playNote(500+GM.pos*60,.12);
+    if(GM.pos>=GM.n){tone('ok');GM.lvl++;GM.n=Math.min(12,GM.n+1);GM.phase='good';renderGame();gWait(1300,ketteShow);return}renderGame();return}
+  tone('no');GM.lives--;GM.wrong=GM.items[GM.pos];GM.phase='bad';renderGame();
+  if(GM.lives<=0){const key=GM.mode==='story'?'kette_s':'kette_p',best=GM.n-1+ (GM.lvl?0:0);const sc=GM.lvl?GM.n-1:GM.pos;const r=gEnd(key,sc);GM.phase='end';
+    const other=gRec(GM.mode==='story'?'kette_p':'kette_s');GM.res={score:sc,rec:r.rec,old:r.old,stars:gStars(sc-3),txt:`Du hast dir ${sc} Dinge in der richtigen Reihenfolge gemerkt${GM.mode==='story'?' – mit der Geschichten-Methode':' – ohne Trick'}`,extra:other?(GM.mode==='story'?`Ohne Trick waren es ${other}. Siehst du, wie gut der Trick wirkt?`:`Mit der Geschichten-Methode hast du schon ${other} geschafft. Probier sie wieder aus!`):(GM.mode==='plain'?'Jetzt probier es mal MIT der Geschichten-Methode – du wirst staunen!':'Spiel zum Vergleich auch mal „ohne Trick“ – dann siehst du, wie viel die Geschichte hilft!')};gWait(1600,renderGame);return}
+  gWait(1600,()=>{GM.phase='ask';GM.wrong=null;GM.pos=0;renderGame()})}
+function ketteView(){if(GM.phase==='ready')return`<div class="bubble">${GM.mode==='story'?'<b>Mit der Geschichten-Methode:</b> Du siehst gleich ein paar Dinge. Stella erzählt dir dazu eine verrückte Geschichte. <b>Mal sie dir im Kopf aus</b> – ganz bunt und lustig! Danach tippst du die Dinge in der richtigen Reihenfolge an.':'<b>Ohne Trick (zum Vergleich):</b> Du siehst gleich ein paar Dinge. Merk sie dir einfach so – ganz ohne Geschichte. Danach tippst du sie in der richtigen Reihenfolge an.'}</div>
+  <button class="btn big" data-act="ketteGo">Los geht's!</button><button class="btn ghost" data-act="ketteMode">${GM.mode==='story'?'Zum Vergleich: ohne Trick spielen':'Mit Geschichten-Methode spielen'}</button>
+  ${gRec('kette_s')||gRec('kette_p')?`<p class="note">Deine Rekorde: mit Geschichte ${gRec('kette_s')||'–'} · ohne Trick ${gRec('kette_p')||'–'}</p>`:''}`;
+  const head=`<div class="gstat"><span>${GM.n} Dinge</span><span>${'❤️'.repeat(GM.lives)}${'🤍'.repeat(2-GM.lives)}</span><span>${GM.mode==='story'?'📖 mit Geschichte':'ohne Trick'}</span></div>`;
+  if(GM.phase==='learn')return head+`<div class="kchain">${GM.items.map((x,i)=>`<span class="kit"><b>${x[0]}</b><i>${i+1}</i></span>`).join('<span class="karr">→</span>')}</div>
+    ${GM.mode==='story'?`<div class="kstory">${GM.story.map((s,i)=>`<p><b>${GM.items[i][0]}${GM.items[i+1][0]}</b> ${s}</p>`).join('')}<p class="small">🎨 Schließ kurz die Augen und stell dir jede Szene vor!</p></div><button class="btn ghost" data-act="ketteSay">${SPK} Geschichte vorlesen</button>`:`<p class="note">${GM.items.map(x=>x[1]).join(', ')}</p>`}
+    <button class="btn big" data-act="ketteAsk">Ich hab's mir gemerkt ›</button>`;
+  return head+`<div class="label">${GM.phase==='good'?'✓ Super, alles richtig!':GM.phase==='bad'?`Als Nächstes kam: ${GM.wrong[0]} ${GM.wrong[1]}`:`Tippe der Reihe nach an – Nummer ${GM.pos+1}:`}</div>
+   <div class="kdone">${GM.items.slice(0,GM.pos).map(x=>`<span>${x[0]}</span>`).join('')}${Array.from({length:GM.n-GM.pos},()=>'<span class="q">?</span>').join('')}</div>
+   <div class="egrid">${GM.grid.map((x,i)=>`<button class="eitem ${GM.items.indexOf(x)>-1&&GM.items.indexOf(x)<GM.pos?'ok':''}" data-act="kettePick" data-i="${i}"><span>${x[0]}</span>${x[1].split(' ')[1]}</button>`).join('')}</div>`}
+/* ---------- Spiel: Zimmer-Reise ---------- */
+const ROOMS=[['🚪','An der Haustür'],['🧥','Im Flur'],['🍳','In der Küche'],['🛋️','Im Wohnzimmer'],['🛁','Im Badezimmer'],['🛏️','In deinem Kinderzimmer'],['🌳','Im Garten'],['🚗','In der Garage']];
+const REISE_B=['du kaum noch durchkommst','es bis zur Decke reicht','alles lustig wackelt und quietscht','du darin schwimmen könntest','es ganz fürchterlich duftet','alles in Regenbogenfarben leuchtet'];
+function reiseStart(){GM={g:'reise',n:4,lives:2,phase:'ready',lvl:0};renderGame()}
+function reiseShow(){GM.items=shuf(EINK).slice(0,GM.n);GM.rooms=ROOMS.slice(0,GM.n);const bb=shuf(REISE_B);GM.txt=GM.items.map((x,i)=>`${GM.rooms[i][1]} ist alles voller ${x[1]} – so viel, dass ${bb[i%bb.length]}!`);GM.k=0;GM.phase='learn';renderGame()}
+function reiseAskNext(){if(GM.k>=GM.n){tone('ok');GM.lvl++;GM.n=Math.min(8,GM.n+1);GM.phase='good';renderGame();gWait(1300,reiseShow);return}const right=GM.items[GM.k];GM.opts=shuf([right,...shuf(EINK.filter(x=>x!==right)).slice(0,3)]);GM.phase='ask';renderGame()}
+function reisePick(n){if(GM.phase!=='ask')return;const right=GM.items[GM.k];if(n===right[1]){playNote(520+GM.k*60,.12);GM.k++;reiseAskNext();return}
+  tone('no');GM.lives--;GM.phase='bad';renderGame();if(GM.lives<=0){const sc=GM.lvl?GM.n-1:GM.k;const r=gEnd('reise',sc);GM.phase='end';GM.res={score:sc,rec:r.rec,old:r.old,stars:gStars(sc-2),txt:`Du hast dir ${sc} Orte mit ihren Sachen gemerkt`,extra:'Profis merken sich so über 100 Dinge! Probier es auch mal mit deinem echten Zuhause.'};gWait(1600,renderGame);return}
+  gWait(1600,()=>{GM.k++;reiseAskNext()})}
+function reiseView(){if(GM.phase==='ready')return`<div class="bubble"><b>Die Zimmer-Reise:</b> Stella legt in Gedanken Sachen in die Zimmer eines Hauses. Stell dir jedes Zimmer <b>ganz genau und übertrieben</b> vor. Danach gehst du die Reise noch einmal – und weißt, was wo war!</div><button class="btn big" data-act="reiseGo">Reise starten ›</button>${gRec('reise')?`<p class="note">Dein Rekord: ${gRec('reise')} Zimmer</p>`:''}`;
+  const head=`<div class="gstat"><span>${GM.n} Zimmer</span><span>${'❤️'.repeat(GM.lives)}${'🤍'.repeat(2-GM.lives)}</span></div>`;
+  if(GM.phase==='learn')return head+`<div class="rooms">${GM.items.map((x,i)=>`<div class="room"><span class="re">${GM.rooms[i][0]}</span><div><b>${GM.rooms[i][1]}: ${x[0]}</b><p>${GM.txt[i]}</p></div></div>`).join('')}</div>
+    <button class="btn ghost" data-act="reiseSay">${SPK} Vorlesen</button><button class="btn big" data-act="reiseAsk">Ich bin durch alle Zimmer gelaufen ›</button>`;
+  if(GM.phase==='good')return head+'<p class="gmsg ok">✓ Alles richtig! Das Haus wird größer …</p>';
+  const rm=GM.rooms[Math.min(GM.k,GM.n-1)];
+  return head+`<div class="room big"><span class="re">${rm[0]}</span><b>${rm[1]} – was war da?</b></div>
+   ${GM.phase==='bad'?`<p class="gmsg no">Dort war: ${GM.items[GM.k][0]} ${GM.items[GM.k][1]}</p>`:`<div class="egrid two">${GM.opts.map(([e,n])=>`<button class="eitem" data-act="reisePick" data-v="${n}"><span>${e}</span>${n}</button>`).join('')}</div>`}`}
+/* ---------- Quiz: Lernen lernen ---------- */
+const LERN=[
+ ['📖','Du willst dir zehn Wörter merken. Was hilft am meisten?','Eine lustige Geschichte daraus machen',['Sie einmal schnell lesen','Sie nur anschauen','Gar nichts – man kann es oder nicht'],'Mit der Geschichten-Methode verbindest du die Wörter wie eine Kette. Ein Wort erinnert dich an das nächste.'],
+ ['🎨','Welches Bild im Kopf merkst du dir am besten?','Ein riesiges, buntes, lustiges Bild',['Ein kleines, graues Bild','Gar kein Bild','Ein langweiliges Bild'],'Das Gehirn liebt Überraschungen. Was verrückt, bunt und lustig ist, bleibt hängen.'],
+ ['📅','Wie lernst du Vokabeln am besten?','Jeden Tag ein bisschen, mit Pausen dazwischen',['Alles am Abend vor dem Test','Einmal ganz lang','Nie wiederholen'],'Wiederholen mit Pausen heißt: heute, morgen, in drei Tagen, in einer Woche. So wandert das Wissen ins Langzeitgedächtnis.'],
+ ['🐴','Was ist eine Eselsbrücke?','Ein Merksatz, der dir beim Erinnern hilft',['Eine Brücke für Esel im Zoo','Ein Schimpfwort','Ein Rechenzeichen'],'Zum Beispiel: „Nie Ohne Seife Waschen“ für Norden, Osten, Süden, Westen.'],
+ ['🏠','Wie funktioniert die Zimmer-Reise?','Man legt in Gedanken Dinge an Orte, die man gut kennt',['Man räumt sein Zimmer auf','Man reist in den Urlaub','Man malt sein Zimmer an'],'Beim Erinnern geht man den Weg im Kopf noch mal ab und „sieht“ die Dinge an ihren Orten.'],
+ ['📦','Wie merkst du dir die Zahl 4 7 2 9 1 6 am leichtesten?','In Päckchen: 47 – 29 – 16',['Ziffer für Ziffer einzeln','Gar nicht','Rückwärts lesen'],'Drei Päckchen sind leichter als sechs einzelne Ziffern. So macht man es auch mit Telefonnummern.'],
+ ['😴','Was macht dein Gehirn, während du schläfst?','Es sortiert und speichert, was du gelernt hast',['Es schaltet sich aus','Es vergisst alles','Es wächst nicht'],'Darum ist Schlafen vor einer Klassenarbeit wichtiger als bis spät in die Nacht zu lernen.'],
+ ['🧑‍🏫','Warum hilft es, anderen etwas zu erklären?','Man merkt, was man verstanden hat und was noch nicht',['Weil man dann nichts mehr lernen muss','Weil es lustig klingt','Es hilft nicht'],'Wer erklärt, muss das Wissen ordnen. Dabei lernt man selbst am meisten.'],
+ ['🔗','Was bedeutet „mit Bekanntem verbinden“?','Neues an etwas hängen, das man schon kennt',['Alles Neue vergessen','Nur Bekanntes lernen','Mit einem Seil spielen'],'Zum Beispiel: Das englische „Monday“ klingt wie Mond – wie unser Montag.'],
+ ['🧭','Welche Eselsbrücke hilft bei den Himmelsrichtungen?','Nie Ohne Seife Waschen',['Mein Vater erklärt mir …','Punkt vor Strich','Wer nämlich mit h schreibt …'],'Norden, Osten, Süden, Westen – im Uhrzeigersinn.'],
+ ['🪐','Welcher Merksatz hilft bei den Planeten?','Mein Vater erklärt mir jeden Sonntag unseren Nachthimmel',['Nie Ohne Seife Waschen','Drei Sekunden – ein Kilometer','Das Krokodil frisst die größere Zahl'],'Merkur, Venus, Erde, Mars, Jupiter, Saturn, Uranus, Neptun.'],
+ ['🐊','Wie merkst du dir die Zeichen > und <?','Das Krokodil frisst immer die größere Zahl',['Der Pfeil zeigt zur größeren Zahl','Das ist egal','Die Spitze zeigt nach oben'],'Das offene Maul zeigt zur größeren Zahl: 9 > 4.']];
+addT('wi',2,[['wi_lern2','Lernen lernen','Merk-Tricks und Eselsbrücken',wiGen(LERN.filter(x=>/Bild|Eselsbrücke|Krokodil|Himmelsrichtungen|schläfst/.test(x[1])))]]);
+addT('wi',3,[['wi_lern3','Lernen lernen','Merk-Tricks und Eselsbrücken',wiGen(LERN)]]);
+addT('wi',4,[['wi_lern4','Lernen lernen','Merk-Tricks und Eselsbrücken',wiGen(LERN)]]);
+GRP.wi.splice(1,0,['Lernen lernen',['wi_lern2','wi_lern3','wi_lern4']]);
+Object.assign(GAMES,{kette:{e:'🔗',n:'Geschichten-Kette',d:'Mit einer verrückten Geschichte viele Dinge merken'},reise:{e:'🏠',n:'Zimmer-Reise',d:'Der Trick der Gedächtnis-Weltmeister'}});
+const GAME_VIEW={kette:ketteView,reise:reiseView},GAME_START={kette:()=>ketteStart('story'),reise:reiseStart};
+Object.assign(EXT_ACT,{
+  tricks:d=>{stopSpeech();S.screen='tricks';if(d&&d.v)S.tv=d.v;render();return true},
+  tView:d=>{S.tv=d.v;S.screen='tricks';render();return true},
+  tFilt:d=>{S.tf=d.v;renderTricks();return true},
+  trickSay:d=>{const t=TRICKS[+d.i];say(`${t.n}. ${t.k} ${t.wie.join(' ')} Beispiel: ${t.bsp}`,'de-DE');return true},
+  eselSay:d=>{const x=ESEL[+d.i];say(`${x[2]}. ${x[3]} ${x[4]}`,'de-DE');return true},
+  ketteGo:()=>{ketteShow();return true},ketteMode:()=>{ketteStart(GM.mode==='story'?'plain':'story');return true},ketteAsk:()=>{ketteAsk();window.scrollTo(0,0);return true},kettePick:d=>{kettePick(+d.i);return true},
+  ketteSay:()=>{say(GM.story.join(' '),'de-DE');return true},
+  reiseGo:()=>{reiseShow();return true},reiseAsk:()=>{stopSpeech();GM.k=0;reiseAskNext();window.scrollTo(0,0);return true},reisePick:d=>{reisePick(d.v);return true},reiseSay:()=>{say(GM.txt.join(' '),'de-DE');return true}
+});
+Object.assign(EXT_SCR,{tricks:renderTricks});
+
 setupZones();
+/* ================= Allgemeinwissen-Check: 15 Bereiche, Klasse 3 und 4 (Einträge mit 4 am Ende nur ab Klasse 4) ================= */
+const AW={
+ ich:[['🚨','Welche Nummer rufst du, wenn es brennt oder jemand schwer verletzt ist?','112',['110','115','123'],'112 ist der Notruf für Feuerwehr und Rettungsdienst. Er ist kostenlos und funktioniert auch ohne Guthaben.'],
+  ['👮','Welche Nummer hat die Polizei?','110',['112','111','100'],'Merke: 110 – Polizei, 112 – Feuerwehr und Krankenwagen.'],
+  ['📞','Was sagst du am Telefon bei einem Notruf zuerst?','Wo ist es passiert?',['Wie spät ist es?','Wie heißt dein Lieblingstier?','Gar nichts'],'Die wichtigsten Fragen: Wo ist es passiert? Was ist passiert? Wie viele Verletzte? Dann warten, ob es noch Fragen gibt. Nicht einfach auflegen!'],
+  ['😟','Du hast im Kaufhaus deine Eltern verloren. Was machst du?','Stehen bleiben oder an der Kasse Bescheid sagen',['Allein nach Hause laufen','Mit einem Fremden mitgehen','Dich verstecken'],'Bleib ruhig an einer Stelle oder geh zu einer Kasse, einem Verkäufer oder einer Mutter mit Kindern. Dort können sie deine Eltern ausrufen.'],
+  ['🚗','Ein fremder Mann bietet dir Süßigkeiten an und will dich im Auto mitnehmen. Was ist richtig?','Nein sagen, weggehen und es den Eltern erzählen',['Einsteigen','Die Süßigkeiten nehmen','Nichts erzählen'],'Geh niemals mit Fremden mit – auch nicht, wenn sie nett sind oder sagen, deine Mama hat sie geschickt.'],
+  ['🚦','Was bedeutet die rote Ampel für Fußgänger?','stehen bleiben',['schnell rennen','langsam gehen','hüpfen'],'Bei Rot bleibst du stehen, bei Grün darfst du gehen – aber vorher trotzdem nach links und rechts schauen.'],
+  ['🦓','Was musst du am Zebrastreifen tun?','Schauen, ob die Autos anhalten, dann zügig gehen',['Einfach loslaufen','Mitten drauf stehen bleiben','Rückwärts gehen'],'Autos müssen am Zebrastreifen anhalten. Aber nicht jeder Fahrer passt auf – darum erst schauen, dann gehen.'],
+  ['⛑️','Warum trägt man beim Fahrradfahren einen Helm?','Er schützt den Kopf bei einem Sturz',['Weil er schön aussieht','Gegen Regen','Damit man schneller fährt'],'Der Kopf ist besonders empfindlich. Ein Helm kann bei einem Unfall schwere Verletzungen verhindern.'],
+  ['🌙','Was hilft, damit Autofahrer dich im Dunkeln sehen?','helle Kleidung und Reflektoren',['schwarze Kleidung','eine Sonnenbrille','leise sein'],'Reflektoren an Jacke und Schulranzen leuchten, wenn Autoscheinwerfer sie anstrahlen.'],
+  ['🩹','Ein Kind ist hingefallen und blutet am Knie. Was tust du?','Einen Erwachsenen holen und trösten',['Weglaufen','Auslachen','Nichts tun'],'Auch kleine Hilfe ist wichtig: Erwachsenen Bescheid sagen und beim Kind bleiben.']],
+ deutschland:[['🇩🇪','Auf welchem Kontinent liegt Deutschland?','Europa',['Asien','Afrika','Amerika'],'Deutschland liegt ziemlich genau in der Mitte von Europa.'],
+  ['💶','Womit bezahlt man in Deutschland?','mit dem Euro',['mit dem Dollar','mit der D-Mark','mit dem Franken'],'Den Euro gibt es seit 2002 als Bargeld. Viele Länder der EU bezahlen damit.'],
+  ['🗣️','Welche Sprache spricht man hauptsächlich in Deutschland?','Deutsch',['Englisch','Französisch','Latein'],'In Deutschland leben aber auch viele Menschen, die zu Hause noch andere Sprachen sprechen, zum Beispiel Türkisch, Russisch, Arabisch oder Polnisch.'],
+  ['🗺️','Wie viele Nachbarländer hat Deutschland?','9',['3','5','12'],'Dänemark, Polen, Tschechien, Österreich, die Schweiz, Frankreich, Luxemburg, Belgien und die Niederlande.'],
+  ['🏔️','Welches Nachbarland liegt direkt südlich von Baden-Württemberg?','die Schweiz',['Dänemark','Polen','die Niederlande'],'Am Bodensee und am Rhein grenzt Baden-Württemberg an die Schweiz. Im Westen liegt Frankreich.'],
+  ['🏛️','Wo arbeiten die Abgeordneten, die Gesetze für ganz Deutschland machen?','im Bundestag in Berlin',['im Rathaus Waiblingen','im Landtag in Stuttgart','in Brüssel'],'Der Bundestag sitzt im Reichstagsgebäude in Berlin – mit einer großen Glaskuppel, die man besuchen kann.'],
+  ['🇪🇺','Zu welcher Gemeinschaft von Ländern gehört Deutschland?','zur Europäischen Union',['zu den Vereinigten Staaten','zu Russland','zu keiner'],'In der EU arbeiten 27 Länder zusammen. Man kann ohne Grenzkontrolle in viele Nachbarländer reisen.'],
+  ['🦅','Welches Tier ist auf dem Wappen von Deutschland?','ein Adler',['ein Löwe','ein Bär','ein Pferd'],'Der Bundesadler ist schwarz auf gelbem (goldenem) Grund.']],
+ geo:[['🌊','Was ist der Unterschied zwischen einem Fluss und einem See?','Ein Fluss fließt, ein See steht still',['Es gibt keinen','Ein See ist immer salzig','Ein Fluss ist immer größer'],'Ein Fluss fließt von der Quelle bis zur Mündung. Ein See ist ein großes, stehendes Gewässer an Land.'],
+  ['🌊','Was ist ein Meer?','ein riesiges Salzwasser-Gebiet',['ein kleiner Teich','ein Fluss in den Bergen','ein Schwimmbad'],'Deutschland liegt an zwei Meeren: an der Nordsee und an der Ostsee.'],
+  ['🏞️','Welcher ist der längste Fluss in Deutschland?','der Rhein',['die Rems','der Neckar','die Elbe'],'Der Rhein fließt vom Bodensee über Basel an Karlsruhe vorbei bis zur Nordsee.'],
+  ['🏞️','Wo entspringt die Donau?','im Schwarzwald, in Baden-Württemberg',['in den Alpen','an der Nordsee','in Berlin'],'Die Donau fließt nach Osten durch viele Länder bis ins Schwarze Meer.'],
+  ['🏔️','Wie heißt das große Gebirge im Süden, an der Grenze zu Österreich und der Schweiz?','die Alpen',['der Harz','die Schwäbische Alb','der Himalaya'],'In den Alpen liegt auch der höchste Berg Deutschlands: die Zugspitze mit fast 3000 Metern.'],
+  ['🏔️','Wie heißt der höchste Berg Deutschlands?','die Zugspitze',['der Feldberg','der Mount Everest','der Brocken'],'Die Zugspitze ist 2962 Meter hoch. Der höchste Berg in Baden-Württemberg ist der Feldberg im Schwarzwald.'],
+  ['💧','Wie heißt der größte See in Baden-Württemberg?','der Bodensee',['der Rhein','die Ostsee','der Titisee'],'Der Bodensee grenzt an Deutschland, Österreich und die Schweiz.'],
+  ['🌅','In welcher Himmelsrichtung geht die Sonne auf?','im Osten',['im Westen','im Norden','im Süden'],'„Im Osten geht die Sonne auf, im Süden nimmt sie ihren Lauf, im Westen wird sie untergehn, im Norden ist sie nie zu sehn.“'],
+  ['🏙️','Was ist typisch für eine Stadt im Vergleich zum Dorf?','viele Häuser, Geschäfte und Menschen',['nur Bauernhöfe','gar keine Straßen','keine Schulen'],'Auf dem Land gibt es mehr Felder, Wiesen und Wald. In der Stadt wohnen viele Menschen eng zusammen.'],
+  ['🗻','Wie heißt das Mittelgebirge zwischen Stuttgart und der Donau?','die Schwäbische Alb',['die Alpen','der Harz','die Eifel'],'Die Alb ist bekannt für ihre Höhlen, Burgen und Wacholderheiden.',4]],
+ welt:[['🌍','Wie viele Kontinente gibt es?','7',['3','5','12'],'Europa, Asien, Afrika, Nordamerika, Südamerika, Australien und die Antarktis.'],
+  ['🪆','Was ist richtig sortiert – vom Großen zum Kleinen?','Erde → Kontinent → Land → Stadt',['Stadt → Land → Erde → Kontinent','Land → Erde → Stadt','Kontinent → Stadt → Erde'],'Die Erde hat Kontinente, Europa ist einer davon. Darin liegt Deutschland, darin Waiblingen.'],
+  ['☀️','Wie lange braucht die Erde für eine Runde um die Sonne?','ein Jahr',['einen Tag','eine Woche','einen Monat'],'365 Tage – das ist ein Jahr.'],
+  ['🌍','Warum gibt es Tag und Nacht?','Weil sich die Erde dreht',['Weil die Sonne ausgeht','Weil der Mond die Sonne verdeckt','Weil Wolken kommen'],'In 24 Stunden dreht sich die Erde einmal um sich selbst. Die Seite zur Sonne hat Tag.'],
+  ['🌙','Wie lange braucht der Mond ungefähr für eine Runde um die Erde?','etwa einen Monat',['einen Tag','ein Jahr','eine Stunde'],'Davon kommt sogar das Wort „Monat“.'],
+  ['🌊','Wie heißt der größte Ozean der Erde?','der Pazifik',['der Atlantik','die Nordsee','der Bodensee'],'Der Pazifik ist so groß, dass alle Kontinente zusammen hineinpassen würden.'],
+  ['🚰','Haben alle Kinder auf der Welt sauberes Wasser aus dem Wasserhahn?','Nein, viele Kinder müssen weit laufen, um Wasser zu holen',['Ja, überall','Nur in Afrika gibt es Wasser','Wasser gibt es nur im Supermarkt'],'Sauberes Wasser, Essen und eine Schule sind nicht überall selbstverständlich. Darum helfen viele Menschen und Organisationen.'],
+  ['🌐','In welchem Erdteil leben die meisten Menschen?','Asien',['Europa','Australien','Antarktis'],'Allein in Indien und China leben jeweils über eine Milliarde Menschen.',4],
+  ['🐧','Welcher Kontinent ist fast ganz mit Eis bedeckt?','die Antarktis',['Afrika','Europa','Australien'],'Am Südpol leben keine Menschen dauerhaft – nur Forscher und Pinguine.']],
+ gesch:[['📱','Was hatten deine Großeltern als Kinder noch NICHT?','ein Smartphone',['Bücher','Fahrräder','Spielzeug'],'Das Internet und Smartphones gibt es erst seit etwa 30 Jahren. Frag mal deine Oma, womit sie gespielt hat!'],
+  ['🔥','Womit machten die Steinzeit-Menschen ihre Werkzeuge?','aus Stein, Holz und Knochen',['aus Plastik','aus Metall aus der Fabrik','aus Glas'],'Daher kommt der Name Steinzeit. Sie konnten schon Feuer machen.'],
+  ['🛡️','Wer baute vor fast 2000 Jahren den Limes – auch in Baden-Württemberg?','die Römer',['die Ritter','die Ägypter','die Wikinger'],'Der Limes war eine lange Grenze mit Wachtürmen. Reste kann man heute noch sehen, zum Beispiel in Welzheim.'],
+  ['🏰','In welcher Zeit lebten Ritter auf Burgen?','im Mittelalter',['in der Steinzeit','heute','in der Zukunft'],'Das Mittelalter dauerte etwa von 500 bis 1500 nach Christus.'],
+  ['🕯️','Womit machten die Menschen vor 200 Jahren abends Licht?','mit Kerzen und Öllampen',['mit LED-Lampen','mit dem Handy','mit Strom aus der Steckdose'],'Elektrisches Licht gab es in den Häusern erst seit etwa 120 Jahren.'],
+  ['🖼️','Woher wissen wir, wie Menschen früher lebten?','aus Funden, alten Gebäuden, Bildern und Briefen',['Das weiß niemand','Aus dem Fernsehprogramm','Aus der Zukunft'],'Archäologen graben alte Dinge aus, und im Museum kann man sie ansehen. Auch alte Gebäude und Denkmäler erzählen Geschichte.'],
+  ['⏳','Was ist richtig sortiert – von früher nach später?','Steinzeit → Römer → Ritter → heute',['Ritter → Steinzeit → heute','heute → Römer → Ritter','Römer → heute → Steinzeit'],'Die Zeitreise in der App zeigt dir, was wann passiert ist.'],
+  ['🔮','Was ist die Zukunft?','die Zeit, die noch kommt',['die Zeit, die vorbei ist','genau jetzt','die Steinzeit'],'Vergangenheit war früher, Gegenwart ist jetzt, Zukunft kommt noch.']],
+ koerper:[['❤️','Was macht das Herz?','Es pumpt das Blut durch den Körper',['Es denkt','Es verdaut das Essen','Es hört'],'Das Herz ist ein Muskel, ungefähr so groß wie deine Faust. Es schlägt etwa 100 000-mal am Tag.'],
+  ['🫁','Wozu brauchen wir die Lunge?','zum Atmen',['zum Sehen','zum Laufen','zum Schmecken'],'Die Lunge holt Sauerstoff aus der Luft. Das Blut bringt ihn in den ganzen Körper.'],
+  ['🧠','Was steuert den ganzen Körper?','das Gehirn',['der Magen','die Haare','die Knie'],'Über die Nerven schickt das Gehirn blitzschnell Befehle an die Muskeln – und bekommt Nachrichten von Augen, Ohren und Haut.'],
+  ['🦷','Wozu hast du die Schneidezähne vorne?','zum Abbeißen',['zum Zermahlen','zum Pfeifen','zum Riechen'],'Schneidezähne beißen ab, Eckzähne halten fest, Backenzähne zermahlen das Essen.'],
+  ['🦷','Welche Zähne zermahlen das Essen?','die Backenzähne',['die Schneidezähne','die Eckzähne','die Milchzähne vorne'],'Die Backenzähne hinten sind breit und flach – wie Mühlsteine.'],
+  ['🦴','Wie viele Knochen hat ein Erwachsener ungefähr?','etwa 200',['etwa 20','etwa 2000','gar keine'],'Genau sind es 206. Sie bilden zusammen das Skelett.'],
+  ['🍎','Was gehört zu einer gesunden Ernährung?','viel Obst, Gemüse und Wasser',['nur Süßigkeiten','viel Limo','gar nichts essen'],'Die Ernährungspyramide hilft: unten viel Wasser, Obst und Gemüse, oben nur wenig Süßes.'],
+  ['🏃','Warum ist Bewegung wichtig?','Sie stärkt Herz, Muskeln und Knochen',['Sie macht krank','Sie ist egal','Sie macht die Haare länger'],'Kinder sollten jeden Tag mindestens eine Stunde toben, rennen oder spielen.'],
+  ['🍽️','Wo wird das Essen nach dem Schlucken verdaut?','im Magen und im Darm',['in der Lunge','im Herz','im Gehirn'],'Der Magen zerkleinert das Essen mit Magensaft, der Darm holt die Nährstoffe heraus.'],
+  ['🩸','Was transportiert das Blut?','Sauerstoff und Nährstoffe',['Gedanken','Luftblasen','Essen in Stücken'],'Das Blut fließt durch die Adern und versorgt jede Zelle im Körper.',4]],
+ natur:[['🐄','Woran erkennt man ein Säugetier?','Die Babys trinken Milch bei der Mutter',['Es hat Federn','Es legt immer Eier','Es hat Kiemen'],'Säugetiere haben meist Fell, und die Jungen werden gesäugt. Auch der Mensch, der Wal und die Fledermaus sind Säugetiere!'],
+  ['🐦','Was haben alle Vögel?','Federn und einen Schnabel',['Fell','Kiemen','sechs Beine'],'Alle Vögel legen Eier. Nicht alle können fliegen – zum Beispiel der Pinguin und der Strauß.'],
+  ['🐟','Womit atmen Fische unter Wasser?','mit Kiemen',['mit einer Lunge','mit der Nase','gar nicht'],'Die Kiemen holen den Sauerstoff aus dem Wasser.'],
+  ['🦎','Zu welcher Tiergruppe gehören Eidechse, Schlange und Schildkröte?','zu den Reptilien',['zu den Säugetieren','zu den Insekten','zu den Fischen'],'Reptilien haben eine trockene, schuppige Haut und legen meist Eier an Land.'],
+  ['🐸','Der Frosch lebt erst als Kaulquappe im Wasser, dann auch an Land. Zu welcher Gruppe gehört er?','zu den Amphibien',['zu den Reptilien','zu den Vögeln','zu den Säugetieren'],'Amphibien (Lurche) haben eine feuchte Haut: Frösche, Kröten, Molche und Salamander.'],
+  ['🐞','Wie viele Beine hat ein Insekt?','6',['8','4','10'],'Insekten haben 6 Beine und 3 Körperteile. Spinnen haben 8 Beine – sie sind also keine Insekten!'],
+  ['🦊','Was ist eine Nahrungskette?','Wer frisst wen: Gras → Hase → Fuchs',['Eine Kette aus Nudeln','Eine Halskette','Ein Einkaufszettel'],'Pflanzen sind immer am Anfang. Pflanzenfresser fressen Pflanzen, Fleischfresser fressen andere Tiere.'],
+  ['🌱','Wozu hat eine Pflanze Wurzeln?','um Wasser aufzunehmen und sich festzuhalten',['um zu atmen wie wir','um zu blühen','um zu laufen'],'Wurzeln holen Wasser und Nährstoffe aus der Erde. Der Stängel leitet sie nach oben zu den Blättern.'],
+  ['🍃','Was brauchen Pflanzen zum Wachsen?','Wasser, Licht und Erde',['Schokolade','Dunkelheit','Musik'],'In den grünen Blättern machen Pflanzen mit Sonnenlicht ihre eigene Nahrung.'],
+  ['🌰','Von welchem Baum kommt die Eichel?','von der Eiche',['von der Tanne','von der Birke','von der Kastanie'],'Eichhörnchen und Wildschweine fressen gern Eicheln.'],
+  ['🌲','Wie unterscheidest du Fichte und Tanne?','„Die Fichte sticht, die Tanne nicht.“',['Gar nicht','Die Tanne hat Blätter','Die Fichte ist immer blau'],'Fichtennadeln sind spitz und stechen. Tannennadeln sind weicher und haben unten zwei helle Streifen.'],
+  ['🍁','Welcher Baum hat Samen wie kleine Propeller?','der Ahorn',['die Eiche','die Tanne','der Apfelbaum'],'Die Ahorn-Samen drehen sich beim Herunterfallen wie ein Hubschrauber und fliegen so weiter weg.'],
+  ['🌳','Welche Bäume sind Laubbäume?','Eiche, Buche, Ahorn',['Tanne, Fichte, Kiefer','Kaktus, Palme','Gras, Moos'],'Laubbäume haben Blätter und verlieren sie meist im Herbst. Nadelbäume haben Nadeln und bleiben meist grün.'],
+  ['🍂','Welcher Nadelbaum verliert im Herbst seine Nadeln?','die Lärche',['die Tanne','die Fichte','die Kiefer'],'Die Lärche ist eine Ausnahme: Ihre Nadeln werden im Herbst goldgelb und fallen ab.',4]],
+ wetter:[['🧊','Was ist Hagel?','Körner aus Eis, die bei Gewittern fallen',['Ganz feiner Regen','Weißer Sand','Wolkenstücke'],'In hohen Gewitterwolken ist es eiskalt. Wassertropfen frieren zu Eiskörnern und fallen herunter.'],
+  ['☁️','Woraus bestehen Wolken?','aus winzigen Wassertröpfchen',['aus Watte','aus Rauch','aus Zucker'],'Werden die Tröpfchen größer und schwerer, fallen sie als Regen herunter.'],
+  ['💨','Was ist Wind?','bewegte Luft',['Atem der Bäume','Wolken, die rennen','Lärm'],'Warme Luft steigt auf, kalte strömt nach. So entsteht Wind.'],
+  ['🌡️','Womit misst man die Temperatur?','mit einem Thermometer',['mit einem Lineal','mit einer Waage','mit einer Uhr'],'Bei 0 Grad Celsius gefriert Wasser, bei 100 Grad kocht es.'],
+  ['📺','Wer macht die Wettervorhersage?','Meteorologen',['Astronauten','Bäcker','Zahnärzte'],'Meteorologen messen Luft, Wind und Temperatur und berechnen mit Computern, wie das Wetter wird.'],
+  ['🌈','Wann siehst du einen Regenbogen?','Wenn die Sonne hinter dir scheint und vor dir Regen fällt',['Nachts','Bei Nebel','Nur im Winter'],'Die Regentropfen zerlegen das Sonnenlicht in seine Farben.'],
+  ['💧','Welche drei Zustände kann Wasser haben?','fest, flüssig, gasförmig',['heiß, kalt, nass','groß, klein, mittel','rot, grün, blau'],'Eis ist fest, Wasser flüssig, Wasserdampf gasförmig.'],
+  ['♻️','Was bedeutet Umweltverschmutzung?','Natur, Luft oder Wasser werden durch Müll oder Abgase schmutzig',['Wenn man sein Zimmer aufräumt','Wenn es regnet','Wenn Blumen blühen'],'Plastikmüll im Meer, Abgase in der Luft, Gift im Boden – das schadet Tieren, Pflanzen und Menschen.'],
+  ['🌫️','Was ist Nebel?','eine Wolke ganz unten am Boden',['Rauch aus dem Schornstein','Staub','Schnee'],'Bei Nebel sieht man schlecht – darum fahren Autos dann langsamer und mit Licht.']],
+ technik:[['⚡','Woher kommt der Strom aus der Steckdose?','aus Kraftwerken, Windrädern und Solaranlagen',['aus dem Wasserhahn','aus der Luft im Zimmer','aus dem Kühlschrank'],'Über lange Leitungen kommt der Strom bis in jedes Haus.'],
+  ['🔌','Warum darf man nichts in eine Steckdose stecken?','Strom kann lebensgefährlich sein',['Weil es Spaß macht','Weil sie sonst kaputtgeht','Das ist erlaubt'],'Strom aus der Steckdose ist so stark, dass er Menschen schwer verletzen kann. Auch nie mit nassen Händen an Stecker fassen!'],
+  ['🔋','Was ist der Unterschied zwischen Batterie und Akku?','Einen Akku kann man wieder aufladen',['Es gibt keinen','Eine Batterie ist immer größer','Ein Akku hat keinen Strom'],'Leere Batterien und Akkus gehören in die Sammelbox im Supermarkt – nicht in den Hausmüll.'],
+  ['🧊','Warum bleibt Essen im Kühlschrank länger frisch?','In der Kälte vermehren sich Bakterien langsamer',['Weil es dunkel ist','Weil es dort Musik gibt','Das stimmt nicht'],'Darum gehören Milch, Wurst und Käse in den Kühlschrank.'],
+  ['🌐','Was ist das Internet?','ein riesiges Netz aus Computern auf der ganzen Welt',['ein einziger großer Computer','das Tablet selbst','ein Fernsehsender'],'Das Tablet oder Handy ist nur das Gerät. Darüber verbindet man sich mit dem Internet.'],
+  ['📶','Was ist WLAN?','Internet ohne Kabel im Haus',['eine Fernbedienung','ein Videospiel','eine Steckdose'],'Ein kleiner Kasten, der Router, sendet das Internet per Funk durch die Wohnung.'],
+  ['📱','Was kann ein Smartphone?','Telefonieren und vieles, was ein Computer kann',['Nur telefonieren','Nur Fotos machen','Gar nichts ohne Strom'],'Ein Smartphone ist ein kleiner Computer: Internet, Fotos, Nachrichten, Spiele und Karten.'],
+  ['🖼️','Ist alles wahr, was im Internet steht?','Nein, Bilder und Texte können falsch oder verändert sein',['Ja, immer','Nur Videos sind falsch','Nur die Werbung stimmt'],'Erst nachdenken, bei Erwachsenen nachfragen und mehrere Quellen vergleichen.'],
+  ['🔒','Was gibst du im Internet nicht einfach heraus?','Name, Adresse, Telefonnummer und Passwörter',['Deine Lieblingsfarbe','Den Namen deines Lieblingstiers im Zoo','Nichts davon ist wichtig'],'Persönliche Daten sind wie ein Schlüssel zu dir. Nur mit den Eltern zusammen teilen.'],
+  ['🚲','Was treibt ein Fahrrad an?','die Kraft deiner Beine über Pedale und Kette',['ein Motor im Lenker','der Wind allein','die Klingel'],'Ein E-Bike hat zusätzlich einen kleinen Elektromotor mit Akku.']],
+ geld:[['💶','Wie viele Cent sind ein Euro?','100',['10','50','1000'],'1 € = 100 ct. Es gibt Münzen von 1 Cent bis 2 Euro und Scheine ab 5 Euro.'],
+  ['💼','Woher bekommen Erwachsene ihr Geld meistens?','für ihre Arbeit',['vom Baum','aus der Steckdose','aus dem Briefkasten'],'Für ihre Arbeit bekommen Erwachsene einen Lohn. Davon bezahlen sie Miete, Essen, Strom und vieles mehr.'],
+  ['🐷','Was bedeutet sparen?','Geld zurücklegen, statt es gleich auszugeben',['Alles sofort ausgeben','Geld wegwerfen','Geld verschenken'],'Wer spart, kann sich später auch etwas Größeres leisten.'],
+  ['🍞','Was ist ein Bedürfnis – also etwas, das man wirklich braucht?','Essen und Trinken',['ein neues Videospiel','die fünfte Puppe','ein Glitzer-Aufkleber'],'Bedürfnisse brauchen wir zum Leben: Essen, Wohnung, Kleidung. Wünsche sind schön, aber nicht nötig.'],
+  ['🏷️','Was bedeutet „günstig“?','Es kostet wenig Geld',['Es kostet sehr viel','Es ist kaputt','Es ist verschenkt'],'Das Gegenteil von günstig ist teuer. Es lohnt sich, Preise zu vergleichen.'],
+  ['🛒','Wer ist im Laden der Kunde?','die Person, die etwas kauft',['die Person, die verkauft','das Regal','die Kasse'],'Das Geschäft verkauft Waren, der Kunde bezahlt dafür.'],
+  ['🏪','Warum verkauft ein Geschäft Waren teurer, als es sie eingekauft hat?','Davon bezahlt es Miete, Mitarbeiter und verdient etwas',['Aus Gemeinheit','Das ist verboten','Das macht kein Geschäft'],'Die Verkäuferin bekommt Lohn, der Laden kostet Miete und Strom – das alles steckt im Preis.'],
+  ['💰','Ist Geld unbegrenzt vorhanden?','Nein – man muss einteilen, wofür man es ausgibt',['Ja, man kann einfach neues drucken','Ja, bei der Bank gibt es immer genug','Nur am Wochenende'],'Auch Familien planen: Wie viel Geld haben wir, was brauchen wir, was können wir uns wünschen?'],
+  ['🏦','Was macht eine Bank?','Sie bewahrt Geld auf und verleiht Geld',['Sie backt Brot','Sie druckt Bücher','Sie repariert Autos'],'Auf einem Konto ist das Geld sicherer als unter dem Kopfkissen.',4]],
+ sprache:[['🗣️','Ist das eine Meinung oder eine Tatsache: „Fußball ist der schönste Sport.“','eine Meinung',['eine Tatsache','eine Frage'],'Eine Meinung ist das, was jemand denkt oder findet. Andere dürfen das anders sehen.'],
+  ['📏','Ist das eine Meinung oder eine Tatsache: „Ein Jahr hat 12 Monate.“','eine Tatsache',['eine Meinung','eine Frage'],'Eine Tatsache kann man überprüfen. Sie stimmt für alle.'],
+  ['🍕','Ist das eine Meinung oder eine Tatsache: „Pizza schmeckt am besten.“','eine Meinung',['eine Tatsache','eine Frage'],'Geschmack ist verschieden – das ist eine Meinung.'],
+  ['🌍','Ist das eine Meinung oder eine Tatsache: „Die Erde dreht sich um die Sonne.“','eine Tatsache',['eine Meinung','eine Frage'],'Das haben Forscher bewiesen – eine Tatsache.'],
+  ['❓','Du verstehst ein Wort im Unterricht nicht. Was machst du am besten?','nachfragen',['so tun, als ob man es versteht','den Unterricht verlassen','schlafen'],'Nachfragen ist schlau, nicht peinlich. So lernst du jeden Tag neue Wörter.'],
+  ['👂','Woran erkennt man gutes Zuhören?','Man schaut den anderen an und lässt ihn ausreden',['Man redet dazwischen','Man spielt dabei','Man dreht sich weg'],'Erst zuhören, dann antworten – das ist eine wichtige Gesprächsregel.'],
+  ['📰','Wozu ist eine Überschrift da?','Sie sagt in wenigen Worten, worum es im Text geht',['Sie macht den Text länger','Sie ist nur Schmuck','Sie steht immer am Ende'],'Lies zuerst die Überschrift – dann weißt du, worauf du achten musst.'],
+  ['💬','Wie sagst du freundlich deine Meinung?','„Ich finde …, weil …“',['„Du bist doof!“','Gar nicht','Indem man schreit'],'Mit „weil“ gibst du einen Grund an. So können andere deine Meinung verstehen.']],
+ werte:[['🤝','Was bedeutet Respekt?','Andere freundlich und fair behandeln',['Immer der Chef sein','Andere auslachen','Nur auf sich achten'],'Respekt heißt: Ich achte die Gefühle, die Meinung und die Sachen der anderen.'],
+  ['⚖️','Was ist gerecht?','Wenn alle fair behandelt werden',['Wenn einer alles bekommt','Wenn der Lauteste gewinnt','Wenn man schummelt'],'Gerecht heißt nicht immer „alle das Gleiche“ – manchmal braucht jemand mehr Hilfe als andere.'],
+  ['🎒','Was bedeutet Eigentum?','Etwas gehört einer Person',['Alles gehört allen','Etwas ist kaputt','Etwas ist neu'],'Fremde Sachen darf man nicht einfach nehmen. Man fragt vorher – und gibt sie zurück.'],
+  ['🤥','Was ist eine Lüge?','Wenn man absichtlich etwas Falsches sagt',['Wenn man sich irrt','Wenn man ein Märchen erzählt','Wenn man schweigt'],'Wer lügt, zerstört Vertrauen. Ehrlich zu sein ist manchmal schwer, aber mutig.'],
+  ['🐶','Was bedeutet Verantwortung?','Sich zuverlässig um etwas kümmern',['Alles anderen überlassen','Nie etwas machen','Schnell weglaufen'],'Wer ein Haustier hat, ist verantwortlich, dass es Futter, Wasser und Liebe bekommt.'],
+  ['😠','Was ist der Unterschied zwischen Streit und Gewalt?','Bei Gewalt wird jemand verletzt – Streit löst man mit Worten',['Es gibt keinen','Gewalt ist ein lauter Streit','Streit ist immer verboten'],'Streiten ist normal. Aber Schlagen, Treten oder Schubsen ist nie in Ordnung.'],
+  ['😢','Was ist Mobbing?','Wenn jemand immer wieder absichtlich gequält oder ausgeschlossen wird',['Ein einmaliger Streit','Ein Spiel','Wenn man Freunde hat'],'Mobbing ist schlimm für das Kind. Wer es sieht, sollte Hilfe bei Erwachsenen holen.'],
+  ['🚪','Warum ist es nicht gut, andere auszugrenzen?','Weil es sehr weh tut, wenn man nicht dazugehört',['Weil es lustig ist','Das ist egal','Weil es Regeln gibt'],'Jeder Mensch möchte dazugehören. Wie würdest du dich fühlen?'],
+  ['🙌','Warum sollte man anderen helfen?','Weil wir alle manchmal Hilfe brauchen',['Damit man Geld bekommt','Man sollte nie helfen','Nur wenn man muss'],'Wer hilft, macht die Welt ein Stück freundlicher – und bekommt oft selbst Hilfe zurück.']],
+ klassik:[['🌍','Wie heißt unser Planet?','Erde',['Mars','Sonne','Mond'],'Die Erde ist der dritte Planet von der Sonne aus.'],
+  ['☀️','Wie heißt der Stern, um den die Erde kreist?','Sonne',['Mond','Polarstern','Venus'],'Die Sonne ist ein Stern – eine riesige leuchtende Kugel aus glühendem Gas.'],
+  ['📅','Wie viele Tage hat eine Woche?','7',['5','10','12'],'Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag.'],
+  ['🗓️','Wie viele Monate hat ein Jahr?','12',['10','7','24'],'Von Januar bis Dezember.'],
+  ['🍂','Wie viele Jahreszeiten gibt es bei uns?','4',['2','3','6'],'Frühling, Sommer, Herbst und Winter.'],
+  ['⏱️','Wie viele Minuten hat eine Stunde?','60',['100','30','24'],'Und eine Minute hat 60 Sekunden.'],
+  ['🗺️','Welches ist das größte Land der Erde?','Russland',['China','Deutschland','Brasilien'],'Russland ist fast fünfzigmal so groß wie Deutschland.'],
+  ['🏔️','Wie heißt der höchste Berg der Erde?','Mount Everest',['Zugspitze','Feldberg','Montblanc'],'Er steht im Himalaya-Gebirge in Asien und ist fast 9000 Meter hoch.'],
+  ['🌋','Was ist ein Vulkan?','ein Berg, aus dem heißes, flüssiges Gestein kommen kann',['ein besonders hoher Baum','ein Wasserfall','eine Höhle aus Eis'],'Tief in der Erde ist es so heiß, dass Gestein schmilzt. Kommt es heraus, heißt es Lava.'],
+  ['📳','Wie entsteht ein Erdbeben?','Große Gesteinsplatten der Erde bewegen sich ruckartig',['Weil viele Menschen hüpfen','Durch Gewitter','Durch Wind'],'Die Erdkruste besteht aus riesigen Platten, die sich ganz langsam bewegen. Wenn sie sich verhaken und plötzlich lösen, bebt die Erde.'],
+  ['⭐','Was ist der Unterschied zwischen Stern und Planet?','Ein Stern leuchtet selbst, ein Planet nicht',['Es gibt keinen','Planeten sind immer größer','Sterne sind kalt'],'Planeten wie die Erde werden von einem Stern beleuchtet. Der Mond leuchtet auch nicht selbst – er wird von der Sonne angestrahlt.'],
+  ['🏜️','Wie heißt die größte heiße Wüste der Erde?','die Sahara',['die Antarktis','der Schwarzwald','die Nordsee'],'Die Sahara liegt im Norden Afrikas und ist fast so groß wie Europa.',4]]
+};
+/* ---------- neue Übungs-Generatoren ---------- */
+function pieSVG(k,m){const r=46,cx=55,cy=55;let g='';for(let i=0;i<k;i++){const a0=i/k*2*Math.PI-Math.PI/2,a1=(i+1)/k*2*Math.PI-Math.PI/2;const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+  g+=k===1?`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${m?'#FF9433':'#fff'}" stroke="#555" stroke-width="2"/>`:`<path d="M${cx} ${cy} L${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z" fill="${i<m?'#FF9433':'#FFF6E6'}" stroke="#7A5A3A" stroke-width="2"/>`}
+  return`<div class="fig"><svg viewBox="0 0 110 110" style="width:150px" role="img" aria-label="Kreis in ${k} Teile, ${m} gefärbt">${g}</svg></div>`}
+const BR={'1/2':'½','1/4':'¼','3/4':'¾','1/3':'⅓','2/3':'⅔'},BRN={'1/2':'ein Halb (die Hälfte)','1/4':'ein Viertel','3/4':'drei Viertel','1/3':'ein Drittel','2/3':'zwei Drittel'};
+const BRUCH={
+  bild(){const f=pick(['1/2','1/4','3/4','1/3','2/3']),[m,k]=f.split('/').map(Number);return{kind:'choice',text:'Welcher Teil der Pizza ist orange?',visual:pieSVG(k,m),options:shuf([BR[f],...shuf(Object.values(BR).filter(x=>x!==BR[f])).slice(0,3)]),answer:BR[f],
+    steps:[{t:`Zähle, in wie viele <b>gleich große</b> Stücke die Pizza geteilt ist: <b>${k}</b>.`,why:'Die Zahl unten im Bruch sagt, in wie viele Teile das Ganze geteilt ist.'},{t:`Davon sind <b>${m}</b> orange.`,why:'Die Zahl oben sagt, wie viele Teile gemeint sind.'},{t:`Das ist <b>${BR[f]}</b> – ${BRN[f]}.`}]}},
+  von(){const t=pick([[2,'Hälfte'],[4,'ein Viertel'],[3,'ein Drittel']]),q=R(2,10),n=t[0]*q;return{kind:'num',long:1,text:t[0]===2?`Wie viel ist die <b>Hälfte</b> von ${n}?`:`Wie viel ist <b>${t[1]}</b> von ${n}?`,answer:q,visual:pieSVG(t[0],1),
+    steps:[{t:`${t[0]===2?'Die Hälfte':t[1][0].toUpperCase()+t[1].slice(1)} heißt: Teile in <b>${t[0]}</b> gleiche Teile.`},{t:`${n} : ${t[0]} = <b>${q}</b>`,why:`Probe: ${q} · ${t[0]} = ${n}`}]}},
+  vgl(){const[a,b]=shuf([['1/2',.5],['1/4',.25],['3/4',.75],['1/3',1/3]]).slice(0,2);const big=a[1]>b[1]?a:b;return{kind:'choice',long:1,text:`Was ist mehr: <b>${BR[a[0]]}</b> oder <b>${BR[b[0]]}</b> einer Pizza?`,options:shuf([BR[a[0]],BR[b[0]]]),answer:BR[big[0]],visual:`<div class="row" style="justify-content:center">${pieSVG(+a[0].split('/')[1],+a[0].split('/')[0])}${pieSVG(+b[0].split('/')[1],+b[0].split('/')[0])}</div>`,
+    steps:[{t:'Schau dir beide Pizzen an: Wo ist mehr orange?',why:'Achtung: Je mehr Stücke man aus einer Pizza schneidet, desto kleiner wird jedes Stück. Ein Viertel ist kleiner als ein Halb!'},{t:`Mehr ist: <b>${BR[big[0]]}</b>`}]}}};
+const WEG_P=[['🏫','Schule'],['🥨','Bäckerei'],['🌳','Park'],['🏥','Krankenhaus'],['⛪','Kirche'],['🏊','Schwimmbad'],['📚','Bücherei'],['🛝','Spielplatz'],['🚉','Bahnhof'],['🏪','Supermarkt']];
+function wegGen(){const N=4,cells=Array(N*N).fill(null),pl=shuf(WEG_P).slice(0,6),pos=shuf([...Array(N*N).keys()]);const home=pos[0];pl.forEach((p,i)=>cells[pos[i+1]]=p);
+  const hx=home%N,hy=Math.floor(home/N);const targets=pos.slice(1,7).map((c,i)=>({c,p:pl[i],dx:c%N-hx,dy:Math.floor(c/N)-hy})).filter(t=>t.dx!==0&&t.dy!==0);if(!targets.length)return wegGen();const t=pick(targets);
+  const h=t.dx>0?'rechts':'links',v=t.dy<0?'oben':'unten';const ins=Math.random()<.5?`Gehe <b>${Math.abs(t.dy)} ${Math.abs(t.dy)===1?'Feld':'Felder'} nach ${v}</b> und dann <b>${Math.abs(t.dx)} nach ${h}</b>.`:`Gehe <b>${Math.abs(t.dx)} ${Math.abs(t.dx)===1?'Feld':'Felder'} nach ${h}</b> und dann <b>${Math.abs(t.dy)} nach ${v}</b>.`;
+  const grid=(hl)=>`<div class="wgrid">${cells.map((c,i)=>`<span class="${i===home?'home':''} ${hl&&i===t.c?'hl':''}">${i===home?'🏠':c?c[0]:''}</span>`).join('')}</div>`;
+  return{kind:'choice',long:1,single:1,text:`Du startest bei 🏠. ${ins} Wo kommst du an?`,visual:grid(false),options:shuf([t.p,...shuf(pl.filter(p=>p!==t.p)).slice(0,3)]).map(p=>p[0]+' '+p[1]),answer:t.p[0]+' '+t.p[1],
+    steps:[{t:'Leg den Finger auf das Haus 🏠.',why:'Oben ist oben auf dem Bild, rechts ist auf der Seite deiner rechten Hand.'},{t:`Jetzt zähle die Felder genau mit: ${ins.replace(/<\/?b>/g,'')}`},{t:`Du kommst an: <b>${t.p[0]} ${t.p[1]}</b>`,vis:grid(true)}]}}
+function ueberschriftGen(g){return()=>{const L=LP.filter(x=>x.g===g),x=pick(L),others=shuf(LP.filter(y=>y!==x)).slice(0,2);return{kind:'choice',long:1,single:1,text:'Welche <b>Überschrift</b> passt zu diesem Text?',visual:`<div class="story" style="--c:var(--c-de)">${x.p.slice(0,2).map(p=>`<p>${esc(p)}</p>`).join('')}<p>…</p></div>`,options:shuf([x.ti,...others.map(o=>o.ti)]),answer:x.ti,
+  steps:[{t:'Frage dich: Worum geht es in dem Text hauptsächlich?',why:'Eine gute Überschrift sagt das Wichtigste in wenigen Worten.'},{t:`Hier geht es um: <b>${x.ti}</b>`}]}}}
+const MT=[['Hunde sind die besten Haustiere.',0],['Ein Hund hat vier Beine.',1],['Mathe ist langweilig.',0],['3 mal 4 ist 12.',1],['Im Winter ist es kälter als im Sommer.',1],['Winter ist die schönste Jahreszeit.',0],['Stuttgart ist die Hauptstadt von Baden-Württemberg.',1],['Stuttgart ist die schönste Stadt der Welt.',0],['Blau ist die tollste Farbe.',0],['Wasser gefriert bei 0 Grad.',1],['Die Ferien sind immer zu kurz.',0],['Ein Tag hat 24 Stunden.',1]];
+function meinungGen(){const[s,t]=pick(MT);return{kind:'choice',long:1,text:`Meinung oder Tatsache?<br>„${s}“`,options:['Meinung','Tatsache'],answer:t?'Tatsache':'Meinung',
+  steps:[{t:'<b>Tatsache</b>: Man kann es überprüfen, und es stimmt für alle.',why:'<b>Meinung</b>: Das findet jemand – andere dürfen es anders sehen. Oft stecken Wörter wie „schön“, „toll“, „beste“ darin.'},{t:`„${s}“ ist eine <b>${t?'Tatsache':'Meinung'}</b>.`}]}}
+addT('ma',3,[['brueche','Halbe und Viertel','½ und ¼ mit Pizza',mix(BRUCH.bild,BRUCH.von,BRUCH.von)],['weg','Weg beschreiben','Felder nach oben, unten, rechts, links',wegGen]]);
+addT('ma',4,[['brueche4','Brüche','Halbe, Viertel, Drittel vergleichen',mix(BRUCH.bild,BRUCH.von,BRUCH.vgl)]]);
+addT('ma',2,[['weg2','Weg beschreiben','Felder zählen auf der Karte',wegGen]]);
+addT('de',3,[['meinung','Meinung oder Tatsache?','„Ich finde …“ oder „Es ist so.“',meinungGen],['ueberschrift','Die passende Überschrift','Worum geht es im Text?',ueberschriftGen(3)]]);
+addT('de',4,[['meinung4','Meinung oder Tatsache?','Begründen mit „weil“',mix(meinungGen,wiGen(AW.sprache))],['ueberschrift4','Die passende Überschrift','Hauptsache erkennen',ueberschriftGen(4)]]);
+GRP.ma.find(x=>x[0]==='Geometrie')[1].push('weg','weg2');GRP.ma.find(x=>/^Rechnen & Zahlen/.test(x[0]))[1].push('brueche','brueche4');
+GRP.de.find(x=>x[0]==='Lesen')[1].push('meinung','meinung4','ueberschrift','ueberschrift4');
+/* ---------- Mein Steckbrief (bleibt nur auf diesem Gerät) ---------- */
+const SB_F=[['vn','Vorname','Wie heißt du mit Vornamen?'],['nn','Nachname','Wie ist dein Nachname?'],['geb','Geburtstag (z. B. 14. Mai)','Wann hast du Geburtstag?'],['str','Straße und Hausnummer','In welcher Straße wohnst du – mit Hausnummer?'],['ort','Postleitzahl und Ort','Wie heißen Postleitzahl und Ort?'],['mama','Name Mama / Bezugsperson 1','Wie heißt deine Mama (Vor- und Nachname)?'],['papa','Name Papa / Bezugsperson 2','Wie heißt dein Papa (Vor- und Nachname)?'],['tel','Notfall-Telefonnummer','Welche Telefonnummer rufst du im Notfall bei deinen Eltern an?']];
+const sbNorm=t=>String(t||'').toLowerCase().replace(/str\.?\b/g,'straße').replace(/[^a-z0-9äöüß]/g,'');
+function sbData(){return me().sb||{}}
+function renderSteckbrief(){const d=sbData(),filled=SB_F.filter(f=>d[f[0]]).length,P=me();
+  if(S.sbEdit||filled<3){app.innerHTML=`${bar(S.sbBack||'home','🪪 Mein Steckbrief','Für Eltern zum Ausfüllen')}
+    <div class="hello">${owl('happy',60)}<div class="bubble">Jedes Kind sollte seine <b>Adresse</b> und eine <b>Notfall-Telefonnummer</b> auswendig können. Tragen Sie die Daten hier ein – danach kann ${esc(P.name)} sie spielerisch üben.</div></div>
+    <div class="sbform">${SB_F.map(([k,l])=>`<label class="swlab" for="sb_${k}">${l}</label><input class="mminp" id="sb_${k}" value="${esc(d[k]||'')}" ${k==='tel'?'inputmode="tel"':''} autocomplete="off">`).join('')}</div>
+    <p class="note">🔒 Diese Angaben bleiben nur auf diesem Gerät gespeichert und werden nirgendwohin gesendet.</p>
+    <button class="btn big" data-act="sbSave">Speichern</button>`;return}
+  const qs=SB_F.filter(f=>d[f[0]]),i=S.sbi||0;
+  if(i>=qs.length){app.innerHTML=`${bar(S.sbBack||'home','🪪 Mein Steckbrief','Geschafft!')}<div class="result">${owl('cheer',100)}<h2>Super, ${esc(d.vn||P.name)}!</h2><div class="score">${S.sbOk} von ${qs.length} gewusst</div><p>${S.sbOk===qs.length?'Du kennst deinen Steckbrief auswendig. Wenn du dich mal verläufst, kannst du jedem sagen, wo du wohnst.':'Übe es jeden Tag einmal – bald kannst du alles auswendig!'}</p>
+    <div class="rcard" style="text-align:left;width:100%"><b>🚨 Und nicht vergessen:</b><div>110 – Polizei</div><div>112 – Feuerwehr und Krankenwagen</div></div>
+    <div class="row" style="width:100%"><button class="btn" data-act="sbStart">Nochmal üben</button><button class="btn ghost" data-act="sbEdit">Daten ändern</button></div></div>`;return}
+  const[k,,q]=qs[i],st=S.sbSt;
+  app.innerHTML=`${bar(S.sbBack||'home','🪪 Mein Steckbrief',`Frage ${i+1} von ${qs.length}`)}
+  <div class="qcard"><div class="qtext long">${q}</div>
+  <input class="mminp" id="sbin" autocomplete="off" ${k==='tel'?'inputmode="tel"':''} placeholder="Schreib es auf …" value="${esc(S.sbIn||'')}">
+  ${st==='no'?`<div class="hint">Fast! Richtig ist: <b>${esc(d[k])}</b><br><span class="small">Lies es laut, schließ die Augen und sag es noch einmal.</span></div>`:st==='ok'?'<div class="gmsg ok">✓ Richtig!</div>':`<button class="btn ghost" data-act="sbHint">💡 Tipp: Wie fängt es an?</button>${S.sbH?`<div class="hint">Es fängt so an: <b>${esc(String(d[k]).slice(0,Math.ceil(String(d[k]).length/3)))}…</b></div>`:''}`}
+  <button class="btn big" data-act="${st?'sbNext':'sbCheck'}">${st?'Weiter ›':'Prüfen'}</button></div>
+  <p class="note">🔒 Bleibt nur auf diesem Gerät.</p>`;const inp=document.getElementById('sbin');if(inp&&!st)inp.addEventListener('input',()=>{S.sbIn=inp.value})}
+/* ---------- Bereiche des Checks ---------- */
+const tg=(s,g,id)=>{const f=findTopic(`${s}|${g}|${id}`);return f?f.t[3]:null};
+const awb=(k,g)=>wiGen(AW[k].filter(x=>g>=4||x[5]!==4));
+const AREAS=[
+ ['ich','🧍','Ich, Alltag und Sicherheit',g=>[awb('ich',g),awb('ich',g),tg('sa',3,'verkehr')]],
+ ['deutschland','🇩🇪','Deutschland',g=>[awb('deutschland',g),wiGen(g>=4?POL4:POL3)]],
+ ['geo','🗺️','Erdkunde und Orientierung',g=>[awb('geo',g),awb('geo',g),tg('er',3,'de'),tg('sa',4,'karte')]],
+ ['welt','🌍','Die Welt',g=>[awb('welt',g),awb('welt',g),tg('er',4,'welt')]],
+ ['gesch','🏛️','Geschichte: früher und heute',g=>[awb('gesch',g),ZQ.first,ZQ.era,tg('sa',3,'frueher')]],
+ ['koerper','❤️','Mensch und Körper',g=>[awb('koerper',g),awb('koerper',g),tg('wi',3,'wi_koerper')]],
+ ['natur','🐸','Tiere, Pflanzen und Bäume',g=>[awb('natur',g),awb('natur',g),tg('sa',3,'pflanzen'),tg('sa',2,'tiere')]],
+ ['wetter','🌦️','Wetter und Umwelt',g=>[awb('wetter',g),awb('wetter',g),wiGen(SA4.umwelt)]],
+ ['technik','⚡','Technik und Medien',g=>[awb('technik',g),awb('technik',g),wiGen(SA4.medien)]],
+ ['geld','💶','Geld und Einkaufen',g=>[awb('geld',g),awb('geld',g),tg('ma',3,'einkauf')]],
+ ['sprache','🗣️','Sprache und Lesen',g=>[awb('sprache',g),meinungGen,ueberschriftGen(g)]],
+ ['mathe','➗','Mathe im Alltag',g=>[BRUCH.bild,BRUCH.von,tg('ma',3,'uhr5'),tg('ma',3,'zeit3'),tg('ma',3,'laengen'),g>=4?tg('ma',4,'fahrplan'):tg('ma',3,'gewicht')]],
+ ['orient','🧭','Zeit, Kalender und Wege',g=>[wegGen,wegGen,tg('ma',3,'zeit3'),tg('sa',2,'zeit')]],
+ ['werte','🤝','Miteinander und Werte',g=>[awb('werte',g),awb('werte',g),wiGen(WIR)]],
+ ['klassik','🧠','Klassisches Allgemeinwissen',g=>[awb('klassik',g),awb('klassik',g),tg('wi',3,'wi_erde')]]];
+[3,4].forEach(g=>addT('wi',g,AREAS.map(([k,e,n,f])=>['aw_'+k,`${e} ${n}`,`Allgemeinwissen-Check · Klasse ${g}`,mix(...f(g).filter(Boolean))])));
+GRP.wi.unshift(['Allgemeinwissen-Check (15 Bereiche)',AREAS.map(a=>'aw_'+a[0])]);
+function renderAwCheck(){const P=me(),g=S.awg||(klasse()===4?4:3),T=P.test||{};let sum=0;
+  const rows=AREAS.map(([k,e,n])=>{const sc=T[`wi-${g}-aw_${k}`];if(sc!=null)sum+=sc;return`<button class="topic awrow" data-act="awGo" data-k="${k}"><span class="bz-e">${e}</span><span class="tx"><span class="nm">${n}</span><div class="ebar"><i class="s" style="width:${(sc||0)*10}%"></i></div><span class="ds">${sc==null?'Noch nicht getestet':`${sc} von 10 richtig`}</span></span>${sc!=null?medalSVG(medalOf(sc),24):''}<span class="go">${NEXT}</span></button>`}).join('');
+  const done=AREAS.filter(([k])=>T[`wi-${g}-aw_${k}`]!=null).length;
+  app.innerHTML=`${bar('home','🎯 Wissens-Check',`Allgemeinwissen · ${esc(P.name)} · Klasse ${g}`)}
+  <div class="grades" style="--c:var(--c-wi)">${[3,4].map(x=>`<button class="grade ${g===x?'on':''}" data-act="awG" data-g="${x}"><b>Klasse ${x}</b><span>${x===3?'Das sollte man wissen':'Für Profis'}</span></button>`).join('')}</div>
+  <div class="rcard"><div class="rc-h">${owl(done===AREAS.length?'cheer':'think',48)}<div><b>${sum} von ${AREAS.length*10} Punkten</b><br><span>${done} von ${AREAS.length} Bereichen getestet. Jeder Bereich hat 10 Fragen. Hier erklärt Stella vorher nichts – das ist ein echter Test! Üben kannst du bei den Wissen-Themen.</span></div></div><div class="ebar" style="height:12px"><i class="s" style="width:${sum/(AREAS.length*10)*100}%"></i></div></div>
+  <button class="tool" style="--c:#2E9B4F" data-act="steckbrief"><span class="gl">🪪</span><b>Mein Steckbrief</b><span>Adresse und Notfallnummer auswendig lernen</span></button>
+  <div class="topics" style="--c:var(--c-wi)">${rows}</div>
+  <p class="note">Die Bereiche orientieren sich daran, was ein Kind in der 3. und 4. Klasse in Baden-Württemberg ungefähr wissen sollte. Es geht nicht um Noten, sondern darum, Lücken zu finden – die übt man dann im Bereich „Wissen“.</p>`}
+Object.assign(EXT_ACT,{
+  awcheck:()=>{stopSpeech();S.screen='awcheck';render();return true},
+  awG:d=>{S.awg=+d.g;renderAwCheck();return true},
+  awGo:d=>{const g=S.awg||(klasse()===4?4:3),f=findTopic(`wi|${g}|aw_${d.k}`);if(!f)return true;S.subj='wi';S.grade=g;S.topic=f.t;S.screen='quiz';stopSpeech();newRound(true);window.scrollTo(0,0);return true},
+  steckbrief:()=>{stopSpeech();S.sbBack=S.screen==='awcheck'?'awcheck':'home';S.sbEdit=false;S.sbi=0;S.sbOk=0;S.sbSt=null;S.sbIn='';S.sbH=false;S.screen='steckbrief';render();return true},
+  sbSave:()=>{const P=me();P.sb=P.sb||{};SB_F.forEach(([k])=>{const v=document.getElementById('sb_'+k);if(v)P.sb[k]=v.value.trim().slice(0,80)});save();S.sbEdit=false;S.sbi=0;S.sbOk=0;S.sbSt=null;S.sbIn='';renderSteckbrief();toast('Gespeichert ✓',1800);return true},
+  sbEdit:()=>{S.sbEdit=true;renderSteckbrief();return true},
+  sbStart:()=>{S.sbi=0;S.sbOk=0;S.sbSt=null;S.sbIn='';S.sbH=false;renderSteckbrief();return true},
+  sbHint:()=>{S.sbH=true;renderSteckbrief();return true},
+  sbCheck:()=>{const d=sbData(),qs=SB_F.filter(f=>d[f[0]]),k=qs[S.sbi||0][0],inp=document.getElementById('sbin'),v=inp?inp.value:S.sbIn;S.sbIn=v;if(!v.trim())return true;
+    const ok=k==='tel'?v.replace(/\D/g,'')===String(d[k]).replace(/\D/g,''):sbNorm(v)===sbNorm(d[k]);S.sbSt=ok?'ok':'no';if(ok){S.sbOk++;tone('ok');me().stars++;bumpDay();save()}else tone('no');renderSteckbrief();return true},
+  sbNext:()=>{S.sbi++;S.sbSt=null;S.sbIn='';S.sbH=false;if(S.sbi>=SB_F.filter(f=>sbData()[f[0]]).length)dayTag('steckbrief');renderSteckbrief();return true}
+});
+Object.assign(EXT_SCR,{awcheck:renderAwCheck,steckbrief:renderSteckbrief});
+
 
 const GRADE_SUB={2:'Wiederholen',3:'Jetzt dran',4:'Vorschau'};
 const ROUND=8;
