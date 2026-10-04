@@ -746,6 +746,41 @@ button,a,select,input{touch-action:manipulation}
 .mbody{padding:0 14px 14px;display:flex;flex-direction:column;gap:10px}.mbody>p{margin:0;font-size:17px;line-height:1.55}
 .mbig{height:200px;border-radius:14px;background:color-mix(in srgb,var(--mc) 12%,var(--card));display:grid;place-items:center;overflow:hidden;font-size:96px}
 .mbody .btn svg{width:22px;height:22px;vertical-align:-4px;margin-right:6px;display:inline-block}.mcred{font-size:11px;margin:0}
+.welcome{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:10px 0 30px}
+.welcome h1{font-family:var(--display);font-size:30px;margin:0}.wsub{margin:0;font-size:19px}
+.mminp.big{font-size:24px;text-align:center;font-family:var(--display);font-weight:800}
+.avgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%}
+.avb{font-size:38px;aspect-ratio:1;border-radius:18px;background:var(--card);border:3px solid var(--line)}.avb.on{border-color:var(--accent);background:var(--star-soft);transform:scale(1.06)}
+.welcome .seg{width:100%}.welcome .btn{width:100%}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.door{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:118px;background:var(--card);border:3px solid var(--line);border-bottom:7px solid var(--c);border-radius:22px;padding:12px;box-shadow:var(--shadow);text-align:center}
+.door .de{font-size:42px}.door b{font-family:var(--display);font-size:17px;line-height:1.15}
+.tool.helper{flex-direction:row;align-items:center;gap:12px;width:100%;margin-top:4px}
+.doorlist{display:flex;flex-direction:column;gap:10px}
+.dtile{display:flex;align-items:center;gap:14px;background:var(--card);border:2px solid var(--line);border-left:8px solid var(--c);border-radius:18px;padding:14px;text-align:left;box-shadow:var(--shadow)}
+.dtile .de{font-size:38px}.dtile .tx{flex:1;display:flex;flex-direction:column}.dtile b{font-family:var(--display);font-size:20px}.dtile .tx span{color:var(--muted);font-size:15px}.dtile .go svg{width:22px;height:22px}
+.sgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.stk{aspect-ratio:1;display:grid;place-items:center;border-radius:12px;background:var(--paper);border:2px dashed var(--line);font-size:26px;color:var(--muted);font-weight:800}
+.stk.has{background:var(--card);border:2px solid var(--star);box-shadow:var(--shadow)}
+.accgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.accb{display:flex;flex-direction:column;align-items:center;gap:2px;background:var(--card);border:3px solid var(--line);border-radius:16px;padding:8px 4px}.accb span:first-child{font-size:30px}.accb b{font-size:13px}.accb.on{border-color:var(--accent)}.accb:disabled{opacity:.55}
+.owlw{position:relative;display:inline-block;flex:none}.owlw .owl{display:block}.owlacc{position:absolute;left:50%;transform:translateX(-50%);line-height:1;pointer-events:none}
+.streak{margin-top:6px;font-weight:800;color:#D9480F}
+.stickhint{display:flex;align-items:center;gap:12px;width:100%;background:var(--star-soft);border:3px solid var(--star);border-radius:18px;padding:10px 14px;margin-bottom:12px;text-align:left;animation:pop .5s}
+.sh-e{font-size:40px}
+.vtog{margin:2px 0}
+.lmap{position:relative;margin:6px 0}
+.lpath{position:absolute;inset:0;width:100%;height:100%;color:color-mix(in srgb,var(--c) 45%,transparent)}
+.lnode{position:absolute;width:44%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;text-align:center}
+.lnode button{width:68px;height:68px;border-radius:50%;background:var(--card);border:4px solid var(--line);border-bottom-width:8px;font-family:var(--display);font-weight:800;font-size:24px;color:var(--muted);position:relative;z-index:1}
+.lnode.done button{background:var(--star-soft);border-color:var(--star);color:var(--ink)}
+.lnode.half button{background:color-mix(in srgb,var(--c) 15%,var(--card));border-color:var(--c);color:var(--c)}
+.lnode.rec button{background:var(--c);border-color:color-mix(in srgb,var(--c) 70%,#000);color:#fff;animation:pulse 1.6s infinite}
+.ln{font-size:13.5px;font-weight:700;line-height:1.2;margin-top:3px;background:color-mix(in srgb,var(--paper) 85%,transparent);border-radius:8px;padding:1px 4px}.recb{color:var(--accent);font-size:12.5px;font-weight:800}
+.lend{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--display);font-weight:800;font-size:20px}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 50%,transparent)}50%{box-shadow:0 0 0 12px transparent}}
+.topic.rec{border:3px solid var(--accent)}
+.fb.mini{flex-direction:row;align-items:center;gap:10px;padding:10px 14px;font-size:17px}.fb.mini .fe{font-size:26px}
 </style>
 </head>
 <body>
@@ -816,7 +851,7 @@ function toast(msg,ms){let t=document.getElementById('toast');if(!t){t=document.
 function speechHelp(){return IS_IOS?'<b>Ich höre nichts?</b> Lautstärke hoch. Stellas Erklärungen nutzen die Stimme des iPhones – die bleibt stumm, solange der <b>Stummschalter</b> am Rand an ist (Rot sichtbar). Diktat und Englisch klingen trotzdem. Öffne die Seite direkt in Safari, nicht als Vorschau in einer anderen App.':'<b>Ich höre nichts?</b> Lautstärke hoch. Öffne die Seite direkt in Safari oder Chrome, nicht in einer anderen App. Unter „Einstellungen“ kannst du die Stimme testen.'}
 const enw=w=>`<span lang="en">${w}</span>`;
 const cleanSay=t=>String(t==null?'':t).replace(/\p{Extended_Pictographic}|️|‍/gu,' ').replace(/[„“”"«»]/g,'').replace(/\s*\(\s*\)\s*/g,' ').replace(/\s+([.,!?:;])/g,'$1').replace(/([.!?])[.]+/g,'$1').replace(/\s+/g,' ').trim();
-const TALK_RATE=.93; // Stella spricht ein kleines bisschen langsamer, damit Kinder gut mitkommen
+const talkRate=()=>(typeof store!=='undefined'&&store.talkRate)||.85; // Stella spricht ein kleines bisschen langsamer, damit Kinder gut mitkommen
 /* say(text, lang, rate, onend) – text: ein Text ODER eine Liste [{t,lang}] */
 function say(text,lang,rate,onend){
   const id=++SAY_ID;let done=false;const fin=()=>{if(!done&&id===SAY_ID){done=true;onend&&onend()}};
@@ -824,7 +859,7 @@ function say(text,lang,rate,onend){
   const C=clips();
   const segs=(Array.isArray(text)?text:[{t:text,lang:lang||'de-DE'}]).map(x=>({t:cleanSay(x.t),lang:x.lang||'de-DE'})).filter(x=>/[\p{L}\p{N}]/u.test(x.t));
   const items=[];const clipRate=(rate||1)<.75?.8:1;
-  const addTts=(t,lg)=>{const v=pickVoice(lg),en=/^en/i.test(lg),r=(rate||1)*(en?.9:TALK_RATE);if(en&&t.length<30&&!/[.!?]$/.test(t))t+='.';
+  const addTts=(t,lg)=>{const v=pickVoice(lg),en=/^en/i.test(lg),r=(rate||1)*(en?.9*talkRate()/.93:talkRate());if(en&&t.length<30&&!/[.!?]$/.test(t))t+='.';
     let last=items[items.length-1];if(!last||!last.tts){last={tts:[]};items.push(last)}
     const add=x=>last.tts.push({t:x,v,lang:lg,r});
     // lange Texte nur bei Online-Stimmen teilen (Chrome bricht sie sonst ab)
@@ -846,7 +881,7 @@ function say(text,lang,rate,onend){
     SAY_Q=it.tts.map((p,j)=>{const u=new SpeechSynthesisUtterance(p.t);u.lang=p.v?p.v.lang:p.lang;if(p.v)u.voice=p.v;u.rate=p.r;u.pitch=1;u.volume=1;
       u.onstart=()=>{SAY_OK=true};
       u.onend=()=>{if(j===it.tts.length-1)next()};
-      u.onerror=e=>{const er=e&&e.error||'';if(er==='interrupted'||er==='canceled')return;if(!SAY_WARNED){SAY_WARNED=true;toast(`Die Sprachausgabe hat nicht funktioniert${er?` (${er})`:''}. `+speechHelp(),9000)}if(j===it.tts.length-1)next()};return u});
+      u.onerror=e=>{const er=e&&e.error||'';if(er==='interrupted'||er==='canceled')return;if(!SAY_WARNED){SAY_WARNED=true;toast('🔇 Der Ton geht gerade nicht. Frag Mama oder Papa – in den Einstellungen kann man die Stimme testen.',4000)}if(j===it.tts.length-1)next()};return u});
     SAY_Q.forEach(u=>speechSynthesis.speak(u))};
   setTimeout(()=>{if(id===SAY_ID&&!SAY_OK&&!SAY_WARNED&&!(canSpeak&&speechSynthesis.speaking)&&(!AUD||AUD.paused)){SAY_WARNED=true;toast(speechHelp(),9000)}},2600);
   // iPhone/iPad erlauben Ton nur, wenn er OHNE Verzögerung direkt beim Antippen startet. Aufnahmen starten immer sofort.
@@ -2578,7 +2613,7 @@ function renderKosmos(){const K=S.kosmos||(S.kosmos={view:'orb',sel:null}),o={ta
 function renderHome(){
   const P=me(),rk=rankOf(P.stars),t=today(),n=(P.day&&P.day.d===t)?P.day.n:0,goal=Math.min(100,Math.round(n/DAILY_GOAL*100)),w=dueWrong().length,tp=dueTopics().length;
   app.innerHTML=`${bar(null,'Sternenheft<span class="dot">.</span>','Lernen für Klasse 2, 3 und 4')}
-  <div class="who" role="group" aria-label="Wer lernt?">${store.profiles.map((p,i)=>`<button class="${store.active===i?'on':''}" data-act="profile" data-i="${i}" aria-pressed="${store.active===i}"><b>${esc(p.name)}</b><span>${STAR}${p.stars}</span></button>`).join('')}</div>
+  <div class="who" role="group" aria-label="Wer lernt?">${store.profiles.map((p,i)=>`<button class="${store.active===i?'on':''}" data-act="profile" data-i="${i}" aria-pressed="${store.active===i}"><b>${p.av?p.av+' ':''}${esc(p.name)}</b><span>${STAR}${p.stars}</span></button>`).join('')}</div>
   <div class="hello2">${owl(n>=DAILY_GOAL?'cheer':'happy',64)}<div class="hb"><b>Hallo ${esc(P.name)}!</b> Du bist <b>${rk.name}</b>.
     <div class="goal"><span>Heute: ${n>=DAILY_GOAL?`Tagesziel geschafft! ⭐`:`${n} von ${DAILY_GOAL} Sternen`}</span><div class="rankbar"><i style="width:${goal}%"></i></div></div>
     ${rk.next?`<span class="small">Noch ${rk.left} ${rk.left===1?'Stern':'Sterne'} bis ${rk.next[1]}</span>`:''}</div></div>
@@ -2587,20 +2622,7 @@ function renderHome(){
   </div></section>
   
   ${factCard()}
-  <section><div class="label">Entdecken und Helfen</div><div class="tools">
-    <button class="tool" style="--c:var(--c-ma)" data-act="helper"><span class="gl">?</span><span class="tx"><b>Hausaufgaben-Helfer</b><br><span class="small">Rechenaufgabe aus dem Heft eintippen – Stella erklärt sie Schritt für Schritt.</span></span></button>
-    <button class="tool" style="--c:var(--c-er)" data-act="atlas"><span class="gl">${ICON.globe}</span><b>Atlas</b><span>Deutschland, Europa, Welt</span></button>
-    <button class="tool" style="--c:#5B4BC4" data-act="kosmos"><span class="gl">🪐</span><b>Weltall</b><span>Sonne und Planeten</span></button>
-    <button class="tool" style="--c:var(--c-ma)" data-act="blitzMenu"><span class="gl">⚡</span><b>Blitzrechnen</b><span>1 Minute – dein Rekord</span></button>
-    <button class="tool" style="--c:var(--c-de)" data-act="lpfad"><span class="gl">📖</span><b>Lesepfad</b><span>Laut lesen und verstehen</span></button>
-    <button class="tool" style="--c:var(--c-de)" data-act="schreibList"><span class="gl">✏️</span><b>Schreibwerkstatt</b><span>Eigene Geschichten</span></button>
-    <button class="tool" style="--c:var(--c-sa)" data-act="machmit"><span class="gl">✋</span><b>Mach mit!</b><span>Messen, bauen, forschen</span></button>
-    <button class="tool" style="--c:var(--c-wi)" data-act="welt"><span class="gl">🌍</span><b>Wir und die Welt</b><span>Politik, Religionen, Miteinander</span></button>
-    <button class="tool" style="--c:#E0598B" data-act="games"><span class="gl">🧠</span><b>Gedächtnis & Lerntricks</b><span>Spiele, Merk-Tricks, Eselsbrücken</span></button>
-    <button class="tool" style="--c:#8D6E63" data-act="zeit"><span class="gl">🕰️</span><b>Zeitreise</b><span>Von der Steinzeit bis heute</span></button>
-    <button class="tool" style="--c:#E8A400" data-act="meilen"><span class="gl">🏆</span><b>Meilensteine</b><span>Erfindungen, Medizin, Sport</span></button>
-    <button class="tool" style="--c:var(--c-wi)" data-act="awcheck"><span class="gl">🎯</span><b>Allgemeinwissen-Check</b><span>15 Bereiche, je 10 Fragen</span></button>
-  </div></section>
+  ${homeTools()}
   <button class="setrow" data-act="settings"><span>⚙️</span><span><b>Für Eltern: Einstellungen</b><br><span class="small">Namen, Stimme, Töne und Lernfortschritt</span></span><span class="go">${NEXT}</span></button>`;
 }
 const PLATFORM=IS_IOS?'ios':/Android/i.test(navigator.userAgent)?'android':/Windows/i.test(navigator.userAgent)?'win':/Mac/i.test(navigator.userAgent)?'mac':'other';
@@ -2619,6 +2641,7 @@ function voiceSettings(){
     ${!canSpeak?'<p><b>Dieser Browser kann nicht vorlesen.</b> Öffne die Seite direkt in Safari oder Chrome.</p>':!list.length?`<p><b>Auf diesem Gerät ist keine deutsche Stimme installiert.</b> ${voiceHowTo()}</p>`:
     `<div class="vrow"><label for="v-de">Stimme</label><select id="v-de" data-lang="de">${list.slice().sort((a,b)=>voiceScore(b,'de-DE')-voiceScore(a,'de-DE')).map(x=>`<option value="${esc(x.voiceURI)}" ${v&&v.voiceURI===x.voiceURI?'selected':''}>${voiceQuality(x)>=2?'★ ':''}${esc(x.name)}${/premium/i.test(vid(x))?' (Premium)':/enhanced|erweitert/i.test(vid(x))?' (Erweitert)':''}</option>`).join('')}</select><button class="speak" data-act="voiceTest" data-lang="de">${SPK}Probe</button></div>
     <p class="vq q${q}">Qualität: <b>${QNAME[q]}</b>${q>=2?' ✓':''}</p>${q<2?`<p class="vtip">💡 <b>So klingt Stella viel besser:</b> ${voiceHowTo()}</p>`:''}`}
+    ${canSpeak?`<div class="vrow"><label>Tempo</label><span>Wie schnell Stella spricht</span></div><div class="seg">${[[.72,'🐢 Langsam'],[.85,'Etwas langsamer'],[.95,'Normal'],[1.05,'🐇 Schneller']].map(([v,l])=>`<button class="${Math.abs(talkRate()-v)<.01?'on':''}" data-act="talkRate" data-v="${v}">${l}</button>`).join('')}</div>`:''}
     ${canSpeak?`<div class="vrow"><label>Automatisch</label><span>Stella liest Erklärungen von selbst vor</span><button class="speak" data-act="voiceExplainToggle">${store.explainVoice===false?'Aus':'An'}</button></div>`:''}
   </div>
   <div class="vrow"><label>Vorlesen</label><span>Jede Aufgabe automatisch vorlesen (hilft Kindern, die noch nicht so schnell lesen)</span><button class="speak" data-act="autoRead">${{off:'Aus',k2:'Nur Klasse 2',all:'Immer'}[store.autoRead||'k2']}</button></div>
@@ -3491,24 +3514,24 @@ function todayCard(){const P=me();
     <div class="row" style="margin-top:12px">${[2,3,4].map(g=>`<button class="btn ghost" data-act="setKlasse" data-g="${g}">Klasse ${g}</button>`).join('')}</div></div></section>`;
   const pl=todayPlan(),it=[];
   const placed=P.placed||{};
-  if(!placed.ma||!placed.de)it.push({e:'🧭',t:'Einstufung',s:`Finde heraus, was du in ${!placed.ma?'Mathe':'Deutsch'} schon kannst (ca. 5 Minuten)`,a:'place',d:`data-s="${!placed.ma?'ma':'de'}"`,done:false});
+  if(!placed.ma||!placed.de)it.push({e:'🧭',t:'Was kann ich schon?',s:`Ein kleines Quiz in ${!placed.ma?'Mathe':'Deutsch'} – ganz ohne Noten (5 Minuten)`,a:'place',d:`data-s="${!placed.ma?'ma':'de'}"`,done:false});
   const tp=(tk,e,lab)=>{if(!tk)return;const f=findTopic(tk);if(!f)return;it.push({e,t:`${lab}: ${f.t[1]}`,s:`${f.sub.name} · Klasse ${f.g}${f.g<klasse()?' – noch eine kleine Lücke schließen':''}`,a:'goTopic',d:`data-tk="${esc(tk)}"`,done:hasTag('tk:'+tk)})};
   tp(pl.ma,'🔢','Neu');tp(pl.de,'📝','Neu');
   if(pl.blitz&&BLITZ[pl.blitz])it.push({e:'⚡',t:`Blitzrechnen: ${BLITZ[pl.blitz].n}`,s:'Eine Minute – schlag deinen Rekord',a:'blitzGo',d:`data-m="${pl.blitz}"`,done:hasTag('blitz')});{const gk=Object.keys(GAMES)[today()%Object.keys(GAMES).length];it.push({e:'🧠',t:`Gedächtnis: ${GAMES[gk].n}`,s:'Ein kurzes Spiel für dein Gehirn',a:'gStart',d:`data-g="${gk}"`,done:hasTag('game')})}
   if(pl.lese&&typeof LP!=='undefined'){const x=LP.find(y=>y.id===pl.lese);if(x)it.push({e:'📖',t:`Lesen: ${x.ti}`,s:'Laut vorlesen und Fragen beantworten',a:'lpOpen',d:`data-id="${x.id}"`,done:hasTag('lese')})}
   const w=dueWrong().length,tpn=dueTopics().length;if(w+tpn)it.push({e:'🔁',t:'Wiederholen',s:`${w+tpn} ${w+tpn===1?'Sache ist':'Sachen sind'} wieder dran`,a:'review0',d:'',done:hasTag('review')});
-  const n=it.filter(x=>x.done).length;
-  return`<section><div class="label">Heute dran · ${n} von ${it.length} geschafft</div><div class="today">${it.map(x=>`<button class="tday ${x.done?'done':''}" data-act="${x.a}" ${x.d}><span class="td-e">${x.done?'✅':x.e}</span><span class="tx"><b>${x.t}</b><br><span class="small">${x.s}</span></span><span class="go">${NEXT}</span></button>`).join('')}</div>
-  ${n===it.length?`<div class="note" style="margin-top:8px">Alles geschafft – super! Jetzt darfst du frei üben oder Pause machen.</div>`:''}</section>`}
+  const n=it.filter(x=>x.done).length;const all=it.length;it.sort((a,b)=>a.done-b.done);const more=all>3&&!S.tdMore;if(more)it.splice(3);
+  return`<section><div class="label">Heute dran · ${n} von ${all} geschafft</div><div class="today">${it.map(x=>`<button class="tday ${x.done?'done':''}" data-act="${x.a}" ${x.d}><span class="td-e">${x.done?'✅':x.e}</span><span class="tx"><b>${x.t}</b><br><span class="small">${x.s}</span></span><span class="go">${NEXT}</span></button>`).join('')}</div>
+  ${more?`<button class="btn ghost" data-act="tdMore" style="width:100%;margin-top:8px">Noch ${all-3} mehr anzeigen</button>`:''}${n===all?`<div class="note" style="margin-top:8px">Alles geschafft – super! Jetzt darfst du frei üben oder Pause machen.</div>`:''}</section>`}
 /* ---------- Einstufung ---------- */
 function startPlace(sid){const g=klasse()||3,ids=[...(g>2?(CORE[sid][g-1]||[]).map(id=>[g-1,id]):[]),...(CORE[sid][g]||[]).map(id=>[g,id])];const qs=[];
   ids.forEach(([gg,id])=>{const f=findTopic(tkOf(sid,gg,id));if(!f)return;const q=numify(genSeeded(f.t[3],newSeed()),sid);q._tk=tkOf(sid,gg,id);q._key=qKey(q);q._tname=f.t[1];q._g=gg;qs.push(q)});
-  stopSpeech();S.subj=sid;S.grade=g;S.topic=['_place',`Einstufung ${sid==='ma'?'Mathe':'Deutsch'}`,'',null];S.screen='quiz';
+  stopSpeech();S.subj=sid;S.grade=g;S.topic=['_place',`Was kann ich schon? ${sid==='ma'?'Mathe':'Deutsch'}`,'',null];S.screen='quiz';
   Q={qs,i:0,res:[],earned:0,n:qs.length,test:true,place:sid,fails:{},t0:Date.now()};S.rv=null;startQ();window.scrollTo(0,0)}
 function finishPlace(){const P=me(),sid=Q.place;P.place=P.place||{};P.placed=P.placed||{};Q.qs.forEach((q,i)=>{P.place[q._tk]=!!Q.res[i]});P.placed[sid]=today();P.plan=null;sesBump();save();S.screen='placeRes';render()}
 function renderPlaceRes(){const sid=Q.place,other=sid==='ma'?'de':'ma',P=me();const ok=Q.qs.filter((q,i)=>Q.res[i]),no=Q.qs.filter((q,i)=>!Q.res[i]);
   const li=(L,c)=>L.map(q=>`<span class="chip3 ${c}">${esc(q._tname)} <i>Kl. ${q._g}</i></span>`).join('');
-  app.innerHTML=`${bar('home','Einstufung',sid==='ma'?'Mathe':'Deutsch')}<div class="result">${owl('cheer',100)}<h2>Danke, ${esc(P.name)}!</h2>
+  app.innerHTML=`${bar('home','Was kann ich schon?',sid==='ma'?'Mathe':'Deutsch')}<div class="result">${owl('cheer',100)}<h2>Danke, ${esc(P.name)}!</h2>
   <p>Jetzt weiß Stella, wo du stehst. Das war kein Test mit Noten – es hilft nur, die richtigen Aufgaben auszusuchen.</p>
   ${ok.length?`<div class="rcard" style="text-align:left;width:100%"><b>Das kannst du schon ✓</b><div class="chips3">${li(ok,'ok')}</div></div>`:''}
   ${no.length?`<div class="rcard" style="text-align:left;width:100%"><b>Das üben wir gemeinsam</b><div class="chips3">${li(no,'no')}</div><span class="small">Diese Themen kommen jetzt nach und nach bei „Heute dran“.</span></div>`:''}
@@ -3535,6 +3558,7 @@ function lernpfadSettings(){const P=me(),k=klasse(),m=store.pauseMin==null?15:st
   <div class="row"><button class="btn ghost" data-act="place" data-s="ma">Einstufung Mathe</button><button class="btn ghost" data-act="place" data-s="de">Einstufung Deutsch</button></div></div></section>
   <section><div class="label">Pausen</div><div class="vbox"><b>Pause vorschlagen nach</b><div class="seg">${[[0,'nie'],[10,'10 Min.'],[15,'15 Min.'],[20,'20 Min.']].map(([v,l])=>`<button class="${m===v?'on':''}" data-act="pauseSet" data-v="${v}">${l}</button>`).join('')}</div><p class="small">Kinder in der Grundschule lernen am besten in kurzen Einheiten von 10 bis 15 Minuten. Danach erinnert Stella freundlich an eine Pause.</p></div></section>`}
 Object.assign(EXT_ACT,{
+  talkRate:d=>{store.talkRate=+d.v;save();renderSettings();say('Hallo, ich bin Stella. So schnell spreche ich jetzt. Ist das gut so?','de-DE');return true},
   setKlasse:d=>{me().klasse=+d.g;me().plan=null;S.grade=+d.g;save();d.stay?renderSettings():renderHome();return true},
   zrSet:d=>{me().zr=+d.v;me().plan=null;save();renderSettings();return true},
   pauseSet:d=>{store.pauseMin=+d.v;save();renderSettings();return true},
@@ -4631,6 +4655,99 @@ Object.assign(EXT_ACT,{
   sbNext:()=>{S.sbi++;S.sbSt=null;S.sbIn='';S.sbH=false;if(S.sbi>=SB_F.filter(f=>sbData()[f[0]]).length)dayTag('steckbrief');renderSteckbrief();return true}
 });
 Object.assign(EXT_SCR,{awcheck:renderAwCheck,steckbrief:renderSteckbrief});
+/* ================= Kindgerecht: Begrüßung mit Tier, Lernweg, Sticker-Album, Stella anziehen, Feuer-Serie, Türen ================= */
+const AVS=['🦊','🐼','🦁','🐸','🐰','🐯','🐨','🦄','🐶','🐱','🐧','🦖','🐙','🦉','🐬','🐝'];
+const ACC=[[30,'🎀','Schleife'],[60,'🧢','Kappe'],[100,'🎩','Zylinder'],[150,'🕶️','Sonnenbrille'],[250,'👑','Krone'],[400,'🎓','Doktorhut']];
+const STICK=[['Tiere',['🐶','🐱','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸']],['Weltall',['🌍','🌙','☀️','⭐','🪐','☄️','🚀','🛸','👩‍🚀','🌌','🔭','🌠']],['Fahrzeuge',['🚲','🚗','🚌','🚂','🚁','✈️','⛵','🚒','🚜','🏎️','🚀','🛴']],['Fantasie',['🦄','🐉','🧚','🧜','🧙','🦸','🏰','🌈','💎','🎃','👻','🤖']]];
+const STICK_ALL=STICK.flatMap(([n,L])=>L.map(e=>[n,e]));
+const STEP_ST=15;
+const stickCount=()=>{const P=me();return Math.min(STICK_ALL.length,Math.floor(P.stars/STEP_ST)+(P.bonusSt||0))};
+const accNow=()=>{try{const P=me();return P.acc&&P.stars>=(ACC.find(a=>a[1]===P.acc)||[1e9])[0]?P.acc:''}catch(e){return''}};
+const owlBase=owl;
+owl=function(mood,size){const svg=owlBase(mood,size),a=accNow();if(!a)return svg;const s=size||64;
+  return`<span class="owlw" style="width:${s}px;height:${Math.round(s*1.04)}px">${svg}<span class="owlacc" style="font-size:${Math.round(s*(a==='🕶️'?.36:.42))}px;top:${a==='🕶️'?Math.round(s*.3):-Math.round(s*.2)}px">${a}</span></span>`};
+const _bumpDay=bumpDay;
+bumpDay=function(){_bumpDay();const P=me(),t=today();if(P.lday===t)return;P.lstreak=P.lday===t-1?(P.lstreak||0)+1:1;P.lday=t;
+  if([3,7,14,30,50,100].includes(P.lstreak)){P.bonusSt=(P.bonusSt||0)+1;setTimeout(()=>toast(`🔥 <b>${P.lstreak} Tage am Stück!</b> Du bekommst einen Bonus-Sticker!`,4500),400)}save()};
+const streakNow=()=>{const P=me();return P.lday>=today()-1?P.lstreak||0:0};
+/* ---------- Begrüßung ---------- */
+function renderWelcome(){const P=me(),av=S.wAv||P.av||'',nm=S.wName!=null?S.wName:(/^Kind \d$/.test(P.name)?'':P.name),k=S.wK||P.klasse||0;
+  app.innerHTML=`<div class="welcome">${owl('cheer',96)}<h1>Hallo! Ich bin Stella.</h1><p class="wsub">Ich helfe dir beim Lernen. Wie heißt du?</p>
+  <input id="wname" class="mminp big" maxlength="16" placeholder="Dein Name" value="${esc(nm)}" autocomplete="off">
+  <div class="label">Such dir ein Tier aus</div><div class="avgrid">${AVS.map(a=>`<button class="avb ${av===a?'on':''}" data-act="wAv" data-v="${a}">${a}</button>`).join('')}</div>
+  <div class="label">In welche Klasse gehst du?</div><div class="seg">${[2,3,4].map(g=>`<button class="${k===g?'on':''}" data-act="wK" data-g="${g}">Klasse ${g}</button>`).join('')}</div>
+  <button class="btn big" data-act="wGo">Los geht's! ›</button>
+  ${store.profiles.length>1?`<button class="btn ghost" data-act="wOther">Ich bin ${esc(store.profiles[1-store.active].name)}</button>`:''}</div>`;
+  const i=document.getElementById('wname');i.addEventListener('input',()=>{S.wName=i.value})}
+/* ---------- Türen statt vieler Kacheln ---------- */
+const DOORS={
+  spielen:{e:'🎮',n:'Spielen & Trainieren',c:'#E0598B',t:[['blitzMenu','⚡','Blitzrechnen','1 Minute – dein Rekord','--c-ma'],['games','🧠','Gedächtnis-Spiele','Memory, Melodie, Zahlen merken','#E0598B'],['tricks','📚','Merk-Tricks','So merkst du dir alles','--c-wi'],['machmit','✋','Mach mit!','Messen, bauen, forschen','--c-sa']]},
+  lesen:{e:'📖',n:'Lesen & Schreiben',c:'#D23F79',t:[['lpfad','📖','Lesepfad','Laut lesen und verstehen','--c-de'],['schreibList','✏️','Schreibwerkstatt','Eigene Geschichten','--c-de']]},
+  welt:{e:'🌍',n:'Welt entdecken',c:'#2E9B4F',t:[['atlas','🗺️','Atlas','Länder antippen','--c-er'],['kosmos','🪐','Weltall','Sonne und Planeten','#5B4BC4'],['zeit','🕰️','Zeitreise','Von der Steinzeit bis heute','#8D6E63'],['meilen','🏆','Meilensteine','Erfindungen, Medizin, Sport','#E8A400'],['welt','🤝','Wir und die Welt','Politik, Religionen, Miteinander','--c-wi'],['awcheck','🎯','Großes Wissens-Quiz','15 Bereiche, je 10 Fragen','--c-wi'],['steckbrief','🪪','Mein Steckbrief','Adresse & Notruf','#2E9B4F']]}};
+const cv=c=>c.startsWith('--')?`var(${c})`:c;
+function renderDoor(){const D=DOORS[S.door];app.innerHTML=`${bar('home',D.e+' '+D.n,'Such dir etwas aus!')}<div class="doorlist">${D.t.map(([a,e,n,s,c])=>`<button class="dtile" style="--c:${cv(c)}" data-act="${a}"><span class="de">${e}</span><span class="tx"><b>${n}</b><span>${s}</span></span><span class="go">${NEXT}</span></button>`).join('')}</div>`}
+function homeTools(){const P=me(),sc=stickCount();return`<section><div class="label">Entdecken</div><div class="doors">
+  ${Object.entries(DOORS).map(([k,D])=>`<button class="door" style="--c:${D.c}" data-act="door" data-v="${k}"><span class="de">${D.e}</span><b>${D.n}</b></button>`).join('')}
+  <button class="door" style="--c:#E8A400" data-act="album"><span class="de">📒</span><b>Sticker-Album</b><span class="small">${sc} von ${STICK_ALL.length}</span></button></div>
+  <button class="tool helper" style="--c:var(--c-ma)" data-act="helper"><span class="gl">?</span><span class="tx"><b>Hausaufgaben-Helfer</b><br><span class="small">Aufgabe aus dem Heft eintippen – Stella erklärt sie.</span></span></button></section>`}
+/* ---------- Sticker-Album & Stella anziehen ---------- */
+function renderAlbum(){const P=me(),n=stickCount(),next=STEP_ST-P.stars%STEP_ST;P.stickSeen=n;save();
+  app.innerHTML=`${bar('home','📒 Sticker-Album',`${n} von ${STICK_ALL.length} Stickern`)}
+  <div class="hello">${owl('cheer',60)}<div class="bubble">Für je <b>${STEP_ST} Sterne</b> bekommst du einen neuen Sticker. ${n<STICK_ALL.length?`Noch <b>${next} ${next===1?'Stern':'Sterne'}</b> bis zum nächsten!`:'Du hast alle Sticker! 🎉'} Wer jeden Tag lernt, bekommt Bonus-Sticker 🔥.</div></div>
+  ${STICK.map(([nm,L],si)=>`<section><div class="label">${nm}</div><div class="sgrid">${L.map((e,j)=>{const idx=si*12+j,has=idx<n;return`<span class="stk ${has?'has':''}">${has?e:'?'}</span>`}).join('')}</div></section>`).join('')}
+  <section><div class="label">Stella anziehen</div><div class="accgrid">${ACC.map(([s,e,nm])=>{const ok=P.stars>=s;return`<button class="accb ${P.acc===e?'on':''}" data-act="acc" data-v="${e}" ${ok?'':'disabled'}><span>${ok?e:'🔒'}</span><b>${nm}</b><span class="small">${ok?'':s+' Sterne'}</span></button>`}).join('')}
+  <button class="accb ${!P.acc?'on':''}" data-act="acc" data-v=""><span>🦉</span><b>Ohne</b></button></div></section>`}
+function stickerHint(){const P=me(),n=stickCount();if((P.stickSeen||0)>=n||n===0)return;const e=STICK_ALL[n-1][1];
+  app.insertAdjacentHTML('afterbegin',`<button class="stickhint" data-act="album"><span class="sh-e">${e}</span><span><b>Neuer Sticker!</b><br><span class="small">Tippe hier, um ihn ins Album zu kleben.</span></span></button>`)}
+/* ---------- Lernweg (Karte) ---------- */
+function recTopicId(s,g){if((s.id==='ma'||s.id==='de')&&typeof nextPath==='function'&&klasse()===g){const tk=nextPath(s.id);if(tk){const[a,gg,id]=tk.split('|');if(+gg===g)return id}}
+  const L=s.grades[g]||[],order=topicGroups(s).flatMap(x=>x.idx).map(i=>L[i]);const f=order.find(t=>me().best[`${s.id}-${g}-${t[0]}`]==null);return f?f[0]:null}
+function mapOrder(s,g){const L=s.grades[g]||[],grp=topicGroups(s).flatMap(x=>x.idx);let ids=[];const zone=new Set([...(ZONE[3]||[]),...(ZONE[4]||[])]);
+  if((s.id==='ma'||s.id==='de')&&PATH[s.id])ids=pathList(s.id,g).filter(id=>L.some(t=>t[0]===id&&!t.hidden));
+  const rest=grp.map(i=>L[i][0]).filter(id=>!ids.includes(id)&&!(s.id==='ma'&&!bigZone()&&zone.has(id)));return[...ids,...rest].map(id=>L.findIndex(t=>t[0]===id))}
+function mapHTML(s){const g=S.grade,L=s.grades[g],ord=mapOrder(s,g),rec=recTopicId(s,g),P=me(),pos=[22,50,78,50],H=104,n=ord.length;
+  const pts=ord.map((_,k)=>`${pos[k%4]},${k*H+40}`).join(' ');
+  return`<div class="lmap" style="--c:var(${s.color});height:${n*H+70}px"><svg class="lpath" viewBox="0 0 100 ${n*H+70}" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="2 12" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+  ${ord.map((i,k)=>{const t=L[i],b=P.best[`${s.id}-${g}-${t[0]}`],st=b!=null&&b>=6?'done':b!=null?'half':t[0]===rec?'rec':'';
+    return`<div class="lnode ${st}" style="left:${pos[k%4]}%;top:${k*H+6}px"><button data-act="topic" data-i="${i}" aria-label="${esc(t[1])}"><span class="lc">${st==='done'?'⭐':st==='half'?'✔︎':st==='rec'?'▶':k+1}</span></button><span class="ln">${st==='rec'?'<b class="recb">Dein nächstes Thema</b><br>':''}${t[1]}</span></div>`}).join('')}<div class="lend" style="top:${n*H+20}px">🏁 Ziel</div></div>`}
+const _renderTopics=renderTopics;
+renderTopics=function(){const s=subj(),ok=`${s.id}${S.grade}`;S.og=S.og||{};
+  if(S.og[ok]==null){const rec=recTopicId(s,S.grade);const G=topicGroups(s);const gi=G.findIndex(x=>x.idx.some(i=>s.grades[S.grade][i][0]===rec));S.og[ok]=gi>=0?gi:0}
+  _renderTopics();const view=S.tview||'map';
+  const tg=`<div class="seg vtog"><button class="${view==='map'?'on':''}" data-act="tview" data-v="map">🗺️ Lernweg</button><button class="${view==='list'?'on':''}" data-act="tview" data-v="list">📋 Alle Themen</button></div>`;
+  const tp=app.querySelector('.topics');if(!tp)return;tp.insertAdjacentHTML('beforebegin',tg);
+  if(view==='map'){tp.outerHTML=mapHTML(s);const r=app.querySelector('.lnode.rec');if(r&&S.lmScroll!==ok){S.lmScroll=ok;setTimeout(()=>r.scrollIntoView({block:'center',behavior:'smooth'}),120)}}
+  else{const rec=recTopicId(s,S.grade);app.querySelectorAll('.topic[data-act="topic"]').forEach(b=>{const t=s.grades[S.grade][+b.dataset.i];if(t&&t[0]===rec){b.classList.add('rec');b.querySelector('.nm').insertAdjacentHTML('beforebegin','<span class="recb">⭐ Dein nächstes Thema</span><br>')}})}};
+/* ---------- Quiz: Fehler-Hinweis kompakt, Tasten sichtbar ---------- */
+const _renderQuiz=renderQuiz;
+renderQuiz=function(){_renderQuiz();if(Q&&Q.state==='retry'){const p=app.querySelector('.pad,.opts,.msteps,.wallet');if(p)setTimeout(()=>p.scrollIntoView({block:'nearest',behavior:'smooth'}),30)}};
+/* ---------- Startseite ---------- */
+const _renderHome=renderHome;
+renderHome=function(){const P=me();if(!P.named){S.screen='welcome';return renderWelcome()}_renderHome();
+  const hb=app.querySelector('.hello2 .hb');const st=streakNow();if(hb&&st>=2)hb.insertAdjacentHTML('beforeend',`<div class="streak">🔥 ${st} Tage am Stück gelernt!</div>`);stickerHint()};
+Object.assign(EXT_ACT,{
+  wAv:d=>{S.wAv=d.v;renderWelcome();return true},
+  wK:d=>{S.wK=+d.g;renderWelcome();return true},
+  wGo:()=>{const P=me(),i=document.getElementById('wname'),nm=(i&&i.value.trim())||S.wName||'';if(!nm){toast('Schreib bitte deinen Namen 🙂',2200);i&&i.focus();return true}
+    if(!(S.wAv||P.av)){toast('Such dir noch ein Tier aus!',2200);return true}if(!(S.wK||P.klasse)){toast('In welche Klasse gehst du?',2200);return true}
+    P.name=nm.slice(0,16);P.av=S.wAv||P.av;P.klasse=S.wK||P.klasse;P.named=true;P.plan=null;S.grade=P.klasse;S.wAv=S.wName=S.wK=null;save();S.screen='home';render();say(`Hallo ${P.name}! Schön, dass du da bist.`,'de-DE');return true},
+  wOther:()=>{store.active=1-store.active;save();S.wAv=S.wName=S.wK=null;S.screen='home';render();return true},
+  door:d=>{stopSpeech();S.door=d.v;S.screen='door';render();return true},
+  album:()=>{stopSpeech();S.screen='album';render();return true},
+  acc:d=>{me().acc=d.v;save();renderAlbum();return true},
+  tview:d=>{S.tview=d.v;renderTopics();return true},
+  topic:d=>{S.topic=subj().grades[S.grade][+d.i];stopSpeech();S.screen='quiz';newRound(false);window.scrollTo(0,0);return true},
+  goTopic:d=>{const f=findTopic(d.tk);if(!f)return true;S.subj=f.sub.id;S.grade=f.g;S.topic=f.t;stopSpeech();S.screen='quiz';newRound(false);window.scrollTo(0,0);return true}
+});
+{const _hub=EXT_ACT.hub;EXT_ACT.hub=d=>{if(_hub&&_hub(d))return true;if(S.screen==='quiz'&&Q&&Q.i>0&&!confirm('Möchtest du wirklich aufhören? Deine Runde ist dann vorbei.'))return true;stopSpeech();Q=null;S.screen='topics';render();return true}}
+{const _prof=EXT_ACT.profile;EXT_ACT.profile=d=>{store.active=+d.i;save();S.screen='home';render();return true}}
+EXT_ACT.tdMore=()=>{S.tdMore=true;renderHome();return true};
+Object.assign(EXT_SCR,{welcome:renderWelcome,door:renderDoor,album:renderAlbum});
+/* ---------- Kinderwörter ---------- */
+{const REN={'Überschlagen':'Schnell schätzen'};SUBJECTS.forEach(s=>[2,3,4].forEach(g=>(s.grades[g]||[]).forEach(t=>{if(REN[t[1]])t[1]=REN[t[1]];if(/^aw_/.test(t[0]))t[2]=`Großes Wissens-Quiz · Klasse ${g}`})));
+  const GR={'Rechnen & Zahlen bis 100':'Rechnen bis 100','Zahlenraum bis 1000':'Große Zahlen bis 1000','Zahlenraum bis 1 Million':'Riesige Zahlen bis 1 Million','Rechentricks – wenn die Grundlagen sitzen':'Rechentricks ✨','Allgemeinwissen-Check (15 Bereiche)':'Großes Wissens-Quiz (15 Bereiche)','Daten, Zufall & Muster':'Diagramme, Zufall & Knobeln'};
+  Object.values(GRP).forEach(L=>L.forEach(x=>{if(GR[x[0]]){LEIT.ma&&LEIT.ma[x[0]]&&(LEIT.ma[GR[x[0]]]=LEIT.ma[x[0]]);x[0]=GR[x[0]]}}))}
+
 
 
 const GRADE_SUB={2:'Wiederholen',3:'Jetzt dran',4:'Vorschau'};
@@ -4841,7 +4958,7 @@ function renderQuiz(){
     ${q.solVis?`<div class="solvis">${q.solVis}</div>`:''}${Q.showSteps?tafelHTML('quiz',q.steps,Q.shown):''}
     <div class="row">${Q.showSteps||Q.test?'':`<button class="btn ghost" data-act="why">Wie geht das?</button>`}${q.say&&canSpeak&&q.kind!=='text'&&q.kind!=='speak'?`<button class="btn ghost" data-act="sayEn">Anhören</button>`:''}${nextBtn}</div></div>`;
   }else if(Q.state==='retry'){
-    fb=q.kind==='build'?`<div class="fb warn"><h3>${Q.buildMsg}</h3><p>Nimm etwas weg oder leg etwas dazu. Wenn du nicht weiterweißt, tippe auf „Hilfe“.</p></div>`:q.kind==='speak'?`<div class="fb warn"><h3>Kein Problem!</h3><p>Hör es dir nochmal langsam an und sprich es nach. Der Tipp hilft bei der Aussprache.</p></div>`:`<div class="fb warn"><h3>Noch nicht ganz.</h3><p>Versuch es noch einmal! Wenn du nicht weiterweißt, tippe auf „Hilfe“.</p></div>`;
+    fb=q.kind==='build'?`<div class="fb warn"><h3>${Q.buildMsg}</h3><p>Nimm etwas weg oder leg etwas dazu. Wenn du nicht weiterweißt, tippe auf „Hilfe“.</p></div>`:q.kind==='speak'?`<div class="fb warn"><h3>Kein Problem!</h3><p>Hör es dir nochmal langsam an und sprich es nach. Der Tipp hilft bei der Aussprache.</p></div>`:`<div class="fb warn mini"><span class="fe">🤔</span><span><b>Noch nicht ganz.</b> Versuch es nochmal – oder tippe unten auf „Hilfe“.</span></div>`;
   }else if(Q.state==='tw'){
     fb=`<div class="fb warn"><h3>Leider nicht richtig.</h3><p>${q.kind==='text'?`Richtig ist: <b>${esc(q.answer)}</b>`:q.kind==='speak'?'Üb das Wort noch einmal.':`Richtig ist: <b>${solText(q)}</b>`}. Die Erklärung kannst du dir am Ende ansehen.</p>${q.solVis?`<div class="solvis">${q.solVis}</div>`:''}<div class="row">${nextBtn}</div></div>`;
   }else if(Q.state==='explain'){
@@ -4897,10 +5014,10 @@ function renderResult(){if(Q&&Q.review)return renderReviewResult();
   ${md?medalSVG(md,70):''}
   <div class="bigstars">${Array.from({length:N},(_,i)=>`<span style="display:contents">${STAR.replace('<svg',`<svg class="${i<e?'on':''}" style="animation-delay:${i*90}ms"`)}</span>`).join('')}</div>
   <div class="score">${e} von ${N} richtig</div>${Q.test&&Q.secs?`<div class="note">Deine Zeit: ${Math.floor(Q.secs/60)} min ${Q.secs%60} s</div>`:''}<p>${msg}</p><p class="rkline">Du bist <b>${rankOf(me().stars).name}</b> mit insgesamt ${me().stars} Sternen.</p>
-  <div class="row" style="width:100%"><button class="btn ghost" data-act="hub">Zum Thema</button><button class="btn ${e>=Q.n*.75&&nextTopicIdx()!=null?'ghost':''}" data-act="${Q.test?'goTest':'again'}">${Q.test?'Test nochmal':'Nochmal üben'}</button></div>${e>=Q.n*.75&&nextTopicIdx()!=null?`<button class="btn" data-act="nextTopic" style="width:100%">Weiter: ${subj().grades[S.grade][nextTopicIdx()][1]} ›</button>`:''}</div>
+  <div class="row" style="width:100%"><button class="btn ghost" data-act="topics">Alle Themen</button><button class="btn ${e>=Q.n*.75&&nextTopicIdx()!=null?'ghost':''}" data-act="${Q.test?'goTest':'again'}">${Q.test?'Test nochmal':'Nochmal üben'}</button></div>${e>=Q.n*.75&&nextTopicIdx()!=null?`<button class="btn" data-act="nextTopic" style="width:100%">Weiter: ${subj().grades[S.grade][nextTopicIdx()][1]} ›</button>`:''}${!Q.test&&e>=Q.n*.75&&S.topic&&!/^(lp_|_place)/.test(S.topic[0])?`<button class="btn ghost" data-act="goTest" style="width:100%">🏅 Traust du dich? Test mit 10 Fragen</button>`:''}</div>
   <div style="--c:var(${s.color})">${review}</div>`;
 }
-function render(){stopSpeech();applyZR();({home:renderHome,topics:renderTopics,hub:renderHub,quiz:renderQuiz,result:renderResult,lesson:renderLesson,helper:renderHelper,atlas:renderAtlas,eltern:renderEltern,settings:renderSettings,kosmos:renderKosmos,...EXT_SCR})[S.screen]();if(S.screen==='result'||S.screen==='placeRes')pauseHint();app.classList.remove('enter');void app.offsetWidth;app.classList.add('enter');window.scrollTo(0,0)}
+function render(){stopSpeech();applyZR();({home:renderHome,topics:renderTopics,hub:renderHub,quiz:renderQuiz,result:renderResult,lesson:renderLesson,helper:renderHelper,atlas:renderAtlas,eltern:renderEltern,settings:renderSettings,kosmos:renderKosmos,...EXT_SCR})[S.screen]();if(S.screen==='result'||S.screen==='placeRes')pauseHint();if(S.screen==='result')stickerHint();app.classList.remove('enter');void app.offsetWidth;app.classList.add('enter');window.scrollTo(0,0)}
 
 /* ---------- Lernen: Beispiel mit Erklär-Tafel ---------- */
 function renderLesson(){
